@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "161150348651",
+    "firebase_url": "https://liga-za-rekreativce.firebaseio.com",
+    "project_id": "liga-za-rekreativce",
+    "storage_bucket": "liga-za-rekreativce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161150348651:android:24d3ae6fc707123b11f02e",
+        "android_client_info": {
+          "package_name": "com.hfad.lzr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161150348651-g7blt902iarsll5fofritqm3nkvfjscb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0JGtB7GjLSUaHnVtsumc-bQYtTCr1yY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161150348651-g7blt902iarsll5fofritqm3nkvfjscb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
