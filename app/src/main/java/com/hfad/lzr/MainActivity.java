@@ -15,12 +15,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createGame(View view){
-        Intent intent = new Intent(this, CreatingMatch.class);
+        Intent intent = new Intent(this, CreatingMatchActivity.class);
         startActivity(intent);
     }
 
     public void createTeam(View view){
-        Intent intent = new Intent(this, CreateTeam.class);
+        Intent intent = new Intent(this, CreateTeamActivity.class);
         startActivity(intent);
     }
 }

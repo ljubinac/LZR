@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class CreatingMatch extends AppCompatActivity {
+public class CreatingMatchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,7 @@ public class CreatingMatch extends AppCompatActivity {
     }
 
     public void addTeam(View view){
-        Intent intent = new Intent(this, CreateTeam.class);
+        Intent intent = new Intent(this, CreateTeamActivity.class);
         startActivity(intent);
     }
 }

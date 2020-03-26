@@ -13,7 +13,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    tools:context=".CreatingMatch">
+    tools:context=".CreatingMatchActivity">
 
     <LinearLayout
         android:orientation="horizontal"

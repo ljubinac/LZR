@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CreateTeam"
+            android:name=".CreateTeamActivity"
             android:exported="true"/>
         <activity
-            android:name=".CreatingMatch"
+            android:name=".CreatingMatchActivity"
             android:exported="true" />
         <activity android:name=".MainActivity">
             <intent-filter>
