@@ -4,6 +4,7 @@ public class Team {
 
     private String id;
     private String name;
+    private String league;
 
     public Team() {
     }
@@ -11,6 +12,12 @@ public class Team {
     public Team(String id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Team(String id, String name, String league) {
+        this.id = id;
+        this.name = name;
+        this.league = league;
     }
 
     public String getId() {
@@ -27,5 +34,13 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLeague() {
+        return league;
+    }
+
+    public void setLeague(String league) {
+        this.league = league;
     }
 }

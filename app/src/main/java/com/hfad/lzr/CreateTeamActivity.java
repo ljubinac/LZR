@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +19,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     Button saveTeam;
     EditText teamName;
     DatabaseReference databaseReference;
+    Spinner leagueName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class CreateTeamActivity extends AppCompatActivity {
 
         saveTeam = findViewById(R.id.save_team);
         teamName = findViewById(R.id.team_name);
+        leagueName = findViewById(R.id.choose_league);
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
         saveTeam.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,9 +43,10 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     private void addTeam() {
         String name = teamName.getText().toString();
+        String league = String.valueOf(leagueName.getSelectedItem());
         if (!TextUtils.isEmpty(name)) {
             String id = databaseReference.push().getKey();
-            Team team = new Team(id, name);
+            Team team = new Team(id, name, league);
             databaseReference.child(id).setValue(team);
             Toast.makeText(this, "Team added!", Toast.LENGTH_LONG).show();
         } else {
