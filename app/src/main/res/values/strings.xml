@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">LZR</string>
+    <string name="lzr">Liga za rekreativce</string>
+    <string name="create_game">Create game</string>
+    <string name="teams">Teams</string>
+    <string name="create_team">Create team</string>
+    <string name="quit">Quit</string>
+    <string name="choose_league">Choose league:</string>
+    <string-array name="leagues">
+        <item>Liga A</item>
+        <item>Liga B</item>
+    </string-array>
+    <string name="choose_teamA">Choose TeamA:</string>
+    <string-array name="teams">
+        <item>Team1</item>
+        <item>Team2</item>
+        <item>Team3</item>
+        <item>Team4</item>
+    </string-array>
+    <string name="choose_teamB">Choose TeamB:</string>
+    <string name="date">Set date:</string>
+    <string name="time">Set time:</string>
+    <string name="add_team">Add team</string>
+    <string name="choose_lineup">Choose lineup</string>
+    <string name="start_game">Start game</string>
+    <string name="team_name">Team name:</string>
+    <string name="players_title">Players</string>
+    <string name="save_team_btn">Save team</string>
+    <string name="add_player_btn">Add</string>
+    <string name="edit_player_btn">Edit</string>
+</resources>
