@@ -1,13 +1,17 @@
 package com.hfad.lzr;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -20,22 +24,40 @@ import java.util.List;
 
 public class CreateTeamActivity extends AppCompatActivity {
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    ArrayList<Player> players = new ArrayList<>();
+
     Button saveTeam;
     EditText teamName;
     DatabaseReference databaseReferencePlayers;
     DatabaseReference databaseReferenceTeams;
     Spinner leagueName;
 
-    EditText playerNumber;
-    EditText playerName;
+    TextView playerNumber;
+    TextView playerName;
     Button addPlayer;
-
-    List<Player> players = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
+
+       /* ArrayList<Player> playersList = new ArrayList<>();
+        playersList.add(new Player("Mihailo Ljubinac", "10"));
+        playersList.add(new Player("Milos Nisic", "12"));
+        playersList.add(new Player("Andreja Micovic", "33"));*/
+
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new Adapter(players);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
 
         saveTeam = findViewById(R.id.save_team);
         teamName = findViewById(R.id.team_name);
@@ -52,8 +74,18 @@ public class CreateTeamActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 addPlayer();
-            }
+
+                mRecyclerView = findViewById(R.id.recyclerView);
+                mRecyclerView.setHasFixedSize(true);
+                mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                mAdapter = new Adapter(players);
+
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                mRecyclerView.setAdapter(mAdapter);
+           }
         });
+
+
         saveTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +127,6 @@ public class CreateTeamActivity extends AppCompatActivity {
 
             players.add(player);
 
-            // databaseReference.child(id).setValue(player);
             Toast.makeText(this, "Player added!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Player not added!", Toast.LENGTH_LONG).show();
