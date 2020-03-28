@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="8dp"
     tools:context=".CreateTeamActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_team"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/text"
+        android:textSize="25sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="30dp">
 
         <TextView
             android:layout_width="0dp"
@@ -64,7 +79,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="35dp">
 
         <TextView
             android:layout_width="0dp"
@@ -118,7 +133,7 @@
             android:inputType="text"/>
 
         <ImageView
-            android:id="@+id/player_add_btn"
+            android:id="@+id/add_image"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="2"
@@ -129,10 +144,20 @@
         android:id="@+id/save_team"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         android:layout_gravity="center"
         android:background="@drawable/ic_save"
         android:textColor="@color/text_btn" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add team"
+        android:textColor="@color/green_btn"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_gravity="center"/>
+
 </LinearLayout>
 
+</ScrollView>

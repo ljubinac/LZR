@@ -1,5 +1,8 @@
 package com.hfad.lzr.model;
 
+import android.widget.EditText;
+import android.widget.TextView;
+
 public class Player {
 
     private String id;
@@ -30,8 +33,9 @@ public class Player {
         this.number = number;
     }
 
-    public void changeText1(String text){
-        nameAndLastname = text;
+    public void changeText1(String text, String text2){
+        number = text;
+        nameAndLastname = text2;
     }
 
     public String getId() {

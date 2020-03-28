@@ -39,7 +39,8 @@ public class CreateTeamActivity extends AppCompatActivity {
     private TextView playerNumber;
     private TextView playerName;
     private ImageView addPlayer;
-    private ImageView deletePlayer;
+    //private ImageView deletePlayer;
+    //private  ImageView editPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +70,14 @@ public class CreateTeamActivity extends AppCompatActivity {
         leagueName = findViewById(R.id.choose_league);
         databaseReferenceTeams = FirebaseDatabase.getInstance().getReference("teams");
 
-        addPlayer = findViewById(R.id.player_add_btn);
+        addPlayer = findViewById(R.id.add_image);
         playerNumber = findViewById(R.id.player_number_edt);
         playerName = findViewById(R.id.player_name_edt);
-        deletePlayer = findViewById(R.id.image_delete);
+       // deletePlayer = findViewById(R.id.image_delete);
+        //editPlayer = findViewById(R.id.image_edit);
         databaseReferencePlayers = FirebaseDatabase.getInstance().getReference("players");
+
+
 
       /*  deletePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,16 +107,6 @@ public class CreateTeamActivity extends AppCompatActivity {
         });
     }
 
-    public void removePlayer(int position){
-        players.remove(position);
-        mAdapter.notifyItemRemoved(position);
-    }
-
-    /*public void changePlayer(int position, String text){
-        players.get(position).changeText1(text);
-        mAdapter.notifyItemChanged(position);
-    }*/
-
     public void buildRecyclerView(){
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -123,17 +117,30 @@ public class CreateTeamActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
-           /* @Override
-            public void onItemClick(int position) {
-                changePlayer(position, "Clicked!");
-            }*/
 
             @Override
             public void onDeleteClick(int position) {
                 removePlayer(position);
             }
+
+           /* @Override
+            public void onEditClick(int position) {
+                playerNumber.getEditableText();
+                playerName.getEditableText();
+                editPlayer(position);
+            }*/
         });
     }
+
+    public void removePlayer(int position){
+        players.remove(position);
+        mAdapter.notifyItemRemoved(position);
+    }
+
+   /* public void editPlayer(int position, EditText newNumber, EditText newName){
+        players.get(position).changeText1(newNumber, newName);
+        mAdapter.notifyItemChanged(position);
+    }*/
 
     private void addTeam() {
         String name = teamName.getText().toString();
@@ -151,6 +158,9 @@ public class CreateTeamActivity extends AppCompatActivity {
                 databaseReferencePlayers.child(idPlayer).setValue(p);
             }
             Toast.makeText(this, "Team added!", Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(name)) {
+            saveTeam.setActivated(false);
+            Toast.makeText(this, "Add team name! ", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Team not added!", Toast.LENGTH_LONG).show();
         }
