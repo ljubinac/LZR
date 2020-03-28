@@ -1,20 +1,20 @@
-package com.hfad.lzr;
+package com.hfad.lzr.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hfad.lzr.R;
 import com.hfad.lzr.model.Player;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHolder> {
 
     private ArrayList<Player> mPlayersList;
     private OnItemClickListener mListener;
@@ -83,7 +83,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
-    public Adapter (ArrayList<Player> playersList){
+    public PlayersAdapter(ArrayList<Player> playersList){
         mPlayersList = playersList;
     }
 

@@ -1,9 +1,5 @@
 package com.hfad.lzr;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,18 +10,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.hfad.lzr.adapter.PlayersAdapter;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreateTeamActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private Adapter mAdapter;
+    private PlayersAdapter mPlayersAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private ArrayList<Player> players = new ArrayList<>();
@@ -73,7 +73,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         addPlayer = findViewById(R.id.add_image);
         playerNumber = findViewById(R.id.player_number_edt);
         playerName = findViewById(R.id.player_name_edt);
-       // deletePlayer = findViewById(R.id.image_delete);
+        // deletePlayer = findViewById(R.id.image_delete);
         //editPlayer = findViewById(R.id.image_edit);
         databaseReferencePlayers = FirebaseDatabase.getInstance().getReference("players");
 
@@ -94,7 +94,7 @@ public class CreateTeamActivity extends AppCompatActivity {
                 addPlayer();
                 buildRecyclerView();
 
-           }
+            }
         });
 
 
@@ -107,16 +107,16 @@ public class CreateTeamActivity extends AppCompatActivity {
         });
     }
 
-    public void buildRecyclerView(){
+    public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mAdapter = new Adapter(players);
+        mPlayersAdapter = new PlayersAdapter(players);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mPlayersAdapter);
 
-        mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+        mPlayersAdapter.setOnItemClickListener(new PlayersAdapter.OnItemClickListener() {
 
             @Override
             public void onDeleteClick(int position) {
@@ -132,9 +132,9 @@ public class CreateTeamActivity extends AppCompatActivity {
         });
     }
 
-    public void removePlayer(int position){
+    public void removePlayer(int position) {
         players.remove(position);
-        mAdapter.notifyItemRemoved(position);
+        mPlayersAdapter.notifyItemRemoved(position);
     }
 
    /* public void editPlayer(int position, EditText newNumber, EditText newName){
@@ -150,7 +150,7 @@ public class CreateTeamActivity extends AppCompatActivity {
             Team team = new Team(id, name, league);
             databaseReferenceTeams.child(id).setValue(team);
 
-            for (Player p : players){
+            for (Player p : players) {
                 String idPlayer = databaseReferencePlayers.push().getKey();
                 p.setId(idPlayer);
                 p.setTeamId(id);
@@ -166,13 +166,14 @@ public class CreateTeamActivity extends AppCompatActivity {
         }
     }
 
-    private void addPlayer(){
+    private void addPlayer() {
         String number = playerNumber.getText().toString();
         String name = playerName.getText().toString();
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(number)){
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(number)) {
             Player player = new Player(name, number);
             players.add(player);
-
+            playerName.setText("");
+            playerNumber.setText("");
             Toast.makeText(this, "Player added!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Player not added!", Toast.LENGTH_LONG).show();
