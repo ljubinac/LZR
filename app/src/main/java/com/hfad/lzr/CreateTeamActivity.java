@@ -25,38 +25,43 @@ import java.util.List;
 public class CreateTeamActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
 
-    Button saveTeam;
-    EditText teamName;
-    DatabaseReference databaseReferencePlayers;
-    DatabaseReference databaseReferenceTeams;
-    Spinner leagueName;
+    private Button saveTeam;
+    private EditText teamName;
+    private DatabaseReference databaseReferencePlayers;
+    private DatabaseReference databaseReferenceTeams;
+    private Spinner leagueName;
 
-    TextView playerNumber;
-    TextView playerName;
-    Button addPlayer;
+    private TextView playerNumber;
+    private TextView playerName;
+    private ImageView addPlayer;
+    private ImageView deletePlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
 
-       /* ArrayList<Player> playersList = new ArrayList<>();
+
+        //setButtons();
+
+       /* final ArrayList<Player> playersList = new ArrayList<>();
         playersList.add(new Player("Mihailo Ljubinac", "10"));
         playersList.add(new Player("Milos Nisic", "12"));
         playersList.add(new Player("Andreja Micovic", "33"));*/
 
-        mRecyclerView = findViewById(R.id.recyclerView);
+
+        /*mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new Adapter(players);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);*/
 
 
         saveTeam = findViewById(R.id.save_team);
@@ -67,21 +72,24 @@ public class CreateTeamActivity extends AppCompatActivity {
         addPlayer = findViewById(R.id.player_add_btn);
         playerNumber = findViewById(R.id.player_number_edt);
         playerName = findViewById(R.id.player_name_edt);
+        deletePlayer = findViewById(R.id.image_delete);
         databaseReferencePlayers = FirebaseDatabase.getInstance().getReference("players");
+
+      /*  deletePlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = Integer.parseInt(v.toString());
+                removePlayer(position);
+            }
+        });*/
 
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 addPlayer();
+                buildRecyclerView();
 
-                mRecyclerView = findViewById(R.id.recyclerView);
-                mRecyclerView.setHasFixedSize(true);
-                mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                mAdapter = new Adapter(players);
-
-                mRecyclerView.setLayoutManager(mLayoutManager);
-                mRecyclerView.setAdapter(mAdapter);
            }
         });
 
@@ -93,14 +101,44 @@ public class CreateTeamActivity extends AppCompatActivity {
                 addTeam();
             }
         });
+    }
 
+    public void removePlayer(int position){
+        players.remove(position);
+        mAdapter.notifyItemRemoved(position);
+    }
 
+    /*public void changePlayer(int position, String text){
+        players.get(position).changeText1(text);
+        mAdapter.notifyItemChanged(position);
+    }*/
+
+    public void buildRecyclerView(){
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mAdapter = new Adapter(players);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+           /* @Override
+            public void onItemClick(int position) {
+                changePlayer(position, "Clicked!");
+            }*/
+
+            @Override
+            public void onDeleteClick(int position) {
+                removePlayer(position);
+            }
+        });
     }
 
     private void addTeam() {
         String name = teamName.getText().toString();
         String league = String.valueOf(leagueName.getSelectedItem());
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(league)) {
+        if (!TextUtils.isEmpty(name)) {
             String id = databaseReferenceTeams.push().getKey();
             Team team = new Team(id, name, league);
             databaseReferenceTeams.child(id).setValue(team);
@@ -122,9 +160,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         String number = playerNumber.getText().toString();
         String name = playerName.getText().toString();
         if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(number)){
-
             Player player = new Player(name, number);
-
             players.add(player);
 
             Toast.makeText(this, "Player added!", Toast.LENGTH_LONG).show();

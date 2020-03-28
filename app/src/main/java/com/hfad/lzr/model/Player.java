@@ -30,6 +30,10 @@ public class Player {
         this.number = number;
     }
 
+    public void changeText1(String text){
+        nameAndLastname = text;
+    }
+
     public String getId() {
         return id;
     }

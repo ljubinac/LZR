@@ -28,19 +28,20 @@
         android:textStyle="bold"
         android:textSize="18sp"/>
 
-        <Button
+        <ImageView
         android:id="@+id/image_edit"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-            android:text="x"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_edit"
 
         />
 
-        <Button
+        <ImageView
             android:id="@+id/image_delete"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:text="e"
+            android:src="@drawable/ic_delete"
 
             />
 
