@@ -80,6 +80,7 @@ public class CreatingMatchActivity extends AppCompatActivity {
 
     public void addTeam(View view){
         Intent intent = new Intent(this, CreateTeamActivity.class);
+        intent.putExtra("prev_activity", "CreatingMatchActivity");
         startActivity(intent);
     }
 }

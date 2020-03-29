@@ -1,5 +1,6 @@
 package com.hfad.lzr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -80,6 +81,10 @@ public class CreateTeamActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 addTeam();
+                if(getIntent().getStringExtra("prev_activity").equals("CreatingMatchActivity")){
+                    Intent intent = new Intent(getApplicationContext(), CreatingMatchActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
