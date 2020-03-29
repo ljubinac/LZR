@@ -48,23 +48,6 @@ public class CreateTeamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_team);
 
 
-        //setButtons();
-
-       /* final ArrayList<Player> playersList = new ArrayList<>();
-        playersList.add(new Player("Mihailo Ljubinac", "10"));
-        playersList.add(new Player("Milos Nisic", "12"));
-        playersList.add(new Player("Andreja Micovic", "33"));*/
-
-
-        /*mRecyclerView = findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new Adapter(players);
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);*/
-
-
         saveTeam = findViewById(R.id.save_team);
         teamName = findViewById(R.id.team_name);
         leagueName = findViewById(R.id.choose_league);
@@ -79,13 +62,7 @@ public class CreateTeamActivity extends AppCompatActivity {
 
 
 
-      /*  deletePlayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = Integer.parseInt(v.toString());
-                removePlayer(position);
-            }
-        });*/
+
 
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,17 +96,21 @@ public class CreateTeamActivity extends AppCompatActivity {
         mPlayersAdapter.setOnItemClickListener(new PlayersAdapter.OnItemClickListener() {
 
             @Override
+            public void onAcceptClick(int position, String name, String number) {
+                editPlayer(position, name, number);
+            }
+
+            @Override
             public void onDeleteClick(int position) {
                 removePlayer(position);
             }
-
-           /* @Override
-            public void onEditClick(int position) {
-                playerNumber.getEditableText();
-                playerName.getEditableText();
-                editPlayer(position);
-            }*/
         });
+    }
+
+    public void editPlayer(int position, String name, String number){
+        players.get(position).setNameAndLastname(name);
+        players.get(position).setNumber(number);
+        mPlayersAdapter.notifyItemChanged(position);
     }
 
     public void removePlayer(int position) {

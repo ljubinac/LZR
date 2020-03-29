@@ -3,7 +3,9 @@ package com.hfad.lzr.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
     public interface OnItemClickListener {
        // void onItemClick(int position);
         void onDeleteClick(int position);
+        void onAcceptClick(int position, String name, String number);
         //void onEditClick(int position);
     }
 
@@ -31,43 +34,29 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView mPlayerName;
-        public TextView mPlayerNumber;
         public ImageView mDeletePlayer;
         public ImageView mEditPlayer;
-        public ImageView mAddPlayer;
+        public EditText mPlayerNameEt;
+        public EditText mPlayerNumberEt;
+        public LinearLayout ll1;
+        public LinearLayout ll2;
+        public TextView mPlayerNameTv;
+        public TextView mPlayerNumberTv;
+        public ImageView mAccept;
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-            mPlayerName = itemView.findViewById(R.id.player_name_edt);
-            mPlayerNumber = itemView.findViewById(R.id.player_number_edt);
             mDeletePlayer = itemView.findViewById(R.id.image_delete);
             mEditPlayer = itemView.findViewById(R.id.image_edit);
+            mPlayerNameEt = itemView.findViewById(R.id.player_name_et);
+            mPlayerNumberEt = itemView.findViewById(R.id.player_number_et);
+            ll1 = itemView.findViewById(R.id.ll1);
+            ll2 = itemView.findViewById(R.id.ll2);
+            mPlayerNameTv = itemView.findViewById(R.id.player_name_tv);
+            mPlayerNumberTv = itemView.findViewById(R.id.player_number_tv);
+            mAccept = itemView.findViewById(R.id.image_accept);
 
 
-          /*  mEditPlayer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            listener.onEditClick(position);
-                        }
-                    }
-                }
-            });*/
-
-           /* itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });*/
 
             mDeletePlayer.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,6 +65,18 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION){
                             listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
+
+            mAccept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onAcceptClick(position, mPlayerNameEt.toString(), mPlayerNumberEt.toString());
                         }
                     }
                 }
@@ -96,11 +97,32 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         Player currentPlayer = mPlayersList.get(position);
 
-        holder.mPlayerName.setText(currentPlayer.getNameAndLastname());
-        holder.mPlayerNumber.setText(currentPlayer.getNumber());
+        holder.mPlayerNameTv.setText(currentPlayer.getNameAndLastname());
+        holder.mPlayerNumberTv.setText(currentPlayer.getNumber());
+
+        holder.mEditPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.mPlayerNameEt.setText(holder.mPlayerNameTv.getText().toString());
+                holder.mPlayerNumberEt.setText(holder.mPlayerNumberTv.getText().toString());
+                holder.ll1.setVisibility(View.INVISIBLE);
+                holder.ll2.setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.mAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                holder.mPlayerNameTv.setText(holder.mPlayerNameEt.getText().toString());
+                holder.mPlayerNumberTv.setText(holder.mPlayerNumberEt.getText().toString());
+                holder.ll1.setVisibility(View.VISIBLE);
+                holder.ll2.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     @Override
