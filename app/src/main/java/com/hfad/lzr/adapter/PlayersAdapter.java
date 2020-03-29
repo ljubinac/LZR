@@ -70,17 +70,6 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
                 }
             });
 
-            mAccept.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            listener.onAcceptClick(position, mPlayerNameEt.toString(), mPlayerNumberEt.toString());
-                        }
-                    }
-                }
-            });
         }
     }
 
@@ -97,7 +86,7 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Player currentPlayer = mPlayersList.get(position);
 
         holder.mPlayerNameTv.setText(currentPlayer.getNameAndLastname());
@@ -121,6 +110,8 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
                 holder.mPlayerNumberTv.setText(holder.mPlayerNumberEt.getText().toString());
                 holder.ll1.setVisibility(View.VISIBLE);
                 holder.ll2.setVisibility(View.INVISIBLE);
+
+                mListener.onAcceptClick(position, holder.mPlayerNameTv.getText().toString(), holder.mPlayerNumberTv.getText().toString());
             }
         });
     }
