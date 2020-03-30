@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".TeamsActivity"
+            android:exported="true"/>
+        <activity
             android:name=".CreateTeamActivity"
             android:exported="true"/>
         <activity
