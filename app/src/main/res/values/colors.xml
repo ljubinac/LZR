@@ -8,4 +8,5 @@
     <color name="text">#000</color>
     <color name="red_btn">#ff0000</color>
     <color name="green_btn">#008000</color>
+    <color name="team_bg">#ebebe0</color>
 </resources>
