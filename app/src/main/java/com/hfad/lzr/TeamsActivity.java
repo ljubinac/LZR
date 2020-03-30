@@ -64,10 +64,10 @@ public class TeamsActivity extends ListActivity {
         });
     }
 
-   /* @Override
+    @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(TeamsActivity.this, TeamActivity.class);
-        intent.putExtra(TeamActivity.EXTRA_TEAMNO, (int) id);
+        intent.putExtra("team_name", teams.get(position));
         startActivity(intent);
-    }*/
+    }
 }

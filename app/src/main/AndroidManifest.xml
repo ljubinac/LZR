@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TeamActivity"></activity>
         <activity
             android:name=".TeamsActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".CreateTeamActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".CreatingMatchActivity"
             android:exported="true" />
