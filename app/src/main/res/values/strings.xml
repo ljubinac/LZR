@@ -37,4 +37,6 @@
         <item>Team4</item>
     </string-array>
     <string name="teamLeagueTV">League:</string>
+    <string name="leagueA">Liga A</string>
+    <string name="leagueB">Liga B</string>
 </resources>

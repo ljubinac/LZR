@@ -1,6 +1,7 @@
 package com.hfad.lzr.adapter;
 
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
