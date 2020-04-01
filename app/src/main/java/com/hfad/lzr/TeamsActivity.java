@@ -33,7 +33,6 @@ import java.util.ArrayList;
 
 public class TeamsActivity extends AppCompatActivity {
 
-    DatabaseReference databaseReference;
     RecyclerView teamsRV;
     FirebaseRecyclerOptions<Team> options;
     FirebaseRecyclerAdapter adapter;
@@ -41,18 +40,6 @@ public class TeamsActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterList;
     ArrayList<String> leagues;
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +57,7 @@ public class TeamsActivity extends AppCompatActivity {
 
         teamsRV.setLayoutManager(new LinearLayoutManager(this));
         teamsRV.setHasFixedSize(true);
-        fetch("Liga A");
+
 
         leagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -86,11 +73,11 @@ public class TeamsActivity extends AppCompatActivity {
 
         });
 
-
+        fetch("Liga A");
 
     }
 
-    private void fetch(final String league){
+    private void fetch(String league){
 
         Query query = FirebaseDatabase.getInstance().getReference().child("teams").orderByChild("league").equalTo(league);
 
@@ -118,10 +105,20 @@ public class TeamsActivity extends AppCompatActivity {
                 });
             }
         };
-
+        adapter.startListening();
         teamsRV.setAdapter(adapter);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
 
 }
