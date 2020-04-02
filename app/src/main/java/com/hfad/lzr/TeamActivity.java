@@ -55,7 +55,7 @@ public class TeamActivity extends AppCompatActivity {
 
     DatabaseReference databaseReferencePlayers;
     RecyclerView playersRV;
-    FirebaseRecyclerOptions options;
+    FirebaseRecyclerOptions<Player> options;
     FirebaseRecyclerAdapter adapter;
     EditText playerNumberET;
     EditText playerNameET;
@@ -119,8 +119,6 @@ public class TeamActivity extends AppCompatActivity {
                 playersRV = findViewById(R.id.recyclerView);
                 playersRV.setHasFixedSize(true);
                 playersRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                adapter.startListening();
-                playersRV.setAdapter(adapter);
                 fetch(idTeam);
             }
         });
@@ -188,7 +186,7 @@ public class TeamActivity extends AppCompatActivity {
             @Override
             public PlayerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.player_item, parent, false);
-                return  new PlayerViewHolder(view);
+                return new PlayerViewHolder(view);
             }
 
             @Override
