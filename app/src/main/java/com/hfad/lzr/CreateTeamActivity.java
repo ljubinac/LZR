@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class CreateTeamActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
+
     private PlayersAdapter mPlayersAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 

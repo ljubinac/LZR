@@ -8,6 +8,14 @@ public class Player {
     private String id;
     private String nameAndLastname;
     private String number;
+    private String teamId;
+
+    public Player(String id, String nameAndLastname, String number, String teamId) {
+        this.id = id;
+        this.nameAndLastname = nameAndLastname;
+        this.number = number;
+        this.teamId = teamId;
+    }
 
     public String getTeamId() {
         return teamId;
@@ -16,8 +24,6 @@ public class Player {
     public void setTeamId(String teamId) {
         this.teamId = teamId;
     }
-
-    private String teamId;
 
     public Player() {
     }

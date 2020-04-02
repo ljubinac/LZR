@@ -100,6 +100,7 @@ public class TeamsActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(TeamsActivity.this, TeamActivity.class);
                         intent.putExtra("team_name", model.getName());
+                        intent.putExtra("idTeam", model.getId());
                         startActivity(intent);
                     }
                 });

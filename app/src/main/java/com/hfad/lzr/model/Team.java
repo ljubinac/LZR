@@ -1,5 +1,7 @@
 package com.hfad.lzr.model;
 
+import java.util.List;
+
 public class Team {
 
     private String id;
