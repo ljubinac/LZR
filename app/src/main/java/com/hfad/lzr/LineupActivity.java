@@ -34,8 +34,13 @@ public class LineupActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager){
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(getIntent().getStringExtra("teamA")), getIntent().getStringExtra("teamA"));
-        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(getIntent().getStringExtra("teamB")), getIntent().getStringExtra("teamB"));
+        String teamAName = getIntent().getStringExtra("teamA");
+        String teamBName = getIntent().getStringExtra("teamB");
+        String teamAId = getIntent().getStringExtra("teamAId");
+        String teamBId = getIntent().getStringExtra("teamBId");
+
+        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamAName, teamAId), getIntent().getStringExtra("teamA"));
+        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamBName, teamBId), getIntent().getStringExtra("teamB"));
         viewPager.setAdapter(sectionsPagerAdapter);
     }
 }

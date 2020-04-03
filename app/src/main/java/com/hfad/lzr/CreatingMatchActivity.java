@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
@@ -30,9 +31,9 @@ public class CreatingMatchActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     ValueEventListener listener;
     ArrayAdapter<String> adapterTeamA;
-    ArrayAdapter<String> adapterTeamB;
     ArrayList<String> teamsSpinnerA;
     ArrayList<String> teamsSpinnerB;
+    ArrayList<Team> teams;
 
     Button chooseLineup;
     ArrayAdapter<String> adapterList;
@@ -43,6 +44,7 @@ public class CreatingMatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creating_match);
 
+        teams = new ArrayList<>();
         spinner1 = (Spinner) findViewById(R.id.choose_teamA);
         spinner2 = (Spinner) findViewById(R.id.choose_teamB);
         leagueSpinner = findViewById(R.id.choose_league);
@@ -51,8 +53,13 @@ public class CreatingMatchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LineupActivity.class);
+
+                String teamAId = teams.get(spinner1.getSelectedItemPosition()).getId();
+                String teamBId = teams.get(spinner2.getSelectedItemPosition()).getId();
                 intent.putExtra("teamA", spinner1.getSelectedItem().toString());
+                intent.putExtra("teamAId", teamAId);
                 intent.putExtra("teamB", spinner2.getSelectedItem().toString());
+                intent.putExtra("teamBId", teamBId);
                 startActivity(intent);
             }
         });
@@ -101,6 +108,7 @@ public class CreatingMatchActivity extends AppCompatActivity {
                     if (team.child("league").getValue().equals(league)) {
                         teamsSpinnerA.add(team.child("name").getValue().toString());
                         teamsSpinnerB.add(team.child("name").getValue().toString());
+                        teams.add(team.getValue(Team.class));
                     }
                 }
 

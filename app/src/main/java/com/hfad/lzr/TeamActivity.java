@@ -174,6 +174,8 @@ public class TeamActivity extends AppCompatActivity {
         }
     }
 
+
+
     private void fetch(final String idTeam) {
 
         final Query query = FirebaseDatabase.getInstance().getReference("players").orderByChild("teamId").equalTo(idTeam);

@@ -17,13 +17,15 @@ import com.hfad.lzr.R;
 public class ChooseLineupFragment extends Fragment {
 
     TextView tv;
-    String stringej;
+    String teamName;
+    String teamId;
 
-    public static ChooseLineupFragment newInstance(String teamName) {
+    public static ChooseLineupFragment newInstance(String teamName, String teamId) {
         ChooseLineupFragment myFragment = new ChooseLineupFragment();
 
         Bundle args = new Bundle();
         args.putString("teamName", teamName);
+        args.putString("teamId", teamId);
         myFragment.setArguments(args);
 
         return myFragment;
@@ -32,7 +34,8 @@ public class ChooseLineupFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        stringej = getArguments().getString("teamName");
+        teamName = getArguments().getString("teamName");
+        teamId = getArguments().getString("teamId");
     }
 
     @Override
@@ -42,7 +45,9 @@ public class ChooseLineupFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_lineup, container, false);
 
         tv = root.findViewById(R.id.section_label);
-        tv.setText(stringej);
+        tv.setText(teamName + "    "  + teamId);
+
+
 
         return root;
     }
