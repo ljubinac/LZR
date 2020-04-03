@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -33,6 +34,7 @@ public class CreatingMatchActivity extends AppCompatActivity {
     ArrayList<String> teamsSpinnerA;
     ArrayList<String> teamsSpinnerB;
 
+    Button chooseLineup;
     ArrayAdapter<String> adapterList;
     ArrayList<String> leagues;
 
@@ -41,10 +43,19 @@ public class CreatingMatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creating_match);
 
-        spinner1 = (Spinner)findViewById(R.id.choose_teamA);
-        spinner2 = (Spinner)findViewById(R.id.choose_teamB);
+        spinner1 = (Spinner) findViewById(R.id.choose_teamA);
+        spinner2 = (Spinner) findViewById(R.id.choose_teamB);
         leagueSpinner = findViewById(R.id.choose_league);
-
+        chooseLineup = findViewById(R.id.choose_lineup);
+        chooseLineup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LineupActivity.class);
+                intent.putExtra("teamA", spinner1.getSelectedItem().toString());
+                intent.putExtra("teamB", spinner2.getSelectedItem().toString());
+                startActivity(intent);
+            }
+        });
         leagues = new ArrayList<>();
         leagues.add("Liga A");
         leagues.add("Liga B");
@@ -82,12 +93,12 @@ public class CreatingMatchActivity extends AppCompatActivity {
         });
     }
 
-    public void fetch(final String league){
+    public void fetch(final String league) {
         listener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot team : dataSnapshot.getChildren()){
-                    if(team.child("league").getValue().equals(league)) {
+                for (DataSnapshot team : dataSnapshot.getChildren()) {
+                    if (team.child("league").getValue().equals(league)) {
                         teamsSpinnerA.add(team.child("name").getValue().toString());
                         teamsSpinnerB.add(team.child("name").getValue().toString());
                     }
@@ -103,7 +114,7 @@ public class CreatingMatchActivity extends AppCompatActivity {
         });
     }
 
-    public void addTeam(View view){
+    public void addTeam(View view) {
         Intent intent = new Intent(this, CreateTeamActivity.class);
         intent.putExtra("prev_activity", "CreatingMatchActivity");
         startActivity(intent);
