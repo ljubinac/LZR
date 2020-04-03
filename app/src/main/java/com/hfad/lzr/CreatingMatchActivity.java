@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -24,12 +25,16 @@ public class CreatingMatchActivity extends AppCompatActivity {
 
     Spinner spinner1;
     Spinner spinner2;
+    Spinner leagueSpinner;
     DatabaseReference databaseReference;
     ValueEventListener listener;
     ArrayAdapter<String> adapterTeamA;
     ArrayAdapter<String> adapterTeamB;
     ArrayList<String> teamsSpinnerA;
     ArrayList<String> teamsSpinnerB;
+
+    ArrayAdapter<String> adapterList;
+    ArrayList<String> leagues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,13 @@ public class CreatingMatchActivity extends AppCompatActivity {
 
         spinner1 = (Spinner)findViewById(R.id.choose_teamA);
         spinner2 = (Spinner)findViewById(R.id.choose_teamB);
+        leagueSpinner = findViewById(R.id.choose_league);
+
+        leagues = new ArrayList<>();
+        leagues.add("Liga A");
+        leagues.add("Liga B");
+        adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leagues);
+        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
 
@@ -53,19 +65,32 @@ public class CreatingMatchActivity extends AppCompatActivity {
 
         spinner1.setAdapter(adapterTeamA);
         spinner2.setAdapter(adapterTeamA);
-        
-        retrieveData();
 
+        leagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = adapterView.getItemAtPosition(i).toString();
+                teamsSpinnerA.clear();
+                teamsSpinnerB.clear();
+                fetch(selectedItem);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
-    public void retrieveData(){
+    public void fetch(final String league){
         listener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot team : dataSnapshot.getChildren()){
-                    teamsSpinnerA.add(team.child("name").getValue().toString());
-                    teamsSpinnerB.add(team.child("name").getValue().toString());
-
+                    if(team.child("league").getValue().equals(league)) {
+                        teamsSpinnerA.add(team.child("name").getValue().toString());
+                        teamsSpinnerB.add(team.child("name").getValue().toString());
+                    }
                 }
 
                 adapterTeamA.notifyDataSetChanged();

@@ -219,8 +219,8 @@ public class TeamActivity extends AppCompatActivity {
                         holder.playerLL1.setVisibility(View.VISIBLE);
                         holder.playerLL2.setVisibility(View.INVISIBLE);
 
-                        databaseReferencePlayers.child(idTeam).child("number").setValue(holder.playerNumberTV.getText().toString());
-                        databaseReferencePlayers.child(idTeam).child("name").setValue(holder.playerNameTV.getText().toString());
+                        databaseReferencePlayers.child(model.getId()).child("number").setValue(holder.playerNumberTV.getText().toString());
+                        databaseReferencePlayers.child(model.getId()).child("nameAndLastname").setValue(holder.playerNameTV.getText().toString());
 
 
 
