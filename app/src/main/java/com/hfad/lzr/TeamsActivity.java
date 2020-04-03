@@ -92,7 +92,7 @@ public class TeamsActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull TeamViewHolder holder, int position, @NonNull final Team model) {
+            protected void onBindViewHolder(@NonNull TeamViewHolder holder, final int position, @NonNull final Team model) {
                 holder.teamName.setText(model.getName());
 
                 holder.teamName.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +102,12 @@ public class TeamsActivity extends AppCompatActivity {
                         intent.putExtra("team_name", model.getName());
                         intent.putExtra("idTeam", model.getId());
                         startActivity(intent);
+                    }
+                });
+                holder.teamDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        adapter.getRef(position).removeValue();
                     }
                 });
             }

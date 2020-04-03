@@ -174,7 +174,7 @@ public class TeamActivity extends AppCompatActivity {
         }
     }
 
-    private void fetch(String idTeam) {
+    private void fetch(final String idTeam) {
 
         final Query query = FirebaseDatabase.getInstance().getReference("players").orderByChild("teamId").equalTo(idTeam);
 
@@ -190,9 +190,42 @@ public class TeamActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull PlayerViewHolder holder, int position, @NonNull Player model) {
+            protected void onBindViewHolder(@NonNull final PlayerViewHolder holder, final int position, @NonNull final Player model) {
                 holder.playerNumberTV.setText(model.getNumber());
                 holder.playerNameTV.setText(model.getNameAndLastname());
+
+                holder.playerDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        adapter.getRef(position).removeValue();
+                    }
+                });
+                holder.playerEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        holder.playerNumberET.setText(holder.playerNumberTV.getText().toString());
+                        holder.playerNameET.setText(holder.playerNameTV.getText().toString());
+                        holder.playerLL1.setVisibility(View.INVISIBLE);
+                        holder.playerLL2.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                holder.playerAccept.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        holder.playerNumberTV.setText(holder.playerNumberET.getText().toString());
+                        holder.playerNameTV.setText(holder.playerNameET.getText().toString());
+                        holder.playerLL1.setVisibility(View.VISIBLE);
+                        holder.playerLL2.setVisibility(View.INVISIBLE);
+
+                        databaseReferencePlayers.child(idTeam).child("number").setValue(holder.playerNumberTV.getText().toString());
+                        databaseReferencePlayers.child(idTeam).child("name").setValue(holder.playerNameTV.getText().toString());
+
+
+
+                    }
+                });;
             }
         };
         adapter.startListening();
