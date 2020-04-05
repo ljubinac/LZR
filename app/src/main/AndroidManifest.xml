@@ -14,7 +14,7 @@
             android:label="@string/title_activity_lineup"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        android:theme="@style/AppTheme">
+<!--        android:theme="@style/AppTheme">-->
         <activity android:name=".GameActivity"></activity>
         <activity android:name=".TeamActivity" />
         <activity

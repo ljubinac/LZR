@@ -3,7 +3,9 @@ package com.hfad.lzr.model;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
 
     private String id;
     private String nameAndLastname;

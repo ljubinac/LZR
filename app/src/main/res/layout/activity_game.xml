@@ -25,7 +25,8 @@
             android:id="@+id/gameTeams"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="4dp">
 
             <TextView
                 android:id="@+id/teamA"
@@ -55,7 +56,8 @@
             android:id="@+id/gameScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="4dp">
 
             <TextView
                 android:id="@+id/scoreTeamA"
@@ -98,7 +100,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/tv2pmTitle"
@@ -106,7 +109,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/tv2pmTitle"
-
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
@@ -128,7 +130,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/tv2paTitle"
@@ -136,8 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/tv2paTitle"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -146,9 +148,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -169,7 +170,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/tv3pmTitle"
@@ -177,8 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/tv3pmTitle"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -187,9 +188,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -201,7 +201,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/tv3paTitle"
@@ -209,8 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/tv3paTitle"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -219,9 +219,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -243,7 +242,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/tv1pmTitle"
@@ -251,8 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/tv1pmTitle"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -261,9 +260,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -275,7 +273,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/tv1paTitle"
@@ -283,8 +282,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/tv1paTitle"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -293,9 +291,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -317,7 +314,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/offRebTitleTV"
@@ -325,8 +323,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/offRebTitleTV"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -335,9 +332,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -349,7 +345,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/defRebTitleTV"
@@ -357,8 +354,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/defRebTitleTV"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -367,9 +363,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -391,7 +386,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/assistTitleTV"
@@ -399,8 +395,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/assistTitleTV"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -409,9 +404,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -423,7 +417,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:layout_margin="4dp">
 
                 <TextView
                     android:id="@+id/turnoversTitleTV"
@@ -431,8 +426,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/turnoversTitleTV"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -441,9 +435,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -474,8 +467,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/blockTitleTV"
-                    android:layout_marginTop="4dp"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/text"/>
 
@@ -484,11 +476,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="0"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
-                    android:textColor="@color/text"/>
+                    android:textColor="@color/text"
+                    />
 
             </LinearLayout>
 
