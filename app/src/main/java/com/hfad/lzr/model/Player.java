@@ -19,6 +19,13 @@ public class Player implements Serializable {
         this.teamId = teamId;
     }
 
+    public Player(Player player){
+        this.id = player.id;
+        this.nameAndLastname = player.nameAndLastname;
+        this.number = player.number;
+        this.teamId = player.teamId;
+    }
+
     public String getTeamId() {
         return teamId;
     }

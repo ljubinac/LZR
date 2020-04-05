@@ -15,11 +15,15 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
+import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.ui.main.ChooseLineupFragment;
 import com.hfad.lzr.ui.main.SectionsPagerAdapter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,20 +32,20 @@ public class LineupActivity extends AppCompatActivity {
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
     private Button startGame;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lineup);
 
-
-
-
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
 
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("game");
 
         startGame = findViewById(R.id.start_game);
 
@@ -56,13 +60,39 @@ public class LineupActivity extends AppCompatActivity {
                 List<Player> playersTeamB = fragment2.getData();
                 Toast.makeText(getApplicationContext(), "TeamB = " + playersTeamB.size() + " players", Toast.LENGTH_LONG).show();
 
+                String gameId = saveGame();
+
+                List<PlayerGame> playerGamesA = new ArrayList<>();
+                List<PlayerGame> playerGamesB = new ArrayList<>();
+
+                for (Player player : playersTeamA){
+                    playerGamesA.add(new PlayerGame(player, gameId));
+                }
+
+                for (Player player : playersTeamB){
+                    playerGamesB.add(new PlayerGame(player, gameId));
+                }
+
                 Intent intent = new Intent(LineupActivity.this, GameActivity.class);
-                intent.putExtra("playersTeamA", ( Serializable ) playersTeamA);
-                intent.putExtra("playersTeamB", ( Serializable ) playersTeamB);
+                intent.putExtra("playersTeamA", ( Serializable ) playerGamesA);
+                intent.putExtra("playersTeamB", ( Serializable ) playerGamesB);
+                intent.putExtra("gameId", gameId);
                 startActivity(intent);
             }
         });
 
+    }
+
+    private String saveGame() {
+        String time = getIntent().getStringExtra("time");
+        String date = getIntent().getStringExtra("date");
+        String teamAid = getIntent().getStringExtra("teamAId");
+        String teamBid = getIntent().getStringExtra("teamBId");
+
+        String id = databaseReference.push().getKey();
+        Game game = new Game(date, teamAid, teamBid, id, time);
+        databaseReference.child(id).setValue(game);
+        return id;
     }
 
 
