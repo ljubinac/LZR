@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -36,9 +35,6 @@ public class CreatingMatchActivity extends AppCompatActivity {
     ArrayList<String> teamsSpinnerB;
     ArrayList<Team> teams;
 
-    EditText timeET;
-    EditText dateET;
-
     Button chooseLineup;
     ArrayAdapter<String> adapterList;
     ArrayList<String> leagues;
@@ -48,8 +44,6 @@ public class CreatingMatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creating_match);
 
-        timeET = findViewById(R.id.timeET);
-        dateET = findViewById(R.id.dateET);
         teams = new ArrayList<>();
         spinner1 = (Spinner) findViewById(R.id.choose_teamA);
         spinner2 = (Spinner) findViewById(R.id.choose_teamB);
@@ -66,8 +60,6 @@ public class CreatingMatchActivity extends AppCompatActivity {
                 intent.putExtra("teamAId", teamAId);
                 intent.putExtra("teamB", spinner2.getSelectedItem().toString());
                 intent.putExtra("teamBId", teamBId);
-                intent.putExtra("timeA", timeET.getText().toString());
-                intent.putExtra("dateA", dateET.getText().toString());
                 startActivity(intent);
             }
         });
