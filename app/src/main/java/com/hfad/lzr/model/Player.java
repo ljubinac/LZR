@@ -12,6 +12,9 @@ public class Player implements Serializable {
     private String number;
     private String teamId;
 
+    public Player() {
+    }
+
     public Player(String id, String nameAndLastname, String number, String teamId) {
         this.id = id;
         this.nameAndLastname = nameAndLastname;
@@ -27,7 +30,11 @@ public class Player implements Serializable {
         this.teamId = teamId;
     }
 
-    public Player() {
+    public Player(Player player) {
+        this.id = player.id;
+        this.nameAndLastname = player.nameAndLastname;
+        this.number = player.number;
+        this.teamId = player.teamId;
     }
 
     public Player(String id, String nameAndLastname, String number) {

@@ -15,11 +15,15 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
+import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.ui.main.ChooseLineupFragment;
 import com.hfad.lzr.ui.main.SectionsPagerAdapter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,12 +32,26 @@ public class LineupActivity extends AppCompatActivity {
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
     private Button startGame;
+    DatabaseReference databaseReferenceGames;
+    String gameDate;
+    String gameTime;
+    String teamAid;
+    String teamBid;
+    String teamA;
+    String teamB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lineup);
 
+         gameDate = getIntent().getStringExtra("gameDate");
+         gameTime = getIntent().getStringExtra("gameTime");
+         teamAid = getIntent().getStringExtra("teamAId");
+         teamBid = getIntent().getStringExtra("teamBId");
+         teamA = getIntent().getStringExtra("teamA");
+         teamB = getIntent().getStringExtra("teamB");
 
 
 
@@ -45,20 +63,41 @@ public class LineupActivity extends AppCompatActivity {
 
         startGame = findViewById(R.id.start_game);
 
+        databaseReferenceGames = FirebaseDatabase.getInstance().getReference("games");
+
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String id = databaseReferenceGames.push().getKey();
+                Game game = new Game(id, teamAid, teamBid, gameDate, gameTime);
+                databaseReferenceGames.child(id).setValue(game);
+
                 ChooseLineupFragment fragment1 = (ChooseLineupFragment) sectionsPagerAdapter.getItem(0);
                 ChooseLineupFragment fragment2 = (ChooseLineupFragment) sectionsPagerAdapter.getItem(1);
 
+                List<PlayerGame> playersGameA = new ArrayList<>();
                 List<Player> playersTeamA = fragment1.getData();
-                Toast.makeText(getApplicationContext(), " TeamA = " + playersTeamA.size() + " players", Toast.LENGTH_LONG).show();
+                for (Player p : playersTeamA){
+                    PlayerGame playerGame = new PlayerGame(id, p);
+                    playersGameA.add(playerGame);
+                }
+
+                List<PlayerGame> playersGameB = new ArrayList<>();
                 List<Player> playersTeamB = fragment2.getData();
-                Toast.makeText(getApplicationContext(), "TeamB = " + playersTeamB.size() + " players", Toast.LENGTH_LONG).show();
+                for (Player p : playersTeamB){
+                    PlayerGame playerGame = new PlayerGame(id, p);
+                    playersGameB.add(playerGame);
+                }
 
                 Intent intent = new Intent(LineupActivity.this, GameActivity.class);
-                intent.putExtra("playersTeamA", ( Serializable ) playersTeamA);
-                intent.putExtra("playersTeamB", ( Serializable ) playersTeamB);
+                intent.putExtra("playersGameA", ( Serializable ) playersGameA);
+                intent.putExtra("playersGameB", ( Serializable ) playersGameB);
+                intent.putExtra("teamAid", teamAid);
+                intent.putExtra("teamBid", teamBid);
+                intent.putExtra("teamA", teamA);
+                intent.putExtra("teamB", teamB);
+
                 startActivity(intent);
             }
         });
