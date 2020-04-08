@@ -118,6 +118,7 @@ public class GameActivity extends AppCompatActivity {
         resA = 0;
         resB = 0;
         currentTeam = false;
+        current = playersGameA.get(0);
 
         buildRecyclerViewA();
         buildRecyclerViewB();

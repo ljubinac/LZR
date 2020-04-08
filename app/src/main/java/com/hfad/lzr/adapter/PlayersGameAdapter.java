@@ -31,10 +31,12 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
     public static class ViewHolder extends  RecyclerView.ViewHolder{
 
         public TextView playerGameNumberTV;
+        public TextView playerLastnameTV;
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             playerGameNumberTV = itemView.findViewById(R.id.player_game_number);
+            playerLastnameTV = itemView.findViewById(R.id.lastNameTV);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,6 +68,7 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         PlayerGame playerGame = mPlayersList.get(position);
         holder.playerGameNumberTV.setText(playerGame.getNumber());
+        holder.playerLastnameTV.setText(playerGame.getNameAndLastname().split(" ")[1]);
     }
 
     @Override
