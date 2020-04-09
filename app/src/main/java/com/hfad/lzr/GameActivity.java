@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -33,7 +34,7 @@ public class GameActivity extends AppCompatActivity {
     PlayersGameAdapter adapterB;
     DatabaseReference databaseReferenceA;
     DatabaseReference databaseReferenceB;
-    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.LayoutManager layoutManagerA, layoutManagerB;
     String teamA;
     String teamB;
     TextView teamATV;
@@ -269,17 +270,23 @@ public class GameActivity extends AppCompatActivity {
     public void buildRecyclerViewA() {
         teamArv = findViewById(R.id.firstTeamRV);
         teamArv.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getApplicationContext());
+        layoutManagerA = new LinearLayoutManager(getApplicationContext());
         adapterA = new PlayersGameAdapter(playersGameA);
 
-        teamArv.setLayoutManager(layoutManager);
+        teamArv.setLayoutManager(layoutManagerA);
         teamArv.setAdapter(adapterA);
         adapterA.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 current = playersGameA.get(position);
                 setValues();
-                currentTeam =false;
+                currentTeam = false;
+                adapterA.notifyItemChanged(adapterA.selectedPos);
+                adapterB.notifyItemChanged(adapterB.selectedPos);
+                adapterA.selectedPos = position;
+                adapterB.selectedPos = RecyclerView.NO_POSITION;
+                adapterB.notifyItemChanged(adapterB.selectedPos);
+                adapterA.notifyItemChanged(adapterA.selectedPos);
             }
         });
     }
@@ -287,10 +294,10 @@ public class GameActivity extends AppCompatActivity {
     public void buildRecyclerViewB() {
         teamBrv = findViewById(R.id.secondTeamRV);
         teamBrv.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getApplicationContext());
+        layoutManagerB = new LinearLayoutManager(getApplicationContext());
         adapterB = new PlayersGameAdapter(playersGameB);
 
-        teamBrv.setLayoutManager(layoutManager);
+        teamBrv.setLayoutManager(layoutManagerB);
         teamBrv.setAdapter(adapterB);
         adapterB.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
@@ -298,6 +305,12 @@ public class GameActivity extends AppCompatActivity {
                 current = playersGameB.get(position);
                 setValues();
                 currentTeam = true;
+                adapterB.notifyItemChanged(adapterB.selectedPos);
+                adapterA.notifyItemChanged(adapterA.selectedPos);
+                adapterB.selectedPos = position;
+                adapterA.selectedPos = RecyclerView.NO_POSITION;
+                adapterA.notifyItemChanged(adapterA.selectedPos);
+                adapterB.notifyItemChanged(adapterB.selectedPos);
             }
         });
     }

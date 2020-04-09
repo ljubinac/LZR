@@ -18,9 +18,7 @@
         android:layout_height="wrap_content"
         android:text="@string/new_team"
         android:layout_gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/text"
-        android:textSize="25sp"/>
+        style="@style/text_tile"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -144,21 +142,13 @@
 
     <Button
         android:id="@+id/save_team"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="70dp"
-        android:layout_gravity="center"
-        android:background="@drawable/ic_save"
-        android:textColor="@color/text_btn" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add team"
-        android:textColor="@color/green_btn"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:layout_gravity="center"/>
+        android:width="130dp"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center"
+        android:text="@string/add_team" />
+
 
 </LinearLayout>
 

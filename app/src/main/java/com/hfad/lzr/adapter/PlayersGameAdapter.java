@@ -19,6 +19,7 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
 
     private ArrayList<PlayerGame> mPlayersList;
     private OnItemClickListener mListener;
+    public int selectedPos = RecyclerView.NO_POSITION;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -47,6 +48,7 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
                             listener.onItemClick(position);
                         }
                     }
+
                 }
             });
         }
@@ -69,14 +71,13 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
         PlayerGame playerGame = mPlayersList.get(position);
         holder.playerGameNumberTV.setText(playerGame.getNumber());
         holder.playerLastnameTV.setText(playerGame.getNameAndLastname().split(" ")[1]);
+        holder.itemView.setSelected(selectedPos == position);
     }
 
     @Override
     public int getItemCount() {
         return mPlayersList.size();
     }
-
-
 
 
 }

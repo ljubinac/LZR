@@ -82,7 +82,11 @@ public class CreateTeamActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 addTeam();
-                if(getIntent().getStringExtra("prev_activity").equals("CreatingMatchActivity")){
+                if(getIntent().getStringExtra("prev_activity") == null){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+                else if(getIntent().getStringExtra("prev_activity").equals("CreatingMatchActivity")){
                     Intent intent = new Intent(getApplicationContext(), CreatingMatchActivity.class);
                     startActivity(intent);
                 }

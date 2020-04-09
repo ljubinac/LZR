@@ -1,42 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:paddingTop="8dp"
+    android:layout_margin="40dp"
     tools:context=".MainActivity">
 
 
     <TextView
         android:id="@+id/lzr"
-        android:width="130dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="22dp"
-        android:textColor="@color/blue_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lzr"
+        style="@style/text_tile"
          />
-
-
 
     <Button
         android:id="@+id/create_game"
         android:width="130dp"
-        android:background="@color/blue_btn"
-        android:textColor="@color/text_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
         android:text="@string/create_game"
+        style="@style/btn"
         android:onClick="createGame"/>
 
     <Button
@@ -53,8 +45,7 @@
     <Button
         android:id="@+id/create_team"
         android:width="130dp"
-        android:background="@color/blue_btn"
-        android:textColor="@color/text_btn"
+        style="@style/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -64,8 +55,7 @@
     <Button
         android:id="@+id/quit"
         android:width="130dp"
-        android:background="@color/blue_btn"
-        android:textColor="@color/text_btn"
+        style="@style/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
