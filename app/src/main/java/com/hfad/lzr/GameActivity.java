@@ -69,6 +69,11 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout llFoul;
     TextView tvBlock;
     TextView tvFoul;
+    LinearLayout llSteals;
+    LinearLayout llTehnical;
+    TextView tvSteals;
+    TextView tvTehnical;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +120,10 @@ public class GameActivity extends AppCompatActivity {
         llFoul = findViewById(R.id.ll_foul);
         tvBlock = findViewById(R.id.blockTV);
         tvFoul = findViewById(R.id.foulTV);
+        llSteals = findViewById(R.id.ll_steals);
+        llTehnical = findViewById(R.id.ll_tehnicalFoul);
+        tvSteals = findViewById(R.id.stealsTV);
+        tvTehnical = findViewById(R.id.tehnicalFoulTV);
 
         resA = 0;
         resB = 0;
@@ -139,11 +148,33 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        ll2pm.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setPm2(current.getPm2() - 1);
+                current.setPa2(current.getPa2() - 1);
+                tv2pm.setText(String.valueOf(current.getPm2()));
+                tv2pa.setText(String.valueOf(current.getPa2()));
+                setRes(-2);
+
+                return true;
+            }
+        });
+
         ll2pa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 current.setPa2(current.getPa2() + 1);
                 tv2pa.setText(String.valueOf(current.getPa2()));
+            }
+        });
+
+        ll2pa.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setPa2(current.getPa2() - 1);
+                tv2pa.setText(String.valueOf(current.getPa2()));
+                return true;
             }
         });
 
@@ -158,11 +189,32 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        ll3pm.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setPm3(current.getPm3() - 1);
+                current.setPa3(current.getPa3() - 1);
+                tv3pm.setText(String.valueOf(current.getPm3()));
+                tv3pa.setText(String.valueOf(current.getPa3()));
+                setRes(-3);
+                return true;
+            }
+        });
+
         ll3pa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 current.setPa3(current.getPa3() + 1);
                 tv3pa.setText(String.valueOf(current.getPa3()));
+            }
+        });
+
+        ll3pa.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setPa3(current.getPa3() - 1);
+                tv3pa.setText(String.valueOf(current.getPa3()));
+                return true;
             }
         });
 
@@ -177,11 +229,32 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        ll1pm.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setPm1(current.getPm1() - 1);
+                current.setPa1(current.getPa1() - 1);
+                tv1pm.setText(String.valueOf(current.getPm1()));
+                tv1pa.setText(String.valueOf(current.getPa1()));
+                setRes(-1);
+                return true;
+            }
+        });
+
         ll1pa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 current.setPa1(current.getPa1() + 1);
                 tv1pa.setText(String.valueOf(current.getPa1()));
+            }
+        });
+
+        ll1pa.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setPa1(current.getPa1() - 1);
+                tv1pa.setText(String.valueOf(current.getPa1()));
+                return true;
             }
         });
 
@@ -193,11 +266,29 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        llOffReb.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setOffReb(current.getOffReb() - 1);
+                tvOffReb.setText(String.valueOf(current.getOffReb()));
+                return true;
+            }
+        });
+
         llDefReb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 current.setDefReb(current.getDefReb() + 1);
                 tvDefReb.setText(String.valueOf(current.getDefReb()));
+            }
+        });
+
+        llDefReb.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setDefReb(current.getDefReb() - 1);
+                tvDefReb.setText(String.valueOf(current.getDefReb()));
+                return true;
             }
         });
 
@@ -209,11 +300,12 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        llTurnov.setOnClickListener(new View.OnClickListener() {
+        llAsist.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                current.setTurnover(current.getTurnover() + 1);
-                tvTurnov.setText(String.valueOf(current.getTurnover()));
+            public boolean onLongClick(View v) {
+                current.setAsist(current.getAsist() - 1);
+                tvAsist.setText(String.valueOf(current.getAsist()));
+                return true;
             }
         });
 
@@ -225,11 +317,84 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        llBlock.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setBlock(current.getBlock() - 1);
+                tvBlock.setText(String.valueOf(current.getBlock()));
+                return true;
+            }
+        });
+
+        llSteals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                current.setSteal(current.getSteal() + 1);
+                tvSteals.setText(String.valueOf(current.getSteal()));
+            }
+        });
+
+        llSteals.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setSteal(current.getSteal() - 1);
+                tvSteals.setText(String.valueOf(current.getSteal()));
+                return true;
+            }
+        });
+
+        llTurnov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                current.setTurnover(current.getTurnover() + 1);
+                tvTurnov.setText(String.valueOf(current.getTurnover()));
+            }
+        });
+
+        llTurnov.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setTurnover(current.getTurnover() - 1);
+                tvTurnov.setText(String.valueOf(current.getTurnover()));
+                return true;
+            }
+        });
+
         llFoul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                current.setFoul(current.getFoul() + 1);
+                if (current.getFoul() > 4){
+                    Toast.makeText(getApplicationContext(), "The player has 5 fouls!", Toast.LENGTH_LONG).show();
+                } else {
+                    current.setFoul(current.getFoul() + 1);
+                    tvFoul.setText(String.valueOf(current.getFoul()));
+                }
+            }
+        });
+
+        llFoul.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setFoul(current.getFoul() - 1);
                 tvFoul.setText(String.valueOf(current.getFoul()));
+                return true;
+            }
+        });
+
+        llTehnical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                current.setTehnicalFoul(current.getTehnicalFoul() + 1);
+                tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
+            }
+        });
+
+        llTehnical.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                current.setTehnicalFoul(current.getTehnicalFoul() - 1);
+                tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
+                return true;
             }
         });
 
@@ -260,10 +425,13 @@ public class GameActivity extends AppCompatActivity {
         tvDefReb.setText(String.valueOf(current.getDefReb()));
 
         tvAsist.setText(String.valueOf(current.getAsist()));
+        tvBlock.setText(String.valueOf(current.getBlock()));
+
+        tvSteals.setText(String.valueOf(current.getSteal()));
         tvTurnov.setText(String.valueOf(current.getTurnover()));
 
-        tvBlock.setText(String.valueOf(current.getBlock()));
         tvFoul.setText(String.valueOf(current.getFoul()));
+        tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
     }
 
 

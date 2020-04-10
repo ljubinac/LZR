@@ -90,15 +90,19 @@ public class LineupActivity extends AppCompatActivity {
                     playersGameB.add(playerGame);
                 }
 
-                Intent intent = new Intent(LineupActivity.this, GameActivity.class);
-                intent.putExtra("playersGameA", ( Serializable ) playersGameA);
-                intent.putExtra("playersGameB", ( Serializable ) playersGameB);
-                intent.putExtra("teamAid", teamAid);
-                intent.putExtra("teamBid", teamBid);
-                intent.putExtra("teamA", teamA);
-                intent.putExtra("teamB", teamB);
+                if (playersGameA.size() >= 5 && playersGameB.size() >= 5) {
+                    Intent intent = new Intent(LineupActivity.this, GameActivity.class);
+                    intent.putExtra("playersGameA", ( Serializable ) playersGameA);
+                    intent.putExtra("playersGameB", ( Serializable ) playersGameB);
+                    intent.putExtra("teamAid", teamAid);
+                    intent.putExtra("teamBid", teamBid);
+                    intent.putExtra("teamA", teamA);
+                    intent.putExtra("teamB", teamB);
 
-                startActivity(intent);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Teams must start with 5 players!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

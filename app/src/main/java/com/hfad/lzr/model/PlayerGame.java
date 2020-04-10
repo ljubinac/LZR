@@ -19,6 +19,8 @@ public class PlayerGame extends Player implements Serializable {
     private int turnover;
     private int block;
     private int foul;
+    private int steal;
+    private int tehnicalFoul;
 
     public PlayerGame(String gameId ,Player player) {
         super(player);
@@ -62,6 +64,22 @@ public class PlayerGame extends Player implements Serializable {
     public void setPointsTeamB(int pointsTeamB) {
         this.pointsTeamB = pointsTeamB;
     }*/
+
+    public int getSteal() {
+        return steal;
+    }
+
+    public void setSteal(int steal) {
+        this.steal = steal;
+    }
+
+    public int getTehnicalFoul() {
+        return tehnicalFoul;
+    }
+
+    public void setTehnicalFoul(int tehnicalFoul) {
+        this.tehnicalFoul = tehnicalFoul;
+    }
 
     public int getPm2() {
         return pm2;

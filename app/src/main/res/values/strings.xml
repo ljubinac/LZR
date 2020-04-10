@@ -58,4 +58,7 @@
     <string name="blockTitleTV">Block</string>
     <string name="foulTitleTV">Foul</string>
     <string name="startGame">Start game</string>
+    <string name="tehnicalFoulTitleTV">Teh</string>
+    <string name="stealsTitleTV">Steals</string>
+
 </resources>
