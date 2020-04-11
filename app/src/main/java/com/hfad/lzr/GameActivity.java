@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,6 +75,8 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout llTehnical;
     TextView tvSteals;
     TextView tvTehnical;
+    LinearLayout llFinishGame;
+    TextView tvFinishGame;
 
 
     @Override
@@ -124,6 +128,9 @@ public class GameActivity extends AppCompatActivity {
         llTehnical = findViewById(R.id.ll_tehnicalFoul);
         tvSteals = findViewById(R.id.stealsTV);
         tvTehnical = findViewById(R.id.tehnicalFoulTV);
+
+        llFinishGame = findViewById(R.id.ll_finishGame);
+        tvFinishGame = findViewById(R.id.finishGameTV);
 
         resA = 0;
         resB = 0;
@@ -395,6 +402,16 @@ public class GameActivity extends AppCompatActivity {
                 current.setTehnicalFoul(current.getTehnicalFoul() - 1);
                 tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
                 return true;
+            }
+        });
+
+        llFinishGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GameActivity.this, StatsActivity.class);
+                intent.putExtra("playersGameA", playersGameA);
+                intent.putExtra("playersGameB", playersGameB);
+                startActivity(intent);
             }
         });
 

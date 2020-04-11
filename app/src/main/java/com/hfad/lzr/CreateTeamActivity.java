@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +49,6 @@ public class CreateTeamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
-
 
         saveTeam = findViewById(R.id.save_team);
         teamName = findViewById(R.id.team_name);
@@ -127,11 +127,6 @@ public class CreateTeamActivity extends AppCompatActivity {
         players.remove(position);
         mPlayersAdapter.notifyItemRemoved(position);
     }
-
-   /* public void editPlayer(int position, EditText newNumber, EditText newName){
-        players.get(position).changeText1(newNumber, newName);
-        mAdapter.notifyItemChanged(position);
-    }*/
 
     private void addTeam() {
         String name = teamName.getText().toString();

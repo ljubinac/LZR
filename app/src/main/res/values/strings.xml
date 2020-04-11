@@ -60,5 +60,6 @@
     <string name="startGame">Start game</string>
     <string name="tehnicalFoulTitleTV">Teh</string>
     <string name="stealsTitleTV">Steals</string>
+    <string name="finishGameTV">Finish game</string>
 
 </resources>
