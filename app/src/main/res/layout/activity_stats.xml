@@ -10,7 +10,7 @@
     <ScrollView
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dip"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
@@ -25,20 +25,57 @@
 
             <TableLayout
                 android:id="@+id/player_game_A"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
 
             </TableLayout>
 
-           <!-- <TableLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
+            <!--<TableLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
                  android:id="@+id/player_game_B">
 
 
              </TableLayout>-->
 
         </HorizontalScrollView>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="horizontal|vertical">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:scrollbars="horizontal|vertical">
+
+            <!--<TableLayout
+                android:id="@+id/player_game_A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+            </TableLayout>-->
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/player_game_B">
+
+
+            </TableLayout>
+
+        </HorizontalScrollView>
+
     </ScrollView>
 </LinearLayout>

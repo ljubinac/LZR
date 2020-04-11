@@ -64,13 +64,13 @@ public class StatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stats);
 
          ll = (TableLayout) findViewById(R.id.player_game_A);
-         /*ll2 = (TableLayout) findViewById(R.id.player_game_B);*/
+         ll2 = (TableLayout) findViewById(R.id.player_game_B);
 
         playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
         playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
 
         init(ll, playersGameA);
-       /* init(ll2, playersGameB);*/
+        init(ll2, playersGameB);
 
     }
 
