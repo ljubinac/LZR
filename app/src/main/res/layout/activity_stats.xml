@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".StatsActivity">
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/ll">
     <ScrollView
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -14,14 +18,14 @@
         android:layout_marginTop="5dip"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal|vertical">
+        android:scrollbars="horizontal">
 
         <HorizontalScrollView
             android:id="@+id/horizontalView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
-            android:scrollbars="horizontal|vertical">
+            android:scrollbars="horizontal">
 
             <TableLayout
                 android:id="@+id/player_game_A"
@@ -31,13 +35,6 @@
 
             </TableLayout>
 
-            <!--<TableLayout
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/player_game_B">
-
-
-             </TableLayout>-->
 
         </HorizontalScrollView>
 
@@ -50,22 +47,15 @@
         android:layout_marginTop="5dip"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal|vertical">
+        android:scrollbars="horizontal">
 
         <HorizontalScrollView
             android:id="@+id/horizontalView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
-            android:scrollbars="horizontal|vertical">
+            android:scrollbars="horizontal">
 
-            <!--<TableLayout
-                android:id="@+id/player_game_A"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-            </TableLayout>-->
 
             <TableLayout
                 android:layout_width="wrap_content"
@@ -78,4 +68,10 @@
         </HorizontalScrollView>
 
     </ScrollView>
+</LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dugme"
+        android:onClick="createPdf"/>
 </LinearLayout>

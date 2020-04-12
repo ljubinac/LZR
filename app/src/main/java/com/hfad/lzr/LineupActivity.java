@@ -46,13 +46,12 @@ public class LineupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lineup);
 
-         gameDate = getIntent().getStringExtra("gameDate");
-         gameTime = getIntent().getStringExtra("gameTime");
-         teamAid = getIntent().getStringExtra("teamAId");
-         teamBid = getIntent().getStringExtra("teamBId");
-         teamA = getIntent().getStringExtra("teamA");
-         teamB = getIntent().getStringExtra("teamB");
-
+        gameDate = getIntent().getStringExtra("gameDate");
+        gameTime = getIntent().getStringExtra("gameTime");
+        teamAid = getIntent().getStringExtra("teamAId");
+        teamBid = getIntent().getStringExtra("teamBId");
+        teamA = getIntent().getStringExtra("teamA");
+        teamB = getIntent().getStringExtra("teamB");
 
 
         viewPager = findViewById(R.id.view_pager);
@@ -69,31 +68,33 @@ public class LineupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String id = databaseReferenceGames.push().getKey();
-                Game game = new Game(id, teamAid, teamBid, gameDate, gameTime);
-                databaseReferenceGames.child(id).setValue(game);
-
                 ChooseLineupFragment fragment1 = (ChooseLineupFragment) sectionsPagerAdapter.getItem(0);
                 ChooseLineupFragment fragment2 = (ChooseLineupFragment) sectionsPagerAdapter.getItem(1);
 
-                List<PlayerGame> playersGameA = new ArrayList<>();
                 List<Player> playersTeamA = fragment1.getData();
-                for (Player p : playersTeamA){
-                    PlayerGame playerGame = new PlayerGame(id, p);
-                    playersGameA.add(playerGame);
-                }
-
-                List<PlayerGame> playersGameB = new ArrayList<>();
                 List<Player> playersTeamB = fragment2.getData();
-                for (Player p : playersTeamB){
-                    PlayerGame playerGame = new PlayerGame(id, p);
-                    playersGameB.add(playerGame);
-                }
 
-                if (playersGameA.size() >= 5 && playersGameB.size() >= 5) {
+                if (playersTeamA.size() >= 5 && playersTeamB.size() >= 5) {
+                    String id = databaseReferenceGames.push().getKey();
+                    Game game = new Game(id, teamAid, teamBid, gameDate, gameTime);
+                    databaseReferenceGames.child(id).setValue(game);
+
+                    List<PlayerGame> playersGameA = new ArrayList<>();
+                    for (Player p : playersTeamA) {
+                        PlayerGame playerGame = new PlayerGame(id, p);
+                        playersGameA.add(playerGame);
+                    }
+
+                    List<PlayerGame> playersGameB = new ArrayList<>();
+                    for (Player p : playersTeamB) {
+                        PlayerGame playerGame = new PlayerGame(id, p);
+                        playersGameB.add(playerGame);
+                    }
+
+
                     Intent intent = new Intent(LineupActivity.this, GameActivity.class);
-                    intent.putExtra("playersGameA", ( Serializable ) playersGameA);
-                    intent.putExtra("playersGameB", ( Serializable ) playersGameB);
+                    intent.putExtra("playersGameA", (Serializable) playersGameA);
+                    intent.putExtra("playersGameB", (Serializable) playersGameB);
                     intent.putExtra("teamAid", teamAid);
                     intent.putExtra("teamBid", teamBid);
                     intent.putExtra("teamA", teamA);
@@ -109,7 +110,7 @@ public class LineupActivity extends AppCompatActivity {
     }
 
 
-    private void setupViewPager(ViewPager viewPager){
+    private void setupViewPager(ViewPager viewPager) {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         String teamAName = getIntent().getStringExtra("teamA");

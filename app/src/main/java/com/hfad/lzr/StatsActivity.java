@@ -1,80 +1,140 @@
 package com.hfad.lzr;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hfad.lzr.model.PlayerGame;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class StatsActivity extends AppCompatActivity {
 
-    ArrayList<PlayerGame> playersGameA;
-    ArrayList<PlayerGame> playersGameB;
 
-    TableLayout ll;
-    TableLayout ll2;
+    private int STORAGE_PERMISSION_CODE = 1;
 
-    TextView tableNum;
-    TextView tableName;
-    TextView tableFG;
-    TextView table2pts;
-    TextView table3pts;
-    TextView table1pts;
-    TextView tableTotalReb;
-    TextView tableDefReb;
-    TextView tableOffReb;
-    TextView tableAssist;
-    TextView tableBlock;
-    TextView tableSteals;
-    TextView tableTurnov;
-    TextView tableFoul;
-    TextView tableTeh;
-    TextView tablePts;
-    TextView tableEff;
+    ArrayList<PlayerGame> playersGameA, playersGameB;
 
+    TableLayout tableTeamA, tableTeamB;
 
-    TextView number;
-    TextView name;
-    TextView fg;
-    TextView pts2;
-    TextView pts3;
-    TextView pts1;
-    TextView totalReb;
-    TextView offReb;
-    TextView defReb;
-    TextView assist;
-    TextView block;
-    TextView steal;
-    TextView turnov;
-    TextView foul;
-    TextView teh;
-    TextView pts;
-    TextView eff;
+    TextView tableNum, tableName, tableFG, table2pts, table3pts, table1pts, tableTotalReb, tableDefReb, tableOffReb, tableAssist, tableBlock, tableSteals, tableTurnov, tableFoul, tablePts, tableEff;
+
+    TextView number, name, fg, pts2, pts3, pts1, totalReb, offReb, defReb, assist, block, steal, turnov, foul, pts, eff;
+
+    LinearLayout ll;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
 
-         ll = (TableLayout) findViewById(R.id.player_game_A);
-         ll2 = (TableLayout) findViewById(R.id.player_game_B);
+        ll = findViewById(R.id.ll);
+
+        tableTeamA = findViewById(R.id.player_game_A);
+        tableTeamB = findViewById(R.id.player_game_B);
 
         playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
         playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
 
-        init(ll, playersGameA);
-        init(ll2, playersGameB);
+        init(tableTeamA, playersGameA);
+        init(tableTeamB, playersGameB);
 
     }
 
-    public void init(TableLayout ll, ArrayList<PlayerGame> playersGameA){
+    public void createPdf(View view){
+
+        if(ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(this, "You have already granted permission", Toast.LENGTH_SHORT).show();
+        } else {
+            requestStoragePermission();
+        }
+        // get view group using reference
+        // convert view group to bitmap
+        ll.setDrawingCacheEnabled(true);
+        ll.buildDrawingCache();
+        Bitmap bm = ll.getDrawingCache();
+
+
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        try {
+            imageToPDF(bytes.toByteArray());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void imageToPDF(byte[] bm) throws FileNotFoundException {
+        try {
+            Document document = new Document();
+            String dirpath = android.os.Environment.getExternalStorageDirectory().toString();
+            PdfWriter.getInstance(document, new FileOutputStream(dirpath + "/NewPDF.pdf")); //  Change pdf's name.
+            document.open();
+            Image img = Image.getInstance(bm);
+            float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
+                    - document.rightMargin() - 0) / img.getWidth()) * 100;
+            img.scalePercent(scaler);
+            img.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
+            document.add(img);
+            document.close();
+            Toast.makeText(this, "PDF Generated successfully!..", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void requestStoragePermission(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            new AlertDialog.Builder(this).setTitle("Permission needed").setMessage("This permission is needed because of that and that").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    ActivityCompat.requestPermissions(StatsActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                }
+            }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            }).create().show();
+        } else{
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Permission NOT GRANTED", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void init(TableLayout table, ArrayList<PlayerGame> playersList){
 
         TableRow row= new TableRow(this);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
@@ -145,11 +205,6 @@ public class StatsActivity extends AppCompatActivity {
         tableEff.setBackgroundResource(R.drawable.table_border);
         tableEff.setPadding(15,15,15,15);
 
-        /*tableTeh = new TextView(this);
-        tableTeh.setBackgroundResource(R.drawable.table_border);
-        tableTeh.setPadding(15,15,15,15);*/
-
-
         tableNum.setText("#No");
         tableName.setText("PLAYER");
         tableFG.setText("FG");
@@ -186,9 +241,9 @@ public class StatsActivity extends AppCompatActivity {
         row.addView(tableEff);
 
 
-        ll.addView(row, 0);
+        table.addView(row, 0);
 
-        for (int i = 0; i < playersGameA.size(); i++){
+        for (int i = 0; i < playersList.size(); i++){
 
             TableRow row2 = new TableRow(this);
             row2.setLayoutParams(lp);
@@ -259,46 +314,46 @@ public class StatsActivity extends AppCompatActivity {
             eff.setBackgroundResource(R.drawable.table_border);
             eff.setPadding(15,15,15,15);
 
-            number.setText(playersGameA.get(i).getNumber());
-            name.setText(playersGameA.get(i).getNameAndLastname());
+            number.setText(playersList.get(i).getNumber());
+            name.setText(playersList.get(i).getNameAndLastname());
 
-            String fgm = String.valueOf(playersGameA.get(i).getPm2() + playersGameA.get(i).getPm3());
-            String fga = String.valueOf(playersGameA.get(i).getPa2() + playersGameA.get(i).getPa3());
+            String fgm = String.valueOf(playersList.get(i).getPm2() + playersList.get(i).getPm3());
+            String fga = String.valueOf(playersList.get(i).getPa2() + playersList.get(i).getPa3());
             String totalFG = fgm + "/" + fga;
             fg.setText(totalFG);
 
-            String p2 = playersGameA.get(i).getPm2() + "/" + playersGameA.get(i).getPa2();
+            String p2 = playersList.get(i).getPm2() + "/" + playersList.get(i).getPa2();
             pts2.setText(p2);
 
-            String p3 = playersGameA.get(i).getPm3() + "/" + playersGameA.get(i).getPa3();
+            String p3 = playersList.get(i).getPm3() + "/" + playersList.get(i).getPa3();
             pts3.setText(p3);
 
-            String p1 = playersGameA.get(i).getPm1() + "/" + playersGameA.get(i).getPa1();
+            String p1 = playersList.get(i).getPm1() + "/" + playersList.get(i).getPa1();
             pts1.setText(p1);
 
-            offReb.setText(String.valueOf(playersGameA.get(i).getOffReb()));
-            defReb.setText(String.valueOf(playersGameA.get(i).getDefReb()));
-            String tReb = String.valueOf(playersGameA.get(i).getOffReb() + playersGameA.get(i).getDefReb());
+            offReb.setText(String.valueOf(playersList.get(i).getOffReb()));
+            defReb.setText(String.valueOf(playersList.get(i).getDefReb()));
+            String tReb = String.valueOf(playersList.get(i).getOffReb() + playersList.get(i).getDefReb());
             totalReb.setText(tReb);
-            assist.setText(String.valueOf(playersGameA.get(i).getAsist()));
-            block.setText(String.valueOf(playersGameA.get(i).getBlock()));
-            steal.setText(String.valueOf(playersGameA.get(i).getSteal()));
-            turnov.setText(String.valueOf(playersGameA.get(i).getTurnover()));
-            foul.setText(String.valueOf(playersGameA.get(i).getFoul()));
+            assist.setText(String.valueOf(playersList.get(i).getAsist()));
+            block.setText(String.valueOf(playersList.get(i).getBlock()));
+            steal.setText(String.valueOf(playersList.get(i).getSteal()));
+            turnov.setText(String.valueOf(playersList.get(i).getTurnover()));
+            foul.setText(String.valueOf(playersList.get(i).getFoul()));
 
-            String totalPoints = String.valueOf((playersGameA.get(i).getPm2() * 2)
-                    + (playersGameA.get(i).getPm3() * 3) + playersGameA.get(i).getPm1());
+            String totalPoints = String.valueOf((playersList.get(i).getPm2() * 2)
+                    + (playersList.get(i).getPm3() * 3) + playersList.get(i).getPm1());
             pts.setText(totalPoints);
 
-            String index = String.valueOf(((playersGameA.get(i).getPm2() * 2)
-                    + (playersGameA.get(i).getPm3() * 3)
-                    + playersGameA.get(i).getPm1())
-                    + (playersGameA.get(i).getOffReb() + playersGameA.get(i).getDefReb())
-                    + playersGameA.get(i).getAsist() + playersGameA.get(i).getBlock()
-                    + playersGameA.get(i).getSteal() - playersGameA.get(i).getTurnover()
-                    - playersGameA.get(i).getFoul() - (playersGameA.get(i).getPa2()-playersGameA.get(i).getPm2())
-                    - (playersGameA.get(i).getPa3()-playersGameA.get(i).getPm3())
-                    - (playersGameA.get(i).getPa1()-playersGameA.get(i).getPm1()) );
+            String index = String.valueOf(((playersList.get(i).getPm2() * 2)
+                    + (playersList.get(i).getPm3() * 3)
+                    + playersList.get(i).getPm1())
+                    + (playersList.get(i).getOffReb() + playersList.get(i).getDefReb())
+                    + playersList.get(i).getAsist() + playersList.get(i).getBlock()
+                    + playersList.get(i).getSteal() - playersList.get(i).getTurnover()
+                    - playersList.get(i).getFoul() - (playersList.get(i).getPa2() - playersList.get(i).getPm2())
+                    - (playersList.get(i).getPa3() - playersList.get(i).getPm3())
+                    - (playersList.get(i).getPa1() - playersList.get(i).getPm1()) );
             eff.setText(index);
 
             row2.addView(number);
@@ -318,7 +373,7 @@ public class StatsActivity extends AppCompatActivity {
             row2.addView(pts);
             row2.addView(eff);
 
-            ll.addView(row2, i+1);
+            table.addView(row2, i+1);
         }
     }
 }
