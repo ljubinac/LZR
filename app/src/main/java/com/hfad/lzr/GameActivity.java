@@ -34,8 +34,6 @@ public class GameActivity extends AppCompatActivity {
     RecyclerView teamBrv;
     PlayersGameAdapter adapterA;
     PlayersGameAdapter adapterB;
-    DatabaseReference databaseReferenceA;
-    DatabaseReference databaseReferenceB;
     RecyclerView.LayoutManager layoutManagerA, layoutManagerB;
     String teamA;
     String teamB;

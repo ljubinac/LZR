@@ -24,8 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hfad.lzr.model.PlayerGame;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
@@ -110,15 +112,10 @@ public class StatsActivity extends AppCompatActivity {
         }
         // get view group using reference
         // convert view group to bitmap
-        ll.setDrawingCacheEnabled(true);
-        ll.buildDrawingCache();
-        Bitmap bm = ll.getDrawingCache();
-
-
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        byte[] bytesA = createImage(tableTeamA);
+        byte[] bytesB = createImage(tableTeamB);
         try {
-            imageToPDF(bytes.toByteArray());
+            imageToPDF(bytesA, bytesB);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -126,19 +123,42 @@ public class StatsActivity extends AppCompatActivity {
 
     }
 
-    public void imageToPDF(byte[] bm) throws FileNotFoundException {
+
+    public byte[] createImage(TableLayout table){
+        table.setDrawingCacheEnabled(true);
+        table.buildDrawingCache();
+        Bitmap bm = table.getDrawingCache();
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        return bytes.toByteArray();
+    }
+    public void imageToPDF(byte[] bytesA, byte[] bytesB) throws FileNotFoundException {
         try {
             Document document = new Document();
             String dirpath = android.os.Environment.getExternalStorageDirectory().toString();
             myFilePath = dirpath + "/NewPDF.pdf";
             PdfWriter.getInstance(document, new FileOutputStream(myFilePath)); //  Change pdf's name.
             document.open();
-            Image img = Image.getInstance(bm);
-            float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
-                    - document.rightMargin() - 0) / img.getWidth()) * 100;
-            img.scalePercent(scaler);
-            img.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
-            document.add(img);
+            Image imgA = Image.getInstance(bytesA);
+            float scalerA = ((document.getPageSize().getWidth() - document.leftMargin()
+                    - document.rightMargin() - 0) / imgA.getWidth()) * 100;
+            imgA.scalePercent(scalerA);
+
+            //imgA.setSpacingAfter(50f);
+            //imgA.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
+
+            document.add(imgA);
+            document.add(new Paragraph("Pozdravčić momci"));
+            document.add(Chunk.NEWLINE);
+            Image imgB = Image.getInstance(bytesB);
+            float scalerB = ((document.getPageSize().getWidth() - document.leftMargin()
+                    - document.rightMargin() - 0) / imgB.getWidth()) * 100;
+            imgB.scalePercent(scalerB);
+            //imgB.setPaddingTop(20f);
+            //imgB.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_CENTER);
+            //imgB.setSpacingAfter();
+            document.add(imgB);
+
             document.close();
             Toast.makeText(this, "PDF Generated successfully!..", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
