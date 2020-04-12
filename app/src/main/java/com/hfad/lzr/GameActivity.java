@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hfad.lzr.adapter.PlayersAdapter;
 import com.hfad.lzr.adapter.PlayersGameAdapter;
+import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 
@@ -26,56 +27,18 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
-    ArrayList<PlayerGame> playersGameA;
-    ArrayList<PlayerGame> playersGameB;
-    String teamAid;
-    String teamBid;
-    RecyclerView teamArv;
-    RecyclerView teamBrv;
-    PlayersGameAdapter adapterA;
-    PlayersGameAdapter adapterB;
+    ArrayList<PlayerGame> playersGameA, playersGameB;
+    String teamAid, teamBid, teamA, teamB;
+    RecyclerView teamArv, teamBrv;
+    PlayersGameAdapter adapterA, adapterB;
     RecyclerView.LayoutManager layoutManagerA, layoutManagerB;
-    String teamA;
-    String teamB;
-    TextView teamATV;
-    TextView teamBTV;
+    TextView teamATV, teamBTV;
     PlayerGame current;
-    LinearLayout ll2pm;
-    LinearLayout ll2pa;
-    TextView tv2pm;
-    TextView tv2pa;
-    TextView resAtv;
-    TextView resBtv;
-    int resA;
-    int resB;
+    LinearLayout ll2pm, ll2pa, ll3pm, ll3pa, ll1pm, ll1pa, llOffReb, llDefReb, llAsist, llTurnov, llBlock, llFoul, llSteals, llTehnical, llFinishGame;
+    TextView tv2pm, tv2pa, resAtv, resBtv, tv3pm, tv3pa, tv1pm, tv1pa, tvOffReb, tvDefReb, tvAsist, tvTurnov, tvBlock, tvFoul, tvSteals, tvTehnical, tvFinishGame;
+    int resA, resB;
     boolean currentTeam;
-    LinearLayout ll3pm;
-    LinearLayout ll3pa;
-    TextView tv3pm;
-    TextView tv3pa;
-    LinearLayout ll1pm;
-    LinearLayout ll1pa;
-    TextView tv1pm;
-    TextView tv1pa;
-    LinearLayout llOffReb;
-    LinearLayout llDefReb;
-    TextView tvOffReb;
-    TextView tvDefReb;
-    LinearLayout llAsist;
-    LinearLayout llTurnov;
-    TextView tvAsist;
-    TextView tvTurnov;
-    LinearLayout llBlock;
-    LinearLayout llFoul;
-    TextView tvBlock;
-    TextView tvFoul;
-    LinearLayout llSteals;
-    LinearLayout llTehnical;
-    TextView tvSteals;
-    TextView tvTehnical;
-    LinearLayout llFinishGame;
-    TextView tvFinishGame;
-
+    Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +47,7 @@ public class GameActivity extends AppCompatActivity {
 
         playersGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameA");
         playersGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameB");
-        teamAid = getIntent().getStringExtra("teamAid");
-        teamBid = getIntent().getStringExtra("teamBid");
-        teamA = getIntent().getStringExtra("teamA");
-        teamB = getIntent().getStringExtra("teamB");
-
+        game = ( Game ) getIntent().getSerializableExtra("game");
 
         teamATV = findViewById(R.id.teamA);
         teamBTV = findViewById(R.id.teamB);
@@ -141,7 +100,6 @@ public class GameActivity extends AppCompatActivity {
         resAtv.setText(String.valueOf(resA));
         resBtv.setText(String.valueOf(resB));
 
-
         ll2pm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,7 +119,6 @@ public class GameActivity extends AppCompatActivity {
                 tv2pm.setText(String.valueOf(current.getPm2()));
                 tv2pa.setText(String.valueOf(current.getPa2()));
                 setRes(-2);
-
                 return true;
             }
         });
@@ -406,14 +363,15 @@ public class GameActivity extends AppCompatActivity {
         llFinishGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                game.setResA(resA);
+                game.setResB(resB);
                 Intent intent = new Intent(GameActivity.this, StatsActivity.class);
                 intent.putExtra("playersGameA", playersGameA);
                 intent.putExtra("playersGameB", playersGameB);
+                intent.putExtra("game", game);
                 startActivity(intent);
             }
         });
-
-
     }
 
     public void setRes(int points){

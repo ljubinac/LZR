@@ -33,12 +33,7 @@ public class LineupActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private Button startGame;
     DatabaseReference databaseReferenceGames;
-    String gameDate;
-    String gameTime;
-    String teamAid;
-    String teamBid;
-    String teamA;
-    String teamB;
+    String gameDate, gameTime, teamAid,teamBid, teamA, teamB;
 
 
     @Override
@@ -52,7 +47,6 @@ public class LineupActivity extends AppCompatActivity {
         teamBid = getIntent().getStringExtra("teamBId");
         teamA = getIntent().getStringExtra("teamA");
         teamB = getIntent().getStringExtra("teamB");
-
 
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
@@ -76,7 +70,7 @@ public class LineupActivity extends AppCompatActivity {
 
                 if (playersTeamA.size() >= 5 && playersTeamB.size() >= 5) {
                     String id = databaseReferenceGames.push().getKey();
-                    Game game = new Game(id, teamAid, teamBid, gameDate, gameTime);
+                    Game game = new Game(id, teamAid, teamBid, gameDate, gameTime, teamA, teamB);
                     databaseReferenceGames.child(id).setValue(game);
 
                     List<PlayerGame> playersGameA = new ArrayList<>();
@@ -91,14 +85,10 @@ public class LineupActivity extends AppCompatActivity {
                         playersGameB.add(playerGame);
                     }
 
-
                     Intent intent = new Intent(LineupActivity.this, GameActivity.class);
                     intent.putExtra("playersGameA", (Serializable) playersGameA);
                     intent.putExtra("playersGameB", (Serializable) playersGameB);
-                    intent.putExtra("teamAid", teamAid);
-                    intent.putExtra("teamBid", teamBid);
-                    intent.putExtra("teamA", teamA);
-                    intent.putExtra("teamB", teamB);
+                    intent.putExtra("game", game);
 
                     startActivity(intent);
                 } else {
@@ -106,9 +96,7 @@ public class LineupActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
 
     private void setupViewPager(ViewPager viewPager) {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

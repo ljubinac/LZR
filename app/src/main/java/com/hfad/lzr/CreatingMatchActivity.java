@@ -27,21 +27,14 @@ import java.util.List;
 
 public class CreatingMatchActivity extends AppCompatActivity {
 
-    Spinner spinner1;
-    Spinner spinner2;
-    Spinner leagueSpinner;
+    Spinner spinner1, spinner2, leagueSpinner;
     DatabaseReference databaseReference;
     ValueEventListener listener;
-    ArrayAdapter<String> adapterTeamA;
-    ArrayList<String> teamsSpinnerA;
-    ArrayList<String> teamsSpinnerB;
+    ArrayAdapter<String> adapterTeamA, adapterList;
+    ArrayList<String> teamsSpinnerA, teamsSpinnerB, leagues;
     ArrayList<Team> teams;
-
     Button chooseLineup;
-    ArrayAdapter<String> adapterList;
-    ArrayList<String> leagues;
-    EditText gameDate;
-    EditText gameTime;
+    EditText gameDate, gameTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,6 +23,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.PlayerGame;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -53,7 +54,9 @@ public class StatsActivity extends AppCompatActivity {
 
     String myFilePath;
 
-    Button share;
+    Button share, create;
+
+    Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +70,17 @@ public class StatsActivity extends AppCompatActivity {
         tableTeamA = findViewById(R.id.player_game_A);
         tableTeamB = findViewById(R.id.player_game_B);
         share = findViewById(R.id.sharePdf);
+        create = findViewById(R.id.createPdf);
 
         playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
         playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
+        game = ( Game ) getIntent().getSerializableExtra("game");
 
         init(tableTeamA, playersGameA);
         init(tableTeamB, playersGameB);
+
+        create.setEnabled(true);
+        share.setEnabled(false);
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +92,6 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     public void sharePdf(){
-
-
         File fileWithinMyDir = new File(myFilePath);
 
         Uri pdfUri = Uri.fromFile(fileWithinMyDir);
@@ -119,10 +125,8 @@ public class StatsActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
+        share.setEnabled(true);
     }
-
 
     public byte[] createImage(TableLayout table){
         table.setDrawingCacheEnabled(true);
@@ -132,11 +136,12 @@ public class StatsActivity extends AppCompatActivity {
         bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
         return bytes.toByteArray();
     }
+
     public void imageToPDF(byte[] bytesA, byte[] bytesB) throws FileNotFoundException {
         try {
             Document document = new Document();
             String dirpath = android.os.Environment.getExternalStorageDirectory().toString();
-            myFilePath = dirpath + "/NewPDF.pdf";
+            myFilePath = dirpath + "/" + game.getGameDate() + "_" + game.getTeamAnaziv() + "_" + game.getTeamBnaziv() + ".pdf";
             PdfWriter.getInstance(document, new FileOutputStream(myFilePath)); //  Change pdf's name.
             document.open();
             Image imgA = Image.getInstance(bytesA);
@@ -146,10 +151,12 @@ public class StatsActivity extends AppCompatActivity {
 
             //imgA.setSpacingAfter(50f);
             //imgA.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
-
-            document.add(imgA);
-            document.add(new Paragraph("Pozdravčić momci"));
+            document.add(new Paragraph(game.getGameDate() + " " + game.getTeamAnaziv() + " vs. " + game.getTeamBnaziv()));
             document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(game.getTeamAnaziv()));
+            document.add(imgA);
+            document.add(Chunk.NEWLINE);
+
             Image imgB = Image.getInstance(bytesB);
             float scalerB = ((document.getPageSize().getWidth() - document.leftMargin()
                     - document.rightMargin() - 0) / imgB.getWidth()) * 100;
@@ -157,6 +164,7 @@ public class StatsActivity extends AppCompatActivity {
             //imgB.setPaddingTop(20f);
             //imgB.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_CENTER);
             //imgB.setSpacingAfter();
+            document.add(new Paragraph(game.getTeamBnaziv()));
             document.add(imgB);
 
             document.close();
@@ -309,7 +317,6 @@ public class StatsActivity extends AppCompatActivity {
             TableRow row2 = new TableRow(this);
             row2.setLayoutParams(lp);
             row2.setBackgroundResource(R.drawable.table_border);
-
 
             number = new TextView(this);
             number.setBackgroundResource(R.drawable.table_border);

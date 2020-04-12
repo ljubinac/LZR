@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class CreateTeamActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-
     private PlayersAdapter mPlayersAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -35,15 +34,11 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     private Button saveTeam;
     private EditText teamName;
-    private DatabaseReference databaseReferencePlayers;
-    private DatabaseReference databaseReferenceTeams;
+    private DatabaseReference databaseReferencePlayers, databaseReferenceTeams;
     private Spinner leagueName;
 
-    private TextView playerNumber;
-    private TextView playerName;
+    private TextView playerNumber, playerName;
     private ImageView addPlayer;
-    //private ImageView deletePlayer;
-    //private  ImageView editPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +53,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         addPlayer = findViewById(R.id.add_image);
         playerNumber = findViewById(R.id.player_number_edt);
         playerName = findViewById(R.id.player_name_edt);
-        // deletePlayer = findViewById(R.id.image_delete);
-        //editPlayer = findViewById(R.id.image_edit);
         databaseReferencePlayers = FirebaseDatabase.getInstance().getReference("players");
-
-
-
-
 
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,10 +61,8 @@ public class CreateTeamActivity extends AppCompatActivity {
 
                 addPlayer();
                 buildRecyclerView();
-
             }
         });
-
 
         saveTeam.setOnClickListener(new View.OnClickListener() {
             @Override

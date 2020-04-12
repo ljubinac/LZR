@@ -36,32 +36,16 @@ import java.util.ArrayList;
 
 public class TeamActivity extends AppCompatActivity {
 
-    DatabaseReference databaseReference;
-    TextView teamNameTV;
-    TextView teamLeagueTV;
-    LinearLayout teamNameLL1;
-    LinearLayout teamNameLL2;
-    EditText teamNameET;
-    ImageView acceptTeamName;
-    ImageView editTeamName;
-    String teamName;
-    String idTeam;
-
+    DatabaseReference databaseReference, databaseReferencePlayers;
+    TextView teamNameTV, teamLeagueTV;
+    LinearLayout teamNameLL1, teamNameLL2, leagueLL1, leagueLL2;
+    EditText teamNameET, playerNumberET, playerNameET;
+    ImageView acceptTeamName, editTeamName, acceptLeague, editLeague, addPlayer, editPlayer, deletePlayer;
+    String teamName, idTeam;
     Spinner leagueSpinner;
-    ImageView acceptLeague;
-    LinearLayout leagueLL1;
-    LinearLayout leagueLL2;
-    ImageView editLeague;
-
-    DatabaseReference databaseReferencePlayers;
     RecyclerView playersRV;
     FirebaseRecyclerOptions<Player> options;
     FirebaseRecyclerAdapter adapter;
-    EditText playerNumberET;
-    EditText playerNameET;
-    ImageView addPlayer;
-    ImageView editPlayer;
-    ImageView deletePlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,8 +207,6 @@ public class TeamActivity extends AppCompatActivity {
 
                         databaseReferencePlayers.child(model.getId()).child("number").setValue(holder.playerNumberTV.getText().toString());
                         databaseReferencePlayers.child(model.getId()).child("nameAndLastname").setValue(holder.playerNameTV.getText().toString());
-
-
 
                     }
                 });;
