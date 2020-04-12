@@ -8,7 +8,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true">
+        <provider
+
+            android:name="androidx.core.content.FileProvider"
+
+            android:authorities="com.hfad.lzr.provider"
+
+            android:exported="false"
+
+            android:grantUriPermissions="true">
+
+            <meta-data
+
+                android:name="android.support.FILE_PROVIDER_PATHS"
+
+                android:resource="@xml/fileprovider" />
+
+        </provider>
         <activity android:name=".StatsActivity"></activity>
         <activity
             android:name=".LineupActivity"
@@ -33,4 +51,5 @@
         </activity>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

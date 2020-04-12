@@ -5,13 +5,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -24,6 +29,7 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -43,6 +49,10 @@ public class StatsActivity extends AppCompatActivity {
 
     LinearLayout ll;
 
+    String myFilePath;
+
+    Button share;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +60,11 @@ public class StatsActivity extends AppCompatActivity {
 
         ll = findViewById(R.id.ll);
 
+        myFilePath = "";
+
         tableTeamA = findViewById(R.id.player_game_A);
         tableTeamB = findViewById(R.id.player_game_B);
+        share = findViewById(R.id.sharePdf);
 
         playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
         playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
@@ -59,13 +72,40 @@ public class StatsActivity extends AppCompatActivity {
         init(tableTeamA, playersGameA);
         init(tableTeamB, playersGameB);
 
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sharePdf();
+            }
+        });
+
+    }
+
+    public void sharePdf(){
+
+
+        File fileWithinMyDir = new File(myFilePath);
+
+        Uri pdfUri = Uri.fromFile(fileWithinMyDir);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            pdfUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", fileWithinMyDir);
+        }
+
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+            intentShareFile.setType("application/pdf");
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, pdfUri);
+
+            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                    "Sharing File...");
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+
+            startActivity(Intent.createChooser(intentShareFile, "Share File"));
     }
 
     public void createPdf(View view){
 
-        if(ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(this, "You have already granted permission", Toast.LENGTH_SHORT).show();
-        } else {
+        if(ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             requestStoragePermission();
         }
         // get view group using reference
@@ -90,7 +130,8 @@ public class StatsActivity extends AppCompatActivity {
         try {
             Document document = new Document();
             String dirpath = android.os.Environment.getExternalStorageDirectory().toString();
-            PdfWriter.getInstance(document, new FileOutputStream(dirpath + "/NewPDF.pdf")); //  Change pdf's name.
+            myFilePath = dirpath + "/NewPDF.pdf";
+            PdfWriter.getInstance(document, new FileOutputStream(myFilePath)); //  Change pdf's name.
             document.open();
             Image img = Image.getInstance(bm);
             float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
