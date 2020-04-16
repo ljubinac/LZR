@@ -42,4 +42,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void tableStandings(View view){
+        Intent intent = new Intent(this, StandingsActivity.class);
+        startActivity(intent);
+    }
+
 }

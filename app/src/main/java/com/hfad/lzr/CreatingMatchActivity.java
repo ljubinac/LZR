@@ -54,12 +54,10 @@ public class CreatingMatchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LineupActivity.class);
 
-                String teamAId = teams.get(spinner1.getSelectedItemPosition()).getId();
-                String teamBId = teams.get(spinner2.getSelectedItemPosition()).getId();
-                intent.putExtra("teamA", spinner1.getSelectedItem().toString());
-                intent.putExtra("teamAId", teamAId);
-                intent.putExtra("teamB", spinner2.getSelectedItem().toString());
-                intent.putExtra("teamBId", teamBId);
+                Team teamA = teams.get(spinner1.getSelectedItemPosition());
+                Team teamB = teams.get(spinner2.getSelectedItemPosition());
+                intent.putExtra("teamA", teamA);
+                intent.putExtra("teamB", teamB);
                 intent.putExtra("gameDate", gameDate.getText().toString());
                 intent.putExtra("gameTime", gameTime.getText().toString());
                 startActivity(intent);

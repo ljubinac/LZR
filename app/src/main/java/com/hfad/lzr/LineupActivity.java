@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
+import com.hfad.lzr.model.Team;
 import com.hfad.lzr.ui.main.ChooseLineupFragment;
 import com.hfad.lzr.ui.main.SectionsPagerAdapter;
 
@@ -33,7 +34,9 @@ public class LineupActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private Button startGame;
     DatabaseReference databaseReferenceGames;
-    String gameDate, gameTime, teamAid,teamBid, teamA, teamB;
+    String gameDate, gameTime, teamAid,teamBid;
+    Team teamA;
+    Team teamB;
 
 
     @Override
@@ -43,10 +46,8 @@ public class LineupActivity extends AppCompatActivity {
 
         gameDate = getIntent().getStringExtra("gameDate");
         gameTime = getIntent().getStringExtra("gameTime");
-        teamAid = getIntent().getStringExtra("teamAId");
-        teamBid = getIntent().getStringExtra("teamBId");
-        teamA = getIntent().getStringExtra("teamA");
-        teamB = getIntent().getStringExtra("teamB");
+        teamA = ( Team ) getIntent().getSerializableExtra("teamA");
+        teamB = ( Team ) getIntent().getSerializableExtra("teamB");
 
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
@@ -70,7 +71,7 @@ public class LineupActivity extends AppCompatActivity {
 
                 if (playersTeamA.size() >= 5 && playersTeamB.size() >= 5) {
                     String id = databaseReferenceGames.push().getKey();
-                    Game game = new Game(id, teamAid, teamBid, gameDate, gameTime, teamA, teamB);
+                    Game game = new Game(id, teamA.getId(), teamB.getId(), gameDate, gameTime, teamA.getName(), teamB.getName());
                     databaseReferenceGames.child(id).setValue(game);
 
                     List<PlayerGame> playersGameA = new ArrayList<>();
@@ -88,6 +89,8 @@ public class LineupActivity extends AppCompatActivity {
                     Intent intent = new Intent(LineupActivity.this, GameActivity.class);
                     intent.putExtra("playersGameA", (Serializable) playersGameA);
                     intent.putExtra("playersGameB", (Serializable) playersGameB);
+                    intent.putExtra("teamA", teamA);
+                    intent.putExtra("teamB", teamB);
                     intent.putExtra("game", game);
 
                     startActivity(intent);
@@ -101,13 +104,10 @@ public class LineupActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        String teamAName = getIntent().getStringExtra("teamA");
-        String teamBName = getIntent().getStringExtra("teamB");
-        String teamAId = getIntent().getStringExtra("teamAId");
-        String teamBId = getIntent().getStringExtra("teamBId");
 
-        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamAName, teamAId), getIntent().getStringExtra("teamA"));
-        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamBName, teamBId), getIntent().getStringExtra("teamB"));
+
+        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamA.getName(), teamA.getId()), teamA.getName());
+        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamB.getName(), teamB.getId()), teamB.getName());
         viewPager.setAdapter(sectionsPagerAdapter);
     }
 }

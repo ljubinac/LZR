@@ -61,5 +61,16 @@
     <string name="tehnicalFoulTitleTV">Teh</string>
     <string name="stealsTitleTV">Steals</string>
     <string name="finishGameTV">Finish game</string>
+    <string name="table">Table</string>
+    <string name="standings">Standings</string>
+    <string name="positionTitleTV">POS</string>
+    <string name="teamNameTitleTV">TEAM</string>
+    <string name="totalGamesTitleTV">P</string>
+    <string name="wGamesTitleTV">W</string>
+    <string name="lGamesTitleTV">L</string>
+    <string name="ptsPlusTitleTV">+</string>
+    <string name="ptsMinusTitleTV">-</string>
+    <string name="pointsTitleTV">PTS</string>
+
 
 </resources>

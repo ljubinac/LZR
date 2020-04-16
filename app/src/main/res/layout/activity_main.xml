@@ -53,6 +53,16 @@
         android:onClick="createTeam"/>
 
     <Button
+        android:id="@+id/table"
+        android:width="130dp"
+        style="@style/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/standings"
+        android:onClick="tableStandings"/>
+
+    <Button
         android:id="@+id/quit"
         android:width="130dp"
         style="@style/btn"

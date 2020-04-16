@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.PlayerGame;
+import com.hfad.lzr.model.Team;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
@@ -57,6 +58,7 @@ public class StatsActivity extends AppCompatActivity {
     Button share, create;
 
     Game game;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

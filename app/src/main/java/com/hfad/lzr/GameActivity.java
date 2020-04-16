@@ -21,14 +21,15 @@ import com.hfad.lzr.adapter.PlayersGameAdapter;
 import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
+import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
+    DatabaseReference databaseReference;
     ArrayList<PlayerGame> playersGameA, playersGameB;
-    String teamAid, teamBid, teamA, teamB;
     RecyclerView teamArv, teamBrv;
     PlayersGameAdapter adapterA, adapterB;
     RecyclerView.LayoutManager layoutManagerA, layoutManagerB;
@@ -39,6 +40,8 @@ public class GameActivity extends AppCompatActivity {
     int resA, resB;
     boolean currentTeam;
     Game game;
+    Team teamA;
+    Team teamB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +50,15 @@ public class GameActivity extends AppCompatActivity {
 
         playersGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameA");
         playersGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameB");
+        teamA = ( Team ) getIntent().getSerializableExtra("teamA");
+        teamB = ( Team ) getIntent().getSerializableExtra("teamB");
         game = ( Game ) getIntent().getSerializableExtra("game");
 
         teamATV = findViewById(R.id.teamA);
         teamBTV = findViewById(R.id.teamB);
 
-        teamATV.setText(teamA);
-        teamBTV.setText(teamB);
+        teamATV.setText(game.getTeamAnaziv());
+        teamBTV.setText(game.getTeamBnaziv());
 
         ll2pm = findViewById(R.id.ll_2PM);
         ll2pa = findViewById(R.id.ll_2PA);
@@ -88,6 +93,8 @@ public class GameActivity extends AppCompatActivity {
 
         llFinishGame = findViewById(R.id.ll_finishGame);
         tvFinishGame = findViewById(R.id.finishGameTV);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("teams");
 
         resA = 0;
         resB = 0;
@@ -365,6 +372,12 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 game.setResA(resA);
                 game.setResB(resB);
+                teamA.setPointsScored(teamA.getPointsScored() + resA);
+                teamA.setPointsReceived(teamA.getPointsReceived() + resB);
+                teamB.setPointsScored(teamB.getPointsScored() + resB);
+                teamB.setPointsReceived(teamB.getPointsReceived() + resA);
+                databaseReference.child(teamA.getId()).setValue(teamA);
+                databaseReference.child(teamB.getId()).setValue(teamB);
                 Intent intent = new Intent(GameActivity.this, StatsActivity.class);
                 intent.putExtra("playersGameA", playersGameA);
                 intent.putExtra("playersGameB", playersGameB);
