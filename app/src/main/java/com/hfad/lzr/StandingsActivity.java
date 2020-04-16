@@ -49,19 +49,19 @@ public class StandingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_standings);
 
         standingsRV = findViewById(R.id.standingsRV);
-        /*leagueSpinner = findViewById(R.id.choose_league);
+        leagueSpinner = findViewById(R.id.choose_league);
 
         leagues = new ArrayList<>();
         leagues.add("Liga A");
         leagues.add("Liga B");
         adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leagues);
-        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
 
         teams = new ArrayList<>();
 
-        /*leagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        leagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
@@ -73,7 +73,7 @@ public class StandingsActivity extends AppCompatActivity {
 
             }
 
-        });*/
+        });
 
         fetch("Liga A");
 
@@ -88,6 +88,12 @@ public class StandingsActivity extends AppCompatActivity {
                     Team team = dsChild.getValue(Team.class);
                     teams.add(team);
                 }
+
+                standingsRV.setHasFixedSize(true);
+                mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                teamAdapter = new TeamAdapter(teams);
+                standingsRV.setLayoutManager(mLayoutManager);
+                standingsRV.setAdapter(teamAdapter);
             }
 
             @Override
@@ -95,11 +101,7 @@ public class StandingsActivity extends AppCompatActivity {
 
             }
         });
-        /*standingsRV.setHasFixedSize(true);*/
-        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        teamAdapter = new TeamAdapter(teams);
-        standingsRV.setLayoutManager(mLayoutManager);
-        standingsRV.setAdapter(teamAdapter);
+
     }
 
     /*private void fetch(String league){
