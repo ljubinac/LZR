@@ -80,6 +80,11 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         holder.teamNameTV.setText(team.getName());
         holder.ptsPlusTV.setText(String.valueOf(team.getPointsScored()));
         holder.ptsMinusTV.setText(String.valueOf(team.getPointsReceived()));
+        holder.pointsTV.setText(String.valueOf(team.getPoints()));
+        holder.totalGamesTV.setText(String.valueOf((team.getPlayed())));
+        holder.wGamesTV.setText(String.valueOf(team.getWin()));
+        holder.lGamesTV.setText(String.valueOf(team.getLost()));
+        holder.positionTV.setText(String.valueOf(position + 1));
         /*holder.itemView.setSelected(selectedPos == position);*/
     }
 

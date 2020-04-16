@@ -3,7 +3,7 @@ package com.hfad.lzr.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Team implements Serializable {
+public class Team implements Serializable, Comparable<Team> {
 
     private String id;
     private String name;
@@ -14,6 +14,7 @@ public class Team implements Serializable {
     private int pointsScored;
     private int pointsReceived;
     private int points;
+    private int position;
 
 
     public Team() {
@@ -46,6 +47,14 @@ public class Team implements Serializable {
         this.id = id;
         this.name = name;
         this.league = league;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public int getPlayed() {
@@ -118,5 +127,16 @@ public class Team implements Serializable {
 
     public void setLeague(String league) {
         this.league = league;
+    }
+
+    @Override
+    public int compareTo(Team t) {
+        if(points > t.points){
+            return  -1;
+        } else if (points < t.points){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
