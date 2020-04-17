@@ -39,6 +39,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
+        <CheckBox
+            android:id="@+id/first_lineup_checkbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 

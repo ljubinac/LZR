@@ -16,11 +16,13 @@ public class LineupViewHolder extends RecyclerView.ViewHolder {
     public TextView playerNumberTV;
     public TextView playerNameTV;
     public CheckBox lineupCheckbox;
+    public CheckBox firstLineupCheckBox;
 
     public LineupViewHolder(@NonNull View itemView) {
         super(itemView);
         playerNumberTV = itemView.findViewById(R.id.player_number_tv);
         playerNameTV = itemView.findViewById(R.id.player_name_tv);
         lineupCheckbox = itemView.findViewById(R.id.lineup_checkbox);
+        firstLineupCheckBox = itemView.findViewById(R.id.first_lineup_checkbox);
     }
 }

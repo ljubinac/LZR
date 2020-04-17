@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
+import com.hfad.lzr.ui.main.LineupDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference;
-    ArrayList<PlayerGame> playersGameA, playersGameB;
+    ArrayList<PlayerGame> playersGameA, playersGameB, firstLineupGameA, firstLineupGameB;
     RecyclerView teamArv, teamBrv;
     PlayersGameAdapter adapterA, adapterB;
     RecyclerView.LayoutManager layoutManagerA, layoutManagerB;
@@ -43,6 +45,8 @@ public class GameActivity extends AppCompatActivity {
     Team teamA;
     Team teamB;
 
+    private static final String TAG = "GameActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,8 @@ public class GameActivity extends AppCompatActivity {
 
         playersGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameA");
         playersGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameB");
+        firstLineupGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameA");
+        firstLineupGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameB");
         teamA = ( Team ) getIntent().getSerializableExtra("teamA");
         teamB = ( Team ) getIntent().getSerializableExtra("teamB");
         game = ( Game ) getIntent().getSerializableExtra("game");
@@ -441,14 +447,14 @@ public class GameActivity extends AppCompatActivity {
         teamArv = findViewById(R.id.firstTeamRV);
         teamArv.setHasFixedSize(true);
         layoutManagerA = new LinearLayoutManager(getApplicationContext());
-        adapterA = new PlayersGameAdapter(playersGameA);
+        adapterA = new PlayersGameAdapter(firstLineupGameA);
 
         teamArv.setLayoutManager(layoutManagerA);
         teamArv.setAdapter(adapterA);
         adapterA.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                current = playersGameA.get(position);
+                current = firstLineupGameA.get(position);
                 setValues();
                 currentTeam = false;
                 adapterA.notifyItemChanged(adapterA.selectedPos);
@@ -458,6 +464,18 @@ public class GameActivity extends AppCompatActivity {
                 adapterB.notifyItemChanged(adapterB.selectedPos);
                 adapterA.notifyItemChanged(adapterA.selectedPos);
             }
+
+            @Override
+            public void onLongClick(int position) {
+                Log.d(TAG, "onClick: opening dialog.");
+
+                LineupDialog dialog = new LineupDialog();
+
+                Bundle args = new Bundle();
+                args.putSerializable("playersGameA", playersGameA);
+                dialog.setArguments(args);
+                dialog.show(getSupportFragmentManager(), "LineupDialog");
+            }
         });
     }
 
@@ -465,14 +483,14 @@ public class GameActivity extends AppCompatActivity {
         teamBrv = findViewById(R.id.secondTeamRV);
         teamBrv.setHasFixedSize(true);
         layoutManagerB = new LinearLayoutManager(getApplicationContext());
-        adapterB = new PlayersGameAdapter(playersGameB);
+        adapterB = new PlayersGameAdapter(firstLineupGameB);
 
         teamBrv.setLayoutManager(layoutManagerB);
         teamBrv.setAdapter(adapterB);
         adapterB.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                current = playersGameB.get(position);
+                current = firstLineupGameB.get(position);
                 setValues();
                 currentTeam = true;
                 adapterB.notifyItemChanged(adapterB.selectedPos);
@@ -481,6 +499,18 @@ public class GameActivity extends AppCompatActivity {
                 adapterA.selectedPos = RecyclerView.NO_POSITION;
                 adapterA.notifyItemChanged(adapterA.selectedPos);
                 adapterB.notifyItemChanged(adapterB.selectedPos);
+            }
+
+            @Override
+            public void onLongClick(int position) {
+                Log.d(TAG, "onClick: opening dialog.");
+
+                LineupDialog dialog = new LineupDialog();
+
+                Bundle args = new Bundle();
+                args.putSerializable("playersGameB", playersGameB);
+                dialog.setArguments(args);
+                dialog.show(getSupportFragmentManager(), "LineupDialog");
             }
         });
     }

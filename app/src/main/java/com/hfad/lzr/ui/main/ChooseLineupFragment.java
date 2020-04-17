@@ -40,8 +40,10 @@ public class ChooseLineupFragment extends Fragment {
     TextView playerNumberTV;
     TextView playerNameTV;
     CheckBox lineupCheckbox;
+    CheckBox firstLineupCheckBox;
 
     ArrayList<Player> playersChecked = new ArrayList<>();
+    ArrayList<Player> firstLineupChecked = new ArrayList<>();
 
     public static ChooseLineupFragment newInstance(String teamName, String teamId) {
         ChooseLineupFragment myFragment = new ChooseLineupFragment();
@@ -76,6 +78,7 @@ public class ChooseLineupFragment extends Fragment {
         playerNumberTV = root.findViewById(R.id.player_number_tv);
         playerNameTV = root.findViewById(R.id.player_name_tv);
         lineupCheckbox = root.findViewById(R.id.lineup_checkbox);
+        firstLineupCheckBox = root.findViewById(R.id.first_lineup_checkbox);
 
         lineupRV.setLayoutManager(new LinearLayoutManager(getContext()));
         lineupRV.setHasFixedSize(true);
@@ -108,6 +111,17 @@ public class ChooseLineupFragment extends Fragment {
                         }
                     }
                 });
+
+                holder.firstLineupCheckBox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (holder.firstLineupCheckBox.isChecked()){
+                            onItemFirstCheck(model);
+                        } else {
+                            onItemFirstUncheck(model);
+                        }
+                    }
+                });
             }
         };
         adapter.startListening();
@@ -117,11 +131,23 @@ public class ChooseLineupFragment extends Fragment {
         return root;
     }
 
+    public void onItemFirstCheck(Player player){
+        firstLineupChecked.add(player);
+    }
+
+    public void onItemFirstUncheck(Player player) {
+        firstLineupChecked.remove(player);
+    }
+
+    public ArrayList<Player> getFirstData(){
+        return firstLineupChecked;
+    }
+
     public void onItemCheck(Player player){
         playersChecked.add(player);
     }
 
-    public void onItemUncheck(Player player){
+    public void onItemUncheck(Player player) {
         playersChecked.remove(player);
     }
 

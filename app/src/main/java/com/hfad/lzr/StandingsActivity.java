@@ -181,11 +181,11 @@ public class StandingsActivity extends AppCompatActivity {
 
             //imgA.setSpacingAfter(50f);
             //imgA.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
-           /* document.add(new Paragraph(game.getGameDate() + " " + game.getTeamAnaziv() + " vs. " + game.getTeamBnaziv()));
-            document.add(Chunk.NEWLINE);
-            document.add(new Paragraph(game.getTeamAnaziv()));
+           // document.add(new Paragraph(game.getGameDate() + " " + game.getTeamAnaziv() + " vs. " + game.getTeamBnaziv()));
+           // document.add(Chunk.NEWLINE);
+           // document.add(new Paragraph(game.getTeamAnaziv()));
             document.add(imgA);
-            document.add(Chunk.NEWLINE);*/
+           // document.add(Chunk.NEWLINE);
 
            /* Image imgB = Image.getInstance(bytesB);
             float scalerB = ((document.getPageSize().getWidth() - document.leftMargin()
