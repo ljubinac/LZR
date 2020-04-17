@@ -1,5 +1,20 @@
 package com.hfad.lzr;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,46 +24,19 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.Toast;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.hfad.lzr.adapter.PlayersGameAdapter;
-import com.hfad.lzr.adapter.StandingsViewHolder;
 import com.hfad.lzr.adapter.TeamAdapter;
-import com.hfad.lzr.adapter.TeamViewHolder;
 import com.hfad.lzr.model.Team;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,8 +46,6 @@ public class StandingsActivity extends AppCompatActivity {
     private int STORAGE_PERMISSION_CODE = 1;
 
     RecyclerView standingsRV;
-    FirebaseRecyclerOptions<Team> options;
-    FirebaseRecyclerAdapter adapter;
     Spinner leagueSpinner;
     ArrayAdapter<String> adapterList;
     ArrayList<String> leagues;
@@ -87,7 +73,7 @@ public class StandingsActivity extends AppCompatActivity {
         leagues = new ArrayList<>();
         leagues.add("Liga A");
         leagues.add("Liga B");
-        adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leagues);
+        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
         adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
@@ -147,14 +133,9 @@ public class StandingsActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(StandingsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             requestStoragePermission();
         }
-        // get view group using reference
-        // convert view group to bitmap
+
         byte[] bytesA = createImage(standingsRV);
-        try {
-            imageToPDF(bytesA);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        imageToPDF(bytesA);
         share.setEnabled(true);
     }
 
@@ -167,7 +148,7 @@ public class StandingsActivity extends AppCompatActivity {
         return bytes.toByteArray();
     }
 
-    public void imageToPDF(byte[] bytesA) throws FileNotFoundException {
+    public void imageToPDF(byte[] bytesA) {
         try {
             Document document = new Document();
             String dirpath = android.os.Environment.getExternalStorageDirectory().toString();
@@ -197,6 +178,7 @@ public class StandingsActivity extends AppCompatActivity {
             document.add(new Paragraph(game.getTeamBnaziv()));
             document.add(imgB);*/
 
+            document.add(imgA);
             document.close();
             Toast.makeText(this, "PDF Generated successfully!..", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
@@ -259,40 +241,5 @@ public class StandingsActivity extends AppCompatActivity {
         });
 
     }
-
-    /*private void fetch(String league){
-
-        Query query = FirebaseDatabase.getInstance().getReference().child("teams").orderByChild("league").equalTo(league);
-
-        options = new FirebaseRecyclerOptions.Builder<Team>().setQuery(query, Team.class).build();
-
-        adapter = new FirebaseRecyclerAdapter<Team, StandingsViewHolder>(options) {
-            @NonNull
-            @Override
-            public StandingsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.standings_item, parent, false);
-                return  new StandingsViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(@NonNull StandingsViewHolder holder, final int position, @NonNull final Team model) {
-                holder.teamNameTV.setText(model.getName());
-                holder.ptsPlusTV.setText(String.valueOf(model.getPointsScored()));
-                holder.ptsMinusTV.setText(String.valueOf(model.getPointsReceived()));
-
-                holder.teamNameTV.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(StandingsActivity.this, TeamActivity.class);
-                        intent.putExtra("team_name", model.getName());
-                        intent.putExtra("idTeam", model.getId());
-                        startActivity(intent);
-                    }
-                });
-            }
-        };
-        adapter.startListening();
-        standingsRV.setAdapter(adapter);
-    }*/
 
 }
