@@ -77,14 +77,22 @@ public class LineupActivity extends AppCompatActivity {
                     databaseReferenceGames.child(id).setValue(game);
 
                     List<PlayerGame> playersGameA = new ArrayList<>();
-                    for (Player p : playersTeamA) {
-                        PlayerGame playerGame = new PlayerGame(id, p);
+                    for (int i = 0; i < playersTeamA.size(); i++){
+                        Player player = playersTeamA.get(i);
+                        PlayerGame playerGame = new PlayerGame(id, player);
+                        if (i < 5){
+                            playerGame.setWhenGoingIn(10);
+                        }
                         playersGameA.add(playerGame);
                     }
 
                     List<PlayerGame> playersGameB = new ArrayList<>();
-                    for (Player p : playersTeamB) {
-                        PlayerGame playerGame = new PlayerGame(id, p);
+                    for (int i = 0; i < playersTeamB.size(); i++){
+                        Player player = playersTeamB.get(i);
+                        PlayerGame playerGame = new PlayerGame(id, player);
+                        if (i < 5){
+                            playerGame.setWhenGoingIn(10);
+                        }
                         playersGameB.add(playerGame);
                     }
 

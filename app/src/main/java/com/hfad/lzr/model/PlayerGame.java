@@ -22,8 +22,8 @@ public class PlayerGame extends Player implements Serializable {
     private int foul;
     private int steal;
     private int tehnicalFoul;
-    // private int minutes;
-    // private int pomocnaKojaGovoriKadJeUsao;
+    private int minutes;
+    private int whenGoingIn;
 
     public PlayerGame(String gameId ,Player player) {
         super(player);
@@ -42,6 +42,8 @@ public class PlayerGame extends Player implements Serializable {
         this.turnover = 0;
         this.block = 0;
         this.foul = 0;
+        this.steal = 0;
+        this.minutes = 0;
     }
 
     public String getGameId() {
@@ -68,7 +70,7 @@ public class PlayerGame extends Player implements Serializable {
         this.pointsTeamB = pointsTeamB;
     }*/
 
-    @Override
+  /*  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -79,6 +81,22 @@ public class PlayerGame extends Player implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(gameId);
+    }*/
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public int getWhenGoingIn() {
+        return whenGoingIn;
+    }
+
+    public void setWhenGoingIn(int whenGoingIn) {
+        this.whenGoingIn = whenGoingIn;
     }
 
     public int getSteal() {

@@ -47,9 +47,9 @@ public class StatsActivity extends AppCompatActivity {
 
     TableLayout tableTeamA, tableTeamB;
 
-    TextView tableNum, tableName, tableFG, table2pts, table3pts, table1pts, tableTotalReb, tableDefReb, tableOffReb, tableAssist, tableBlock, tableSteals, tableTurnov, tableFoul, tablePts, tableEff;
+    TextView tableNum, tableName, tableTime, tableFG, table2pts, table3pts, table1pts, tableTotalReb, tableDefReb, tableOffReb, tableAssist, tableBlock, tableSteals, tableTurnov, tableFoul, tablePts, tableEff;
 
-    TextView number, name, fg, pts2, pts3, pts1, totalReb, offReb, defReb, assist, block, steal, turnov, foul, pts, eff;
+    TextView number, name, time, fg, pts2, pts3, pts1, totalReb, offReb, defReb, assist, block, steal, turnov, foul, pts, eff;
 
     LinearLayout ll;
 
@@ -59,8 +59,8 @@ public class StatsActivity extends AppCompatActivity {
 
     Game game;
 
-    int teamFGM, teamFGA, team2PTSpm, team2PTSpa, team3PTSpm, team3PTSpa, team1PTSpm, team1PTSpa, teamOffReb, teamDefReb, teamReb, teamAssist, teamBlocks, teamSteals, teamTurnovers, teamFouls, teamPoints, teamEff;
-    TextView teamTV, teamTitle, teamFGtv, team2ptsTV, team3ptsTV, team1ptsTV, teamOffRebTV, teamDefRebTV, teamRebTV, teamAssistTV, teamBlocksTV, teamStealsTV, teamTurnTV, teamFoulsTV, teamPointsTV, teamEffTV;
+    int teamTime, teamFGM, teamFGA, team2PTSpm, team2PTSpa, team3PTSpm, team3PTSpa, team1PTSpm, team1PTSpa, teamOffReb, teamDefReb, teamReb, teamAssist, teamBlocks, teamSteals, teamTurnovers, teamFouls, teamPoints, teamEff;
+    TextView teamTV, teamTitle, teamTimeTV, teamFGtv, team2ptsTV, team3ptsTV, team1ptsTV, teamOffRebTV, teamDefRebTV, teamRebTV, teamAssistTV, teamBlocksTV, teamStealsTV, teamTurnTV, teamFoulsTV, teamPointsTV, teamEffTV;
 
 
     @Override
@@ -79,16 +79,16 @@ public class StatsActivity extends AppCompatActivity {
 
         playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
         playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
-        firstLineupGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("firstLineupGameA");
-        firstLineupGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("firstLineupGameB");
+       /* firstLineupGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("firstLineupGameA");
+        firstLineupGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("firstLineupGameB");*/
         game = ( Game ) getIntent().getSerializableExtra("game");
 
-        firstLineupGameA.addAll(playersGameA);
-        firstLineupGameB.addAll(playersGameB);
+      /*  firstLineupGameA.addAll(playersGameA);
+        firstLineupGameB.addAll(playersGameB);*/
 
-        init(tableTeamA, firstLineupGameA);
+        init(tableTeamA, playersGameA);
         setValue();
-        init(tableTeamB, firstLineupGameB);
+        init(tableTeamB, playersGameB);
 
         create.setEnabled(true);
         share.setEnabled(false);
@@ -103,6 +103,7 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     public void setValue(){
+        teamTime = 0;
         teamFGM = 0;
         teamFGA = 0;
         team2PTSpm = 0;
@@ -250,6 +251,10 @@ public class StatsActivity extends AppCompatActivity {
         tableName.setBackgroundResource(R.drawable.table_border);
         tableName.setPadding(15,15,15,15);
 
+        tableTime = new TextView(this);
+        tableTime.setBackgroundResource(R.drawable.table_border);
+        tableTime.setPadding(15,15,15,15);
+
         tableFG = new TextView(this);
         tableFG.setBackgroundResource(R.drawable.table_border);
         tableFG.setPadding(15,15,15,15);
@@ -308,6 +313,7 @@ public class StatsActivity extends AppCompatActivity {
 
         tableNum.setText("#No");
         tableName.setText("PLAYER");
+        tableTime.setText("Time");
         tableFG.setText("FG");
         table2pts.setText("2pts");
         table3pts.setText("3pts");
@@ -326,6 +332,7 @@ public class StatsActivity extends AppCompatActivity {
 
         row.addView(tableNum);
         row.addView(tableName);
+        row.addView(tableTime);
         row.addView(tableFG);
         row.addView(table2pts);
         row.addView(table3pts);
@@ -357,6 +364,10 @@ public class StatsActivity extends AppCompatActivity {
             name = new TextView(this);
             name.setBackgroundResource(R.drawable.table_border);
             name.setPadding(15,15,15,15);
+
+            time = new TextView(this);
+            time.setBackgroundResource(R.drawable.table_border);
+            time.setPadding(15,15,15,15);
 
             fg = new TextView(this);
             fg.setBackgroundResource(R.drawable.table_border);
@@ -416,6 +427,10 @@ public class StatsActivity extends AppCompatActivity {
 
             number.setText(playersList.get(i).getNumber());
             name.setText(playersList.get(i).getNameAndLastname());
+            int minutes = (playersList.get(i).getMinutes() % 3600) / 60;
+            int secs = playersList.get(i).getMinutes() % 60;
+            String t = String.format("%02d:%02d", minutes, secs);
+            time.setText(String.valueOf(playersList.get(i).getMinutes()));
 
             String fgm = String.valueOf(playersList.get(i).getPm2() + playersList.get(i).getPm3());
             String fga = String.valueOf(playersList.get(i).getPa2() + playersList.get(i).getPa3());
@@ -456,6 +471,7 @@ public class StatsActivity extends AppCompatActivity {
                     - (playersList.get(i).getPa1() - playersList.get(i).getPm1()) );
             eff.setText(index);
 
+            teamTime += playersList.get(i).getMinutes();
             teamFGM += (playersList.get(i).getPm2() + playersList.get(i).getPm3());
             teamFGA += (playersList.get(i).getPa2() + playersList.get(i).getPa3());
             team2PTSpm += playersList.get(i).getPm2();
@@ -486,6 +502,7 @@ public class StatsActivity extends AppCompatActivity {
 
             row2.addView(number);
             row2.addView(name);
+            row2.addView(time);
             row2.addView(fg);
             row2.addView(pts2);
             row2.addView(pts3);
@@ -515,6 +532,10 @@ public class StatsActivity extends AppCompatActivity {
         teamTitle = new TextView(this);
         teamTitle.setBackgroundResource(R.drawable.table_border);
         teamTitle.setPadding(15,15,15,15);
+
+        teamTimeTV = new TextView(this);
+        teamTimeTV.setBackgroundResource(R.drawable.table_border);
+        teamTimeTV.setPadding(15,15,15,15);
 
         teamFGtv = new TextView(this);
         teamFGtv.setBackgroundResource(R.drawable.table_border);
@@ -574,6 +595,7 @@ public class StatsActivity extends AppCompatActivity {
 
         teamTV.setText("#");
         teamTitle.setText("Total:");
+        teamTimeTV.setText(String.valueOf(teamTime));
         teamFGtv.setText(teamFGM + "/" + teamFGA);
         team2ptsTV.setText(team2PTSpm + "/" + team2PTSpa);
         team3ptsTV.setText(team3PTSpm + "/" + team3PTSpa);
@@ -591,6 +613,7 @@ public class StatsActivity extends AppCompatActivity {
 
         row3.addView(teamTV);
         row3.addView(teamTitle);
+        row3.addView(teamTimeTV);
         row3.addView(teamFGtv);
         row3.addView(team2ptsTV);
         row3.addView(team3ptsTV);

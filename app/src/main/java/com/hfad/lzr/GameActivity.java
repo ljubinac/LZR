@@ -46,13 +46,13 @@ public class GameActivity extends AppCompatActivity {
     Game game;
     Team teamA;
     Team teamB;
-    PlayerGame goingOut;
-    int goingOutPosition;
+    PlayerGame goingOutA, goingOutB;
+    int goingOutPositionA, goingOutPositionB;
     boolean isChange;
     private static final String TAG = "GameActivity";
 
-    private int seconds = 600;
-    private  boolean running;
+    private int seconds = 10;
+    private boolean running;
     private boolean wasRunning;
 
     @Override
@@ -60,15 +60,15 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
         runTimer();
 
-        playersGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameA");
-        playersGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameB");
+        playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
+        playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
 //        firstLineupGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameA");
 //        firstLineupGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameB");
         teamA = ( Team ) getIntent().getSerializableExtra("teamA");
@@ -353,7 +353,7 @@ public class GameActivity extends AppCompatActivity {
         llFoul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (current.getFoul() > 4){
+                if (current.getFoul() > 4) {
                     Toast.makeText(getApplicationContext(), "The player has 5 fouls!", Toast.LENGTH_LONG).show();
                 } else {
                     current.setFoul(current.getFoul() + 1);
@@ -397,7 +397,7 @@ public class GameActivity extends AppCompatActivity {
                 teamA.setPointsReceived(teamA.getPointsReceived() + resB);
                 teamB.setPointsScored(teamB.getPointsScored() + resB);
                 teamB.setPointsReceived(teamB.getPointsReceived() + resA);
-                if(resA > resB){
+                if (resA > resB) {
                     teamA.setPoints(teamA.getPoints() + 2);
                     teamB.setPoints(teamB.getPoints() + 1);
                 } else {
@@ -406,7 +406,7 @@ public class GameActivity extends AppCompatActivity {
                 }
                 teamA.setPlayed(teamA.getPlayed() + 1);
                 teamB.setPlayed(teamB.getPlayed() + 1);
-                if(resA > resB){
+                if (resA > resB) {
                     teamA.setWin(teamA.getWin() + 1);
                     teamB.setLost(teamB.getLost() + 1);
                 } else {
@@ -424,8 +424,8 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    public void setRes(int points){
-        if (currentTeam){
+    public void setRes(int points) {
+        if (currentTeam) {
             resB = resB + points;
             resBtv.setText(String.valueOf(resB));
         } else {
@@ -434,7 +434,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void setValues(){
+    public void setValues() {
         tv2pm.setText(String.valueOf(current.getPm2()));
         tv2pa.setText(String.valueOf(current.getPa2()));
 
@@ -466,48 +466,59 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         wasRunning = running;
         running = false;
     }
 
     @Override
-    protected  void onResume(){
+    protected void onResume() {
         super.onResume();
-        if (wasRunning){
+        if (wasRunning) {
             running = true;
         }
 
     }
 
-    public void onClickStart(View view){
+    public void onClickStart(View view) {
         running = true;
     }
 
-    public void onClickStop(View view){
+    public void onClickStop(View view) {
         running = false;
     }
 
-    public void onClickReset(View view){
+    public void onClickReset(View view) {
         running = false;
-        seconds = 600;
+        seconds = 10;
+        /*for (int i = 0; i < 5; i++) {
+            playersGameA.get(i).setWhenGoingIn(10);
+            playersGameB.get(i).setWhenGoingIn(10);
+        }*/
     }
 
-    private void runTimer(){
-        final TextView timeView = (TextView) findViewById(R.id.time);
+    private void runTimer() {
+        final TextView timeView = ( TextView ) findViewById(R.id.time);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
+                if (seconds == 0) {
+                    for (int i = 0; i < 5; i++) {
+                        playersGameA.get(i).setMinutes(playersGameA.get(i).getMinutes() + playersGameA.get(i).getWhenGoingIn());
+                        playersGameB.get(i).setMinutes(playersGameB.get(i).getMinutes() + playersGameB.get(i).getWhenGoingIn());
+                    }
+                }
                 int minutes = (seconds % 3600) / 60;
                 int secs = seconds % 60;
                 String time = String.format("%02d:%02d", minutes, secs);
                 timeView.setText(time);
-                if (running) {
+                if (running && seconds > 0) {
                     seconds--;
                 }
                 handler.postDelayed(this, 1000);
+
             }
         });
     }
@@ -524,7 +535,7 @@ public class GameActivity extends AppCompatActivity {
         adapterA.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if(!isChange) {
+                if (!isChange) {
                     current = playersGameA.get(position);
                     setValues();
                     currentTeam = false;
@@ -536,8 +547,9 @@ public class GameActivity extends AppCompatActivity {
                     adapterA.notifyItemChanged(adapterA.selectedPos);
                 } else {
                     PlayerGame goingIn = playersGameA.get(position);
-                    playersGameA.set(goingOutPosition, goingIn);
-                    playersGameA.set(position, goingOut);
+                    goingIn.setWhenGoingIn(seconds);
+                    playersGameA.set(goingOutPositionA, goingIn);
+                    playersGameA.set(position, goingOutA);
                     adapterA.notifyDataSetChanged();
                     isChange = false;
                 }
@@ -545,9 +557,10 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(int position) {
-                goingOut = playersGameA.get(position);
+                goingOutA = playersGameA.get(position);
+                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - seconds);
                 // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
-                goingOutPosition = position;
+                goingOutPositionA = position;
                 isChange = true;
 
 //                View itemView = layoutManagerA.findViewByPosition(position);
@@ -583,27 +596,33 @@ public class GameActivity extends AppCompatActivity {
         adapterB.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                current = playersGameB.get(position);
-                setValues();
-                currentTeam = true;
-                adapterB.notifyItemChanged(adapterB.selectedPos);
-                adapterA.notifyItemChanged(adapterA.selectedPos);
-                adapterB.selectedPos = position;
-                adapterA.selectedPos = RecyclerView.NO_POSITION;
-                adapterA.notifyItemChanged(adapterA.selectedPos);
-                adapterB.notifyItemChanged(adapterB.selectedPos);
+                if (!isChange) {
+                    current = playersGameB.get(position);
+                    setValues();
+                    currentTeam = true;
+                    adapterB.notifyItemChanged(adapterB.selectedPos);
+                    adapterA.notifyItemChanged(adapterA.selectedPos);
+                    adapterB.selectedPos = position;
+                    adapterA.selectedPos = RecyclerView.NO_POSITION;
+                    adapterA.notifyItemChanged(adapterA.selectedPos);
+                    adapterB.notifyItemChanged(adapterB.selectedPos);
+                } else {
+                    PlayerGame goingIn = playersGameB.get(position);
+                    goingIn.setWhenGoingIn(seconds);
+                    playersGameB.set(goingOutPositionB, goingIn);
+                    playersGameB.set(position, goingOutB);
+                    adapterB.notifyDataSetChanged();
+                    isChange = false;
+                }
             }
 
             @Override
             public void onLongClick(int position) {
-                Log.d(TAG, "onClick: opening dialog.");
-
-                LineupDialog dialog = new LineupDialog();
-
-                Bundle args = new Bundle();
-                args.putSerializable("playersGameB", playersGameB);
-                dialog.setArguments(args);
-                dialog.show(getSupportFragmentManager(), "LineupDialog");
+                goingOutB = playersGameB.get(position);
+                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - seconds);
+                // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
+                goingOutPositionB = position;
+                isChange = true;
             }
         });
     }
