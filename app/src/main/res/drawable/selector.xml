@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="true" android:drawable="@color/team_bg"/>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:state_selected="true"
+        android:drawable="@color/blue_btn"/>
+    <item
+        app:state_in="true"
+        android:drawable="@color/green_btn"/>
+    <item
+        app:state_out="true"
+        android:drawable="@color/red_btn"/>
 </selector>

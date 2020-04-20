@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="states">
+        <attr name="state_default" format="boolean"/>
+        <attr name="state_in" format="boolean" />
+        <attr name="state_out" format="boolean" />
+        <attr name="state_changeOut" format="boolean" />
+        <attr name="state_changeIn" format="boolean" />
+    </declare-styleable>
+</resources>

@@ -26,14 +26,12 @@ import com.hfad.lzr.model.Team;
 import com.hfad.lzr.ui.main.LineupDialog;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GameActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference;
-    ArrayList<PlayerGame> playersGameA, playersGameB, firstLineupGameA, firstLineupGameB;
+    ArrayList<PlayerGame> playersGameA, playersGameB;
     RecyclerView teamArv, teamBrv;
     PlayersGameAdapter adapterA, adapterB;
     RecyclerView.LayoutManager layoutManagerA, layoutManagerB;
@@ -47,8 +45,6 @@ public class GameActivity extends AppCompatActivity {
     Team teamA;
     Team teamB;
 
-    ArrayList<PlayerGame> reservesA, reservesB;
-
     private static final String TAG = "GameActivity";
 
     @Override
@@ -58,16 +54,11 @@ public class GameActivity extends AppCompatActivity {
 
         playersGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameA");
         playersGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameB");
-        firstLineupGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameA");
-        firstLineupGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameB");
+//        firstLineupGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameA");
+//        firstLineupGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameB");
         teamA = ( Team ) getIntent().getSerializableExtra("teamA");
         teamB = ( Team ) getIntent().getSerializableExtra("teamB");
         game = ( Game ) getIntent().getSerializableExtra("game");
-
-       /* reservesA = new ArrayList<>(playersGameA);
-        reservesA.removeAll(firstLineupGameA);*/
-        reservesA = new ArrayList<>(playersGameA);
-        reservesB = new ArrayList<>(playersGameB);
 
         teamATV = findViewById(R.id.teamA);
         teamBTV = findViewById(R.id.teamB);
@@ -412,26 +403,11 @@ public class GameActivity extends AppCompatActivity {
                 Intent intent = new Intent(GameActivity.this, StatsActivity.class);
                 intent.putExtra("playersGameA", playersGameA);
                 intent.putExtra("playersGameB", playersGameB);
-                intent.putExtra("firstLineupGameA", firstLineupGameA);
-                intent.putExtra("firstLineupGameB", firstLineupGameB);
                 intent.putExtra("game", game);
                 startActivity(intent);
             }
         });
     }
-
-    /*public static  ArrayList<PlayerGame> removeDuplicate(ArrayList<PlayerGame> list){
-
-        Set<PlayerGame> set = new LinkedHashSet<>();
-
-        set.addAll(list);
-
-        list.clear();
-
-        list.addAll(set);
-
-        return list;
-    }*/
 
     public void setRes(int points){
         if (currentTeam){
@@ -471,14 +447,14 @@ public class GameActivity extends AppCompatActivity {
         teamArv = findViewById(R.id.firstTeamRV);
         teamArv.setHasFixedSize(true);
         layoutManagerA = new LinearLayoutManager(getApplicationContext());
-        adapterA = new PlayersGameAdapter(firstLineupGameA);
+        adapterA = new PlayersGameAdapter(playersGameA);
 
         teamArv.setLayoutManager(layoutManagerA);
         teamArv.setAdapter(adapterA);
         adapterA.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                current = firstLineupGameA.get(position);
+                current = playersGameA.get(position);
                 setValues();
                 currentTeam = false;
                 adapterA.notifyItemChanged(adapterA.selectedPos);
@@ -495,12 +471,8 @@ public class GameActivity extends AppCompatActivity {
 
                 LineupDialog dialog = new LineupDialog();
 
-                /*reservesA.addAll(playersGameA);
-                reservesA.addAll(firstLineupGameA);
-                reservesA = removeDuplicate(reservesA);*/
-
                 Bundle args = new Bundle();
-                args.putSerializable("reserves", reservesA);
+                args.putSerializable("playersGameA", playersGameA);
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
             }
@@ -511,14 +483,14 @@ public class GameActivity extends AppCompatActivity {
         teamBrv = findViewById(R.id.secondTeamRV);
         teamBrv.setHasFixedSize(true);
         layoutManagerB = new LinearLayoutManager(getApplicationContext());
-        adapterB = new PlayersGameAdapter(firstLineupGameB);
+        adapterB = new PlayersGameAdapter(playersGameB);
 
         teamBrv.setLayoutManager(layoutManagerB);
         teamBrv.setAdapter(adapterB);
         adapterB.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                current = firstLineupGameB.get(position);
+                current = playersGameB.get(position);
                 setValues();
                 currentTeam = true;
                 adapterB.notifyItemChanged(adapterB.selectedPos);
@@ -536,7 +508,7 @@ public class GameActivity extends AppCompatActivity {
                 LineupDialog dialog = new LineupDialog();
 
                 Bundle args = new Bundle();
-                args.putSerializable("reserves", reservesB);
+                args.putSerializable("playersGameB", playersGameB);
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
             }

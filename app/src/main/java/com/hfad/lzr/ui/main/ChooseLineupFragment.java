@@ -1,11 +1,11 @@
 package com.hfad.lzr.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -43,8 +43,8 @@ public class ChooseLineupFragment extends Fragment {
     CheckBox lineupCheckbox;
     CheckBox firstLineupCheckBox;
 
-    ArrayList<Player> playersChecked = new ArrayList<>();
-    ArrayList<Player> firstLineupChecked = new ArrayList<>();
+    ArrayList<Player> players = new ArrayList<>();
+    ArrayList<Integer> starting5 = new ArrayList<>();
 
     public static ChooseLineupFragment newInstance(String teamName, String teamId) {
         ChooseLineupFragment myFragment = new ChooseLineupFragment();
@@ -98,7 +98,7 @@ public class ChooseLineupFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull final LineupViewHolder holder, int position, @NonNull final Player model) {
+            protected void onBindViewHolder(@NonNull final LineupViewHolder holder, final int position, @NonNull final Player model) {
                 holder.playerNumberTV.setText(model.getNumber());
                 holder.playerNameTV.setText(model.getNameAndLastname());
 
@@ -107,9 +107,11 @@ public class ChooseLineupFragment extends Fragment {
                     public void onClick(View v) {
                         if (holder.lineupCheckbox.isChecked()){
                             onItemCheck(model);
+                            holder.lineupCheckbox.setChecked(true);
                         } else {
                             onItemUncheck(model);
-                            onItemFirstUncheck(model);
+                            //onItemFirstUncheck(position);
+                            holder.lineupCheckbox.setChecked(false);
                             holder.firstLineupCheckBox.setChecked(false);
                         }
                     }
@@ -118,12 +120,14 @@ public class ChooseLineupFragment extends Fragment {
                 holder.firstLineupCheckBox.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (holder.firstLineupCheckBox.isChecked()){
+                        if(holder.firstLineupCheckBox.isChecked()){
                             onItemFirstCheck(model);
-                            onItemUncheck(model);
+                            //onItemCheck(model);
                             holder.lineupCheckbox.setChecked(true);
+                            holder.firstLineupCheckBox.setChecked(true);
                         } else {
-                            onItemFirstUncheck(model);
+                            onItemUncheck(model);
+                            holder.firstLineupCheckBox.setChecked(false);
                         }
                     }
                 });
@@ -137,26 +141,29 @@ public class ChooseLineupFragment extends Fragment {
     }
 
     public void onItemFirstCheck(Player player){
-        firstLineupChecked.add(player);
+        if(players.contains(player)){
+            players.remove(player);
+        }
+        players.add(0, player);
     }
 
-    public void onItemFirstUncheck(Player player) {
-        firstLineupChecked.remove(player);
-    }
-
-    public ArrayList<Player> getFirstData(){
-        return firstLineupChecked;
+    public void onItemFirstUncheck(Integer position) {
+        starting5.remove(position);
     }
 
     public void onItemCheck(Player player){
-        playersChecked.add(player);
+        players.add(player);
     }
 
     public void onItemUncheck(Player player) {
-        playersChecked.remove(player);
+        players.remove(player);
+    }
+
+    public ArrayList<Integer> getFirstData(){
+        return starting5;
     }
 
     public ArrayList<Player> getData(){
-        return playersChecked;
+        return players;
     }
 }

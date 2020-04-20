@@ -67,31 +67,19 @@ public class LineupActivity extends AppCompatActivity {
                 ChooseLineupFragment fragment2 = (ChooseLineupFragment) sectionsPagerAdapter.getItem(1);
 
                 List<Player> playersTeamA = fragment1.getData();
-                List<Player> firstLineupTeamA = fragment1.getFirstData();
+                //List<Integer> firstLineupTeamA = fragment1.getFirstData();
                 List<Player> playersTeamB = fragment2.getData();
-                List<Player> firstLineupTeamB = fragment2.getFirstData();
+                //List<Integer> firstLineupTeamB = fragment2.getFirstData();
 
-                if (firstLineupTeamA.size() == 5 && firstLineupTeamB.size() == 5) {
+                if (playersTeamA.size() >= 5 && playersTeamB.size() >= 5) {
                     String id = databaseReferenceGames.push().getKey();
                     Game game = new Game(id, teamA.getId(), teamB.getId(), gameDate, gameTime, teamA.getName(), teamB.getName());
                     databaseReferenceGames.child(id).setValue(game);
-
-                    List<PlayerGame> firstLineupGameA = new ArrayList<>();
-                    for (Player p : firstLineupTeamA) {
-                        PlayerGame playerGame = new PlayerGame(id, p);
-                        firstLineupGameA.add(playerGame);
-                    }
 
                     List<PlayerGame> playersGameA = new ArrayList<>();
                     for (Player p : playersTeamA) {
                         PlayerGame playerGame = new PlayerGame(id, p);
                         playersGameA.add(playerGame);
-                    }
-
-                    List<PlayerGame> firstLineupGameB = new ArrayList<>();
-                    for (Player p : firstLineupTeamB) {
-                        PlayerGame playerGame = new PlayerGame(id, p);
-                        firstLineupGameB.add(playerGame);
                     }
 
                     List<PlayerGame> playersGameB = new ArrayList<>();
@@ -101,8 +89,8 @@ public class LineupActivity extends AppCompatActivity {
                     }
 
                     Intent intent = new Intent(LineupActivity.this, GameActivity.class);
-                    intent.putExtra("firstLineupGameA", (Serializable) firstLineupGameA);
-                    intent.putExtra("firstLineupGameB", (Serializable) firstLineupGameB);
+                    //intent.putExtra("firstLineupGameA", (Serializable) firstLineupTeamA);
+                    //intent.putExtra("firstLineupGameB", (Serializable) firstLineupTeamB);
                     intent.putExtra("playersGameA", (Serializable) playersGameA);
                     intent.putExtra("playersGameB", (Serializable) playersGameB);
                     intent.putExtra("teamA", teamA);
@@ -119,8 +107,6 @@ public class LineupActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-
 
         sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamA.getName(), teamA.getId()), teamA.getName());
         sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamB.getName(), teamB.getId()), teamB.getName());
