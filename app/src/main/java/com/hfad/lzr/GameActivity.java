@@ -24,6 +24,7 @@ import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
+import com.hfad.lzr.ui.main.CustomLinearLayout;
 import com.hfad.lzr.ui.main.LineupDialog;
 
 import java.util.ArrayList;
@@ -45,7 +46,9 @@ public class GameActivity extends AppCompatActivity {
     Game game;
     Team teamA;
     Team teamB;
-
+    PlayerGame goingOut;
+    int goingOutPosition;
+    boolean isChange;
     private static final String TAG = "GameActivity";
 
     private int seconds = 600;
@@ -521,27 +524,50 @@ public class GameActivity extends AppCompatActivity {
         adapterA.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                current = playersGameA.get(position);
-                setValues();
-                currentTeam = false;
-                adapterA.notifyItemChanged(adapterA.selectedPos);
-                adapterB.notifyItemChanged(adapterB.selectedPos);
-                adapterA.selectedPos = position;
-                adapterB.selectedPos = RecyclerView.NO_POSITION;
-                adapterB.notifyItemChanged(adapterB.selectedPos);
-                adapterA.notifyItemChanged(adapterA.selectedPos);
+                if(!isChange) {
+                    current = playersGameA.get(position);
+                    setValues();
+                    currentTeam = false;
+                    adapterA.notifyItemChanged(adapterA.selectedPos);
+                    adapterB.notifyItemChanged(adapterB.selectedPos);
+                    adapterA.selectedPos = position;
+                    adapterB.selectedPos = RecyclerView.NO_POSITION;
+                    adapterB.notifyItemChanged(adapterB.selectedPos);
+                    adapterA.notifyItemChanged(adapterA.selectedPos);
+                } else {
+                    PlayerGame goingIn = playersGameA.get(position);
+                    playersGameA.set(goingOutPosition, goingIn);
+                    playersGameA.set(position, goingOut);
+                    adapterA.notifyDataSetChanged();
+                    isChange = false;
+                }
             }
 
             @Override
             public void onLongClick(int position) {
-                Log.d(TAG, "onClick: opening dialog.");
+                goingOut = playersGameA.get(position);
+                // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
+                goingOutPosition = position;
+                isChange = true;
 
-                LineupDialog dialog = new LineupDialog();
+//                View itemView = layoutManagerA.findViewByPosition(position);
+//                CustomLinearLayout cll = itemView.findViewById(R.id.cll);
+//                cll.setmIsOut(true);
+//                adapterA.notifyItemChanged(position);
+//                .isEnabled(true);
+//                .isChangeIn(true);
 
-                Bundle args = new Bundle();
-                args.putSerializable("playersGameA", playersGameA);
-                dialog.setArguments(args);
-                dialog.show(getSupportFragmentManager(), "LineupDialog");
+//                Log.d(TAG, "onClick: opening dialog.");
+//                CustomLinearLayout cll = (CustomLinearLayout) layoutManagerA.findViewByPosition(position);
+//                cll.setmIsChangeIn(true);
+
+
+//                LineupDialog dialog = new LineupDialog();
+//
+//                Bundle args = new Bundle();
+//                args.putSerializable("playersGameA", playersGameA);
+//                dialog.setArguments(args);
+//                dialog.show(getSupportFragmentManager(), "LineupDialog");
             }
         });
     }

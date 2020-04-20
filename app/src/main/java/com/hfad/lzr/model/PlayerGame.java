@@ -22,6 +22,8 @@ public class PlayerGame extends Player implements Serializable {
     private int foul;
     private int steal;
     private int tehnicalFoul;
+    // private int minutes;
+    // private int pomocnaKojaGovoriKadJeUsao;
 
     public PlayerGame(String gameId ,Player player) {
         super(player);
