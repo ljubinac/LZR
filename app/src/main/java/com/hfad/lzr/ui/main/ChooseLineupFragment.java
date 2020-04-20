@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -108,6 +109,8 @@ public class ChooseLineupFragment extends Fragment {
                             onItemCheck(model);
                         } else {
                             onItemUncheck(model);
+                            onItemFirstUncheck(model);
+                            holder.firstLineupCheckBox.setChecked(false);
                         }
                     }
                 });
@@ -117,6 +120,8 @@ public class ChooseLineupFragment extends Fragment {
                     public void onClick(View v) {
                         if (holder.firstLineupCheckBox.isChecked()){
                             onItemFirstCheck(model);
+                            onItemUncheck(model);
+                            holder.lineupCheckbox.setChecked(true);
                         } else {
                             onItemFirstUncheck(model);
                         }

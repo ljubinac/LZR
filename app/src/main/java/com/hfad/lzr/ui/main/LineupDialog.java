@@ -26,26 +26,21 @@ import java.util.ArrayList;
 public class LineupDialog extends DialogFragment {
 
     private static final String TAG = "LineupDialog";
-
     private TextView mActionOk, mActionCancel;
-
-    RecyclerView secondLineupArv, secondLineupBrv;
-
-    ArrayList<PlayerGame> playersGameA, playersGameB;
-
-    PlayersGameAdapter adapterA, adapterB;
+    RecyclerView secondLineupRV;
+    PlayersGameAdapter adapter;
     TextView playerNumberTV;
     TextView playerNameTV;
+    RecyclerView.LayoutManager layoutManager;
 
-    RecyclerView.LayoutManager layoutManagerA, layoutManagerB;
+    ArrayList<PlayerGame> reserves;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        playersGameA = ( ArrayList<PlayerGame> ) getArguments().getSerializable("playersGameA");
-        playersGameB = ( ArrayList<PlayerGame> ) getArguments().getSerializable("playersGameB");
+        reserves = ( ArrayList<PlayerGame> ) getArguments().getSerializable("reserves");
     }
 
     @Nullable
@@ -53,26 +48,17 @@ public class LineupDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_lineup, container, false);
 
-        secondLineupArv = view.findViewById(R.id.secondLineupArv);
-        secondLineupBrv = view.findViewById(R.id.secondLineupBrv);
+        secondLineupRV = view.findViewById(R.id.secondLineupArv);
         mActionCancel = view.findViewById(R.id.action_cancel);
         mActionOk = view.findViewById(R.id.action_ok);
         playerNameTV = view.findViewById(R.id.player_name_tv);
         playerNumberTV = view.findViewById(R.id.player_number_tv);
 
-        secondLineupArv.setHasFixedSize(true);
-        layoutManagerA = new LinearLayoutManager(getContext());
-        adapterA = new PlayersGameAdapter(playersGameA);
-
-        secondLineupArv.setLayoutManager(layoutManagerA);
-        secondLineupArv.setAdapter(adapterA);
-
-        secondLineupBrv.setHasFixedSize(true);
-        layoutManagerB = new LinearLayoutManager(getContext());
-        adapterB = new PlayersGameAdapter(playersGameB);
-
-        secondLineupBrv.setLayoutManager(layoutManagerB);
-        secondLineupBrv.setAdapter(adapterB);
+        secondLineupRV.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new PlayersGameAdapter(reserves);
+        secondLineupRV.setLayoutManager(layoutManager);
+        secondLineupRV.setAdapter(adapter);
 
 
 
@@ -106,5 +92,4 @@ public class LineupDialog extends DialogFragment {
         });
         return  view;
     }
-
 }

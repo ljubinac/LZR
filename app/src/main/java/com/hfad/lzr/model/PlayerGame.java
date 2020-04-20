@@ -1,6 +1,7 @@
 package com.hfad.lzr.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class PlayerGame extends Player implements Serializable {
 
@@ -64,6 +65,19 @@ public class PlayerGame extends Player implements Serializable {
     public void setPointsTeamB(int pointsTeamB) {
         this.pointsTeamB = pointsTeamB;
     }*/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayerGame that = ( PlayerGame ) o;
+        return gameId.equals(that.gameId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gameId);
+    }
 
     public int getSteal() {
         return steal;

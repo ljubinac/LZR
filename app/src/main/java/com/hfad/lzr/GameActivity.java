@@ -26,7 +26,9 @@ import com.hfad.lzr.model.Team;
 import com.hfad.lzr.ui.main.LineupDialog;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -45,6 +47,8 @@ public class GameActivity extends AppCompatActivity {
     Team teamA;
     Team teamB;
 
+    ArrayList<PlayerGame> reservesA, reservesB;
+
     private static final String TAG = "GameActivity";
 
     @Override
@@ -59,6 +63,11 @@ public class GameActivity extends AppCompatActivity {
         teamA = ( Team ) getIntent().getSerializableExtra("teamA");
         teamB = ( Team ) getIntent().getSerializableExtra("teamB");
         game = ( Game ) getIntent().getSerializableExtra("game");
+
+       /* reservesA = new ArrayList<>(playersGameA);
+        reservesA.removeAll(firstLineupGameA);*/
+        reservesA = new ArrayList<>(playersGameA);
+        reservesB = new ArrayList<>(playersGameB);
 
         teamATV = findViewById(R.id.teamA);
         teamBTV = findViewById(R.id.teamB);
@@ -403,11 +412,26 @@ public class GameActivity extends AppCompatActivity {
                 Intent intent = new Intent(GameActivity.this, StatsActivity.class);
                 intent.putExtra("playersGameA", playersGameA);
                 intent.putExtra("playersGameB", playersGameB);
+                intent.putExtra("firstLineupGameA", firstLineupGameA);
+                intent.putExtra("firstLineupGameB", firstLineupGameB);
                 intent.putExtra("game", game);
                 startActivity(intent);
             }
         });
     }
+
+    /*public static  ArrayList<PlayerGame> removeDuplicate(ArrayList<PlayerGame> list){
+
+        Set<PlayerGame> set = new LinkedHashSet<>();
+
+        set.addAll(list);
+
+        list.clear();
+
+        list.addAll(set);
+
+        return list;
+    }*/
 
     public void setRes(int points){
         if (currentTeam){
@@ -471,8 +495,12 @@ public class GameActivity extends AppCompatActivity {
 
                 LineupDialog dialog = new LineupDialog();
 
+                /*reservesA.addAll(playersGameA);
+                reservesA.addAll(firstLineupGameA);
+                reservesA = removeDuplicate(reservesA);*/
+
                 Bundle args = new Bundle();
-                args.putSerializable("playersGameA", playersGameA);
+                args.putSerializable("reserves", reservesA);
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
             }
@@ -508,7 +536,7 @@ public class GameActivity extends AppCompatActivity {
                 LineupDialog dialog = new LineupDialog();
 
                 Bundle args = new Bundle();
-                args.putSerializable("playersGameB", playersGameB);
+                args.putSerializable("reserves", reservesB);
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
             }

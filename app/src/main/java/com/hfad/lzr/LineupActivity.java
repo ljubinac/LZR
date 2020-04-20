@@ -71,8 +71,7 @@ public class LineupActivity extends AppCompatActivity {
                 List<Player> playersTeamB = fragment2.getData();
                 List<Player> firstLineupTeamB = fragment2.getFirstData();
 
-                if (playersTeamA.size() >= 5 && playersTeamB.size() >= 5
-                        && firstLineupTeamA.size() == 5 && firstLineupTeamB.size() == 5) {
+                if (firstLineupTeamA.size() == 5 && firstLineupTeamB.size() == 5) {
                     String id = databaseReferenceGames.push().getKey();
                     Game game = new Game(id, teamA.getId(), teamB.getId(), gameDate, gameTime, teamA.getName(), teamB.getName());
                     databaseReferenceGames.child(id).setValue(game);

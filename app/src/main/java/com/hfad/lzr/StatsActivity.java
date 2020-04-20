@@ -43,7 +43,7 @@ public class StatsActivity extends AppCompatActivity {
 
     private int STORAGE_PERMISSION_CODE = 1;
 
-    ArrayList<PlayerGame> playersGameA, playersGameB;
+    ArrayList<PlayerGame> playersGameA, playersGameB, firstLineupGameA, firstLineupGameB;
 
     TableLayout tableTeamA, tableTeamB;
 
@@ -79,11 +79,16 @@ public class StatsActivity extends AppCompatActivity {
 
         playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
         playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
+        firstLineupGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("firstLineupGameA");
+        firstLineupGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("firstLineupGameB");
         game = ( Game ) getIntent().getSerializableExtra("game");
 
-        init(tableTeamA, playersGameA);
+        firstLineupGameA.addAll(playersGameA);
+        firstLineupGameB.addAll(playersGameB);
+
+        init(tableTeamA, firstLineupGameA);
         setValue();
-        init(tableTeamB, playersGameB);
+        init(tableTeamB, firstLineupGameB);
 
         create.setEnabled(true);
         share.setEnabled(false);
