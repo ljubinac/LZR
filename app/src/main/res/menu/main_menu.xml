@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_games"
+            android:title="GAMES"/>
+            <item
+                android:id="@+id/nav_teams"
+                android:title="TEAMS"/>
+        <item
+            android:id="@+id/nav_standings"
+            android:title="STANDINGS"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:title="SETTINGS"/>
+        <item
+            android:id="@+id/nav_quit"
+            android:title="QUIT"/>
+
+    </group>
+</menu>

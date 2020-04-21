@@ -41,7 +41,7 @@ public class GameActivity extends AppCompatActivity {
     Team teamB;
     PlayerGame goingOutA, goingOutB;
     int goingOutPositionA, goingOutPositionB;
-    boolean isChange;
+    boolean isChange = false;
   /*  private static final String TAG = "GameActivity";*/
 
     private static final long START_TIME_IN_MILLIS = 6000;
@@ -593,24 +593,6 @@ public class GameActivity extends AppCompatActivity {
                 isChange = true;
                 adapterA.notifyDataSetChanged();
 
-//                View itemView = layoutManagerA.findViewByPosition(position);
-//                CustomLinearLayout cll = itemView.findViewById(R.id.cll);
-//                cll.setmIsOut(true);
-//                adapterA.notifyItemChanged(position);
-//                .isEnabled(true);
-//                .isChangeIn(true);
-
-//                Log.d(TAG, "onClick: opening dialog.");
-//                CustomLinearLayout cll = (CustomLinearLayout) layoutManagerA.findViewByPosition(position);
-//                cll.setmIsChangeIn(true);
-
-
-//                LineupDialog dialog = new LineupDialog();
-//
-//                Bundle args = new Bundle();
-//                args.putSerializable("playersGameA", playersGameA);
-//                dialog.setArguments(args);
-//                dialog.show(getSupportFragmentManager(), "LineupDialog");
             }
         });
     }
@@ -638,10 +620,22 @@ public class GameActivity extends AppCompatActivity {
                     adapterB.notifyItemChanged(adapterB.selectedPos);
                 } else {
                     PlayerGame goingIn = playersGameB.get(position);
-                  //  goingIn.setWhenGoingIn(seconds);
+                    goingIn.setmIsIn(true);
+                    //goingIn.setWhenGoingIn(seconds);
                     goingIn.setWhenGoingIn((int)mTimeLeftInMillis);
                     playersGameB.set(goingOutPositionB, goingIn);
                     playersGameB.set(position, goingOutB);
+                    for(int i=5; i<playersGameB.size(); i++){
+                        playersGameB.get(i).setmIsChangeIn(false);
+                        playersGameB.get(i).setmIsOut(true);
+                        playersGameB.get(i).setmIsEnabled(false);
+                    }
+                    for (int i=0; i<5; i++){
+                        playersGameB.get(i).setmIsEnabled(true);
+                        playersGameB.get(i).setmIsIn(true);
+                    }
+
+                    goingOutB.setmIsChangeOut(false);
                     adapterB.notifyDataSetChanged();
                     isChange = false;
                 }
@@ -653,7 +647,16 @@ public class GameActivity extends AppCompatActivity {
                 goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - (int)mTimeLeftInMillis);
                 // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
                 goingOutPositionB = position;
+                goingOutB.setmIsChangeOut(true);
+                for(int i=5; i<playersGameB.size(); i++){
+                    playersGameB.get(i).setmIsChangeIn(true);
+                    playersGameB.get(i).setmIsEnabled(true);
+                }
+                for (int i=0; i<5; i++){
+                    playersGameB.get(i).setmIsEnabled(false);
+                }
                 isChange = true;
+                adapterB.notifyDataSetChanged();
             }
         });
     }
