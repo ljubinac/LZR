@@ -532,18 +532,6 @@ public class GameActivity extends AppCompatActivity {
         mTextViewCountDown.setText(timeLeftFormatted);
     }
 
-    private void updateTimer() {
-        int minutes = (int) (millisecondsLeft / 1000) /60;
-        int secs = (int) (millisecondsLeft / 1000) % 60;
-        String time = String.format("%02d:%02d", minutes, secs);
-        timeView.setText(time);
-    }
-
-    public void onClickStop(View view) {
-        countDownTimer.cancel();
-    }
-
-
     public void buildRecyclerViewA() {
         teamArv = findViewById(R.id.firstTeamRV);
         teamArv.setHasFixedSize(true);

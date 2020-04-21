@@ -9,7 +9,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:layout_margin="40dp"
     tools:context=".MainActivity">
 
 
