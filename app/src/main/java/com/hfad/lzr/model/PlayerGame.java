@@ -1,5 +1,7 @@
 package com.hfad.lzr.model;
 
+import com.hfad.lzr.R;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -24,6 +26,13 @@ public class PlayerGame extends Player implements Serializable {
     private int tehnicalFoul;
     private int minutes;
     private int whenGoingIn;
+
+    private boolean mIsIn = false;
+    private boolean mIsOut = false;
+    private boolean mIsChangeIn = false;
+    private boolean mIsChangeOut = false;
+    private boolean mIsEnabled = false;
+
 
     public PlayerGame(String gameId ,Player player) {
         super(player);
@@ -54,34 +63,45 @@ public class PlayerGame extends Player implements Serializable {
         this.gameId = gameId;
     }
 
-  /*  public int getPointsTeamA() {
-        return pointsTeamA;
+    public boolean ismIsEnabled() {
+        return mIsEnabled;
     }
 
-    public void setPointsTeamA(int pointsTeamA) {
-        this.pointsTeamA = pointsTeamA;
+    public void setmIsEnabled(boolean mIsEnabled) {
+        this.mIsEnabled = mIsEnabled;
     }
 
-    public int getPointsTeamB() {
-        return pointsTeamB;
+    public boolean ismIsIn() {
+        return mIsIn;
     }
 
-    public void setPointsTeamB(int pointsTeamB) {
-        this.pointsTeamB = pointsTeamB;
-    }*/
-
-  /*  @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PlayerGame that = ( PlayerGame ) o;
-        return gameId.equals(that.gameId);
+    public void setmIsIn(boolean mIsIn) {
+        this.mIsIn = mIsIn;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(gameId);
-    }*/
+    public boolean ismIsOut() {
+        return mIsOut;
+    }
+
+    public void setmIsOut(boolean mIsOut) {
+        this.mIsOut = mIsOut;
+    }
+
+    public boolean ismIsChangeIn() {
+        return mIsChangeIn;
+    }
+
+    public void setmIsChangeIn(boolean mIsChangeIn) {
+        this.mIsChangeIn = mIsChangeIn;
+    }
+
+    public boolean ismIsChangeOut() {
+        return mIsChangeOut;
+    }
+
+    public void setmIsChangeOut(boolean mIsChangeOut) {
+        this.mIsChangeOut = mIsChangeOut;
+    }
 
     public int getMinutes() {
         return minutes;

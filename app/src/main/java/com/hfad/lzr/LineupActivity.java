@@ -82,6 +82,9 @@ public class LineupActivity extends AppCompatActivity {
                         PlayerGame playerGame = new PlayerGame(id, player);
                         if (i < 5){
                             playerGame.setWhenGoingIn(10);
+                            playerGame.setmIsEnabled(true);
+                        } else {
+                            playerGame.setmIsEnabled(false);
                         }
                         playersGameA.add(playerGame);
                     }

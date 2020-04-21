@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -50,22 +51,26 @@ public class GameActivity extends AppCompatActivity {
     int goingOutPositionA, goingOutPositionB;
     boolean isChange;
     private static final String TAG = "GameActivity";
+    TextView timeView;
 
-    private int seconds = 10;
-    private boolean running;
-    private boolean wasRunning;
+    CountDownTimer countDownTimer;
+    private static final long MILLISECONDS_START = 600000;
+    private long millisecondsLeft = MILLISECONDS_START;
+    private boolean timerRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        if (savedInstanceState != null) {
-            seconds = savedInstanceState.getInt("seconds");
-            running = savedInstanceState.getBoolean("running");
-            wasRunning = savedInstanceState.getBoolean("wasRunning");
-        }
-        runTimer();
+//        if (savedInstanceState != null) {
+//            seconds = savedInstanceState.getInt("seconds");
+//            running = savedInstanceState.getBoolean("running");
+//            wasRunning = savedInstanceState.getBoolean("wasRunning");
+//        }
+//        runTimer();
+        timeView = ( TextView ) findViewById(R.id.time);
+        updateTimer();
 
         playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
         playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
@@ -455,74 +460,42 @@ public class GameActivity extends AppCompatActivity {
 
         tvFoul.setText(String.valueOf(current.getFoul()));
         tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt("seconds", seconds);
-        savedInstanceState.putBoolean("running", running);
-        savedInstanceState.putBoolean("wasRunning", wasRunning);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        wasRunning = running;
-        running = false;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (wasRunning) {
-            running = true;
-        }
 
     }
+
+//    @Override
+//    public void onSaveInstanceState(Bundle savedInstanceState) {
+//        super.onSaveInstanceState(savedInstanceState);
+//        savedInstanceState.putInt("seconds", seconds);
+//        savedInstanceState.putBoolean("running", running);
+//        savedInstanceState.putBoolean("wasRunning", wasRunning);
+//    }
 
     public void onClickStart(View view) {
-        running = true;
+        countDownTimer = new CountDownTimer(millisecondsLeft, 1000) {
+            @Override
+            public void onTick(long l) {
+                millisecondsLeft = l;
+                updateTimer();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+    }
+
+    private void updateTimer() {
+        int minutes = (int) (millisecondsLeft / 1000) /60;
+        int secs = (int) (millisecondsLeft / 1000) % 60;
+        String time = String.format("%02d:%02d", minutes, secs);
+        timeView.setText(time);
     }
 
     public void onClickStop(View view) {
-        running = false;
+        countDownTimer.cancel();
     }
-
-    public void onClickReset(View view) {
-        running = false;
-        seconds = 10;
-        /*for (int i = 0; i < 5; i++) {
-            playersGameA.get(i).setWhenGoingIn(10);
-            playersGameB.get(i).setWhenGoingIn(10);
-        }*/
-    }
-
-    private void runTimer() {
-        final TextView timeView = ( TextView ) findViewById(R.id.time);
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (seconds == 0) {
-                    for (int i = 0; i < 5; i++) {
-                        playersGameA.get(i).setMinutes(playersGameA.get(i).getMinutes() + playersGameA.get(i).getWhenGoingIn());
-                        playersGameB.get(i).setMinutes(playersGameB.get(i).getMinutes() + playersGameB.get(i).getWhenGoingIn());
-                    }
-                }
-                int minutes = (seconds % 3600) / 60;
-                int secs = seconds % 60;
-                String time = String.format("%02d:%02d", minutes, secs);
-                timeView.setText(time);
-                if (running && seconds > 0) {
-                    seconds--;
-                }
-                handler.postDelayed(this, 1000);
-
-            }
-        });
-    }
-
 
     public void buildRecyclerViewA() {
         teamArv = findViewById(R.id.firstTeamRV);
@@ -547,9 +520,21 @@ public class GameActivity extends AppCompatActivity {
                     adapterA.notifyItemChanged(adapterA.selectedPos);
                 } else {
                     PlayerGame goingIn = playersGameA.get(position);
-                    goingIn.setWhenGoingIn(seconds);
+                    goingIn.setmIsIn(true);
+                    //goingIn.setWhenGoingIn(seconds);
                     playersGameA.set(goingOutPositionA, goingIn);
                     playersGameA.set(position, goingOutA);
+                    for(int i=5; i<playersGameA.size(); i++){
+                        playersGameA.get(i).setmIsChangeIn(false);
+                        playersGameA.get(i).setmIsOut(true);
+                        playersGameA.get(i).setmIsEnabled(false);
+                    }
+                    for (int i=0; i<5; i++){
+                        playersGameA.get(i).setmIsEnabled(true);
+                        playersGameA.get(i).setmIsIn(true);
+                    }
+
+                    goingOutA.setmIsChangeOut(false);
                     adapterA.notifyDataSetChanged();
                     isChange = false;
                 }
@@ -558,10 +543,19 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onLongClick(int position) {
                 goingOutA = playersGameA.get(position);
-                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - seconds);
+                //goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - seconds);
                 // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
                 goingOutPositionA = position;
+                goingOutA.setmIsChangeOut(true);
+                for(int i=5; i<playersGameA.size(); i++){
+                    playersGameA.get(i).setmIsChangeIn(true);
+                    playersGameA.get(i).setmIsEnabled(true);
+                }
+                for (int i=0; i<5; i++){
+                    playersGameA.get(i).setmIsEnabled(false);
+                }
                 isChange = true;
+                adapterA.notifyDataSetChanged();
 
 //                View itemView = layoutManagerA.findViewByPosition(position);
 //                CustomLinearLayout cll = itemView.findViewById(R.id.cll);
@@ -608,7 +602,7 @@ public class GameActivity extends AppCompatActivity {
                     adapterB.notifyItemChanged(adapterB.selectedPos);
                 } else {
                     PlayerGame goingIn = playersGameB.get(position);
-                    goingIn.setWhenGoingIn(seconds);
+                  //  goingIn.setWhenGoingIn(seconds);
                     playersGameB.set(goingOutPositionB, goingIn);
                     playersGameB.set(position, goingOutB);
                     adapterB.notifyDataSetChanged();
@@ -619,7 +613,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onLongClick(int position) {
                 goingOutB = playersGameB.get(position);
-                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - seconds);
+                //goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - seconds);
                 // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
                 goingOutPositionB = position;
                 isChange = true;

@@ -12,4 +12,8 @@
     <item
         app:state_changeOut="true"
         android:drawable="@color/colorAccent"/>
+    <item
+        app:state_changeIn="true"
+        android:drawable="@color/design_default_color_secondary_variant"
+        />
 </selector>

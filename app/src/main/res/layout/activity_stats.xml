@@ -1,85 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".StatsActivity">
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/ll">
-    <ScrollView
-        android:id="@+id/layout"
+
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:fillViewport="true"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal">
+        android:orientation="vertical">
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalView"
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
+            android:fillViewport="true"
+            android:scrollbarStyle="outsideInset"
             android:scrollbars="horizontal">
 
-            <TableLayout
-                android:id="@+id/player_game_A"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-            </TableLayout>
-
-
-        </HorizontalScrollView>
-
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/layout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:fillViewport="true"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal">
-
-        <HorizontalScrollView
-            android:id="@+id/horizontalView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:scrollbars="horizontal">
-
-
-            <TableLayout
+            <HorizontalScrollView
+                android:id="@+id/horizontalView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/player_game_B">
+                android:layout_marginTop="5dip"
+                android:scrollbars="horizontal">
+
+                <TableLayout
+                    android:id="@+id/player_game_A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
 
-            </TableLayout>
+                </TableLayout>
 
-        </HorizontalScrollView>
 
-    </ScrollView>
-</LinearLayout>
-    <Button
-        android:id="@+id/createPdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:onClick="createPdf"/>
+            </HorizontalScrollView>
 
-    <Button
-        android:id="@+id/sharePdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Share"
-        />
-</LinearLayout>
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:fillViewport="true"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbars="horizontal">
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:scrollbars="horizontal">
+
+
+                <TableLayout
+                    android:id="@+id/player_game_B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                </TableLayout>
+
+            </HorizontalScrollView>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/createPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="createPdf"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/sharePdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share" />
+    </LinearLayout>
+
+
+</ScrollView>

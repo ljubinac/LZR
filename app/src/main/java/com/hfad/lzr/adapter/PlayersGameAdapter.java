@@ -95,7 +95,20 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
             holder.cll.setmIsIn(true);
         } else {
             holder.cll.setmIsOut(true);
-            //holder.itemView.setEnabled(false);
+        }
+        if (playerGame.ismIsEnabled()) {
+            holder.itemView.setEnabled(true);
+        } else {
+            holder.itemView.setEnabled(false);
+        }
+        if (playerGame.ismIsChangeOut()) {
+            holder.cll.setmIsChangeOut(true);
+            holder.cll.setmIsIn(false);
+            holder.cll.setmIsOut(false);
+        }
+        if (playerGame.ismIsChangeIn()) {
+            holder.cll.setmIsChangeIn(true);
+            holder.cll.setmIsOut(false);
         }
     }
 
