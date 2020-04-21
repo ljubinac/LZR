@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">LZR</string>
-    <string name="lzr">Liga za rekreativce</string>
+    <string name="app_name">ALeague</string>
+    <string name="lzr" translatable="false">A League</string>
     <string name="create_game">Create game</string>
     <string name="teams">Teams</string>
     <string name="create_team">Create team</string>
@@ -37,43 +37,117 @@
         <item>Team4</item>
     </string-array>
     <string name="teamLeagueTV">League:</string>
-    <string name="leagueA">Liga A</string>
-    <string name="leagueB">Liga B</string>
-    <string name="title_activity_lineup">LineupActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="date_hint">dd/mm/yyyy</string>
-    <string name="time_hint">hh/mm</string>
-    <string name="title_activity_choose_lineup">ChooseLineupActivity</string>
-    <string name="tv2pmTitle">2PM</string>
-    <string name="tv2paTitle">2PA</string>
-    <string name="tv3pmTitle">3PM</string>
-    <string name="tv3paTitle">3PA</string>
-    <string name="tv1pmTitle">FTM</string>
-    <string name="tv1paTitle">FTA</string>
-    <string name="offRebTitleTV">OffReb</string>
-    <string name="defRebTitleTV">DefReb</string>
-    <string name="assistTitleTV">Assist</string>
-    <string name="turnoversTitleTV">Turnov</string>
-    <string name="blockTitleTV">Block</string>
-    <string name="foulTitleTV">Foul</string>
+    <string name="leagueA" translatable="false">Liga A</string>
+    <string name="leagueB" translatable="false">Liga B</string>
+    <string name="title_activity_lineup" translatable="false">LineupActivity</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
+    <string name="date_hint" translatable="false">dd/mm/yyyy</string>
+    <string name="time_hint" translatable="false">hh/mm</string>
+    <string name="title_activity_choose_lineup" translatable="false">ChooseLineupActivity</string>
+    <string name="tv2pmTitle" translatable="false">2PM</string>
+    <string name="tv2paTitle" translatable="false">2PA</string>
+    <string name="tv3pmTitle" translatable="false">3PM</string>
+    <string name="tv3paTitle" translatable="false">3PA</string>
+    <string name="tv1pmTitle" translatable="false">FTM</string>
+    <string name="tv1paTitle" translatable="false">FTA</string>
+    <string name="offRebTitleTV" translatable="false">O REB</string>
+    <string name="defRebTitleTV" translatable="false">D REB</string>
+    <string name="assistTitleTV" translatable="false">AST</string>
+    <string name="turnoversTitleTV" translatable="false">TOV</string>
+    <string name="blockTitleTV" translatable="false">BLK</string>
+    <string name="foulTitleTV" translatable="false">FOUL</string>
     <string name="startGame">Start game</string>
-    <string name="tehnicalFoulTitleTV">Teh</string>
-    <string name="stealsTitleTV">Steals</string>
+    <string name="tehnicalFoulTitleTV" translatable="false">TEH</string>
+    <string name="stealsTitleTV" translatable="false">STL</string>
     <string name="finishGameTV">Finish game</string>
     <string name="table">Table</string>
     <string name="standings">Standings</string>
-    <string name="positionTitleTV">#</string>
-    <string name="teamNameTitleTV">TEAM</string>
-    <string name="totalGamesTitleTV">P</string>
-    <string name="wGamesTitleTV">W</string>
-    <string name="lGamesTitleTV">L</string>
-    <string name="ptsPlusTitleTV">+</string>
-    <string name="ptsMinusTitleTV">-</string>
-    <string name="pointsTitleTV">PTS</string>
+    <string name="positionTitleTV" translatable="false">#</string>
+    <string name="teamNameTitleTV" translatable="false">TEAM</string>
+    <string name="totalGamesTitleTV" translatable="false">P</string>
+    <string name="wGamesTitleTV" translatable="false">W</string>
+    <string name="lGamesTitleTV" translatable="false">L</string>
+    <string name="ptsPlusTitleTV" translatable="false">+</string>
+    <string name="ptsMinusTitleTV" translatable="false">-</string>
+    <string name="pointsTitleTV" translatable="false">PTS</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="reset">Reset</string>
+    <string name="pause">Pause</string>
+    <string name="team_added">Team added!</string>
+    <string name="add_team_name">Add team name!</string>
+    <string name="team_not_added">Team not added!</string>
+    <string name="player_added">Player added!</string>
+    <string name="player_not_added">Player not added!</string>
+    <string name="player_has_5_foul">The player has 5 fouls!</string>
+    <string name="teams_must_start_with_5_players">Teams must start with 5 players!</string>
+
+    <string name="no" translatable="false">#No</string>
+    <string name="PLAYER" translatable="false">PLAYER</string>
+    <string name="Time" translatable="false">Time</string>
+    <string name="FG" translatable="false">FG</string>
+    <string name="pts2" translatable="false">2pts</string>
+    <string name="pts3" translatable="false">3pts</string>
+    <string name="FT" translatable="false">FT</string>
+    <string name="OREB" translatable="false">O REB</string>
+    <string name="DREB" translatable="false">D REB</string>
+    <string name="REB" translatable="false">REB</string>
+    <string name="AST" translatable="false">AST</string>
+    <string name="BLK" translatable="false">BLK</string>
+    <string name="STL" translatable="false">STL</string>
+    <string name="TOV" translatable="false">TOV</string>
+    <string name="PF" translatable="false">PF</string>
+    <string name="PTS" translatable="false">PTS</string>
+    <string name="EFF" translatable="false">EFF</string>
+    <string name="taraba" translatable="false">#</string>
+    <string name="total">Total:</string>
+    <string name="kosa_crta" translatable="false">/</string>
+
+    <string name="team_name_hint">Team name</string>
+    <string name="player_number_hint">#No</string>
+    <string name="player_name_hint">Name and lastname</string>
+    <string name="button_save">Save</string>
+    <string name="button_share">Share</string>
+    <string name="button_settings">Settings</string>
+
+    <string name="dark">Dark</string>
+    <string name="serbian">Serbian</string>
+    <string name="light">Light</string>
+    <string name="english">English</string>
+
+    <!--<string name="sync_pref">Sync</string>
+    <string name="sync_pref_summary">Get your photos, videos, contacts, subscriptions, etc on all your devices.</string>-->
+
+    <string name="themes">Themes</string>
+    <string name="themes_dialog_title">Perform Sync Using</string>
+    <string name="themes_default_value" translatable="false">Light</string>
+    <string name="themes_summary" translatable="false">Light</string>
+
+    <string-array name="themes_entries">
+        <item>@string/light</item>
+        <item>@string/dark</item>
+    </string-array>
+
+    <string-array name="themes_values">
+        <item>@string/light</item>
+        <item>@string/dark</item>
+    </string-array>
+
+    <string name="languages">Languages</string>
+    <string name="languages_dialog_title">Perform Sync Using</string>
+    <string name="languages_default_value" translatable="false">English</string>
+    <string name="languages_summary" translatable="false">English</string>
+
+    <string-array name="languages_entries">
+        <item>@string/english</item>
+        <item>@string/serbian</item>
+    </string-array>
+
+    <string-array name="languages_values">
+        <item>@string/english</item>
+        <item>@string/serbian</item>
+    </string-array>
 
 
 </resources>

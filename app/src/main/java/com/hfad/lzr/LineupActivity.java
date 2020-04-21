@@ -6,11 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -94,7 +91,7 @@ public class LineupActivity extends AppCompatActivity {
                         Player player = playersTeamB.get(i);
                         PlayerGame playerGame = new PlayerGame(id, player);
                         if (i < 5){
-                            playerGame.setWhenGoingIn(10);
+                            playerGame.setWhenGoingIn(6000);
                         }
                         playersGameB.add(playerGame);
                     }
@@ -110,7 +107,7 @@ public class LineupActivity extends AppCompatActivity {
 
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Teams must start with 5 players!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.teams_must_start_with_5_players, Toast.LENGTH_LONG).show();
                 }
             }
         });

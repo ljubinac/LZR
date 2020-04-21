@@ -3,19 +3,15 @@ package com.hfad.lzr.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.lzr.R;
-import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
@@ -31,11 +27,11 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         mListener = listener;
     }*/
 
-    public static class ViewHolder extends  RecyclerView.ViewHolder{
+    static class ViewHolder extends  RecyclerView.ViewHolder{
 
-        public TextView positionTV, teamNameTV, totalGamesTV, wGamesTV, lGamesTV, ptsPlusTV, ptsMinusTV, pointsTV;
+        TextView positionTV, teamNameTV, totalGamesTV, wGamesTV, lGamesTV, ptsPlusTV, ptsMinusTV, pointsTV;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             positionTV = itemView.findViewById(R.id.positionTV);
             teamNameTV = itemView.findViewById(R.id.teamNameTV);
@@ -70,8 +66,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.standings_item, parent, false);
        /* ViewHolder vh = new ViewHolder(view, mListener);*/
-        ViewHolder vh = new ViewHolder(view);
-        return  vh;
+        return new ViewHolder(view);
     }
 
     @Override

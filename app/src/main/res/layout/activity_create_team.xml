@@ -42,7 +42,7 @@
             android:layout_weight="1"
             android:textStyle="italic"
             android:textSize="18dp"
-            android:hint="Team name"
+            android:hint="@string/team_name_hint"
             android:textColor="@color/text"
             />
 
@@ -117,7 +117,7 @@
             android:textColor="@color/text"
             android:textStyle="bold"
             android:textSize="18dp"
-            android:hint="No"
+            android:hint="@string/player_number_hint"
             android:inputType="number"
             android:maxLength="2"/>
 
@@ -129,7 +129,7 @@
             android:textColor="@color/text"
             android:textStyle="bold"
             android:textSize="18dp"
-            android:hint="Name and lastname"
+            android:hint="@string/player_name_hint"
             android:inputType="text"/>
 
         <ImageView

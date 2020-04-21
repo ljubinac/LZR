@@ -4,14 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,11 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hfad.lzr.adapter.PlayerViewHolder;
-import com.hfad.lzr.adapter.PlayersAdapter;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.Team;
-
-import java.util.ArrayList;
 
 public class TeamActivity extends AppCompatActivity {
 
@@ -152,9 +146,9 @@ public class TeamActivity extends AppCompatActivity {
             playerNumberET.setText("");
             playerNameET.setText("");
 
-            Toast.makeText(this, "Player added!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.player_added, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Player not added!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.player_not_added, Toast.LENGTH_LONG).show();
         }
     }
 

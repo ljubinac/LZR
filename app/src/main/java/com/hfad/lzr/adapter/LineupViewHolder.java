@@ -2,7 +2,6 @@ package com.hfad.lzr.adapter;
 
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import com.hfad.lzr.R;
 
 public class LineupViewHolder extends RecyclerView.ViewHolder {
 
-    public LinearLayout ll1;
     public TextView playerNumberTV;
     public TextView playerNameTV;
     public CheckBox lineupCheckbox;

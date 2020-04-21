@@ -32,19 +32,19 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
         mListener = listener;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView mDeletePlayer;
-        public ImageView mEditPlayer;
-        public EditText mPlayerNameEt;
-        public EditText mPlayerNumberEt;
-        public LinearLayout ll1;
-        public LinearLayout ll2;
-        public TextView mPlayerNameTv;
-        public TextView mPlayerNumberTv;
-        public ImageView mAccept;
+        ImageView mDeletePlayer;
+        ImageView mEditPlayer;
+        EditText mPlayerNameEt;
+        EditText mPlayerNumberEt;
+        LinearLayout ll1;
+        LinearLayout ll2;
+        TextView mPlayerNameTv;
+        TextView mPlayerNumberTv;
+        ImageView mAccept;
 
-        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             mDeletePlayer = itemView.findViewById(R.id.image_delete);
             mEditPlayer = itemView.findViewById(R.id.image_edit);
@@ -81,8 +81,7 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.player_item, parent, false);
-        ViewHolder vh = new ViewHolder(v, mListener);
-        return vh;
+        return new ViewHolder(v, mListener);
     }
 
     @Override
