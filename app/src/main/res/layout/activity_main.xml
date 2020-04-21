@@ -63,6 +63,16 @@
         android:onClick="tableStandings"/>
 
     <Button
+        android:id="@+id/settings"
+        android:width="130dp"
+        style="@style/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/button_settings"
+        android:onClick="buttonSettings" />
+
+    <Button
         android:id="@+id/quit"
         android:width="130dp"
         style="@style/btn"

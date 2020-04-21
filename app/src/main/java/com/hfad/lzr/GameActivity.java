@@ -5,11 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.ContactsContract;
-import android.util.Log;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -18,17 +15,13 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.hfad.lzr.adapter.PlayersAdapter;
 import com.hfad.lzr.adapter.PlayersGameAdapter;
 import com.hfad.lzr.model.Game;
-import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
-import com.hfad.lzr.ui.main.CustomLinearLayout;
-import com.hfad.lzr.ui.main.LineupDialog;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -49,23 +42,48 @@ public class GameActivity extends AppCompatActivity {
     PlayerGame goingOutA, goingOutB;
     int goingOutPositionA, goingOutPositionB;
     boolean isChange;
-    private static final String TAG = "GameActivity";
+  /*  private static final String TAG = "GameActivity";*/
 
-    private int seconds = 10;
-    private boolean running;
-    private boolean wasRunning;
+    private static final long START_TIME_IN_MILLIS = 6000;
+
+    private TextView mTextViewCountDown;
+    private Button mButtonStartPause;
+    private Button mButtonReset;
+
+    private CountDownTimer mCountDownTimer;
+
+    private boolean mTimerRunning;
+
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        if (savedInstanceState != null) {
-            seconds = savedInstanceState.getInt("seconds");
-            running = savedInstanceState.getBoolean("running");
-            wasRunning = savedInstanceState.getBoolean("wasRunning");
-        }
-        runTimer();
+        mTextViewCountDown = findViewById(R.id.text_view_countdown);
+        mButtonStartPause = findViewById(R.id.button_start_pause);
+        mButtonReset = findViewById(R.id.button_reset);
+
+        mButtonStartPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mTimerRunning){
+                    pauseTimer();
+                } else {
+                    startTimer();
+                }
+            }
+        });
+
+        mButtonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetTimer();
+            }
+        });
+
+        updateCountDownText();
 
         playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
         playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
@@ -354,7 +372,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (current.getFoul() > 4) {
-                    Toast.makeText(getApplicationContext(), "The player has 5 fouls!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.player_has_5_foul, Toast.LENGTH_LONG).show();
                 } else {
                     current.setFoul(current.getFoul() + 1);
                     tvFoul.setText(String.valueOf(current.getFoul()));
@@ -457,71 +475,63 @@ public class GameActivity extends AppCompatActivity {
         tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt("seconds", seconds);
-        savedInstanceState.putBoolean("running", running);
-        savedInstanceState.putBoolean("wasRunning", wasRunning);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        wasRunning = running;
-        running = false;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (wasRunning) {
-            running = true;
-        }
-
-    }
-
-    public void onClickStart(View view) {
-        running = true;
-    }
-
-    public void onClickStop(View view) {
-        running = false;
-    }
-
-    public void onClickReset(View view) {
-        running = false;
-        seconds = 10;
-        /*for (int i = 0; i < 5; i++) {
-            playersGameA.get(i).setWhenGoingIn(10);
-            playersGameB.get(i).setWhenGoingIn(10);
-        }*/
-    }
-
-    private void runTimer() {
-        final TextView timeView = ( TextView ) findViewById(R.id.time);
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
+    private void startTimer(){
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
-            public void run() {
-                if (seconds == 0) {
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+                mTimerRunning = false;
+                mButtonStartPause.setText(R.string.start);
+                mButtonStartPause.setVisibility(View.INVISIBLE);
+                mButtonReset.setVisibility(View.VISIBLE);
+
                     for (int i = 0; i < 5; i++) {
                         playersGameA.get(i).setMinutes(playersGameA.get(i).getMinutes() + playersGameA.get(i).getWhenGoingIn());
                         playersGameB.get(i).setMinutes(playersGameB.get(i).getMinutes() + playersGameB.get(i).getWhenGoingIn());
                     }
-                }
-                int minutes = (seconds % 3600) / 60;
-                int secs = seconds % 60;
-                String time = String.format("%02d:%02d", minutes, secs);
-                timeView.setText(time);
-                if (running && seconds > 0) {
-                    seconds--;
-                }
-                handler.postDelayed(this, 1000);
 
+               updateCountDownText();
             }
-        });
+        }.start();
+
+        mTimerRunning = true;
+        mButtonStartPause.setText(R.string.pause);
+        mButtonReset.setVisibility(View.INVISIBLE);
     }
+
+    private void pauseTimer(){
+        mCountDownTimer.cancel();
+        mTimerRunning = false;
+        mButtonStartPause.setText(R.string.start);
+        mButtonReset.setVisibility(View.VISIBLE);
+    }
+
+    private void resetTimer(){
+        mTimeLeftInMillis = START_TIME_IN_MILLIS;
+        updateCountDownText();
+        mButtonReset.setVisibility(View.INVISIBLE);
+        mButtonStartPause.setVisibility(View.VISIBLE);
+
+        for (int i = 0; i < 5; i++) {
+            playersGameA.get(i).setWhenGoingIn((int)mTimeLeftInMillis);
+            playersGameB.get(i).setWhenGoingIn((int)mTimeLeftInMillis);
+        }
+    }
+
+    private void updateCountDownText(){
+        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        mTextViewCountDown.setText(timeLeftFormatted);
+    }
+
 
 
     public void buildRecyclerViewA() {
@@ -547,7 +557,7 @@ public class GameActivity extends AppCompatActivity {
                     adapterA.notifyItemChanged(adapterA.selectedPos);
                 } else {
                     PlayerGame goingIn = playersGameA.get(position);
-                    goingIn.setWhenGoingIn(seconds);
+                    goingIn.setWhenGoingIn((int)mTimeLeftInMillis);
                     playersGameA.set(goingOutPositionA, goingIn);
                     playersGameA.set(position, goingOutA);
                     adapterA.notifyDataSetChanged();
@@ -558,7 +568,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onLongClick(int position) {
                 goingOutA = playersGameA.get(position);
-                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - seconds);
+                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - (int)mTimeLeftInMillis);
                 // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
                 goingOutPositionA = position;
                 isChange = true;
@@ -608,7 +618,7 @@ public class GameActivity extends AppCompatActivity {
                     adapterB.notifyItemChanged(adapterB.selectedPos);
                 } else {
                     PlayerGame goingIn = playersGameB.get(position);
-                    goingIn.setWhenGoingIn(seconds);
+                    goingIn.setWhenGoingIn((int)mTimeLeftInMillis);
                     playersGameB.set(goingOutPositionB, goingIn);
                     playersGameB.set(position, goingOutB);
                     adapterB.notifyDataSetChanged();
@@ -619,7 +629,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onLongClick(int position) {
                 goingOutB = playersGameB.get(position);
-                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - seconds);
+                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - (int)mTimeLeftInMillis);
                 // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
                 goingOutPositionB = position;
                 isChange = true;

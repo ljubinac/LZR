@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.PlayerGame;
-import com.hfad.lzr.model.Team;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
@@ -37,13 +36,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class StatsActivity extends AppCompatActivity {
 
 
     private int STORAGE_PERMISSION_CODE = 1;
 
-    ArrayList<PlayerGame> playersGameA, playersGameB, firstLineupGameA, firstLineupGameB;
+    ArrayList<PlayerGame> playersGameA, playersGameB;
 
     TableLayout tableTeamA, tableTeamB;
 
@@ -311,23 +311,23 @@ public class StatsActivity extends AppCompatActivity {
         tableEff.setBackgroundResource(R.drawable.table_border);
         tableEff.setPadding(15,15,15,15);
 
-        tableNum.setText("#No");
-        tableName.setText("PLAYER");
-        tableTime.setText("Time");
-        tableFG.setText("FG");
-        table2pts.setText("2pts");
-        table3pts.setText("3pts");
-        table1pts.setText("FT");
-        tableOffReb.setText("O REB");
-        tableDefReb.setText("D REB");
-        tableTotalReb.setText("REB");
-        tableAssist.setText("AST");
-        tableBlock.setText("BLK");
-        tableSteals.setText("STL");
-        tableTurnov.setText("TOV");
-        tableFoul.setText("PF");
-        tablePts.setText("PTS");
-        tableEff.setText("EFF");
+        tableNum.setText(R.string.no);
+        tableName.setText(R.string.PLAYER);
+        tableTime.setText(R.string.Time);
+        tableFG.setText(R.string.FG);
+        table2pts.setText(R.string.pts2);
+        table3pts.setText(R.string.pts3);
+        table1pts.setText(R.string.FT);
+        tableOffReb.setText(R.string.OREB);
+        tableDefReb.setText(R.string.DREB);
+        tableTotalReb.setText(R.string.REB);
+        tableAssist.setText(R.string.AST);
+        tableBlock.setText(R.string.BLK);
+        tableSteals.setText(R.string.STL);
+        tableTurnov.setText(R.string.TOV);
+        tableFoul.setText(R.string.PF);
+        tablePts.setText(R.string.PTS);
+        tableEff.setText(R.string.EFF);
 
 
         row.addView(tableNum);
@@ -427,10 +427,12 @@ public class StatsActivity extends AppCompatActivity {
 
             number.setText(playersList.get(i).getNumber());
             name.setText(playersList.get(i).getNameAndLastname());
-            int minutes = (playersList.get(i).getMinutes() % 3600) / 60;
-            int secs = playersList.get(i).getMinutes() % 60;
-            String t = String.format("%02d:%02d", minutes, secs);
-            time.setText(String.valueOf(playersList.get(i).getMinutes()));
+            int minutes = (playersList.get(i).getMinutes() / 1000) / 60;
+            int seconds = (playersList.get(i).getMinutes() / 1000) % 60;
+
+            String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+            time.setText(timeLeftFormatted);
 
             String fgm = String.valueOf(playersList.get(i).getPm2() + playersList.get(i).getPm3());
             String fga = String.valueOf(playersList.get(i).getPa2() + playersList.get(i).getPa3());
@@ -593,13 +595,13 @@ public class StatsActivity extends AppCompatActivity {
         teamEffTV.setBackgroundResource(R.drawable.table_border);
         teamEffTV.setPadding(15,15,15,15);
 
-        teamTV.setText("#");
-        teamTitle.setText("Total:");
+        teamTV.setText(R.string.taraba);
+        teamTitle.setText(R.string.total);
         teamTimeTV.setText(String.valueOf(teamTime));
-        teamFGtv.setText(teamFGM + "/" + teamFGA);
-        team2ptsTV.setText(team2PTSpm + "/" + team2PTSpa);
-        team3ptsTV.setText(team3PTSpm + "/" + team3PTSpa);
-        team1ptsTV.setText(team1PTSpm + "/" + team1PTSpa);
+        teamFGtv.setText(teamFGM + R.string.kosa_crta + teamFGA);
+        team2ptsTV.setText(team2PTSpm + R.string.kosa_crta + team2PTSpa);
+        team3ptsTV.setText(team3PTSpm + R.string.kosa_crta + team3PTSpa);
+        team1ptsTV.setText(team1PTSpm + R.string.kosa_crta + team1PTSpa);
         teamOffRebTV.setText(String.valueOf(teamOffReb));
         teamDefRebTV.setText(String.valueOf(teamDefReb));
         teamRebTV.setText(String.valueOf(teamReb));

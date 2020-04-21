@@ -1,7 +1,6 @@
 package com.hfad.lzr.adapter;
 
 import android.view.View;
-import android.view.textclassifier.TextClassification;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,7 @@ import com.hfad.lzr.R;
 
 public class StandingsViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView positionTV, teamNameTV, totalGamesTV, wGamesTV, lGamesTV, ptsPlusTV, ptsMinusTV, pointsTV;
+    private TextView positionTV, teamNameTV, totalGamesTV, wGamesTV, lGamesTV, ptsPlusTV, ptsMinusTV, pointsTV;
 
     public StandingsViewHolder(@NonNull View itemView) {
         super(itemView);

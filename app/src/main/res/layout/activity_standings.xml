@@ -148,14 +148,14 @@
         android:id="@+id/createPdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/button_save"
         android:onClick="createPdf"/>
 
     <Button
         android:id="@+id/sharePdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share"
+        android:text="@string/button_share"
         />
 
 

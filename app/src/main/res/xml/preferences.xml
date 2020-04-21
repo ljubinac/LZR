@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <!-- <CheckBoxPreference
+        android:key="pref_sync"
+        android:title="@string/sync_pref"
+        android:summary="@string/sync_pref_summary"
+        android:defaultValue="true"/>-->
+    <!--android:dependency="pref_sync"-->
+    <ListPreference
+        android:key="themes"
+        android:title="@string/themes"
+        android:entries="@array/themes_entries"
+        android:entryValues="@array/themes_values"
+        android:defaultValue="@string/themes_default_value"
+        android:summary="@string/themes_summary"/>
+
+    <!--        android:dependency="pref_sync"-->
+    <ListPreference
+        android:key="languages"
+        android:title="@string/languages"
+        android:entries="@array/languages_entries"
+        android:entryValues="@array/languages_values"
+        android:defaultValue="@string/languages_default_value"
+        android:summary="@string/languages_summary"/>
+
+</PreferenceScreen>

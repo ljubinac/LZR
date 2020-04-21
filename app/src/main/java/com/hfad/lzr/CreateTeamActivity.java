@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -130,12 +129,12 @@ public class CreateTeamActivity extends AppCompatActivity {
 
                 databaseReferencePlayers.child(idPlayer).setValue(p);
             }
-            Toast.makeText(this, "Team added!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.team_added, Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(name)) {
             saveTeam.setActivated(false);
-            Toast.makeText(this, "Add team name! ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.add_team_name, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Team not added!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.team_not_added, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -147,9 +146,9 @@ public class CreateTeamActivity extends AppCompatActivity {
             players.add(player);
             playerName.setText("");
             playerNumber.setText("");
-            Toast.makeText(this, "Player added!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.player_added, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Player not added!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.player_not_added, Toast.LENGTH_LONG).show();
         }
     }
 

@@ -3,9 +3,7 @@ package com.hfad.lzr.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +13,6 @@ import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.ui.main.CustomLinearLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.ViewHolder> {
 
@@ -34,13 +31,13 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
         mListener = listener;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView playerGameNumberTV;
-        public TextView playerLastnameTV;
-        public CustomLinearLayout cll;
+        TextView playerGameNumberTV;
+        TextView playerLastnameTV;
+        CustomLinearLayout cll;
 
-        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             playerGameNumberTV = itemView.findViewById(R.id.player_game_number);
             playerLastnameTV = itemView.findViewById(R.id.lastNameTV);
@@ -81,8 +78,7 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.player_game_item, parent, false);
-        ViewHolder vh = new ViewHolder(view, mListener);
-        return vh;
+        return new ViewHolder(view, mListener);
     }
 
     @Override
