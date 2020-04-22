@@ -10,5 +10,11 @@
     <color name="green_btn">#008000</color>
     <color name="team_bg">#ebebe0</color>
     <color name="divider">#14212121</color>
+    
+    <color name="orange_start">#F9AA33</color>
+    <color name="orange_end">#9F3F21</color>
+
+    <color name="blue_start">#344955</color>
+    <color name="blue_end">#4A6EA8</color>
 
 </resources>
