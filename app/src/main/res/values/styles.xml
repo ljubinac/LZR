@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         ">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -14,43 +14,51 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
-    <style name="layout">
-        <item name="android:textColor">@color/text</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">20dp</item>
-    </style>
-
-    <style name="text_tile">
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/text</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="btn">
-        <item name="background">@color/colorPrimary</item>
-    </style>
-
-    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+    <style name="AppTabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabIndicatorColor">?attr/colorAccent</item>
         <item name="tabIndicatorHeight">4dp</item>
         <item name="tabPaddingStart">6dp</item>
         <item name="tabPaddingEnd">6dp</item>
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabTextAppearance">@style/AppTabTextAppearance</item>
-        <item name="tabSelectedTextColor">@color/text_btn</item>
+        <item name="tabSelectedTextColor">@color/white</item>
     </style>
 
-    <!-- for text -->
     <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/text_btn</item>
-        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+<!-- DESIGN -->
+
+    <style name="create_match_choose_ll">
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
     </style>
 
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/divider</item>
+    </style>
 
+    <style name="AppTheme.ButtonBlue" parent="Widget.AppCompat.Button.Colored">
+        <item name="backgroundTint">@color/blue_btn</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_height">36dp</item>
+    </style>
+
+    <style name="AppTheme.ButtonOrange" parent="Widget.AppCompat.Button.Colored">
+        <item name="backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    
 </resources>

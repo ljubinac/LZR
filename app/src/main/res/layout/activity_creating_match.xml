@@ -8,177 +8,154 @@
     android:fillViewport="true"
     android:isScrollContainer="true">
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CreatingMatchActivity">
-
-    <include
-    android:id="@+id/toolbar"
-    layout="@layout/toolbar" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/new_game"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/text"
-        android:textSize="25sp"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        >
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/choose_league"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:textColor="@color/text"
-        />
-
-        <Spinner
-            android:id="@+id/choose_league"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/leagues"
-             />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/choose_teamA"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="@color/text"
-            />
-
-        <Spinner
-            android:id="@+id/choose_teamA"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/teams"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/choose_teamB"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="@color/text"
-            />
-
-        <Spinner
-            android:id="@+id/choose_teamB"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/teams"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/date"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="@color/text"
-            />
-        <EditText
-            android:id="@+id/gameDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="7"
-            android:hint="@string/date_hint"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/time"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="@color/text"
-            />
-        <EditText
-            android:id="@+id/gameTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="7"
-            android:hint="@string/time_hint"/>
-
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:layout_marginTop="30dp">
-    <Button
-        android:id="@+id/add_team"
-        android:width="135dp"
-        android:background="@color/blue_btn"
-        android:textColor="@color/text_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_team"
-        android:onClick="addTeam"
-        />
-    <Button
-        android:id="@+id/choose_lineup"
-        android:width="135dp"
-        android:background="@color/blue_btn"
-        android:textColor="@color/text_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/choose_lineup"
-        />
+        tools:context=".CreatingMatchActivity">
 
-</LinearLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
-</LinearLayout>
+        <LinearLayout
+            style="@style/create_match_choose_ll"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/choose_league"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+            <Spinner
+                android:id="@+id/choose_league"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:entries="@array/leagues" />
+        </LinearLayout>
+
+        <View style="@style/Divider" />
+
+        <LinearLayout
+            style="@style/create_match_choose_ll"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/choose_league"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+            <Spinner
+                android:id="@+id/choose_teamA"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:entries="@array/teams" />
+        </LinearLayout>
+
+        <View style="@style/Divider" />
+
+        <LinearLayout
+            style="@style/create_match_choose_ll"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/choose_teamB"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+            <Spinner
+                android:id="@+id/choose_teamB"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/teams" />
+        </LinearLayout>
+
+        <View style="@style/Divider" />
+
+        <LinearLayout
+            style="@style/create_match_choose_ll"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/choose_hall"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+            <Spinner
+                android:id="@+id/choose_hall"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/teams" />
+        </LinearLayout>
+
+        <View style="@style/Divider" />
+
+        <LinearLayout
+            style="@style/create_match_choose_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/pick_date_btn"
+                style="@style/AppTheme.ButtonBlue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/outline_event_24"
+                android:drawableTint="@color/white"
+                android:text="@string/pick_date" />
+
+            <Button
+                android:id="@+id/pick_time_btn"
+                style="@style/AppTheme.ButtonBlue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/baseline_schedule_24"
+                android:drawableTint="@color/white"
+                android:text="@string/pick_time" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/choose_lineup"
+                style="@style/AppTheme.ButtonOrange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="48dp"
+                android:text="@string/save_game"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
 </ScrollView>

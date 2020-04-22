@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="create_match_choose_ll">
+        <item name="android:paddingHorizontal">30dp</item>
+        <item name="android:paddingVertical">24dp</item>
+    </style>
+</resources>

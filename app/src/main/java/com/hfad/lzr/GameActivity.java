@@ -1,9 +1,5 @@
 package com.hfad.lzr;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,6 +8,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
     PlayerGame goingOutA, goingOutB;
     int goingOutPositionA, goingOutPositionB;
     boolean isChange = false;
-  /*  private static final String TAG = "GameActivity";*/
+    /*  private static final String TAG = "GameActivity";*/
 
     private static final long START_TIME_IN_MILLIS = 6000;
 
@@ -68,7 +68,7 @@ public class GameActivity extends AppCompatActivity {
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTimerRunning){
+                if (mTimerRunning) {
                     pauseTimer();
                 } else {
                     startTimer();
@@ -85,13 +85,13 @@ public class GameActivity extends AppCompatActivity {
 
         updateCountDownText();
 
-        playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
-        playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
+        playersGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameA");
+        playersGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameB");
 //        firstLineupGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameA");
 //        firstLineupGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("firstLineupGameB");
-        teamA = ( Team ) getIntent().getSerializableExtra("teamA");
-        teamB = ( Team ) getIntent().getSerializableExtra("teamB");
-        game = ( Game ) getIntent().getSerializableExtra("game");
+        teamA = (Team) getIntent().getSerializableExtra("teamA");
+        teamB = (Team) getIntent().getSerializableExtra("teamB");
+        game = (Game) getIntent().getSerializableExtra("game");
 
         teamATV = findViewById(R.id.teamA);
         teamBTV = findViewById(R.id.teamB);
@@ -475,7 +475,7 @@ public class GameActivity extends AppCompatActivity {
         tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
     }
 
-    private void startTimer(){
+    private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -490,12 +490,12 @@ public class GameActivity extends AppCompatActivity {
                 mButtonStartPause.setVisibility(View.INVISIBLE);
                 mButtonReset.setVisibility(View.VISIBLE);
 
-                    for (int i = 0; i < 5; i++) {
-                        playersGameA.get(i).setMinutes(playersGameA.get(i).getMinutes() + playersGameA.get(i).getWhenGoingIn());
-                        playersGameB.get(i).setMinutes(playersGameB.get(i).getMinutes() + playersGameB.get(i).getWhenGoingIn());
-                    }
+                for (int i = 0; i < 5; i++) {
+                    playersGameA.get(i).setMinutes(playersGameA.get(i).getMinutes() + playersGameA.get(i).getWhenGoingIn());
+                    playersGameB.get(i).setMinutes(playersGameB.get(i).getMinutes() + playersGameB.get(i).getWhenGoingIn());
+                }
 
-               updateCountDownText();
+                updateCountDownText();
             }
         }.start();
 
@@ -504,26 +504,26 @@ public class GameActivity extends AppCompatActivity {
         mButtonReset.setVisibility(View.INVISIBLE);
     }
 
-    private void pauseTimer(){
+    private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
         mButtonStartPause.setText(R.string.start);
         mButtonReset.setVisibility(View.VISIBLE);
     }
 
-    private void resetTimer(){
+    private void resetTimer() {
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
         updateCountDownText();
         mButtonReset.setVisibility(View.INVISIBLE);
         mButtonStartPause.setVisibility(View.VISIBLE);
 
         for (int i = 0; i < 5; i++) {
-            playersGameA.get(i).setWhenGoingIn((int)mTimeLeftInMillis);
-            playersGameB.get(i).setWhenGoingIn((int)mTimeLeftInMillis);
+            playersGameA.get(i).setWhenGoingIn((int) mTimeLeftInMillis);
+            playersGameB.get(i).setWhenGoingIn((int) mTimeLeftInMillis);
         }
     }
 
-    private void updateCountDownText(){
+    private void updateCountDownText() {
         int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
 
@@ -556,16 +556,15 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     PlayerGame goingIn = playersGameA.get(position);
                     goingIn.setmIsIn(true);
-                    //goingIn.setWhenGoingIn(seconds);
-                    goingIn.setWhenGoingIn((int)mTimeLeftInMillis);
+                    goingIn.setWhenGoingIn((int) mTimeLeftInMillis);
                     playersGameA.set(goingOutPositionA, goingIn);
                     playersGameA.set(position, goingOutA);
-                    for(int i=5; i<playersGameA.size(); i++){
+                    for (int i = 5; i < playersGameA.size(); i++) {
                         playersGameA.get(i).setmIsChangeIn(false);
                         playersGameA.get(i).setmIsOut(true);
                         playersGameA.get(i).setmIsEnabled(false);
                     }
-                    for (int i=0; i<5; i++){
+                    for (int i = 0; i < 5; i++) {
                         playersGameA.get(i).setmIsEnabled(true);
                         playersGameA.get(i).setmIsIn(true);
                     }
@@ -579,15 +578,14 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onLongClick(int position) {
                 goingOutA = playersGameA.get(position);
-                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - (int)mTimeLeftInMillis);
-                // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
+                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - (int) mTimeLeftInMillis);
                 goingOutPositionA = position;
                 goingOutA.setmIsChangeOut(true);
-                for(int i=5; i<playersGameA.size(); i++){
+                for (int i = 5; i < playersGameA.size(); i++) {
                     playersGameA.get(i).setmIsChangeIn(true);
                     playersGameA.get(i).setmIsEnabled(true);
                 }
-                for (int i=0; i<5; i++){
+                for (int i = 0; i < 5; i++) {
                     playersGameA.get(i).setmIsEnabled(false);
                 }
                 isChange = true;
@@ -621,16 +619,15 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     PlayerGame goingIn = playersGameB.get(position);
                     goingIn.setmIsIn(true);
-                    //goingIn.setWhenGoingIn(seconds);
-                    goingIn.setWhenGoingIn((int)mTimeLeftInMillis);
+                    goingIn.setWhenGoingIn((int) mTimeLeftInMillis);
                     playersGameB.set(goingOutPositionB, goingIn);
                     playersGameB.set(position, goingOutB);
-                    for(int i=5; i<playersGameB.size(); i++){
+                    for (int i = 5; i < playersGameB.size(); i++) {
                         playersGameB.get(i).setmIsChangeIn(false);
                         playersGameB.get(i).setmIsOut(true);
                         playersGameB.get(i).setmIsEnabled(false);
                     }
-                    for (int i=0; i<5; i++){
+                    for (int i = 0; i < 5; i++) {
                         playersGameB.get(i).setmIsEnabled(true);
                         playersGameB.get(i).setmIsIn(true);
                     }
@@ -644,15 +641,14 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onLongClick(int position) {
                 goingOutB = playersGameB.get(position);
-                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - (int)mTimeLeftInMillis);
-                // onome koji izlazi izracunati koliko je odigrao na osnovu trenutnog vremena na satu i one promenljive koja govori kad je usao i sacuvati vreme (razliku)
+                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - (int) mTimeLeftInMillis);
                 goingOutPositionB = position;
                 goingOutB.setmIsChangeOut(true);
-                for(int i=5; i<playersGameB.size(); i++){
+                for (int i = 5; i < playersGameB.size(); i++) {
                     playersGameB.get(i).setmIsChangeIn(true);
                     playersGameB.get(i).setmIsEnabled(true);
                 }
-                for (int i=0; i<5; i++){
+                for (int i = 0; i < 5; i++) {
                     playersGameB.get(i).setmIsEnabled(false);
                 }
                 isChange = true;

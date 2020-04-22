@@ -22,10 +22,10 @@
     <string name="new_team">Kreiraj novi tim</string>
     <string name="new_game">Kreiraj novu utakmicu</string>
     <string name="create_game">Kreiraj utakmicu</string>
-    <string name="choose_teamB">Izaberi TimB:</string>
-    <string name="choose_teamA">Izaberi TimA:</string>
+    <string name="choose_teamB">Tim B</string>
+    <string name="choose_teamA">Tim A</string>
     <string name="choose_lineup">Izaberi postavu</string>
-    <string name="choose_league">Izaberi ligu:</string>
+    <string name="choose_league">Liga</string>
     <string name="add_team">Dodaj tim</string>
     <string name="add_player_btn">Dodaj</string>
     <string name="table">Tabela</string>
@@ -49,4 +49,8 @@
     <string name="serbian">Srpski</string>
     <string name="light">Svetlo</string>
     <string name="english">Engleski</string>
+    <string name="choose_hall">Hala</string>
+    <string name="save_game">Sačuvaj</string>
+    <string name="pick_time">Odaberite vreme</string>
+    <string name="pick_date">Odaberite datum</string>
 </resources>

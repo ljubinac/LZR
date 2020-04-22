@@ -1,10 +1,6 @@
 package com.hfad.lzr;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +9,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -68,7 +70,7 @@ public class TeamsActivity extends AppCompatActivity {
 
     }
 
-    private void fetch(String league){
+    private void fetch(String league) {
 
         Query query = FirebaseDatabase.getInstance().getReference().child("teams").orderByChild("league").equalTo(league);
 
@@ -79,7 +81,7 @@ public class TeamsActivity extends AppCompatActivity {
             @Override
             public TeamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.team_item, parent, false);
-                return  new TeamViewHolder(view);
+                return new TeamViewHolder(view);
             }
 
             @Override
@@ -98,7 +100,31 @@ public class TeamsActivity extends AppCompatActivity {
                 holder.teamDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        adapter.getRef(position).removeValue();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(TeamsActivity.this);
+
+                        builder.setTitle("Confirm");
+                        builder.setMessage("Are you sure?");
+
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do nothing but close the dialog
+                                adapter.getRef(position).removeValue();
+                                dialog.dismiss();
+                            }
+                        });
+
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        AlertDialog alert = builder.create();
+                        alert.show();
+
                     }
                 });
             }

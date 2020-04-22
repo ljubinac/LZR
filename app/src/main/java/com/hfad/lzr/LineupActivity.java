@@ -6,11 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hfad.lzr.model.Game;
@@ -43,8 +42,8 @@ public class LineupActivity extends AppCompatActivity {
 
         gameDate = getIntent().getStringExtra("gameDate");
         gameTime = getIntent().getStringExtra("gameTime");
-        teamA = ( Team ) getIntent().getSerializableExtra("teamA");
-        teamB = ( Team ) getIntent().getSerializableExtra("teamB");
+        teamA = (Team) getIntent().getSerializableExtra("teamA");
+        teamB = (Team) getIntent().getSerializableExtra("teamB");
 
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
@@ -64,9 +63,7 @@ public class LineupActivity extends AppCompatActivity {
                 ChooseLineupFragment fragment2 = (ChooseLineupFragment) sectionsPagerAdapter.getItem(1);
 
                 List<Player> playersTeamA = fragment1.getData();
-                //List<Integer> firstLineupTeamA = fragment1.getFirstData();
                 List<Player> playersTeamB = fragment2.getData();
-                //List<Integer> firstLineupTeamB = fragment2.getFirstData();
 
                 if (playersTeamA.size() >= 5 && playersTeamB.size() >= 5) {
                     String id = databaseReferenceGames.push().getKey();
@@ -74,11 +71,11 @@ public class LineupActivity extends AppCompatActivity {
                     databaseReferenceGames.child(id).setValue(game);
 
                     List<PlayerGame> playersGameA = new ArrayList<>();
-                    for (int i = 0; i < playersTeamA.size(); i++){
+                    for (int i = 0; i < playersTeamA.size(); i++) {
                         Player player = playersTeamA.get(i);
                         PlayerGame playerGame = new PlayerGame(id, player);
-                        if (i < 5){
-                            playerGame.setWhenGoingIn(10);
+                        if (i < 5) {
+                            playerGame.setWhenGoingIn(6);
                             playerGame.setmIsEnabled(true);
                         } else {
                             playerGame.setmIsEnabled(false);
@@ -87,11 +84,11 @@ public class LineupActivity extends AppCompatActivity {
                     }
 
                     List<PlayerGame> playersGameB = new ArrayList<>();
-                    for (int i = 0; i < playersTeamB.size(); i++){
+                    for (int i = 0; i < playersTeamB.size(); i++) {
                         Player player = playersTeamB.get(i);
                         PlayerGame playerGame = new PlayerGame(id, player);
-                        if (i < 5){
-                            playerGame.setWhenGoingIn(10);
+                        if (i < 5) {
+                            playerGame.setWhenGoingIn(6);
                             playerGame.setmIsEnabled(true);
                         } else {
                             playerGame.setmIsEnabled(false);
@@ -100,8 +97,6 @@ public class LineupActivity extends AppCompatActivity {
                     }
 
                     Intent intent = new Intent(LineupActivity.this, GameActivity.class);
-                    //intent.putExtra("firstLineupGameA", (Serializable) firstLineupTeamA);
-                    //intent.putExtra("firstLineupGameB", (Serializable) firstLineupTeamB);
                     intent.putExtra("playersGameA", (Serializable) playersGameA);
                     intent.putExtra("playersGameB", (Serializable) playersGameB);
                     intent.putExtra("teamA", teamA);

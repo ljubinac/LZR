@@ -5,9 +5,9 @@
     <string name="teams">Teams</string>
     <string name="create_team">Create team</string>
     <string name="quit">Quit</string>
-    <string name="choose_league">Choose league:</string>
-    <string name="choose_teamA">Choose TeamA:</string>
-    <string name="choose_teamB">Choose TeamB:</string>
+    <string name="choose_league">League</string>
+    <string name="choose_teamA">Team A</string>
+    <string name="choose_teamB">Team B</string>
     <string name="date">Set date:</string>
     <string name="time">Set time:</string>
     <string name="add_team">Add team</string>
@@ -160,6 +160,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="choose_hall">Hall</string>
+    <string name="save_game">Save Game</string>
+    <string name="pick_time">Pick Time</string>
+    <string name="pick_date">Pick Date</string>
 
 
 </resources>

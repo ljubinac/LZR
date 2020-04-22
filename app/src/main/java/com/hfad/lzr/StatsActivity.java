@@ -1,12 +1,5 @@
 package com.hfad.lzr;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +15,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.PlayerGame;
@@ -77,14 +77,9 @@ public class StatsActivity extends AppCompatActivity {
         share = findViewById(R.id.sharePdf);
         create = findViewById(R.id.createPdf);
 
-        playersGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameA");
-        playersGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("playersGameB");
-       /* firstLineupGameA = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("firstLineupGameA");
-        firstLineupGameB = ( ArrayList<PlayerGame> ) getIntent().getSerializableExtra("firstLineupGameB");*/
-        game = ( Game ) getIntent().getSerializableExtra("game");
-
-      /*  firstLineupGameA.addAll(playersGameA);
-        firstLineupGameB.addAll(playersGameB);*/
+        playersGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameA");
+        playersGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameB");
+        game = (Game) getIntent().getSerializableExtra("game");
 
         init(tableTeamA, playersGameA);
         setValue();
@@ -102,7 +97,7 @@ public class StatsActivity extends AppCompatActivity {
 
     }
 
-    public void setValue(){
+    public void setValue() {
         teamTime = 0;
         teamFGM = 0;
         teamFGA = 0;
@@ -124,29 +119,29 @@ public class StatsActivity extends AppCompatActivity {
         teamEff = 0;
     }
 
-    public void sharePdf(){
+    public void sharePdf() {
         File fileWithinMyDir = new File(myFilePath);
 
         Uri pdfUri = Uri.fromFile(fileWithinMyDir);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             pdfUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", fileWithinMyDir);
         }
 
         Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-            intentShareFile.setType("application/pdf");
-            intentShareFile.putExtra(Intent.EXTRA_STREAM, pdfUri);
+        intentShareFile.setType("application/pdf");
+        intentShareFile.putExtra(Intent.EXTRA_STREAM, pdfUri);
 
-            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                    "Sharing File...");
-            intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+        intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                "Sharing File...");
+        intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
 
-            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+        startActivity(Intent.createChooser(intentShareFile, "Share File"));
     }
 
-    public void createPdf(View view){
+    public void createPdf(View view) {
 
-        if(ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestStoragePermission();
         }
         // get view group using reference
@@ -161,7 +156,7 @@ public class StatsActivity extends AppCompatActivity {
         share.setEnabled(true);
     }
 
-    public byte[] createImage(TableLayout table){
+    public byte[] createImage(TableLayout table) {
         table.setDrawingCacheEnabled(true);
         table.buildDrawingCache();
         Bitmap bm = table.getDrawingCache();
@@ -207,12 +202,12 @@ public class StatsActivity extends AppCompatActivity {
         }
     }
 
-    private void requestStoragePermission(){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             new AlertDialog.Builder(this).setTitle("Permission needed").setMessage("This permission is needed because of that and that").setPositiveButton("ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    ActivityCompat.requestPermissions(StatsActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                    ActivityCompat.requestPermissions(StatsActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
                 }
             }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                 @Override
@@ -220,15 +215,15 @@ public class StatsActivity extends AppCompatActivity {
                     dialogInterface.dismiss();
                 }
             }).create().show();
-        } else{
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == STORAGE_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Permission NOT GRANTED", Toast.LENGTH_LONG).show();
@@ -236,80 +231,80 @@ public class StatsActivity extends AppCompatActivity {
         }
     }
 
-    public void init(TableLayout table, ArrayList<PlayerGame> playersList){
+    public void init(TableLayout table, ArrayList<PlayerGame> playersList) {
 
-        TableRow row= new TableRow(this);
+        TableRow row = new TableRow(this);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
         row.setBackgroundResource(R.drawable.table_border);
 
         tableNum = new TextView(this);
         tableNum.setBackgroundResource(R.drawable.table_border);
-        tableNum.setPadding(15,15,15,15);
+        tableNum.setPadding(15, 15, 15, 15);
 
         tableName = new TextView(this);
         tableName.setBackgroundResource(R.drawable.table_border);
-        tableName.setPadding(15,15,15,15);
+        tableName.setPadding(15, 15, 15, 15);
 
         tableTime = new TextView(this);
         tableTime.setBackgroundResource(R.drawable.table_border);
-        tableTime.setPadding(15,15,15,15);
+        tableTime.setPadding(15, 15, 15, 15);
 
         tableFG = new TextView(this);
         tableFG.setBackgroundResource(R.drawable.table_border);
-        tableFG.setPadding(15,15,15,15);
+        tableFG.setPadding(15, 15, 15, 15);
 
         table2pts = new TextView(this);
         table2pts.setBackgroundResource(R.drawable.table_border);
-        table2pts.setPadding(15,15,15,15);
+        table2pts.setPadding(15, 15, 15, 15);
 
         table3pts = new TextView(this);
         table3pts.setBackgroundResource(R.drawable.table_border);
-        table3pts.setPadding(15,15,15,15);
+        table3pts.setPadding(15, 15, 15, 15);
 
         table1pts = new TextView(this);
         table1pts.setBackgroundResource(R.drawable.table_border);
-        table1pts.setPadding(15,15,15,15);
+        table1pts.setPadding(15, 15, 15, 15);
 
         tableTotalReb = new TextView(this);
         tableTotalReb.setBackgroundResource(R.drawable.table_border);
-        tableTotalReb.setPadding(15,15,15,15);
+        tableTotalReb.setPadding(15, 15, 15, 15);
 
         tableDefReb = new TextView(this);
         tableDefReb.setBackgroundResource(R.drawable.table_border);
-        tableDefReb.setPadding(15,15,15,15);
+        tableDefReb.setPadding(15, 15, 15, 15);
 
         tableOffReb = new TextView(this);
         tableOffReb.setBackgroundResource(R.drawable.table_border);
-        tableOffReb.setPadding(15,15,15,15);
+        tableOffReb.setPadding(15, 15, 15, 15);
 
         tableAssist = new TextView(this);
         tableAssist.setBackgroundResource(R.drawable.table_border);
-        tableAssist.setPadding(15,15,15,15);
+        tableAssist.setPadding(15, 15, 15, 15);
 
         tableBlock = new TextView(this);
         tableBlock.setBackgroundResource(R.drawable.table_border);
-        tableBlock.setPadding(15,15,15,15);
+        tableBlock.setPadding(15, 15, 15, 15);
 
         tableSteals = new TextView(this);
         tableSteals.setBackgroundResource(R.drawable.table_border);
-        tableSteals.setPadding(15,15,15,15);
+        tableSteals.setPadding(15, 15, 15, 15);
 
         tableTurnov = new TextView(this);
         tableTurnov.setBackgroundResource(R.drawable.table_border);
-        tableTurnov.setPadding(15,15,15,15);
+        tableTurnov.setPadding(15, 15, 15, 15);
 
         tableFoul = new TextView(this);
         tableFoul.setBackgroundResource(R.drawable.table_border);
-        tableFoul.setPadding(15,15,15,15);
+        tableFoul.setPadding(15, 15, 15, 15);
 
         tablePts = new TextView(this);
         tablePts.setBackgroundResource(R.drawable.table_border);
-        tablePts.setPadding(15,15,15,15);
+        tablePts.setPadding(15, 15, 15, 15);
 
         tableEff = new TextView(this);
         tableEff.setBackgroundResource(R.drawable.table_border);
-        tableEff.setPadding(15,15,15,15);
+        tableEff.setPadding(15, 15, 15, 15);
 
         tableNum.setText(R.string.no);
         tableName.setText(R.string.PLAYER);
@@ -351,7 +346,7 @@ public class StatsActivity extends AppCompatActivity {
 
         table.addView(row, 0);
 
-        for (int i = 0; i < playersList.size(); i++){
+        for (int i = 0; i < playersList.size(); i++) {
 
             TableRow row2 = new TableRow(this);
             row2.setLayoutParams(lp);
@@ -359,76 +354,76 @@ public class StatsActivity extends AppCompatActivity {
 
             number = new TextView(this);
             number.setBackgroundResource(R.drawable.table_border);
-            number.setPadding(15,15,15,15);
+            number.setPadding(15, 15, 15, 15);
 
             name = new TextView(this);
             name.setBackgroundResource(R.drawable.table_border);
-            name.setPadding(15,15,15,15);
+            name.setPadding(15, 15, 15, 15);
 
             time = new TextView(this);
             time.setBackgroundResource(R.drawable.table_border);
-            time.setPadding(15,15,15,15);
+            time.setPadding(15, 15, 15, 15);
 
             fg = new TextView(this);
             fg.setBackgroundResource(R.drawable.table_border);
-            fg.setPadding(15,15,15,15);
+            fg.setPadding(15, 15, 15, 15);
 
             pts2 = new TextView(this);
             pts2.setBackgroundResource(R.drawable.table_border);
-            pts2.setPadding(15,15,15,15);
+            pts2.setPadding(15, 15, 15, 15);
 
             pts3 = new TextView(this);
             pts3.setBackgroundResource(R.drawable.table_border);
-            pts3.setPadding(15,15,15,15);
+            pts3.setPadding(15, 15, 15, 15);
 
             pts1 = new TextView(this);
             pts1.setBackgroundResource(R.drawable.table_border);
-            pts1.setPadding(15,15,15,15);
+            pts1.setPadding(15, 15, 15, 15);
 
             offReb = new TextView(this);
             offReb.setBackgroundResource(R.drawable.table_border);
-            offReb.setPadding(15,15,15,15);
+            offReb.setPadding(15, 15, 15, 15);
 
             defReb = new TextView(this);
             defReb.setBackgroundResource(R.drawable.table_border);
-            defReb.setPadding(15,15,15,15);
+            defReb.setPadding(15, 15, 15, 15);
 
             totalReb = new TextView(this);
             totalReb.setBackgroundResource(R.drawable.table_border);
-            totalReb.setPadding(15,15,15,15);
+            totalReb.setPadding(15, 15, 15, 15);
 
             assist = new TextView(this);
             assist.setBackgroundResource(R.drawable.table_border);
-            assist.setPadding(15,15,15,15);
+            assist.setPadding(15, 15, 15, 15);
 
             block = new TextView(this);
             block.setBackgroundResource(R.drawable.table_border);
-            block.setPadding(15,15,15,15);
+            block.setPadding(15, 15, 15, 15);
 
             steal = new TextView(this);
             steal.setBackgroundResource(R.drawable.table_border);
-            steal.setPadding(15,15,15,15);
+            steal.setPadding(15, 15, 15, 15);
 
             turnov = new TextView(this);
             turnov.setBackgroundResource(R.drawable.table_border);
-            turnov.setPadding(15,15,15,15);
+            turnov.setPadding(15, 15, 15, 15);
 
             foul = new TextView(this);
             foul.setBackgroundResource(R.drawable.table_border);
-            foul.setPadding(15,15,15,15);
+            foul.setPadding(15, 15, 15, 15);
 
             pts = new TextView(this);
             pts.setBackgroundResource(R.drawable.table_border);
-            pts.setPadding(15,15,15,15);
+            pts.setPadding(15, 15, 15, 15);
 
             eff = new TextView(this);
             eff.setBackgroundResource(R.drawable.table_border);
-            eff.setPadding(15,15,15,15);
+            eff.setPadding(15, 15, 15, 15);
 
             number.setText(playersList.get(i).getNumber());
             name.setText(playersList.get(i).getNameAndLastname());
-            int minutes = (playersList.get(i).getMinutes() / 1000) / 60;
-            int seconds = (playersList.get(i).getMinutes() / 1000) % 60;
+            int minutes = (playersList.get(i).getMinutes()) / 60;
+            int seconds = (playersList.get(i).getMinutes()) % 60;
 
             String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
@@ -470,7 +465,7 @@ public class StatsActivity extends AppCompatActivity {
                     + playersList.get(i).getSteal() - playersList.get(i).getTurnover()
                     - playersList.get(i).getFoul() - (playersList.get(i).getPa2() - playersList.get(i).getPm2())
                     - (playersList.get(i).getPa3() - playersList.get(i).getPm3())
-                    - (playersList.get(i).getPa1() - playersList.get(i).getPm1()) );
+                    - (playersList.get(i).getPa1() - playersList.get(i).getPm1()));
             eff.setText(index);
 
             teamTime += playersList.get(i).getMinutes();
@@ -520,7 +515,7 @@ public class StatsActivity extends AppCompatActivity {
             row2.addView(pts);
             row2.addView(eff);
 
-            table.addView(row2, i+1);
+            table.addView(row2, i + 1);
         }
 
         TableRow row3 = new TableRow(this);
@@ -529,71 +524,71 @@ public class StatsActivity extends AppCompatActivity {
 
         teamTV = new TextView(this);
         teamTV.setBackgroundResource(R.drawable.table_border);
-        teamTV.setPadding(15,15,15,15);
+        teamTV.setPadding(15, 15, 15, 15);
 
         teamTitle = new TextView(this);
         teamTitle.setBackgroundResource(R.drawable.table_border);
-        teamTitle.setPadding(15,15,15,15);
+        teamTitle.setPadding(15, 15, 15, 15);
 
         teamTimeTV = new TextView(this);
         teamTimeTV.setBackgroundResource(R.drawable.table_border);
-        teamTimeTV.setPadding(15,15,15,15);
+        teamTimeTV.setPadding(15, 15, 15, 15);
 
         teamFGtv = new TextView(this);
         teamFGtv.setBackgroundResource(R.drawable.table_border);
-        teamFGtv.setPadding(15,15,15,15);
+        teamFGtv.setPadding(15, 15, 15, 15);
 
         team2ptsTV = new TextView(this);
         team2ptsTV.setBackgroundResource(R.drawable.table_border);
-        team2ptsTV.setPadding(15,15,15,15);
+        team2ptsTV.setPadding(15, 15, 15, 15);
 
         team3ptsTV = new TextView(this);
         team3ptsTV.setBackgroundResource(R.drawable.table_border);
-        team3ptsTV.setPadding(15,15,15,15);
+        team3ptsTV.setPadding(15, 15, 15, 15);
 
         team1ptsTV = new TextView(this);
         team1ptsTV.setBackgroundResource(R.drawable.table_border);
-        team1ptsTV.setPadding(15,15,15,15);
+        team1ptsTV.setPadding(15, 15, 15, 15);
 
         teamOffRebTV = new TextView(this);
         teamOffRebTV.setBackgroundResource(R.drawable.table_border);
-        teamOffRebTV.setPadding(15,15,15,15);
+        teamOffRebTV.setPadding(15, 15, 15, 15);
 
         teamDefRebTV = new TextView(this);
         teamDefRebTV.setBackgroundResource(R.drawable.table_border);
-        teamDefRebTV.setPadding(15,15,15,15);
+        teamDefRebTV.setPadding(15, 15, 15, 15);
 
         teamRebTV = new TextView(this);
         teamRebTV.setBackgroundResource(R.drawable.table_border);
-        teamRebTV.setPadding(15,15,15,15);
+        teamRebTV.setPadding(15, 15, 15, 15);
 
         teamAssistTV = new TextView(this);
         teamAssistTV.setBackgroundResource(R.drawable.table_border);
-        teamAssistTV.setPadding(15,15,15,15);
+        teamAssistTV.setPadding(15, 15, 15, 15);
 
         teamBlocksTV = new TextView(this);
         teamBlocksTV.setBackgroundResource(R.drawable.table_border);
-        teamBlocksTV.setPadding(15,15,15,15);
+        teamBlocksTV.setPadding(15, 15, 15, 15);
 
         teamStealsTV = new TextView(this);
         teamStealsTV.setBackgroundResource(R.drawable.table_border);
-        teamStealsTV.setPadding(15,15,15,15);
+        teamStealsTV.setPadding(15, 15, 15, 15);
 
         teamTurnTV = new TextView(this);
         teamTurnTV.setBackgroundResource(R.drawable.table_border);
-        teamTurnTV.setPadding(15,15,15,15);
+        teamTurnTV.setPadding(15, 15, 15, 15);
 
         teamFoulsTV = new TextView(this);
         teamFoulsTV.setBackgroundResource(R.drawable.table_border);
-        teamFoulsTV.setPadding(15,15,15,15);
+        teamFoulsTV.setPadding(15, 15, 15, 15);
 
         teamPointsTV = new TextView(this);
         teamPointsTV.setBackgroundResource(R.drawable.table_border);
-        teamPointsTV.setPadding(15,15,15,15);
+        teamPointsTV.setPadding(15, 15, 15, 15);
 
         teamEffTV = new TextView(this);
         teamEffTV.setBackgroundResource(R.drawable.table_border);
-        teamEffTV.setPadding(15,15,15,15);
+        teamEffTV.setPadding(15, 15, 15, 15);
 
         teamTV.setText(R.string.taraba);
         teamTitle.setText(R.string.total);

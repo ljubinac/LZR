@@ -1,9 +1,6 @@
 package com.hfad.lzr;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,6 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -76,7 +79,7 @@ public class TeamActivity extends AppCompatActivity {
         databaseReference.orderByChild("name").equalTo(teamName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dsChild : dataSnapshot.getChildren()){
+                for (DataSnapshot dsChild : dataSnapshot.getChildren()) {
                     Team team = dsChild.getValue(Team.class);
                     idTeam = dsChild.getKey();
                     teamNameTV.setText(team.getName());
@@ -134,10 +137,10 @@ public class TeamActivity extends AppCompatActivity {
         });
     }
 
-    private void addPlayer(){
+    private void addPlayer() {
         String number = playerNumberET.getText().toString();
         String name = playerNameET.getText().toString();
-        if(!TextUtils.isEmpty(number) || !TextUtils.isEmpty(name)){
+        if (!TextUtils.isEmpty(number) || !TextUtils.isEmpty(name)) {
             String id = databaseReferencePlayers.push().getKey();
             Player player = new Player(id, name, number, idTeam);
             player.setId(id);
@@ -151,7 +154,6 @@ public class TeamActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.player_not_added, Toast.LENGTH_LONG).show();
         }
     }
-
 
 
     private void fetch(final String idTeam) {
@@ -177,7 +179,31 @@ public class TeamActivity extends AppCompatActivity {
                 holder.playerDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        adapter.getRef(position).removeValue();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(TeamActivity.this);
+
+                        builder.setTitle("Confirm");
+                        builder.setMessage("Are you sure?");
+
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do nothing but close the dialog
+                                adapter.getRef(position).removeValue();
+                                dialog.dismiss();
+                            }
+                        });
+
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        AlertDialog alert = builder.create();
+                        alert.show();
+
                     }
                 });
                 holder.playerEdit.setOnClickListener(new View.OnClickListener() {
@@ -203,19 +229,20 @@ public class TeamActivity extends AppCompatActivity {
                         databaseReferencePlayers.child(model.getId()).child("nameAndLastname").setValue(holder.playerNameTV.getText().toString());
 
                     }
-                });;
+                });
+                ;
             }
         };
         adapter.startListening();
         playersRV.setAdapter(adapter);
     }
 
-    public void editLeague(){
+    public void editLeague() {
         leagueLL1.setVisibility(View.INVISIBLE);
         leagueLL2.setVisibility(View.VISIBLE);
     }
 
-    public void acceptChanges(){
+    public void acceptChanges() {
         teamLeagueTV.setText(leagueSpinner.getSelectedItem().toString());
         leagueLL1.setVisibility(View.VISIBLE);
         leagueLL2.setVisibility(View.INVISIBLE);
@@ -223,13 +250,13 @@ public class TeamActivity extends AppCompatActivity {
         databaseReference.child(idTeam).child("league").setValue(teamLeagueTV.getText().toString());
     }
 
-    public void editTeamName(){
+    public void editTeamName() {
         teamNameET.setText(teamNameTV.getText().toString());
         teamNameLL1.setVisibility(View.INVISIBLE);
         teamNameLL2.setVisibility(View.VISIBLE);
     }
 
-    public void saveTeamName(){
+    public void saveTeamName() {
 
         teamNameTV.setText(teamNameET.getText().toString());
         teamNameLL1.setVisibility(View.VISIBLE);

@@ -1,29 +1,26 @@
 package com.hfad.lzr;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreatingMatchActivity extends AppCompatActivity {
 
@@ -34,19 +31,22 @@ public class CreatingMatchActivity extends AppCompatActivity {
     ArrayList<String> teamsSpinnerA, teamsSpinnerB, leagues;
     ArrayList<Team> teams;
     Button chooseLineup;
-    EditText gameDate, gameTime;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creating_match);
 
-        gameDate = findViewById(R.id.gameDate);
-        gameTime = findViewById(R.id.gameTime);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         teams = new ArrayList<>();
-        spinner1 = (Spinner) findViewById(R.id.choose_teamA);
-        spinner2 = (Spinner) findViewById(R.id.choose_teamB);
+        spinner1 = findViewById(R.id.choose_teamA);
+        spinner2 = findViewById(R.id.choose_teamB);
         leagueSpinner = findViewById(R.id.choose_league);
         chooseLineup = findViewById(R.id.choose_lineup);
         chooseLineup.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +58,8 @@ public class CreatingMatchActivity extends AppCompatActivity {
                 Team teamB = teams.get(spinner2.getSelectedItemPosition());
                 intent.putExtra("teamA", teamA);
                 intent.putExtra("teamB", teamB);
-                intent.putExtra("gameDate", gameDate.getText().toString());
-                intent.putExtra("gameTime", gameTime.getText().toString());
+//                intent.putExtra("gameDate", gameDate.getText().toString());
+//                intent.putExtra("gameTime", gameTime.getText().toString());
                 startActivity(intent);
             }
         });
@@ -122,9 +122,13 @@ public class CreatingMatchActivity extends AppCompatActivity {
         });
     }
 
-    public void addTeam(View view) {
-        Intent intent = new Intent(this, CreateTeamActivity.class);
-        intent.putExtra("prev_activity", "CreatingMatchActivity");
-        startActivity(intent);
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
