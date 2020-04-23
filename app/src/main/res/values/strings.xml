@@ -162,8 +162,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="choose_hall">Hall</string>
     <string name="save_game">Save Game</string>
-    <string name="pick_time">Pick Time</string>
-    <string name="pick_date">Pick Date</string>
+    <string name="pick_time">Time</string>
+    <string name="pick_date">Date</string>
 
 
 </resources>

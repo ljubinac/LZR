@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_games"
-            android:title="GAMES"/>
+            android:title="GAMES"
+            android:icon="@drawable/baseline_sports_basketball_24"
+            android:iconTint="@color/colorPrimary"
+            />
             <item
                 android:id="@+id/nav_teams"
-                android:title="TEAMS"/>
+                android:title="TEAMS"
+                android:icon="@drawable/ic_teams_icon"
+                android:iconTint="@color/colorPrimary"/>
         <item
             android:id="@+id/nav_standings"
-            android:title="STANDINGS"/>
+            android:title="STANDINGS"
+            android:icon="@drawable/ic_standings_icon"
+            android:iconTint="@color/colorPrimary"/>
         <item
             android:id="@+id/nav_settings"
-            android:title="SETTINGS"/>
+            android:title="SETTINGS"
+            android:icon="@drawable/ic_settings_24px"
+            android:iconTint="@color/colorPrimary"
+            />
         <item
             android:id="@+id/nav_quit"
-            android:title="QUIT"/>
+            android:title="QUIT"
+            android:icon="@drawable/ic_exit_to_app_24px"
+            android:iconTint="@color/colorPrimary"/>
 
     </group>
 </menu>

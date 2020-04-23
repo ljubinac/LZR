@@ -43,8 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
-                    android:src="@drawable/outline_add_24"
-                    android:tint="@color/white"
+                    android:src="@drawable/fab_gradient"
                     android:contentDescription="@string/create_game"
                     android:layout_margin="16dp" />
 
