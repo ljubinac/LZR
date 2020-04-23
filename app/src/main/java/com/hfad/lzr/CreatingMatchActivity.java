@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
@@ -30,13 +31,16 @@ public class CreatingMatchActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterTeamA, adapterList;
     ArrayList<String> teamsSpinnerA, teamsSpinnerB, leagues;
     ArrayList<Team> teams;
-    Button chooseLineup;
+    Button saveGame;
     Toolbar toolbar;
+    DatabaseReference databaseReferenceGames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creating_match);
+
+        databaseReferenceGames = FirebaseDatabase.getInstance().getReference("games");
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,18 +52,16 @@ public class CreatingMatchActivity extends AppCompatActivity {
         spinner1 = findViewById(R.id.choose_teamA);
         spinner2 = findViewById(R.id.choose_teamB);
         leagueSpinner = findViewById(R.id.choose_league);
-        chooseLineup = findViewById(R.id.choose_lineup);
-        chooseLineup.setOnClickListener(new View.OnClickListener() {
+        saveGame = findViewById(R.id.choose_lineup);
+        saveGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LineupActivity.class);
-
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                String id = databaseReferenceGames.push().getKey();
                 Team teamA = teams.get(spinner1.getSelectedItemPosition());
                 Team teamB = teams.get(spinner2.getSelectedItemPosition());
-                intent.putExtra("teamA", teamA);
-                intent.putExtra("teamB", teamB);
-//                intent.putExtra("gameDate", gameDate.getText().toString());
-//                intent.putExtra("gameTime", gameTime.getText().toString());
+                Game game = new Game(id, teamA.getId(), teamB.getId(), "Date", "Time", teamA.getName(), teamB.getName(), false);
+                databaseReferenceGames.child(id).setValue(game);
                 startActivity(intent);
             }
         });

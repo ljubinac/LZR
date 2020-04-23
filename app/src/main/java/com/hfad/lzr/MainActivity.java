@@ -1,11 +1,16 @@
 package com.hfad.lzr;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +21,11 @@ import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+import com.hfad.lzr.ui.main.GamesFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Toolbar toolbar;
     FloatingActionButton fab;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +44,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         fab = findViewById(R.id.fab);
 
-        setSupportActionBar(toolbar);
+        viewPager = findViewById(R.id.view_pager);
+        tabLayout = findViewById(R.id.tab_layout);
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
+        viewPagerAdapter.addFragment(GamesFragment.newInstance(true), "Recent games");
+        viewPagerAdapter.addFragment(GamesFragment.newInstance(false), "Upcoming");
+        viewPager.setAdapter(viewPagerAdapter);
+
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
@@ -53,6 +75,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+    }
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        private List<Fragment> fragments = new ArrayList<>();
+        private List<String> fragmentTitle = new ArrayList<>();
+
+        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+        }
+
+        public void addFragment(Fragment fragment, String title){
+            fragments.add(fragment);
+            fragmentTitle.add(title);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentTitle.get(position);
+        }
     }
 
     @Override
@@ -96,4 +150,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

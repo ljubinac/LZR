@@ -40,8 +40,8 @@ public class LineupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lineup);
 
-        gameDate = getIntent().getStringExtra("gameDate");
-        gameTime = getIntent().getStringExtra("gameTime");
+        /*gameDate = getIntent().getStringExtra("gameDate");
+        gameTime = getIntent().getStringExtra("gameTime");*/
         teamA = (Team) getIntent().getSerializableExtra("teamA");
         teamB = (Team) getIntent().getSerializableExtra("teamB");
 
@@ -67,8 +67,8 @@ public class LineupActivity extends AppCompatActivity {
 
                 if (playersTeamA.size() >= 5 && playersTeamB.size() >= 5) {
                     String id = databaseReferenceGames.push().getKey();
-                    Game game = new Game(id, teamA.getId(), teamB.getId(), gameDate, gameTime, teamA.getName(), teamB.getName());
-                    databaseReferenceGames.child(id).setValue(game);
+                    /*Game game = new Game(id, teamA.getId(), teamB.getId(), gameDate, gameTime, teamA.getName(), teamB.getName());*/
+                 /*   databaseReferenceGames.child(id).setValue(game);*/
 
                     List<PlayerGame> playersGameA = new ArrayList<>();
                     for (int i = 0; i < playersTeamA.size(); i++) {
@@ -101,7 +101,7 @@ public class LineupActivity extends AppCompatActivity {
                     intent.putExtra("playersGameB", (Serializable) playersGameB);
                     intent.putExtra("teamA", teamA);
                     intent.putExtra("teamB", teamB);
-                    intent.putExtra("game", game);
+                   /* intent.putExtra("game", game);*/
 
                     startActivity(intent);
                 } else {
