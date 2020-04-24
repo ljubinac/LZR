@@ -18,7 +18,9 @@
     <color name="blue_start">#344955</color>
     <color name="blue_end">#4A6EA8</color>
 
-    <color name="grey_start">#e6e6e6</color>
-    <color name="grey_end">#e6e6e6</color>
+    <color name="grey_start">#e2eef5</color>
+    <color name="grey_end">#e2eef5</color>
+
+    <color name="tab_not_selected">#B3FFFFFF</color>
 
 </resources>

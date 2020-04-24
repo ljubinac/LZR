@@ -49,7 +49,13 @@ public class LineupActivity extends AppCompatActivity {
         setupViewPager(viewPager);
 
         TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        tabs.setupWithViewPager(viewPager, true);
+        tabs.setSelected(true);
+
+        tabs.setTabTextColors(getResources().getColor(R.color.tab_not_selected),
+                getResources().getColor(R.color.white));
+
+        tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
 
         startGame = findViewById(R.id.start_game);
 
