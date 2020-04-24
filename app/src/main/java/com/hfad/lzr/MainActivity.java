@@ -118,12 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
-    public void createTeam(View view) {
-        Intent intent = new Intent(this, CreateTeamActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;

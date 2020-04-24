@@ -5,8 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="18dp"
     tools:context=".TeamActivity">
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar">
+
+    </include>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
                 android:gravity="center"
-                android:text=""
+                android:text="Team:"
                 android:textColor="@color/text"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -50,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
-                android:text=""
+                android:text="Team"
                 android:textColor="@color/text"
                 android:textSize="30sp"
                 android:textStyle="italic" />

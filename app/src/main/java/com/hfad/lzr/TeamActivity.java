@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,11 +44,15 @@ public class TeamActivity extends AppCompatActivity {
     RecyclerView playersRV;
     FirebaseRecyclerOptions<Player> options;
     FirebaseRecyclerAdapter adapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         teamNameTV = findViewById(R.id.teamNameTV);
         teamLeagueTV = findViewById(R.id.teamLeagueTV);
@@ -136,6 +141,7 @@ public class TeamActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void addPlayer() {
         String number = playerNumberET.getText().toString();

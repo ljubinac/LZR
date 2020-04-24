@@ -13,6 +13,9 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,12 +36,16 @@ public class TeamsActivity extends AppCompatActivity {
     Spinner leagueSpinner;
     ArrayAdapter<String> adapterList;
     ArrayList<String> leagues;
+    Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         teamsRV = findViewById(R.id.teamsRV);
         leagueSpinner = findViewById(R.id.choose_league);
@@ -49,6 +56,9 @@ public class TeamsActivity extends AppCompatActivity {
         adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
         adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.divider));
+        teamsRV.addItemDecoration(itemDecorator);
         teamsRV.setLayoutManager(new LinearLayoutManager(this));
         teamsRV.setHasFixedSize(true);
 

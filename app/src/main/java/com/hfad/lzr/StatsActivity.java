@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -62,11 +63,15 @@ public class StatsActivity extends AppCompatActivity {
     int teamTime, teamFGM, teamFGA, team2PTSpm, team2PTSpa, team3PTSpm, team3PTSpa, team1PTSpm, team1PTSpa, teamOffReb, teamDefReb, teamReb, teamAssist, teamBlocks, teamSteals, teamTurnovers, teamFouls, teamPoints, teamEff;
     TextView teamTV, teamTitle, teamTimeTV, teamFGtv, team2ptsTV, team3ptsTV, team1ptsTV, teamOffRebTV, teamDefRebTV, teamRebTV, teamAssistTV, teamBlocksTV, teamStealsTV, teamTurnTV, teamFoulsTV, teamPointsTV, teamEffTV;
 
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         ll = findViewById(R.id.ll);
 

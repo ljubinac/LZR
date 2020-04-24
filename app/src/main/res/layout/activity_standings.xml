@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TeamsActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"></include>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,9 +22,8 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="@string/choose_league"
-            android:textStyle="bold"
             android:textColor="@color/text"
-            />
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/choose_league"
@@ -39,17 +41,16 @@
         android:layout_gravity="center"
         android:layout_marginVertical="15dp"
         android:text="@string/standings"
-        android:textStyle="bold"
-        android:textSize="22dp"
         android:textColor="@color/text"
-        />
+        android:textSize="22dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="4dp"
 
         >
@@ -61,8 +62,8 @@
             android:layout_weight="1"
             android:text="@string/positionTitleTV"
             android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/teamNameTitleTV"
@@ -71,8 +72,8 @@
             android:layout_weight="3"
             android:text="@string/teamNameTitleTV"
             android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/totalGamesTitleTV"
@@ -81,8 +82,8 @@
             android:layout_weight="1"
             android:text="@string/totalGamesTitleTV"
             android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/wGamesTitleTV"
@@ -91,8 +92,8 @@
             android:layout_weight="1"
             android:text="@string/wGamesTitleTV"
             android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lGamesTitleTV"
@@ -101,8 +102,8 @@
             android:layout_weight="1"
             android:text="@string/lGamesTitleTV"
             android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/ptsPlusTitleTV"
@@ -111,8 +112,8 @@
             android:layout_weight="1"
             android:text="@string/ptsPlusTitleTV"
             android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/ptsMinusTitleTV"
@@ -121,8 +122,8 @@
             android:layout_weight="1"
             android:text="@string/ptsMinusTitleTV"
             android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/pointsTitleTV"
@@ -131,8 +132,8 @@
             android:layout_weight="1"
             android:text="@string/pointsTitleTV"
             android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -141,22 +142,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
-        android:scrollbars="vertical"
-        />
+        android:scrollbars="vertical" />
 
     <Button
         android:id="@+id/createPdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_save"
-        android:onClick="createPdf"/>
+        android:onClick="createPdf"
+        android:text="@string/button_save" />
 
     <Button
         android:id="@+id/sharePdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_share"
-        />
+        android:text="@string/button_share" />
 
 
 </LinearLayout>
