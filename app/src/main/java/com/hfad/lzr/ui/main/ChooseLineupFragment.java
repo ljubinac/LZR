@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.hfad.lzr.R;
 import com.hfad.lzr.adapter.LineupViewHolder;
+import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
 
 import java.util.ArrayList;
@@ -29,10 +32,6 @@ import java.util.zip.Inflater;
  * A placeholder fragment containing a simple view.
  */
 public class ChooseLineupFragment extends Fragment {
-
-    TextView tv;
-    String teamName;
-    String teamId;
 
     DatabaseReference databaseReference;
     RecyclerView lineupRV;
@@ -46,12 +45,15 @@ public class ChooseLineupFragment extends Fragment {
     ArrayList<Player> players = new ArrayList<>();
     ArrayList<Integer> starting5 = new ArrayList<>();
 
-    public static ChooseLineupFragment newInstance(String teamName, String teamId) {
+    Game game;
+    String teamId;
+
+    public static ChooseLineupFragment newInstance(Game game, String teamId) {
         ChooseLineupFragment myFragment = new ChooseLineupFragment();
 
         Bundle args = new Bundle();
-        args.putString("teamName", teamName);
         args.putString("teamId", teamId);
+        args.putSerializable("game", game);
         myFragment.setArguments(args);
 
         return myFragment;
@@ -60,8 +62,8 @@ public class ChooseLineupFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        teamName = getArguments().getString("teamName");
         teamId = getArguments().getString("teamId");
+        game = ( Game ) getArguments().getSerializable("game");
 
 
     }
@@ -72,17 +74,15 @@ public class ChooseLineupFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_lineup, container, false);
 
-        /*tv = root.findViewById(R.id.section_label);
-        tv.setText(teamName + "    "  + teamId);*/
-
         lineupRV = root.findViewById(R.id.lineup_RV);
         playerNumberTV = root.findViewById(R.id.player_number_tv);
         playerNameTV = root.findViewById(R.id.player_name_tv);
         lineupCheckbox = root.findViewById(R.id.lineup_checkbox);
         firstLineupCheckBox = root.findViewById(R.id.first_lineup_checkbox);
 
-        lineupRV.setLayoutManager(new LinearLayoutManager(getContext()));
         lineupRV.setHasFixedSize(true);
+        lineupRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference("players");
 
@@ -110,7 +110,6 @@ public class ChooseLineupFragment extends Fragment {
                             holder.lineupCheckbox.setChecked(true);
                         } else {
                             onItemUncheck(model);
-                            //onItemFirstUncheck(position);
                             holder.lineupCheckbox.setChecked(false);
                             holder.firstLineupCheckBox.setChecked(false);
                         }
@@ -122,7 +121,6 @@ public class ChooseLineupFragment extends Fragment {
                     public void onClick(View v) {
                         if(holder.firstLineupCheckBox.isChecked()){
                             onItemFirstCheck(model);
-                            //onItemCheck(model);
                             holder.lineupCheckbox.setChecked(true);
                             holder.firstLineupCheckBox.setChecked(true);
                         } else {
@@ -133,11 +131,11 @@ public class ChooseLineupFragment extends Fragment {
                 });
             }
         };
+
         adapter.startListening();
         lineupRV.setAdapter(adapter);
 
-
-        return root;
+       return root;
     }
 
     public void onItemFirstCheck(Player player){

@@ -2,11 +2,14 @@ package com.hfad.lzr;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -30,9 +33,10 @@ public class LineupActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private Button startGame;
     DatabaseReference databaseReferenceGames;
-    String gameDate, gameTime;
-    Team teamA;
-    Team teamB;
+    Game game;
+    Toolbar toolbar;
+    TabLayout tabs;
+    String teamId;
 
 
     @Override
@@ -40,15 +44,20 @@ public class LineupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lineup);
 
-        /*gameDate = getIntent().getStringExtra("gameDate");
-        gameTime = getIntent().getStringExtra("gameTime");*/
-        teamA = (Team) getIntent().getSerializableExtra("teamA");
-        teamB = (Team) getIntent().getSerializableExtra("teamB");
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        game = ( Game ) getIntent().getSerializableExtra("game");
+        teamId = getIntent().getStringExtra("teamId");
+
 
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
 
-        TabLayout tabs = findViewById(R.id.tabs);
+
+        tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager, true);
         tabs.setSelected(true);
 
@@ -73,8 +82,6 @@ public class LineupActivity extends AppCompatActivity {
 
                 if (playersTeamA.size() >= 5 && playersTeamB.size() >= 5) {
                     String id = databaseReferenceGames.push().getKey();
-                    /*Game game = new Game(id, teamA.getId(), teamB.getId(), gameDate, gameTime, teamA.getName(), teamB.getName());*/
-                 /*   databaseReferenceGames.child(id).setValue(game);*/
 
                     List<PlayerGame> playersGameA = new ArrayList<>();
                     for (int i = 0; i < playersTeamA.size(); i++) {
@@ -105,9 +112,7 @@ public class LineupActivity extends AppCompatActivity {
                     Intent intent = new Intent(LineupActivity.this, GameActivity.class);
                     intent.putExtra("playersGameA", (Serializable) playersGameA);
                     intent.putExtra("playersGameB", (Serializable) playersGameB);
-                    intent.putExtra("teamA", teamA);
-                    intent.putExtra("teamB", teamB);
-                   /* intent.putExtra("game", game);*/
+                    intent.putExtra("game", game);
 
                     startActivity(intent);
                 } else {
@@ -117,11 +122,23 @@ public class LineupActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamA.getName(), teamA.getId()), teamA.getName());
-        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(teamB.getName(), teamB.getId()), teamB.getName());
+        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(game, game.getIdTeamA()), game.getTeamAnaziv());
+        sectionsPagerAdapter.addFragment(ChooseLineupFragment.newInstance(game, game.getIdTeamB()), game.getTeamBnaziv());
         viewPager.setAdapter(sectionsPagerAdapter);
+
+
     }
 }
