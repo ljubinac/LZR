@@ -168,5 +168,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="points_negative_warning">Shots and attempts can not be a negative number!</string>
+
 
 </resources>

@@ -1,5 +1,6 @@
 package com.hfad.lzr.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.hfad.lzr.LineupActivity;
+import com.hfad.lzr.MainActivity;
 import com.hfad.lzr.R;
 import com.hfad.lzr.adapter.GameViewHolder;
 import com.hfad.lzr.model.Game;
@@ -35,6 +38,8 @@ public class GamesFragment extends Fragment {
     FirebaseRecyclerAdapter adapter;
     TextView teamAname;
     TextView teamBname;
+
+    Game game;
 
     boolean isFinished;
 
@@ -58,6 +63,7 @@ public class GamesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         isFinished = getArguments().getBoolean("recent");
+        game = ( Game ) getArguments().getSerializable("game");
     }
 
     @Override
@@ -80,9 +86,19 @@ public class GamesFragment extends Fragment {
         options = new FirebaseRecyclerOptions.Builder<Game>().setQuery(query, Game.class).build();
         adapter = new FirebaseRecyclerAdapter<Game, GameViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull GameViewHolder holder, int position, @NonNull Game model) {
+            protected void onBindViewHolder(@NonNull GameViewHolder holder, int position, @NonNull final Game model) {
                 holder.teamAnameTV.setText(model.getTeamAnaziv());
                 holder.teamBnameTV.setText(model.getTeamBnaziv());
+
+                // listener klikom poslati game model na lineup aktivnost
+                holder.upcomingGameLL.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), LineupActivity.class);
+                        intent.putExtra("game", model);
+                        getActivity().startActivity(intent);
+                    }
+                });
             }
 
             @NonNull

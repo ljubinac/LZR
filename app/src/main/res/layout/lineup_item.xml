@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/text"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:textSize="18sp"/>
 
@@ -29,18 +29,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:textColor="@color/text"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:textSize="18sp"/>
 
         <CheckBox
             android:id="@+id/lineup_checkbox"
             android:layout_width="0dp"
+            android:shadowColor="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
         <CheckBox
             android:id="@+id/first_lineup_checkbox"
+            android:shadowColor="@color/colorPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
