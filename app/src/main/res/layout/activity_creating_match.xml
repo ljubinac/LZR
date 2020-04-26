@@ -18,13 +18,16 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
 
+
+
         <LinearLayout
-            style="@style/create_match_choose_ll"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <TextView
+                android:layout_marginLeft="30dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -34,20 +37,23 @@
             <Spinner
                 android:id="@+id/choose_league"
                 android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
+                android:layout_height="45dp"
+                android:elevation="2dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/spinner_custom"
                 android:entries="@array/leagues" />
         </LinearLayout>
 
         <View style="@style/Divider" />
 
         <LinearLayout
-            style="@style/create_match_choose_ll"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <TextView
+                android:layout_marginLeft="30dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -57,20 +63,24 @@
             <Spinner
                 android:id="@+id/choose_teamA"
                 android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:entries="@array/teams" />
+                android:layout_height="45dp"
+                android:elevation="2dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/spinner_custom"
+                android:entries="@array/teams"
+                />
         </LinearLayout>
 
         <View style="@style/Divider" />
 
         <LinearLayout
-            style="@style/create_match_choose_ll"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <TextView
+                android:layout_marginLeft="30dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -80,19 +90,23 @@
             <Spinner
                 android:id="@+id/choose_teamB"
                 android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:entries="@array/teams" />
+                android:layout_height="45dp"
+                android:entries="@array/teams"
+                android:background="@drawable/spinner_custom"
+                android:elevation="2dp"
+                android:layout_marginRight="30dp"/>
         </LinearLayout>
 
         <View style="@style/Divider" />
 
         <LinearLayout
-            style="@style/create_match_choose_ll"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <TextView
+                android:layout_marginLeft="30dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -102,8 +116,11 @@
             <Spinner
                 android:id="@+id/choose_hall"
                 android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:entries="@array/teams" />
+                android:layout_height="45dp"
+                android:entries="@array/teams"
+                android:background="@drawable/spinner_custom"
+                android:layout_marginRight="30dp"
+                android:elevation="2dp"/>
         </LinearLayout>
 
         <View style="@style/Divider" />

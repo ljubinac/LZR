@@ -23,4 +23,6 @@
 
     <color name="tab_not_selected">#B3FFFFFF</color>
 
+    <color name="drop_down_arrow">#99000000</color>
+
 </resources>
