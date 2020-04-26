@@ -98,9 +98,6 @@ public class GameActivity extends AppCompatActivity {
         teamATV = findViewById(R.id.teamA);
         teamBTV = findViewById(R.id.teamB);
 
-        /*teamATV.setText(game.getTeamAnaziv());
-        teamBTV.setText(game.getTeamBnaziv());*/
-
         ll2pm = findViewById(R.id.ll_2PM);
         ll2pa = findViewById(R.id.ll_2PA);
         tv2pm = findViewById(R.id.tv2pm);
@@ -586,8 +583,8 @@ public class GameActivity extends AppCompatActivity {
         mButtonStartPause.setVisibility(View.VISIBLE);
 
         for (int i = 0; i < 5; i++) {
-            playersGameA.get(i).setWhenGoingIn((int) mTimeLeftInMillis);
-            playersGameB.get(i).setWhenGoingIn((int) mTimeLeftInMillis);
+            playersGameA.get(i).setWhenGoingIn((int) mTimeLeftInMillis / 1000);
+            playersGameB.get(i).setWhenGoingIn((int) mTimeLeftInMillis / 1000);
         }
     }
 
@@ -624,7 +621,7 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     PlayerGame goingIn = playersGameA.get(position);
                     goingIn.setmIsIn(true);
-                    goingIn.setWhenGoingIn((int) mTimeLeftInMillis);
+                    goingIn.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
                     playersGameA.set(goingOutPositionA, goingIn);
                     playersGameA.set(position, goingOutA);
                     for (int i = 5; i < playersGameA.size(); i++) {
@@ -646,7 +643,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onLongClick(int position) {
                 goingOutA = playersGameA.get(position);
-                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - (int) mTimeLeftInMillis);
+                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionA = position;
                 goingOutA.setmIsChangeOut(true);
                 for (int i = 5; i < playersGameA.size(); i++) {
@@ -687,7 +684,7 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     PlayerGame goingIn = playersGameB.get(position);
                     goingIn.setmIsIn(true);
-                    goingIn.setWhenGoingIn((int) mTimeLeftInMillis);
+                    goingIn.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
                     playersGameB.set(goingOutPositionB, goingIn);
                     playersGameB.set(position, goingOutB);
                     for (int i = 5; i < playersGameB.size(); i++) {
@@ -709,7 +706,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onLongClick(int position) {
                 goingOutB = playersGameB.get(position);
-                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - (int) mTimeLeftInMillis);
+                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionB = position;
                 goingOutB.setmIsChangeOut(true);
                 for (int i = 5; i < playersGameB.size(); i++) {

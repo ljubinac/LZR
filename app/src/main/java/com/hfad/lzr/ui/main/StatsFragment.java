@@ -28,8 +28,6 @@ public class StatsFragment extends Fragment {
 
     ArrayList<PlayerGame> playersList;
 
-    TableLayout tableTeam;
-
     TextView tableNum, tableName, tableTime, tableFG, table2pts, table3pts, table1pts, tableTotalReb, tableDefReb, tableOffReb, tableAssist, tableBlock, tableSteals, tableTurnov, tableFoul, tablePts, tableEff;
 
     TextView number, name, time, fg, pts2, pts3, pts1, totalReb, offReb, defReb, assist, block, steal, turnov, foul, pts, eff;
@@ -38,6 +36,9 @@ public class StatsFragment extends Fragment {
     TextView teamTV, teamTitle, teamTimeTV, teamFGtv, team2ptsTV, team3ptsTV, team1ptsTV, teamOffRebTV, teamDefRebTV, teamRebTV, teamAssistTV, teamBlocksTV, teamStealsTV, teamTurnTV, teamFoulsTV, teamPointsTV, teamEffTV;
 
     Game game;
+
+    TableLayout table;
+
 
     public StatsFragment() {
         // Required empty public constructor
@@ -68,12 +69,16 @@ public class StatsFragment extends Fragment {
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_stats, container, false);
 
-        tableTeam = root.findViewById(R.id.player_game_A);
+        table = root.findViewById(R.id.player_game_A);
 
-        init(tableTeam, playersList);
+        init(playersList);
         setValue();
 
         return root;
+    }
+
+    public TableLayout getTable(){
+        return table;
     }
 
     public void setValue() {
@@ -98,7 +103,7 @@ public class StatsFragment extends Fragment {
         teamEff = 0;
     }
 
-    public void init(TableLayout table, ArrayList<PlayerGame> playersList) {
+    public void init(ArrayList<PlayerGame> playersList) {
 
         TableRow row = new TableRow(getActivity());
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
@@ -289,11 +294,10 @@ public class StatsFragment extends Fragment {
 
             number.setText(playersList.get(i).getNumber());
             name.setText(playersList.get(i).getNameAndLastname());
+
             int minutes = (playersList.get(i).getMinutes()) / 60;
             int seconds = (playersList.get(i).getMinutes()) % 60;
-
             String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-
             time.setText(timeLeftFormatted);
 
             String fgm = String.valueOf(playersList.get(i).getPm2() + playersList.get(i).getPm3());

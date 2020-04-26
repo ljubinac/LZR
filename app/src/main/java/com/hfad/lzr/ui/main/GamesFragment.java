@@ -36,14 +36,10 @@ public class GamesFragment extends Fragment {
     RecyclerView gamesRV;
     FirebaseRecyclerOptions<Game> options;
     FirebaseRecyclerAdapter adapter;
-    TextView teamAname;
-    TextView teamBname;
 
     Game game;
 
     boolean isFinished;
-
-    ArrayList<Game> games = new ArrayList<>();
 
     public GamesFragment() {
         // Required empty public constructor

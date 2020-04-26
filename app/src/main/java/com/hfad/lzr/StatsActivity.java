@@ -8,12 +8,11 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,7 +31,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.PlayerGame;
-import com.hfad.lzr.model.Team;
 import com.hfad.lzr.ui.main.StatsFragment;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -46,7 +44,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class StatsActivity extends AppCompatActivity {
 
@@ -70,6 +67,8 @@ public class StatsActivity extends AppCompatActivity {
     ViewPager viewPager;
     TabLayout tabLayout;
 
+    StatsFragment statsFragmentA, statsFragmentB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +84,7 @@ public class StatsActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tabs);
 
+
         tabLayout.setupWithViewPager(viewPager, true);
         tabLayout.setSelected(true);
 
@@ -94,8 +94,10 @@ public class StatsActivity extends AppCompatActivity {
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
-        viewPagerAdapter.addFragment(StatsFragment.newInstance(playersGameA), game.getTeamAnaziv());
-        viewPagerAdapter.addFragment(StatsFragment.newInstance(playersGameB), game.getTeamBnaziv());
+        statsFragmentA = StatsFragment.newInstance(playersGameA);
+        statsFragmentB = StatsFragment.newInstance(playersGameB);
+        viewPagerAdapter.addFragment(statsFragmentA, game.getTeamAnaziv());
+        viewPagerAdapter.addFragment(statsFragmentB, game.getTeamBnaziv());
         viewPager.setAdapter(viewPagerAdapter);
 
         ll = findViewById(R.id.ll);
@@ -175,6 +177,8 @@ public class StatsActivity extends AppCompatActivity {
         }
         // get view group using reference
         // convert view group to bitmap
+        tableTeamA = statsFragmentA.getTable();
+        tableTeamB = statsFragmentB.getTable();
         byte[] bytesA = createImage(tableTeamA);
         byte[] bytesB = createImage(tableTeamB);
         try {
@@ -258,5 +262,15 @@ public class StatsActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission NOT GRANTED", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
