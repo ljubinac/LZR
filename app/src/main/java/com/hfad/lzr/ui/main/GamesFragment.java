@@ -73,8 +73,6 @@ public class GamesFragment extends Fragment {
         View root =  inflater.inflate(R.layout.fragment_games, container, false);
 
         gamesRV = root.findViewById(R.id.games_RV);
-        /*teamAname = root.findViewById(R.id.teamA_tv);
-        teamBname = root.findViewById(R.id.teamB_tv);*/
 
         gamesRV.setLayoutManager(new LinearLayoutManager(getContext()));
         gamesRV.setHasFixedSize(true);

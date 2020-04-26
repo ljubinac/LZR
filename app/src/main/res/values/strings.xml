@@ -170,5 +170,9 @@
 
     <string name="points_negative_warning">Shots and attempts can not be a negative number!</string>
 
+    <string name="game_date">Date</string>
+    <string name="game_time">Time</string>
+    <string name="game_hall">Hall</string>
+
 
 </resources>
