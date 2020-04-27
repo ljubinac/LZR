@@ -13,8 +13,7 @@ import com.hfad.lzr.R;
 public class GameViewHolder extends RecyclerView.ViewHolder {
 
     public TextView teamAnameTV, teamBnameTV, resAtv, resBtv, gameDateTV, gameTimeTV, gameVenueTV;
-    public ImageView teamAimage;
-    public ImageView teamBimage;
+    public ImageView teamAimage, teamBimage;
     public LinearLayout upcomingGameLL;
     public GameViewHolder(@NonNull View itemView) {
         super(itemView);

@@ -83,6 +83,10 @@ public class GamesFragment extends Fragment {
             protected void onBindViewHolder(@NonNull GameViewHolder holder, int position, @NonNull final Game model) {
                 holder.teamAnameTV.setText(model.getTeamAnaziv());
                 holder.teamBnameTV.setText(model.getTeamBnaziv());
+                if(model.isFinished()) {
+                    holder.resAtv.setText(String.valueOf(model.getResA()));
+                    holder.resBtv.setText(String.valueOf(model.getResB()));
+                }
 
                 // listener klikom poslati game model na lineup aktivnost
                 holder.upcomingGameLL.setOnClickListener(new View.OnClickListener() {

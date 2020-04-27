@@ -29,7 +29,7 @@ import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
 
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference, databaseReferenceGames;
     ArrayList<PlayerGame> playersGameA, playersGameB;
     RecyclerView teamArv, teamBrv;
     PlayersGameAdapter adapterA, adapterB;
@@ -133,6 +133,8 @@ public class GameActivity extends AppCompatActivity {
         tvFinishGame = findViewById(R.id.finishGameTV);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
+
+        databaseReferenceGames = FirebaseDatabase.getInstance().getReference("games");
 
         databaseReference.orderByChild("id").equalTo(game.getIdTeamA()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -498,6 +500,10 @@ public class GameActivity extends AppCompatActivity {
                 }
                 databaseReference.child(teamA.getId()).setValue(teamA);
                 databaseReference.child(teamB.getId()).setValue(teamB);
+                game.setResA(resA);
+                game.setResB(resB);
+                game.setFinished(true);
+                databaseReferenceGames.child(game.getId()).setValue(game);
                 Intent intent = new Intent(GameActivity.this, StatsActivity.class);
                 intent.putExtra("playersGameA", playersGameA);
                 intent.putExtra("playersGameB", playersGameB);
