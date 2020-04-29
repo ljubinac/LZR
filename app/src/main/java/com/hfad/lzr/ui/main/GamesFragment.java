@@ -22,6 +22,7 @@ import com.google.firebase.database.Query;
 import com.hfad.lzr.LineupActivity;
 import com.hfad.lzr.MainActivity;
 import com.hfad.lzr.R;
+import com.hfad.lzr.StatsActivity;
 import com.hfad.lzr.adapter.GameViewHolder;
 import com.hfad.lzr.model.Game;
 
@@ -88,15 +89,16 @@ public class GamesFragment extends Fragment {
                     holder.resBtv.setText(String.valueOf(model.getResB()));
                 }
 
-                // listener klikom poslati game model na lineup aktivnost
-                holder.upcomingGameLL.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), LineupActivity.class);
-                        intent.putExtra("game", model);
-                        getActivity().startActivity(intent);
-                    }
-                });
+                if(!model.isFinished()) {
+                    holder.upcomingGameLL.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), LineupActivity.class);
+                            intent.putExtra("game", model);
+                            getActivity().startActivity(intent);
+                        }
+                    });
+                }
             }
 
             @NonNull

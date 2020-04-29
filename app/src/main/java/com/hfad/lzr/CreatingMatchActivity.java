@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,11 +35,15 @@ public class CreatingMatchActivity extends AppCompatActivity {
     Button saveGame;
     Toolbar toolbar;
     DatabaseReference databaseReferenceGames;
+    Button datePickerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creating_match);
+
+//        datePickerBtn = findViewById(R.id.pick_date_btn);
+
 
         databaseReferenceGames = FirebaseDatabase.getInstance().getReference("games");
 
@@ -100,6 +105,20 @@ public class CreatingMatchActivity extends AppCompatActivity {
 
             }
         });
+
+// nesto ne radi, evo greske:
+      //  com.google.android.material.datepicker.MaterialDatePicker requires a value for the com.hfad.lzr:attr/materialCalendarTheme attribute to be set in your app theme. You can either set the attribute in your theme or update your theme to inherit from Theme.MaterialComponents (or a descendant).
+
+ /*       MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Select a date");
+        final MaterialDatePicker materialDatePicker = builder.build();
+
+        datePickerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+            }
+        });*/
     }
 
     public void fetch(final String league) {

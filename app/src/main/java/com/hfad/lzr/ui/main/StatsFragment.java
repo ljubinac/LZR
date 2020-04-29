@@ -463,11 +463,14 @@ public class StatsFragment extends Fragment {
 
         teamTV.setText(R.string.taraba);
         teamTitle.setText(R.string.total);
-        teamTimeTV.setText(String.valueOf(teamTime));
-        teamFGtv.setText(teamFGM + R.string.kosa_crta + teamFGA);
-        team2ptsTV.setText(team2PTSpm + R.string.kosa_crta + team2PTSpa);
-        team3ptsTV.setText(team3PTSpm + R.string.kosa_crta + team3PTSpa);
-        team1ptsTV.setText(team1PTSpm + R.string.kosa_crta + team1PTSpa);
+        int minutes = teamTime / 60;
+        int seconds = teamTime % 60;
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        teamTimeTV.setText(timeLeftFormatted);
+        teamFGtv.setText(teamFGM + "/" + teamFGA);
+        team2ptsTV.setText(team2PTSpm + "/" + team2PTSpa);
+        team3ptsTV.setText(team3PTSpm + "/" + team3PTSpa);
+        team1ptsTV.setText(team1PTSpm + "/" + team1PTSpa);
         teamOffRebTV.setText(String.valueOf(teamOffReb));
         teamDefRebTV.setText(String.valueOf(teamDefReb));
         teamRebTV.setText(String.valueOf(teamReb));

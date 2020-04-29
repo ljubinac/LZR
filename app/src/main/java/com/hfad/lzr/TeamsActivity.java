@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.hfad.lzr.adapter.TeamViewHolder;
@@ -37,6 +39,7 @@ public class TeamsActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterList;
     ArrayList<String> leagues;
     Toolbar toolbar;
+    FloatingActionButton fab;
 
 
     @Override
@@ -49,6 +52,7 @@ public class TeamsActivity extends AppCompatActivity {
 
         teamsRV = findViewById(R.id.teamsRV);
         leagueSpinner = findViewById(R.id.choose_league);
+        fab = findViewById(R.id.fab);
 
         leagues = new ArrayList<>();
         leagues.add("Liga A");
@@ -77,6 +81,14 @@ public class TeamsActivity extends AppCompatActivity {
         });
 
         fetch("Liga A");
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TeamsActivity.this, CreatingMatchActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -153,6 +165,16 @@ public class TeamsActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

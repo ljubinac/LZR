@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,8 +41,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textColor="@color/text"
-                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -53,20 +54,6 @@
                 android:layout_margin="4dp"
                 android:orientation="horizontal">
 
-
-
-                <!--<Button
-                    android:id="@+id/timeStop"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/stop"
-                    android:textColor="@color/text"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:onClick="onClickStop"/>-->
-
                 <Button
                     android:id="@+id/button_start_pause"
                     android:layout_width="0dp"
@@ -74,7 +61,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/start"
-                    android:textColor="@color/text"
+                    android:textColor="@color/white"
+                    android:background="@color/colorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold"/>
 
@@ -85,7 +73,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/reset"
-                    android:textColor="@color/text"
+                    android:textColor="@color/white"
+                    android:background="@color/colorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:visibility="invisible"
@@ -107,8 +96,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="TeamA"
-                    android:textColor="@color/text"
-                    android:textSize="22dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -118,8 +107,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="TeamB"
-                    android:textColor="@color/text"
-                    android:textSize="22dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -138,15 +127,15 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="ResA"
-                    android:textColor="@color/text"
-                    android:textSize="22dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=":"
-                    android:textColor="@color/text"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -157,8 +146,8 @@
                     android:layout_weight="1"
                     android:gravity="left"
                     android:text="ResB"
-                    android:textColor="@color/text"
-                    android:textSize="22dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -185,8 +174,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/tv2pmTitle"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -195,8 +184,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -216,8 +205,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/tv2paTitle"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -226,8 +215,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -255,8 +244,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/tv3pmTitle"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -265,8 +254,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -286,8 +275,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/tv3paTitle"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -296,8 +285,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -326,8 +315,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/tv1pmTitle"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -336,8 +325,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -357,8 +346,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/tv1paTitle"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -367,8 +356,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -397,8 +386,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/offRebTitleTV"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -407,8 +396,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -428,8 +417,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/defRebTitleTV"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -438,8 +427,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -468,8 +457,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/assistTitleTV"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -478,8 +467,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -499,8 +488,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/blockTitleTV"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -509,8 +498,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -543,8 +532,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/stealsTitleTV"
-                    android:textColor="@color/text"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -553,8 +542,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0"
-                    android:textColor="@color/text"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -574,8 +563,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/turnoversTitleTV"
-                    android:textColor="@color/text"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -584,8 +573,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="0"
-                    android:textColor="@color/text"
-                    android:textSize="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -616,8 +605,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/foulTitleTV"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -626,8 +615,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -647,8 +636,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/tehnicalFoulTitleTV"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -657,8 +646,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="0"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -678,7 +667,7 @@
                     android:layout_height="70dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/border"
+                    android:background="@drawable/border2"
                     android:orientation="vertical">
 
                     <TextView
@@ -687,8 +676,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/finishGameTV"
-                        android:textColor="@color/text"
-                        android:textSize="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
