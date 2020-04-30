@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,8 +73,8 @@ public class StandingsActivity extends AppCompatActivity {
         standingsRV = findViewById(R.id.standingsRV);
         leagueSpinner = findViewById(R.id.choose_league);
 
-        share = findViewById(R.id.sharePdf);
-        create = findViewById(R.id.createPdf);
+       /* share = findViewById(R.id.sharePdf);
+        create = findViewById(R.id.createPdf);*/
 
         myFilePath = "";
 
@@ -82,6 +83,12 @@ public class StandingsActivity extends AppCompatActivity {
         leagues.add("Liga B");
         adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
         adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.divider));
+        standingsRV.addItemDecoration(itemDecorator);
+        standingsRV.setLayoutManager(new LinearLayoutManager(this));
+        standingsRV.setHasFixedSize(true);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
 
@@ -103,7 +110,7 @@ public class StandingsActivity extends AppCompatActivity {
 
         fetch("Liga A");
 
-        create.setEnabled(true);
+      /*  create.setEnabled(true);
         share.setEnabled(false);
 
         share.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +118,7 @@ public class StandingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 sharePdf();
             }
-        });
+        });*/
 
     }
 

@@ -18,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,9 +39,9 @@ public class TeamActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference, databaseReferencePlayers;
     TextView teamNameTV, teamLeagueTV;
-    LinearLayout teamNameLL1, teamNameLL2, leagueLL1, leagueLL2;
+    LinearLayout teamNameLL1, teamNameLL2, leagueLL1, leagueLL2, addPlayerLL;
     EditText teamNameET, playerNumberET, playerNameET;
-    ImageView acceptTeamName, editTeamName, acceptLeague, editLeague, addPlayer, editPlayer, deletePlayer;
+    ImageView acceptTeamName, editTeamName, acceptLeague, editLeague, addPlayer, editPlayer, deletePlayer, showAdd, backAdd;
     String teamName, idTeam;
     Spinner leagueSpinner;
     RecyclerView playersRV;
@@ -57,18 +59,18 @@ public class TeamActivity extends AppCompatActivity {
 
         teamNameTV = findViewById(R.id.teamNameTV);
         teamLeagueTV = findViewById(R.id.teamLeagueTV);
-        teamNameET = findViewById(R.id.teamNameET);
+//        teamNameET = findViewById(R.id.teamNameET);
         teamNameLL1 = findViewById(R.id.teamNameLL1);
-        teamNameLL2 = findViewById(R.id.teamNameLL2);
-        acceptTeamName = findViewById(R.id.acceptTeamName);
+//        teamNameLL2 = findViewById(R.id.teamNameLL2);
+//        acceptTeamName = findViewById(R.id.acceptTeamName);
         editTeamName = findViewById(R.id.image_editTeamName);
         teamName = getIntent().getStringExtra("team_name");
 
-        editLeague = findViewById(R.id.image_editLeague);
+//        editLeague = findViewById(R.id.image_editLeague);
         leagueSpinner = findViewById(R.id.choose_league);
-        acceptLeague = findViewById(R.id.image_acceptLeague);
-        leagueLL1 = findViewById(R.id.leagueLL1);
-        leagueLL2 = findViewById(R.id.leagueLL2);
+//        acceptLeague = findViewById(R.id.image_acceptLeague);
+//        leagueLL1 = findViewById(R.id.leagueLL1);
+//        leagueLL2 = findViewById(R.id.leagueLL2);
 
         idTeam = getIntent().getStringExtra("idTeam");
         playerNumberET = findViewById(R.id.player_number_edt);
@@ -77,6 +79,15 @@ public class TeamActivity extends AppCompatActivity {
         playersRV = findViewById(R.id.recyclerView);
         editPlayer = findViewById(R.id.image_edit);
         deletePlayer = findViewById(R.id.image_delete);
+        showAdd = findViewById(R.id.show_add_image);
+        addPlayerLL = findViewById(R.id.add_player_ll);
+        backAdd = findViewById(R.id.back_image);
+
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.divider));
+        playersRV.addItemDecoration(itemDecorator);
+        playersRV.setLayoutManager(new LinearLayoutManager(this));
+        playersRV.setHasFixedSize(true);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
 
@@ -99,6 +110,22 @@ public class TeamActivity extends AppCompatActivity {
             }
         });
 
+        showAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAdd.setVisibility(View.GONE);
+                addPlayerLL.setVisibility(View.VISIBLE);
+            }
+        });
+
+        backAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAdd.setVisibility(View.VISIBLE);
+                addPlayerLL.setVisibility(View.GONE);
+            }
+        });
+
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +134,9 @@ public class TeamActivity extends AppCompatActivity {
                 playersRV.setHasFixedSize(true);
                 playersRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 fetch(idTeam);
+                showAdd.setVisibility(View.VISIBLE);
+                addPlayerLL.setVisibility(View.GONE);
+
             }
         });
 
@@ -114,33 +144,33 @@ public class TeamActivity extends AppCompatActivity {
         playersRV.setHasFixedSize(true);
         fetch(idTeam);
 
-        editTeamName.setOnClickListener(new View.OnClickListener() {
+       /* editTeamName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editTeamName();
             }
-        });
+        });*/
 
-        acceptTeamName.setOnClickListener(new View.OnClickListener() {
+   /*     acceptTeamName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveTeamName();
             }
-        });
+        });*/
 
-        editLeague.setOnClickListener(new View.OnClickListener() {
+  /*      editLeague.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editLeague();
             }
-        });
+        });*/
 
-        acceptLeague.setOnClickListener(new View.OnClickListener() {
+        /*acceptLeague.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 acceptChanges();
             }
-        });
+        });*/
     }
 
 
@@ -218,7 +248,7 @@ public class TeamActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         holder.playerNumberET.setText(holder.playerNumberTV.getText().toString());
                         holder.playerNameET.setText(holder.playerNameTV.getText().toString());
-                        holder.playerLL1.setVisibility(View.INVISIBLE);
+                        holder.playerLL1.setVisibility(View.GONE);
                         holder.playerLL2.setVisibility(View.VISIBLE);
                     }
                 });
@@ -230,14 +260,21 @@ public class TeamActivity extends AppCompatActivity {
                         holder.playerNumberTV.setText(holder.playerNumberET.getText().toString());
                         holder.playerNameTV.setText(holder.playerNameET.getText().toString());
                         holder.playerLL1.setVisibility(View.VISIBLE);
-                        holder.playerLL2.setVisibility(View.INVISIBLE);
+                        holder.playerLL2.setVisibility(View.GONE);
 
                         databaseReferencePlayers.child(model.getId()).child("number").setValue(holder.playerNumberTV.getText().toString());
                         databaseReferencePlayers.child(model.getId()).child("nameAndLastname").setValue(holder.playerNameTV.getText().toString());
 
                     }
                 });
-                ;
+
+                holder.cancelEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        holder.playerLL1.setVisibility(View.VISIBLE);
+                        holder.playerLL2.setVisibility(View.GONE);
+                    }
+                });
             }
         };
         adapter.startListening();
@@ -267,7 +304,7 @@ public class TeamActivity extends AppCompatActivity {
 
         teamNameTV.setText(teamNameET.getText().toString());
         teamNameLL1.setVisibility(View.VISIBLE);
-        teamNameLL2.setVisibility(View.INVISIBLE);
+        teamNameLL2.setVisibility(View.GONE);
 
         databaseReference.child(idTeam).child("name").setValue(teamNameTV.getText().toString());
 

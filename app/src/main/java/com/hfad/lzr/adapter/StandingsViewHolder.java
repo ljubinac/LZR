@@ -10,7 +10,7 @@ import com.hfad.lzr.R;
 
 public class StandingsViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView positionTV, teamNameTV, totalGamesTV, wGamesTV, lGamesTV, ptsPlusTV, ptsMinusTV, pointsTV;
+    private TextView positionTV, teamNameTV, totalGamesTV, wGamesTV, lGamesTV, ptsPlusMinusTV, pointsTV;
 
     public StandingsViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -19,8 +19,7 @@ public class StandingsViewHolder extends RecyclerView.ViewHolder {
         totalGamesTV = itemView.findViewById(R.id.totalGamesTV);
         wGamesTV = itemView.findViewById(R.id.wGamesTV);
         lGamesTV = itemView.findViewById(R.id.lGamesTV);
-        ptsPlusTV = itemView.findViewById(R.id.ptsPlusTV);
-        ptsMinusTV = itemView.findViewById(R.id.ptsMinusTV);
+        ptsPlusMinusTV = itemView.findViewById(R.id.ptsPlusMinusTV);
         pointsTV = itemView.findViewById(R.id.pointsTV);
     }
 }

@@ -8,42 +8,36 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar"></include>
+        layout="@layout/toolbar_standings"></include>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_height="100dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/header_gradient">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="@string/choose_league"
-            android:textColor="@color/text"
-            android:textStyle="bold" />
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginRight="30dp"/>
 
         <Spinner
             android:id="@+id/choose_league"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="175dp"
+            android:layout_height="44dp"
             android:layout_gravity="center"
+            android:background="@drawable/spinner_custom"
+            android:elevation="3dp"
             android:entries="@array/leagues" />
 
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginVertical="15dp"
-        android:text="@string/standings"
-        android:textColor="@color/text"
-        android:textSize="22dp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/ll1"
@@ -51,8 +45,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="4dp"
-
+        android:padding="16dp"
         >
 
         <TextView
@@ -60,20 +53,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/positionTitleTV"
+            android:text=""
             android:textColor="@color/text"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:gravity="center"/>
 
         <TextView
             android:id="@+id/teamNameTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="@string/teamNameTitleTV"
+            android:text=""
             android:textColor="@color/text"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/totalGamesTitleTV"
@@ -83,7 +75,7 @@
             android:text="@string/totalGamesTitleTV"
             android:textColor="@color/text"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:gravity="center"/>
 
         <TextView
             android:id="@+id/wGamesTitleTV"
@@ -93,7 +85,8 @@
             android:text="@string/wGamesTitleTV"
             android:textColor="@color/text"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:gravity="center"
+            />
 
         <TextView
             android:id="@+id/lGamesTitleTV"
@@ -103,19 +96,19 @@
             android:text="@string/lGamesTitleTV"
             android:textColor="@color/text"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:gravity="center"/>
 
         <TextView
-            android:id="@+id/ptsPlusTitleTV"
+            android:id="@+id/ptsPlusMinusTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/ptsPlusTitleTV"
+            android:text="@string/ptsPlusMinusTitleTV"
             android:textColor="@color/text"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:gravity="center"/>
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/ptsMinusTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -123,7 +116,7 @@
             android:text="@string/ptsMinusTitleTV"
             android:textColor="@color/text"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
 
         <TextView
             android:id="@+id/pointsTitleTV"
@@ -133,7 +126,8 @@
             android:text="@string/pointsTitleTV"
             android:textColor="@color/text"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="center"/>
 
     </LinearLayout>
 
@@ -141,10 +135,10 @@
         android:id="@+id/standingsRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:paddingHorizontal="16dp"/>
 
-    <Button
+    <!--<Button
         android:id="@+id/createPdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,7 +149,7 @@
         android:id="@+id/sharePdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_share" />
+        android:text="@string/button_share" />-->
 
 
 </LinearLayout>

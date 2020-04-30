@@ -25,4 +25,6 @@
 
     <color name="drop_down_arrow">#99000000</color>
 
+    <color name="grey">#b3b3b3</color>
+
 </resources>

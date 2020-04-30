@@ -21,7 +21,7 @@ public class PlayerViewHolder extends RecyclerView.ViewHolder {
     public ImageView playerDelete;
     public EditText playerNumberET;
     public EditText playerNameET;
-    public ImageView playerAccept;
+    public ImageView playerAccept, cancelEdit;
 
     public PlayerViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -34,5 +34,6 @@ public class PlayerViewHolder extends RecyclerView.ViewHolder {
         playerNumberET = itemView.findViewById(R.id.player_number_et);
         playerNameET = itemView.findViewById(R.id.player_name_et);
         playerAccept = itemView.findViewById(R.id.image_accept);
+        cancelEdit = itemView.findViewById(R.id.cancel_edit_image);
     }
 }

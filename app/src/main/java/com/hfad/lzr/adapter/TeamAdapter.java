@@ -29,7 +29,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
     static class ViewHolder extends  RecyclerView.ViewHolder{
 
-        TextView positionTV, teamNameTV, totalGamesTV, wGamesTV, lGamesTV, ptsPlusTV, ptsMinusTV, pointsTV;
+        TextView positionTV, teamNameTV, totalGamesTV, wGamesTV, lGamesTV, ptsPlusMinusTV, pointsTV;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -38,8 +38,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
             totalGamesTV = itemView.findViewById(R.id.totalGamesTV);
             wGamesTV = itemView.findViewById(R.id.wGamesTV);
             lGamesTV = itemView.findViewById(R.id.lGamesTV);
-            ptsPlusTV = itemView.findViewById(R.id.ptsPlusTV);
-            ptsMinusTV = itemView.findViewById(R.id.ptsMinusTV);
+            ptsPlusMinusTV = itemView.findViewById(R.id.ptsPlusMinusTV);
             pointsTV = itemView.findViewById(R.id.pointsTV);
         }
 
@@ -73,8 +72,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Team team = mTeamList.get(position);
         holder.teamNameTV.setText(team.getName());
-        holder.ptsPlusTV.setText(String.valueOf(team.getPointsScored()));
-        holder.ptsMinusTV.setText(String.valueOf(team.getPointsReceived()));
+        holder.ptsPlusMinusTV.setText(String.valueOf(team.getPointsScored() - team.getPointsReceived()));
         holder.pointsTV.setText(String.valueOf(team.getPoints()));
         holder.totalGamesTV.setText(String.valueOf((team.getPlayed())));
         holder.wGamesTV.setText(String.valueOf(team.getWin()));

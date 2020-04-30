@@ -68,7 +68,7 @@
     <string name="totalGamesTitleTV" translatable="false">P</string>
     <string name="wGamesTitleTV" translatable="false">W</string>
     <string name="lGamesTitleTV" translatable="false">L</string>
-    <string name="ptsPlusTitleTV" translatable="false">+</string>
+    <string name="ptsPlusMinusTitleTV" translatable="false">+-</string>
     <string name="ptsMinusTitleTV" translatable="false">-</string>
     <string name="pointsTitleTV" translatable="false">PTS</string>
     <string name="start">Start</string>
@@ -173,6 +173,8 @@
     <string name="game_date">Date</string>
     <string name="game_time">Time</string>
     <string name="game_hall">Hall</string>
+
+    <string name="team">Team</string>
 
 
 </resources>
