@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,6 +60,7 @@ public class StandingsActivity extends AppCompatActivity {
 
     Button share, create;
     String myFilePath;
+    FloatingActionButton fab;
 
     Toolbar toolbar;
 
@@ -73,6 +75,7 @@ public class StandingsActivity extends AppCompatActivity {
         standingsRV = findViewById(R.id.standingsRV);
         leagueSpinner = findViewById(R.id.choose_league);
 
+        fab = findViewById(R.id.sharePdfFab);
        /* share = findViewById(R.id.sharePdf);
         create = findViewById(R.id.createPdf);*/
 

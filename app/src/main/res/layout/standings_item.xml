@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="1dp">-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp">
 
     <LinearLayout
         android:id="@+id/ll1"
@@ -24,9 +20,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:textColor="@color/text_grey_light"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="1dp"/>
 
         <TextView
             android:id="@+id/teamNameTV"
@@ -35,63 +32,59 @@
             android:layout_weight="3"
             android:textColor="@color/text"
             android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="16sp"
+            android:layout_marginHorizontal="1dp" />
 
         <TextView
             android:id="@+id/totalGamesTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/text"
+            android:textColor="@color/text_grey"
             android:textSize="18sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_marginHorizontal="1dp"/>
 
         <TextView
             android:id="@+id/wGamesTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:textColor="@color/text_grey"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="1dp"/>
 
         <TextView
             android:id="@+id/lGamesTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:textColor="@color/text_grey"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="1dp"/>
 
         <TextView
             android:id="@+id/ptsPlusMinusTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:gravity="center"/>
-
-        <!--<TextView
-            android:id="@+id/ptsMinusTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/text"
-            android:textStyle="bold"
-            android:textSize="18sp" />-->
+            android:textColor="@color/text_grey"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="1dp"/>
 
         <TextView
             android:id="@+id/pointsTV"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textColor="@color/text"
+            android:textColor="@color/text_grey_dark"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:gravity="center"
-            android:background="@color/grey_start"/>
+            android:layout_marginHorizontal="1dp"/>
     </LinearLayout>
 </LinearLayout>
 

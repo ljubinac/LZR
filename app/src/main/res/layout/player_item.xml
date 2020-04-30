@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="16dp"
     >
 
     <LinearLayout
@@ -19,8 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@color/orange_start"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
+        android:textSize="16sp"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/player_name_tv"
@@ -28,13 +29,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:textColor="@color/text"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
+        android:textSize="16sp"/>
 
         <ImageView
         android:id="@+id/image_edit"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="21dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/ic_edit"
         android:tint="#9F3F21"
@@ -43,7 +43,7 @@
         <ImageView
             android:id="@+id/image_delete"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="21dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_delete"
             android:tint="#9F3F21"

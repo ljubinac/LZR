@@ -48,6 +48,7 @@ public class TeamActivity extends AppCompatActivity {
     FirebaseRecyclerOptions<Player> options;
     FirebaseRecyclerAdapter adapter;
     Toolbar toolbar;
+    View divider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class TeamActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        divider = findViewById(R.id.divider);
         teamNameTV = findViewById(R.id.teamNameTV);
         teamLeagueTV = findViewById(R.id.teamLeagueTV);
 //        teamNameET = findViewById(R.id.teamNameET);
@@ -113,8 +115,9 @@ public class TeamActivity extends AppCompatActivity {
         showAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAdd.setVisibility(View.GONE);
+                showAdd.setVisibility(View.INVISIBLE);
                 addPlayerLL.setVisibility(View.VISIBLE);
+                divider.setVisibility(View.VISIBLE);
             }
         });
 
@@ -123,6 +126,7 @@ public class TeamActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showAdd.setVisibility(View.VISIBLE);
                 addPlayerLL.setVisibility(View.GONE);
+                divider.setVisibility(View.GONE);
             }
         });
 

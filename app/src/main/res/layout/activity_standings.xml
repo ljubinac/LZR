@@ -13,18 +13,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@drawable/header_gradient"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:background="@drawable/header_gradient">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
             android:gravity="center_vertical"
             android:text="@string/choose_league"
-            android:textSize="14sp"
             android:textColor="@color/white"
-            android:layout_marginRight="30dp"/>
+            android:textSize="14sp" />
 
         <Spinner
             android:id="@+id/choose_league"
@@ -45,18 +45,18 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp"
-        >
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/positionTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text=""
             android:textColor="@color/text"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:textSize="16sp"
+            android:layout_marginHorizontal="1dp" />
 
         <TextView
             android:id="@+id/teamNameTitleTV"
@@ -65,78 +65,153 @@
             android:layout_weight="3"
             android:text=""
             android:textColor="@color/text"
-            android:textSize="18sp"/>
+            android:textSize="16sp"
+            android:layout_marginHorizontal="1dp" />
 
         <TextView
             android:id="@+id/totalGamesTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/totalGamesTitleTV"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:textColor="@color/text_grey_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="1dp" />
 
         <TextView
             android:id="@+id/wGamesTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/wGamesTitleTV"
-            android:textColor="@color/text"
-            android:textSize="18sp"
             android:gravity="center"
-            />
+            android:text="@string/wGamesTitleTV"
+            android:textColor="@color/text_grey_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="1dp" />
 
         <TextView
             android:id="@+id/lGamesTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/lGamesTitleTV"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:textColor="@color/text_grey_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="1dp"/>
 
         <TextView
             android:id="@+id/ptsPlusMinusTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/ptsPlusMinusTitleTV"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:gravity="center"/>
+            android:textStyle="bold"
+            android:textColor="@color/text_grey_dark"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="1dp" />
 
-       <!-- <TextView
-            android:id="@+id/ptsMinusTitleTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/ptsMinusTitleTV"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:textStyle="bold" />-->
+        <!-- <TextView
+             android:id="@+id/ptsMinusTitleTV"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:text="@string/ptsMinusTitleTV"
+             android:textColor="@color/text"
+             android:textSize="18sp"
+             android:textStyle="bold" />-->
 
         <TextView
             android:id="@+id/pointsTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/pointsTitleTV"
             android:textColor="@color/text"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:gravity="center"/>
+            android:layout_marginHorizontal="1dp"/>
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/standingsRV"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:paddingHorizontal="16dp"/>
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
+            >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="1dp"></View>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:layout_marginHorizontal="1dp"></View>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="1dp"></View>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="1dp"></View>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="1dp"></View>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="1dp"></View>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/standings_gradient"
+                android:layout_marginHorizontal="1dp"></View>
+
+
+
+        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sharePdfFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/create_game"
+            android:src="@drawable/fab_gradient" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/standingsRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+
+
+    </RelativeLayout>
+
 
     <!--<Button
         android:id="@+id/createPdf"

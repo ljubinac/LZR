@@ -105,8 +105,8 @@
     <string name="kosa_crta" translatable="false">/</string>
 
     <string name="team_name_hint">Team name</string>
-    <string name="player_number_hint">#No</string>
-    <string name="player_name_hint">Name and lastname</string>
+    <string name="player_number_hint">#</string>
+    <string name="player_name_hint">Name</string>
     <string name="button_save">Save</string>
     <string name="button_share">Share</string>
     <string name="button_settings">Settings</string>
