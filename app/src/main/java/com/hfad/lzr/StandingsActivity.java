@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,12 +39,16 @@ import com.hfad.lzr.model.Team;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.parser.Line;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 
 public class StandingsActivity extends AppCompatActivity {
 
@@ -62,6 +67,8 @@ public class StandingsActivity extends AppCompatActivity {
     String myFilePath;
     FloatingActionButton fab;
 
+    LinearLayout standingsLL;
+
     Toolbar toolbar;
 
     @Override
@@ -74,7 +81,7 @@ public class StandingsActivity extends AppCompatActivity {
 
         standingsRV = findViewById(R.id.standingsRV);
         leagueSpinner = findViewById(R.id.choose_league);
-
+        standingsLL = findViewById(R.id.standings_ll);
         fab = findViewById(R.id.sharePdfFab);
        /* share = findViewById(R.id.sharePdf);
         create = findViewById(R.id.createPdf);*/
@@ -113,53 +120,31 @@ public class StandingsActivity extends AppCompatActivity {
 
         fetch("Liga A");
 
-      /*  create.setEnabled(true);
-        share.setEnabled(false);
-
-        share.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                sharePdf();
+            public void onClick(View view) {
+                createPdf();
             }
-        });*/
-
+        });
     }
 
-    public void sharePdf(){
-        File fileWithinMyDir = new File(myFilePath);
 
-        Uri pdfUri = Uri.fromFile(fileWithinMyDir);
+    public void createPdf() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            pdfUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", fileWithinMyDir);
-        }
-
-        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-        intentShareFile.setType("application/pdf");
-        intentShareFile.putExtra(Intent.EXTRA_STREAM, pdfUri);
-
-        intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                "Sharing File...");
-        intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-
-        startActivity(Intent.createChooser(intentShareFile, "Share File"));
-    }
-
-    public void createPdf(View view){
-
-        if(ContextCompat.checkSelfPermission(StandingsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(StandingsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestStoragePermission();
         }
-
-        byte[] bytesA = createImage(standingsRV);
+        fab.setVisibility(View.INVISIBLE);
+        byte[] bytesA = createImage(standingsLL);
         imageToPDF(bytesA);
-        share.setEnabled(true);
+        sharePdf();
+        fab.setVisibility(View.VISIBLE);
     }
 
-    public byte[] createImage(RecyclerView recyclerView){
-        recyclerView.setDrawingCacheEnabled(true);
-        recyclerView.buildDrawingCache();
-        Bitmap bm = recyclerView.getDrawingCache();
+    public byte[] createImage(LinearLayout standingsLL) {
+        standingsLL.setDrawingCacheEnabled(true);
+        standingsLL.buildDrawingCache();
+        Bitmap bm = standingsLL.getDrawingCache();
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
         return bytes.toByteArray();
@@ -168,8 +153,15 @@ public class StandingsActivity extends AppCompatActivity {
     public void imageToPDF(byte[] bytesA) {
         try {
             Document document = new Document();
-            String dirpath = android.os.Environment.getExternalStorageDirectory().toString();
-            myFilePath = dirpath + "/newPdf.pdf";
+            String dirpath = getApplicationContext().getCacheDir().toString();
+
+            Date c = Calendar.getInstance().getTime();
+            System.out.println("Current time => " + c);
+
+            SimpleDateFormat df = new SimpleDateFormat("dd_MM_yyyy");
+            String formattedDate = df.format(c);
+
+            myFilePath = dirpath + "/standings_" + formattedDate + "_" + leagueSpinner.getSelectedItem().toString() + ".pdf";
             PdfWriter.getInstance(document, new FileOutputStream(myFilePath)); //  Change pdf's name.
             document.open();
             Image imgA = Image.getInstance(bytesA);
@@ -179,22 +171,9 @@ public class StandingsActivity extends AppCompatActivity {
 
             //imgA.setSpacingAfter(50f);
             //imgA.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
-           // document.add(new Paragraph(game.getGameDate() + " " + game.getTeamAnaziv() + " vs. " + game.getTeamBnaziv()));
-           // document.add(Chunk.NEWLINE);
-           // document.add(new Paragraph(game.getTeamAnaziv()));
-            document.add(imgA);
-           // document.add(Chunk.NEWLINE);
-
-           /* Image imgB = Image.getInstance(bytesB);
-            float scalerB = ((document.getPageSize().getWidth() - document.leftMargin()
-                    - document.rightMargin() - 0) / imgB.getWidth()) * 100;
-            imgB.scalePercent(scalerB);
-            //imgB.setPaddingTop(20f);
-            //imgB.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_CENTER);
-            //imgB.setSpacingAfter();
-            document.add(new Paragraph(game.getTeamBnaziv()));
-            document.add(imgB);*/
-
+            // document.add(new Paragraph(game.getGameDate() + " " + game.getTeamAnaziv() + " vs. " + game.getTeamBnaziv()));
+            // document.add(Chunk.NEWLINE);
+            // document.add(new Paragraph(game.getTeamAnaziv()));
             document.add(imgA);
             document.close();
             Toast.makeText(this, "PDF Generated successfully!..", Toast.LENGTH_SHORT).show();
@@ -203,12 +182,30 @@ public class StandingsActivity extends AppCompatActivity {
         }
     }
 
-    private void requestStoragePermission(){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+    public void sharePdf() {
+        File fileWithinMyDir = new File(myFilePath);
+        Uri pdfUri = Uri.fromFile(fileWithinMyDir);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            pdfUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", fileWithinMyDir);
+        }
+
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        intentShareFile.setType("application/pdf");
+        intentShareFile.putExtra(Intent.EXTRA_STREAM, pdfUri);
+        intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                "Sharing File...");
+        intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+
+        startActivity(Intent.createChooser(intentShareFile, "Share File"));
+    }
+
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             new AlertDialog.Builder(this).setTitle("Permission needed").setMessage("This permission is needed because of that and that").setPositiveButton("ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    ActivityCompat.requestPermissions(StandingsActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                    ActivityCompat.requestPermissions(StandingsActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
                 }
             }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                 @Override
@@ -216,15 +213,15 @@ public class StandingsActivity extends AppCompatActivity {
                     dialogInterface.dismiss();
                 }
             }).create().show();
-        } else{
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == STORAGE_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Permission NOT GRANTED", Toast.LENGTH_LONG).show();
@@ -232,12 +229,12 @@ public class StandingsActivity extends AppCompatActivity {
         }
     }
 
-    private void fetch(String league){
+    private void fetch(String league) {
         databaseReference.orderByChild("league").equalTo(league).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 teams.clear();
-                for (DataSnapshot dsChild : dataSnapshot.getChildren()){
+                for (DataSnapshot dsChild : dataSnapshot.getChildren()) {
                     Team team = dsChild.getValue(Team.class);
                     teams.add(team);
                 }

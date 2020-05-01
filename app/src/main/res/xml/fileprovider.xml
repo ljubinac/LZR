@@ -4,10 +4,12 @@
     <!-- See table below.  The external-files-path DOES NOT require external storage permissions. -->
 
     <external-path
-
         name="external_files"
-
         path="." />
+    
+    <cache-path
+        name="cache"
+        path="."/>
 
 
 
