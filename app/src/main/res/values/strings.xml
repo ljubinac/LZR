@@ -175,6 +175,17 @@
     <string name="game_hall">Hall</string>
 
     <string name="team">Team</string>
+    <string name="sign_up">Sign up</string>
+    <string name="login">Login</string>
+
+    <string name="full_name_hint_register">Full name</string>
+    <string name="email_hint_register">Email</string>
+    <string name="password_hint_register">Password</string>
+    <string name="text_go_to_log_in">Already have an account? Log in</string>
+    <string name="text_go_to_sign_up">Don\'t have an account? Sign up</string>
+    <string name="text_forgot_password">Forgot password?</string>
+    <string name="togline">Togline...</string>
+    <string name="log_in">Log in</string>
 
 
 </resources>

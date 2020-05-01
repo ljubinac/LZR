@@ -10,6 +10,7 @@
     <color name="text_grey">#979797</color>
     <color name="text_grey_light">#D2D2D2</color>
     <color name="text_grey_dark">#344955</color>
+    <color name="edit_text_grey">#E5E5E5</color>
     <color name="red_btn">#ff0000</color>
     <color name="green_btn">#008000</color>
     <color name="team_bg">#ebebe0</color>
