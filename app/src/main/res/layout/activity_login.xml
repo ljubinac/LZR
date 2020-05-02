@@ -8,10 +8,24 @@
     tools:context=".RegisterActivity">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp">
+
+        <ImageView
+            android:id="@+id/login_back_arrow_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_arrow"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="48dp"
         >
 
         <ImageView
@@ -84,7 +98,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="219dp">
+        android:layout_marginTop="194dp">
 
         <TextView
             android:layout_width="match_parent"
