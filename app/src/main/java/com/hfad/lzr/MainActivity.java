@@ -81,6 +81,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (getIntent().getStringExtra("activity") != null) {
+            if (getIntent().getStringExtra("activity").equals("CreatingMatchActivity")) {
+                TabLayout.Tab tab = tabLayout.getTabAt(1);
+                tab.select();
+            }
+        } else {
+            TabLayout.Tab tab = tabLayout.getTabAt(0);
+            tab.select();
+        }
+        navigationView.setCheckedItem(R.id.nav_games);
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -92,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super(fm, behavior);
         }
 
-        public void addFragment(Fragment fragment, String title){
+        public void addFragment(Fragment fragment, String title) {
             fragments.add(fragment);
             fragmentTitle.add(title);
         }
@@ -127,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_games:
                 break;
             case R.id.nav_teams:

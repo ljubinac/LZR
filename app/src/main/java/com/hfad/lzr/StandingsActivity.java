@@ -156,7 +156,6 @@ public class StandingsActivity extends AppCompatActivity {
             String dirpath = getApplicationContext().getCacheDir().toString();
 
             Date c = Calendar.getInstance().getTime();
-            System.out.println("Current time => " + c);
 
             SimpleDateFormat df = new SimpleDateFormat("dd_MM_yyyy");
             String formattedDate = df.format(c);

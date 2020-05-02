@@ -15,12 +15,17 @@
     <color name="green_btn">#008000</color>
     <color name="team_bg">#ebebe0</color>
     <color name="divider">#14212121</color>
+    <color name="default_background">#FAFAFA</color>
     
     <color name="orange_start">#F9AA33</color>
     <color name="orange_end">#D37C2B</color>
 
     <color name="blue_start">#344955</color>
     <color name="blue_end">#4A6EA8</color>
+    
+    <color name="tagline">#80344955</color>
+
+    <color name="link">#4A6EA8</color>
 
     <color name="grey_start">#e2eef5</color>
     <color name="grey_end">#e2eef5</color>

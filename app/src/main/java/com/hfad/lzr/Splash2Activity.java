@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 public class Splash2Activity extends AppCompatActivity {
 
@@ -24,7 +23,7 @@ public class Splash2Activity extends AppCompatActivity {
         goToSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Splash2Activity.this, RegisterActivity.class);
+                Intent intent = new Intent(Splash2Activity.this, SignupActivity.class);
                 startActivity(intent);
             }
         });

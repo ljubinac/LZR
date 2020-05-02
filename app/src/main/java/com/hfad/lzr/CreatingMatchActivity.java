@@ -67,6 +67,7 @@ public class CreatingMatchActivity extends AppCompatActivity {
                 Team teamB = teams.get(spinner2.getSelectedItemPosition());
                 Game game = new Game(id, teamA.getId(), teamB.getId(), "Date", "Time", teamA.getName(), teamB.getName(), false);
                 databaseReferenceGames.child(id).setValue(game);
+                intent.putExtra("activity", "CreatingMatchActivity");
                 startActivity(intent);
             }
         });
@@ -106,19 +107,6 @@ public class CreatingMatchActivity extends AppCompatActivity {
             }
         });
 
-// nesto ne radi, evo greske:
-      //  com.google.android.material.datepicker.MaterialDatePicker requires a value for the com.hfad.lzr:attr/materialCalendarTheme attribute to be set in your app theme. You can either set the attribute in your theme or update your theme to inherit from Theme.MaterialComponents (or a descendant).
-
- /*       MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
-        builder.setTitleText("Select a date");
-        final MaterialDatePicker materialDatePicker = builder.build();
-
-        datePickerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
-            }
-        });*/
     }
 
     public void fetch(final String league) {
