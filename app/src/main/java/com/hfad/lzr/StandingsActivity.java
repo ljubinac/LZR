@@ -63,7 +63,6 @@ public class StandingsActivity extends AppCompatActivity {
     TeamAdapter teamAdapter;
     RecyclerView.LayoutManager mLayoutManager;
 
-    Button share, create;
     String myFilePath;
     FloatingActionButton fab;
 

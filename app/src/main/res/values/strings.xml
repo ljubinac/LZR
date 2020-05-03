@@ -191,4 +191,7 @@
     <string name="settings">Settings</string>
     <string name="sign_out">Sign out</string>
 
+    <string name="player_stats">Player stats</string>
+
+
 </resources>

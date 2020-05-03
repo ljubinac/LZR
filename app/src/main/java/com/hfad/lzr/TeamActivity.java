@@ -49,6 +49,7 @@ public class TeamActivity extends AppCompatActivity {
     FirebaseRecyclerAdapter adapter;
     Toolbar toolbar;
     View divider;
+    Team team;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,7 @@ public class TeamActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dsChild : dataSnapshot.getChildren()) {
-                    Team team = dsChild.getValue(Team.class);
+                    team = dsChild.getValue(Team.class);
                     idTeam = dsChild.getKey();
                     teamNameTV.setText(team.getName());
                     teamLeagueTV.setText(team.getLeague());
@@ -183,7 +184,7 @@ public class TeamActivity extends AppCompatActivity {
         String name = playerNameET.getText().toString();
         if (!TextUtils.isEmpty(number) || !TextUtils.isEmpty(name)) {
             String id = databaseReferencePlayers.push().getKey();
-            Player player = new Player(id, name, number, idTeam);
+            Player player = new Player(id, name, number, idTeam, team.getLeague());
             player.setId(id);
             player.setTeamId(idTeam);
             databaseReferencePlayers.child(id).setValue(player);

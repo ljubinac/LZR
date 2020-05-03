@@ -11,15 +11,19 @@ public class Player implements Serializable {
     private String nameAndLastname;
     private String number;
     private String teamId;
+    private String league;
+    private int totalPoints;
 
     public Player() {
     }
 
-    public Player(String id, String nameAndLastname, String number, String teamId) {
+    public Player(String id, String nameAndLastname, String number, String teamId, String league) {
         this.id = id;
         this.nameAndLastname = nameAndLastname;
         this.number = number;
         this.teamId = teamId;
+        this.league = league;
+        this.totalPoints = 0;
     }
 
     public String getTeamId() {
@@ -35,6 +39,7 @@ public class Player implements Serializable {
         this.nameAndLastname = player.nameAndLastname;
         this.number = player.number;
         this.teamId = player.teamId;
+        this.totalPoints = player.totalPoints;
     }
 
     public Player(String id, String nameAndLastname, String number) {
@@ -51,6 +56,22 @@ public class Player implements Serializable {
     public void changeText1(String text, String text2){
         number = text;
         nameAndLastname = text2;
+    }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
+    public String getLeague() {
+        return league;
+    }
+
+    public void setLeague(String league) {
+        this.league = league;
     }
 
     public String getId() {

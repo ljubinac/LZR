@@ -21,6 +21,10 @@
             android:icon="@drawable/ic_standings_icon"
             android:iconTint="@color/colorPrimary"/>
         <item
+            android:id="@+id/nav_player_stats"
+            android:title="@string/player_stats"
+            android:iconTint="@color/colorPrimary"/>
+        <item
             android:id="@+id/nav_settings"
             android:title="@string/settings"
             android:icon="@drawable/ic_settings_24px"

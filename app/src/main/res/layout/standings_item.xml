@@ -87,6 +87,3 @@
             android:layout_marginHorizontal="1dp"/>
     </LinearLayout>
 </LinearLayout>
-
-<!--
-</androidx.cardview.widget.CardView>-->

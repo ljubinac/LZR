@@ -85,7 +85,12 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         PlayerGame playerGame = mPlayersList.get(position);
         holder.playerGameNumberTV.setText(playerGame.getNumber());
-        holder.playerLastnameTV.setText(playerGame.getNameAndLastname().split(" ")[1]);
+        String[] playerName = playerGame.getNameAndLastname().split(" ");
+        if(playerName.length < 2){
+            holder.playerLastnameTV.setText(playerName[0]);
+        } else {
+            holder.playerLastnameTV.setText(playerName[1]);
+        }
         holder.itemView.setSelected(selectedPos == position);
         if (position < 5) {
             holder.cll.setmIsIn(true);

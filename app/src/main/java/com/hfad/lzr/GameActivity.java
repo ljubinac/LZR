@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hfad.lzr.adapter.PlayersGameAdapter;
 import com.hfad.lzr.model.Game;
+import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
 
@@ -29,7 +30,7 @@ import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
 
-    DatabaseReference databaseReference, databaseReferenceGames;
+    DatabaseReference databaseReference, databaseReferenceGames, databaseReferencePlayers;
     ArrayList<PlayerGame> playersGameA, playersGameB;
     RecyclerView teamArv, teamBrv;
     PlayersGameAdapter adapterA, adapterB;
@@ -135,6 +136,8 @@ public class GameActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
 
         databaseReferenceGames = FirebaseDatabase.getInstance().getReference("games");
+
+        databaseReferencePlayers = FirebaseDatabase.getInstance().getReference("players");
 
         databaseReference.orderByChild("id").equalTo(game.getIdTeamA()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -476,6 +479,15 @@ public class GameActivity extends AppCompatActivity {
         llFinishGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (int i = 0; i < playersGameA.size(); i++){
+                    PlayerGame playerGame = playersGameA.get(i);
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + playerGame.getPm2() + playerGame.getPm3());
+                }
+
+                for (int i = 0; i < playersGameB.size(); i++){
+                    PlayerGame playerGame = playersGameB.get(i);
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + playerGame.getPm2() + playerGame.getPm3());
+                }
                 game.setResA(resA);
                 game.setResB(resB);
                 teamA.setPointsScored(teamA.getPointsScored() + resA);
