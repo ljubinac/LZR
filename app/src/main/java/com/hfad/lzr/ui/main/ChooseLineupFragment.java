@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,6 +82,9 @@ public class ChooseLineupFragment extends Fragment {
         lineupCheckbox = root.findViewById(R.id.lineup_checkbox);
         firstLineupCheckBox = root.findViewById(R.id.first_lineup_checkbox);
 
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
+        lineupRV.addItemDecoration(itemDecorator);
         lineupRV.setHasFixedSize(true);
         lineupRV.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -112,6 +117,7 @@ public class ChooseLineupFragment extends Fragment {
                             onItemUncheck(model);
                             holder.lineupCheckbox.setChecked(false);
                             holder.firstLineupCheckBox.setChecked(false);
+                            holder.ll1.setBackgroundColor(getResources().getColor(R.color.default_background));
                         }
                     }
                 });
@@ -123,9 +129,11 @@ public class ChooseLineupFragment extends Fragment {
                             onItemFirstCheck(model);
                             holder.lineupCheckbox.setChecked(true);
                             holder.firstLineupCheckBox.setChecked(true);
+                            holder.ll1.setBackgroundColor(getResources().getColor(R.color.starting5_background));
                         } else {
                             onItemUncheck(model);
                             holder.firstLineupCheckBox.setChecked(false);
+                            holder.ll1.setBackgroundColor(getResources().getColor(R.color.default_background));
                         }
                     }
                 });

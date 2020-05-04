@@ -38,4 +38,6 @@
 
     <color name="standings_end">#00E2EEF5</color>
     <color name="standings_start">#E2EEF5</color>
+
+    <color name="starting5_background">#6BE2EEF5</color>
 </resources>

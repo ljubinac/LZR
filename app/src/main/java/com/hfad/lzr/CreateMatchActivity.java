@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +23,7 @@ import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
 
-public class CreatingMatchActivity extends AppCompatActivity {
+public class CreateMatchActivity extends AppCompatActivity {
 
     Spinner spinner1, spinner2, leagueSpinner;
     DatabaseReference databaseReference;
@@ -80,12 +79,12 @@ public class CreatingMatchActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
 
         teamsSpinnerA = new ArrayList<>();
-        adapterTeamA = new ArrayAdapter<String>(CreatingMatchActivity.this,
+        adapterTeamA = new ArrayAdapter<String>(CreateMatchActivity.this,
                 android.R.layout.simple_spinner_dropdown_item,
                 teamsSpinnerA);
 
         teamsSpinnerB = new ArrayList<>();
-        adapterTeamA = new ArrayAdapter<String>(CreatingMatchActivity.this,
+        adapterTeamA = new ArrayAdapter<String>(CreateMatchActivity.this,
                 android.R.layout.simple_spinner_dropdown_item,
                 teamsSpinnerB);
 

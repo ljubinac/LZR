@@ -191,6 +191,9 @@
     <string name="settings">Settings</string>
     <string name="sign_out">Sign out</string>
 
+    <string name="todays_roster">Today\'s \nroaster</string>
+    <string name="starting5">Starting \nfive</string>
+
     <string name="player_stats">Player stats</string>
 
     <string-array name="parametres_array">

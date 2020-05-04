@@ -50,7 +50,7 @@
             android:name=".CreateTeamActivity"
             android:configChanges="screenSize|orientation|screenLayout" />
         <activity
-            android:name=".CreatingMatchActivity"
+            android:name=".CreateMatchActivity"
             android:configChanges="screenSize|orientation|screenLayout" />
         <activity android:name=".MainActivity" />
     </application>

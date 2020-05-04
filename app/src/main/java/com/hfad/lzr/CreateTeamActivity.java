@@ -3,6 +3,7 @@ package com.hfad.lzr;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -79,7 +81,7 @@ public class CreateTeamActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if(getIntent().getStringExtra("prev_activity").equals("CreatingMatchActivity")){
-                    Intent intent = new Intent(getApplicationContext(), CreatingMatchActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), CreateMatchActivity.class);
                     startActivity(intent);
                 }
             }
@@ -157,5 +159,16 @@ public class CreateTeamActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.player_not_added, Toast.LENGTH_LONG).show();
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }
