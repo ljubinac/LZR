@@ -481,12 +481,27 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 for (int i = 0; i < playersGameA.size(); i++){
                     PlayerGame playerGame = playersGameA.get(i);
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + playerGame.getPm2() + playerGame.getPm3());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
+
                 }
 
                 for (int i = 0; i < playersGameB.size(); i++){
                     PlayerGame playerGame = playersGameB.get(i);
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + playerGame.getPm2() + playerGame.getPm3());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
                 }
                 game.setResA(resA);
                 game.setResB(resB);

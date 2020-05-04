@@ -42,6 +42,15 @@ public class PlayerStatsActivity extends AppCompatActivity {
     RecyclerView.LayoutManager mLayoutManager;
     Toolbar toolbar;
 
+    Spinner parameterSpinner;
+    ArrayAdapter<String> adapterListOfParameters;
+    ArrayList<String> parameters;
+
+    String selectedLeague;
+    String selectedParameter;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +62,18 @@ public class PlayerStatsActivity extends AppCompatActivity {
         playerStatsRV = findViewById(R.id.player_stats_rv);
         leagueSpinner = findViewById(R.id.choose_league);
 
+        parameterSpinner = findViewById(R.id.choose_parameter);
+
         leagues = new ArrayList<>();
         leagues.add("Liga A");
         leagues.add("Liga B");
+        adapterListOfParameters = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
+        adapterListOfParameters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        parameters = new ArrayList<>();
+        parameters.add("PTS");
+        parameters.add("AST");
+
         adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
         adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -72,8 +90,8 @@ public class PlayerStatsActivity extends AppCompatActivity {
         leagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                fetch(selectedItem);
+                selectedLeague = parent.getItemAtPosition(position).toString();
+                fetch(selectedLeague, selectedParameter);
             }
 
             @Override
@@ -83,10 +101,23 @@ public class PlayerStatsActivity extends AppCompatActivity {
 
         });
 
-        fetch("Liga A");
+        parameterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedParameter = parent.getItemAtPosition(position).toString();
+                fetch(selectedLeague, selectedParameter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        fetch("Liga A", "PTS");
     }
 
-    private void fetch(String league) {
+    private void fetch(String league, final String parameter) {
         databaseReference.orderByChild("league").equalTo(league).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -96,11 +127,11 @@ public class PlayerStatsActivity extends AppCompatActivity {
                     players.add(player);
                 }
 
-//                Collections.sort(players);
+                Collections.sort(players);
 
                 playerStatsRV.setHasFixedSize(true);
                 mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                playerStatsAdapter = new PlayerStatsAdapter(players);
+                playerStatsAdapter = new PlayerStatsAdapter(players, parameter);
                 playerStatsRV.setLayoutManager(mLayoutManager);
                 playerStatsRV.setAdapter(playerStatsAdapter);
             }

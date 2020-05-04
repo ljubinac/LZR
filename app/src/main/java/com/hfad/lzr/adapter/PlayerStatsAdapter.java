@@ -17,20 +17,23 @@ import java.util.ArrayList;
 public class PlayerStatsAdapter extends RecyclerView.Adapter<PlayerStatsAdapter.PlayerStatsViewHolder> {
 
     private ArrayList<Player> mPlayersList;
+    String mSelectedParameter;
 
     static class PlayerStatsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView playerTV, ptsTV;
+        TextView postionTV, playerTV, parameterTV;
         public PlayerStatsViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            postionTV = itemView.findViewById(R.id.position_tv);
             playerTV = itemView.findViewById(R.id.player_tv);
-            ptsTV = itemView.findViewById(R.id.pts_tv);
+            parameterTV = itemView.findViewById(R.id.parameter_tv);
         }
     }
 
-    public PlayerStatsAdapter(ArrayList<Player> players) {
+    public PlayerStatsAdapter(ArrayList<Player> players, String selectedParameter) {
         mPlayersList = players;
+        mSelectedParameter = selectedParameter;
     }
 
     @NonNull
@@ -43,8 +46,25 @@ public class PlayerStatsAdapter extends RecyclerView.Adapter<PlayerStatsAdapter.
     @Override
     public void onBindViewHolder(@NonNull PlayerStatsViewHolder holder, int position) {
         Player player = mPlayersList.get(position);
+        holder.postionTV.setText(String.valueOf(position + 1));
         holder.playerTV.setText(player.getNameAndLastname());
-        holder.ptsTV.setText(String.valueOf(player.getTotalPoints()));
+        if(mSelectedParameter.equals("PTS")) {
+            holder.parameterTV.setText(String.valueOf(player.getTotalPoints()));
+        } else if (mSelectedParameter.equals("AST")) {
+            holder.parameterTV.setText(String.valueOf(player.getTotalAssists()));
+        } else if (mSelectedParameter.equals("REB")) {
+            holder.parameterTV.setText(String.valueOf(player.getTotalRebs()));
+        } else if (mSelectedParameter.equals("STL")) {
+            holder.parameterTV.setText(String.valueOf(player.getTotalSteals()));
+        } else if (mSelectedParameter.equals("BLK")) {
+            holder.parameterTV.setText(String.valueOf(player.getTotalBlocks()));
+        } else if (mSelectedParameter.equals("TOV")) {
+            holder.parameterTV.setText(String.valueOf(player.getTotalTurnovers()));
+        } else if (mSelectedParameter.equals("PF")) {
+            holder.parameterTV.setText(String.valueOf(player.getTotalFouls()));
+        } else if (mSelectedParameter.equals("TEH")) {
+            holder.parameterTV.setText(String.valueOf(player.getTotalTehnical()));
+        }
     }
 
     @Override

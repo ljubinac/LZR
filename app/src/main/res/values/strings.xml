@@ -193,5 +193,14 @@
 
     <string name="player_stats">Player stats</string>
 
-
+    <string-array name="parametres_array">
+        <item>PTS</item>
+        <item>AST</item>
+        <item>REB</item>
+        <item>STL</item>
+        <item>BLK</item>
+        <item>TOV</item>
+        <item>PF</item>
+        <item>TEH</item>
+    </string-array>
 </resources>

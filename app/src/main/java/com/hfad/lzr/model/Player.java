@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-public class Player implements Serializable {
+public class Player implements Serializable, Comparable<Player> {
 
     private String id;
     private String nameAndLastname;
@@ -13,6 +13,15 @@ public class Player implements Serializable {
     private String teamId;
     private String league;
     private int totalPoints;
+    private int totalRebs;
+    private int totalAssists;
+    private int totalSteals;
+    private int totalBlocks;
+    private int totalTurnovers;
+    private int totalFouls;
+    private int totalTehnical;
+    private int totalMinutes;
+    private int totalEff;
 
     public Player() {
     }
@@ -24,6 +33,14 @@ public class Player implements Serializable {
         this.teamId = teamId;
         this.league = league;
         this.totalPoints = 0;
+        this.totalRebs = 0;
+        this.totalAssists = 0;
+        this.totalSteals = 0;
+        this.totalBlocks = 0;
+        this.totalFouls = 0;
+        this.totalTurnovers = 0;
+        this.totalTehnical = 0;
+        this.totalEff = 0;
     }
 
     public String getTeamId() {
@@ -40,6 +57,14 @@ public class Player implements Serializable {
         this.number = player.number;
         this.teamId = player.teamId;
         this.totalPoints = player.totalPoints;
+        this.totalAssists = player.totalAssists;
+        this.totalRebs = player.totalRebs;
+        this.totalSteals = player.totalSteals;
+        this.totalBlocks = player.totalBlocks;
+        this.totalFouls = player.totalFouls;
+        this.totalTurnovers = player.totalTurnovers;
+        this.totalTehnical = player.totalTehnical;
+        this.totalEff = player.totalEff;
     }
 
     public Player(String id, String nameAndLastname, String number) {
@@ -56,6 +81,78 @@ public class Player implements Serializable {
     public void changeText1(String text, String text2){
         number = text;
         nameAndLastname = text2;
+    }
+
+    public int getTotalTurnovers() {
+        return totalTurnovers;
+    }
+
+    public void setTotalTurnovers(int totalTurnovers) {
+        this.totalTurnovers = totalTurnovers;
+    }
+
+    public int getTotalFouls() {
+        return totalFouls;
+    }
+
+    public void setTotalFouls(int totalFouls) {
+        this.totalFouls = totalFouls;
+    }
+
+    public int getTotalTehnical() {
+        return totalTehnical;
+    }
+
+    public void setTotalTehnical(int totalTehnical) {
+        this.totalTehnical = totalTehnical;
+    }
+
+    public int getTotalMinutes() {
+        return totalMinutes;
+    }
+
+    public void setTotalMinutes(int totalMinutes) {
+        this.totalMinutes = totalMinutes;
+    }
+
+    public int getTotalRebs() {
+        return totalRebs;
+    }
+
+    public void setTotalRebs(int totalRebs) {
+        this.totalRebs = totalRebs;
+    }
+
+    public int getTotalAssists() {
+        return totalAssists;
+    }
+
+    public void setTotalAssists(int totalAssists) {
+        this.totalAssists = totalAssists;
+    }
+
+    public int getTotalSteals() {
+        return totalSteals;
+    }
+
+    public void setTotalSteals(int totalSteals) {
+        this.totalSteals = totalSteals;
+    }
+
+    public int getTotalBlocks() {
+        return totalBlocks;
+    }
+
+    public void setTotalBlocks(int totalBlocks) {
+        this.totalBlocks = totalBlocks;
+    }
+
+    public int getTotalEff() {
+        return totalEff;
+    }
+
+    public void setTotalEff(int totalEff) {
+        this.totalEff = totalEff;
     }
 
     public int getTotalPoints() {
@@ -96,5 +193,16 @@ public class Player implements Serializable {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    @Override
+    public int compareTo(Player p) {
+        if(totalPoints > p.totalPoints || totalAssists > p.totalAssists || totalRebs > p.totalRebs || totalSteals > p.totalSteals || totalBlocks > p.totalBlocks || totalTehnical > p.totalTehnical || totalFouls > p.totalFouls || totalTurnovers > p.totalTurnovers){
+            return  -1;
+        } else if (totalPoints < p.totalPoints || totalAssists < p.totalAssists || totalRebs < p.totalRebs || totalSteals < p.totalSteals || totalBlocks < p.totalBlocks || totalTehnical < p.totalTehnical || totalFouls < p.totalFouls || totalTurnovers < p.totalTurnovers){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

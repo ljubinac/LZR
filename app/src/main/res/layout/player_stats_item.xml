@@ -14,15 +14,15 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-<!--        <TextView-->
-<!--            android:id="@+id/positionTV"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:textColor="@color/text_grey_light"-->
-<!--            android:textSize="16sp"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_marginHorizontal="1dp"/>-->
+        <TextView
+            android:id="@+id/position_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/text_grey_light"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="1dp"/>
 
         <TextView
             android:id="@+id/player_tv"
@@ -35,7 +35,7 @@
             android:layout_marginHorizontal="1dp" />
 
         <TextView
-            android:id="@+id/pts_tv"
+            android:id="@+id/parameter_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
