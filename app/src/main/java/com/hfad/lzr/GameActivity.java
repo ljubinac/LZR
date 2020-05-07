@@ -489,6 +489,10 @@ public class GameActivity extends AppCompatActivity {
                     databaseReferencePlayers.child(playerGame.getId()).child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
                     databaseReferencePlayers.child(playerGame.getId()).child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
                     databaseReferencePlayers.child(playerGame.getId()).child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalEff").setValue(playerGame.getTotalPoints() +
+                            playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
+                            (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
+                            playerGame.getTotalFouls());
 
                 }
 
@@ -502,6 +506,10 @@ public class GameActivity extends AppCompatActivity {
                     databaseReferencePlayers.child(playerGame.getId()).child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
                     databaseReferencePlayers.child(playerGame.getId()).child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
                     databaseReferencePlayers.child(playerGame.getId()).child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
+                    databaseReferencePlayers.child(playerGame.getId()).child("totalEff").setValue(playerGame.getTotalPoints() +
+                            playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
+                            (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
+                            playerGame.getTotalFouls());
                 }
                 game.setResA(resA);
                 game.setResB(resB);

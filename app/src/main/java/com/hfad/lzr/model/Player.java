@@ -4,6 +4,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class Player implements Serializable, Comparable<Player> {
 
@@ -197,9 +198,9 @@ public class Player implements Serializable, Comparable<Player> {
 
     @Override
     public int compareTo(Player p) {
-        if(totalPoints > p.totalPoints || totalAssists > p.totalAssists || totalRebs > p.totalRebs || totalSteals > p.totalSteals || totalBlocks > p.totalBlocks || totalTehnical > p.totalTehnical || totalFouls > p.totalFouls || totalTurnovers > p.totalTurnovers){
+        if(totalPoints > p.totalPoints) {
             return  -1;
-        } else if (totalPoints < p.totalPoints || totalAssists < p.totalAssists || totalRebs < p.totalRebs || totalSteals < p.totalSteals || totalBlocks < p.totalBlocks || totalTehnical < p.totalTehnical || totalFouls < p.totalFouls || totalTurnovers < p.totalTurnovers){
+        } else if (totalPoints < p.totalPoints){
             return 1;
         } else {
             return 0;

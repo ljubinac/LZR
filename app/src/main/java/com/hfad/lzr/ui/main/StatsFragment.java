@@ -1,10 +1,13 @@
 package com.hfad.lzr.ui.main;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,75 +111,112 @@ public class StatsFragment extends Fragment {
         TableRow row = new TableRow(getActivity());
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(lp);
-        row.setBackgroundResource(R.drawable.table_border);
+
+        // Ovo je jedna opcija da se oboji red, druga je da se promeni boja u table_border.xml
+        //u xml_u mogu da se postave borderi a ovako je bez
+//        row.setBackgroundColor(getContext().getResources().getColor(R.color.orange_end));
 
         tableNum = new TextView(getActivity());
-        tableNum.setBackgroundResource(R.drawable.table_border);
         tableNum.setPadding(15, 15, 15, 15);
+        tableNum.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableNum.setTypeface(null, Typeface.BOLD);
+        tableNum.setGravity(Gravity.RIGHT);
 
         tableName = new TextView(getActivity());
-        tableName.setBackgroundResource(R.drawable.table_border);
         tableName.setPadding(15, 15, 15, 15);
+        tableName.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableName.setTypeface(null, Typeface.BOLD);
+        tableName.setGravity(Gravity.LEFT);
 
         tableTime = new TextView(getActivity());
-        tableTime.setBackgroundResource(R.drawable.table_border);
         tableTime.setPadding(15, 15, 15, 15);
+        tableTime.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableTime.setTypeface(null, Typeface.BOLD);
+        tableTime.setGravity(Gravity.CENTER);
 
         tableFG = new TextView(getActivity());
-        tableFG.setBackgroundResource(R.drawable.table_border);
         tableFG.setPadding(15, 15, 15, 15);
+        tableFG.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableFG.setTypeface(null, Typeface.BOLD);
+        tableFG.setGravity(Gravity.CENTER);
 
         table2pts = new TextView(getActivity());
-        table2pts.setBackgroundResource(R.drawable.table_border);
         table2pts.setPadding(15, 15, 15, 15);
+        table2pts.setTextColor(getResources().getColor(R.color.colorPrimary));
+        table2pts.setTypeface(null, Typeface.BOLD);
+        table2pts.setGravity(Gravity.CENTER);
 
         table3pts = new TextView(getActivity());
-        table3pts.setBackgroundResource(R.drawable.table_border);
         table3pts.setPadding(15, 15, 15, 15);
+        table3pts.setTextColor(getResources().getColor(R.color.colorPrimary));
+        table3pts.setTypeface(null, Typeface.BOLD);
+        table3pts.setGravity(Gravity.CENTER);
 
         table1pts = new TextView(getActivity());
-        table1pts.setBackgroundResource(R.drawable.table_border);
         table1pts.setPadding(15, 15, 15, 15);
+        table1pts.setTextColor(getResources().getColor(R.color.colorPrimary));
+        table1pts.setTypeface(null, Typeface.BOLD);
+        table1pts.setGravity(Gravity.CENTER);
 
         tableTotalReb = new TextView(getActivity());
-        tableTotalReb.setBackgroundResource(R.drawable.table_border);
         tableTotalReb.setPadding(15, 15, 15, 15);
+        tableTotalReb.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableTotalReb.setTypeface(null, Typeface.BOLD);
+        tableTotalReb.setGravity(Gravity.CENTER);
 
         tableDefReb = new TextView(getActivity());
-        tableDefReb.setBackgroundResource(R.drawable.table_border);
         tableDefReb.setPadding(15, 15, 15, 15);
+        tableDefReb.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableDefReb.setTypeface(null, Typeface.BOLD);
+        tableDefReb.setGravity(Gravity.CENTER);
 
         tableOffReb = new TextView(getActivity());
-        tableOffReb.setBackgroundResource(R.drawable.table_border);
         tableOffReb.setPadding(15, 15, 15, 15);
+        tableOffReb.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableOffReb.setTypeface(null, Typeface.BOLD);
+        tableOffReb.setGravity(Gravity.CENTER);
 
         tableAssist = new TextView(getActivity());
-        tableAssist.setBackgroundResource(R.drawable.table_border);
         tableAssist.setPadding(15, 15, 15, 15);
+        tableAssist.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableAssist.setTypeface(null, Typeface.BOLD);
+        tableAssist.setGravity(Gravity.CENTER);
 
         tableBlock = new TextView(getActivity());
-        tableBlock.setBackgroundResource(R.drawable.table_border);
         tableBlock.setPadding(15, 15, 15, 15);
+        tableBlock.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableBlock.setTypeface(null, Typeface.BOLD);
+        tableBlock.setGravity(Gravity.CENTER);
 
         tableSteals = new TextView(getActivity());
-        tableSteals.setBackgroundResource(R.drawable.table_border);
         tableSteals.setPadding(15, 15, 15, 15);
+        tableSteals.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableSteals.setTypeface(null, Typeface.BOLD);
+        tableSteals.setGravity(Gravity.CENTER);
 
         tableTurnov = new TextView(getActivity());
-        tableTurnov.setBackgroundResource(R.drawable.table_border);
         tableTurnov.setPadding(15, 15, 15, 15);
+        tableTurnov.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableTurnov.setTypeface(null, Typeface.BOLD);
+        tableTurnov.setGravity(Gravity.CENTER);
 
         tableFoul = new TextView(getActivity());
-        tableFoul.setBackgroundResource(R.drawable.table_border);
         tableFoul.setPadding(15, 15, 15, 15);
+        tableFoul.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableFoul.setTypeface(null, Typeface.BOLD);
+        tableFoul.setGravity(Gravity.CENTER);
 
         tablePts = new TextView(getActivity());
-        tablePts.setBackgroundResource(R.drawable.table_border);
         tablePts.setPadding(15, 15, 15, 15);
+        tablePts.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tablePts.setTypeface(null, Typeface.BOLD);
+        tablePts.setGravity(Gravity.CENTER);
 
         tableEff = new TextView(getActivity());
-        tableEff.setBackgroundResource(R.drawable.table_border);
         tableEff.setPadding(15, 15, 15, 15);
+        tableEff.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tableEff.setTypeface(null, Typeface.BOLD);
+        tableEff.setGravity(Gravity.CENTER);
 
         tableNum.setText(R.string.no);
         tableName.setText(R.string.PLAYER);
@@ -222,75 +262,95 @@ public class StatsFragment extends Fragment {
 
             TableRow row2 = new TableRow(getActivity());
             row2.setLayoutParams(lp);
-            row2.setBackgroundResource(R.drawable.table_border);
+
+            row2.setBackgroundResource(R.drawable.gray_layout_gradient);
 
             number = new TextView(getActivity());
-            number.setBackgroundResource(R.drawable.table_border);
             number.setPadding(15, 15, 15, 15);
+            number.setGravity(Gravity.RIGHT);
+            number.setTextColor(getResources().getColor(R.color.orange_end));
+            number.setTypeface(null, Typeface.BOLD);
 
             name = new TextView(getActivity());
-            name.setBackgroundResource(R.drawable.table_border);
             name.setPadding(15, 15, 15, 15);
+            name.setGravity(Gravity.LEFT);
+            name.setTextColor(getResources().getColor(R.color.colorPrimary));
+            name.setTypeface(null, Typeface.BOLD);
 
             time = new TextView(getActivity());
-            time.setBackgroundResource(R.drawable.table_border);
             time.setPadding(15, 15, 15, 15);
+            time.setTextColor(getResources().getColor(R.color.colorPrimary));
+            time.setGravity(Gravity.CENTER);
 
             fg = new TextView(getActivity());
-            fg.setBackgroundResource(R.drawable.table_border);
             fg.setPadding(15, 15, 15, 15);
+            fg.setTextColor(getResources().getColor(R.color.colorPrimary));
+            fg.setGravity(Gravity.CENTER);
 
             pts2 = new TextView(getActivity());
-            pts2.setBackgroundResource(R.drawable.table_border);
             pts2.setPadding(15, 15, 15, 15);
+            pts2.setTextColor(getResources().getColor(R.color.colorPrimary));
+            pts2.setGravity(Gravity.CENTER);
 
             pts3 = new TextView(getActivity());
-            pts3.setBackgroundResource(R.drawable.table_border);
+            pts3.setTextColor(getResources().getColor(R.color.colorPrimary));
             pts3.setPadding(15, 15, 15, 15);
+            pts3.setGravity(Gravity.CENTER);
 
             pts1 = new TextView(getActivity());
-            pts1.setBackgroundResource(R.drawable.table_border);
+            pts1.setTextColor(getResources().getColor(R.color.colorPrimary));
             pts1.setPadding(15, 15, 15, 15);
+            pts1.setGravity(Gravity.CENTER);
 
             offReb = new TextView(getActivity());
-            offReb.setBackgroundResource(R.drawable.table_border);
+            offReb.setTextColor(getResources().getColor(R.color.colorPrimary));
             offReb.setPadding(15, 15, 15, 15);
+            offReb.setGravity(Gravity.CENTER);
 
             defReb = new TextView(getActivity());
-            defReb.setBackgroundResource(R.drawable.table_border);
+            defReb.setTextColor(getResources().getColor(R.color.colorPrimary));
             defReb.setPadding(15, 15, 15, 15);
+            defReb.setGravity(Gravity.CENTER);
 
             totalReb = new TextView(getActivity());
-            totalReb.setBackgroundResource(R.drawable.table_border);
+            totalReb.setTextColor(getResources().getColor(R.color.colorPrimary));
             totalReb.setPadding(15, 15, 15, 15);
+            totalReb.setGravity(Gravity.CENTER);
 
             assist = new TextView(getActivity());
-            assist.setBackgroundResource(R.drawable.table_border);
+            assist.setTextColor(getResources().getColor(R.color.colorPrimary));
             assist.setPadding(15, 15, 15, 15);
+            assist.setGravity(Gravity.CENTER);
 
             block = new TextView(getActivity());
-            block.setBackgroundResource(R.drawable.table_border);
+            block.setTextColor(getResources().getColor(R.color.colorPrimary));
             block.setPadding(15, 15, 15, 15);
+            block.setGravity(Gravity.CENTER);
 
             steal = new TextView(getActivity());
-            steal.setBackgroundResource(R.drawable.table_border);
+            steal.setTextColor(getResources().getColor(R.color.colorPrimary));
             steal.setPadding(15, 15, 15, 15);
+            steal.setGravity(Gravity.CENTER);
 
             turnov = new TextView(getActivity());
-            turnov.setBackgroundResource(R.drawable.table_border);
+            turnov.setTextColor(getResources().getColor(R.color.colorPrimary));
             turnov.setPadding(15, 15, 15, 15);
+            turnov.setGravity(Gravity.CENTER);
 
             foul = new TextView(getActivity());
-            foul.setBackgroundResource(R.drawable.table_border);
+            foul.setTextColor(getResources().getColor(R.color.colorPrimary));
             foul.setPadding(15, 15, 15, 15);
+            foul.setGravity(Gravity.CENTER);
 
             pts = new TextView(getActivity());
-            pts.setBackgroundResource(R.drawable.table_border);
+            pts.setTextColor(getResources().getColor(R.color.colorPrimary));
             pts.setPadding(15, 15, 15, 15);
+            pts.setGravity(Gravity.CENTER);
 
             eff = new TextView(getActivity());
-            eff.setBackgroundResource(R.drawable.table_border);
+            eff.setTextColor(getResources().getColor(R.color.colorPrimary));
             eff.setPadding(15, 15, 15, 15);
+            eff.setGravity(Gravity.CENTER);
 
             number.setText(playersList.get(i).getNumber());
             name.setText(playersList.get(i).getNameAndLastname());
@@ -386,82 +446,126 @@ public class StatsFragment extends Fragment {
             row2.addView(pts);
             row2.addView(eff);
 
+            if (i % 2 == 0){
+                row2.setBackgroundResource(R.drawable.gray_layout_gradient);
+            } else {
+                row2.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+
             table.addView(row2, i + 1);
         }
 
         TableRow row3 = new TableRow(getActivity());
         row3.setLayoutParams(lp);
-        row3.setBackgroundResource(R.drawable.table_border);
 
-        teamTV = new TextView(getActivity());
+        /*teamTV = new TextView(getActivity());
         teamTV.setBackgroundResource(R.drawable.table_border);
         teamTV.setPadding(15, 15, 15, 15);
+        teamTV.setGravity(Gravity.CENTER);
+        teamTV.setTypeface(null, Typeface.BOLD);*/
+
+
 
         teamTitle = new TextView(getActivity());
-        teamTitle.setBackgroundResource(R.drawable.table_border);
+        teamTitle.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamTitle.setPadding(15, 15, 15, 15);
+        teamTitle.setGravity(Gravity.CENTER);
+        teamTitle.setTypeface(null, Typeface.BOLD);
+        TableRow.LayoutParams params = ( TableRow.LayoutParams ) row3.getLayoutParams();
+        params.span = 2;
+        teamTitle.setLayoutParams(params);
 
         teamTimeTV = new TextView(getActivity());
-        teamTimeTV.setBackgroundResource(R.drawable.table_border);
+        teamTimeTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamTimeTV.setPadding(15, 15, 15, 15);
+        teamTimeTV.setGravity(Gravity.CENTER);
+        teamTimeTV.setTypeface(null, Typeface.BOLD);
 
         teamFGtv = new TextView(getActivity());
-        teamFGtv.setBackgroundResource(R.drawable.table_border);
+        teamFGtv.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamFGtv.setPadding(15, 15, 15, 15);
+        teamFGtv.setGravity(Gravity.CENTER);
+        teamFGtv.setTypeface(null, Typeface.BOLD);
 
         team2ptsTV = new TextView(getActivity());
-        team2ptsTV.setBackgroundResource(R.drawable.table_border);
+        team2ptsTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         team2ptsTV.setPadding(15, 15, 15, 15);
+        team2ptsTV.setGravity(Gravity.CENTER);
+        team2ptsTV.setTypeface(null, Typeface.BOLD);
 
         team3ptsTV = new TextView(getActivity());
-        team3ptsTV.setBackgroundResource(R.drawable.table_border);
+        team3ptsTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         team3ptsTV.setPadding(15, 15, 15, 15);
+        team3ptsTV.setGravity(Gravity.CENTER);
+        team3ptsTV.setTypeface(null, Typeface.BOLD);
 
         team1ptsTV = new TextView(getActivity());
-        team1ptsTV.setBackgroundResource(R.drawable.table_border);
+        team1ptsTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         team1ptsTV.setPadding(15, 15, 15, 15);
+        team1ptsTV.setGravity(Gravity.CENTER);
+        team1ptsTV.setTypeface(null, Typeface.BOLD);
 
         teamOffRebTV = new TextView(getActivity());
-        teamOffRebTV.setBackgroundResource(R.drawable.table_border);
+        teamOffRebTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamOffRebTV.setPadding(15, 15, 15, 15);
+        teamOffRebTV.setGravity(Gravity.CENTER);
+        teamOffRebTV.setTypeface(null, Typeface.BOLD);
 
         teamDefRebTV = new TextView(getActivity());
-        teamDefRebTV.setBackgroundResource(R.drawable.table_border);
+        teamDefRebTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamDefRebTV.setPadding(15, 15, 15, 15);
+        teamDefRebTV.setGravity(Gravity.CENTER);
+        teamDefRebTV.setTypeface(null, Typeface.BOLD);
 
         teamRebTV = new TextView(getActivity());
-        teamRebTV.setBackgroundResource(R.drawable.table_border);
+        teamRebTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamRebTV.setPadding(15, 15, 15, 15);
+        teamRebTV.setGravity(Gravity.CENTER);
+        teamRebTV.setTypeface(null, Typeface.BOLD);
 
         teamAssistTV = new TextView(getActivity());
-        teamAssistTV.setBackgroundResource(R.drawable.table_border);
+        teamAssistTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamAssistTV.setPadding(15, 15, 15, 15);
+        teamAssistTV.setGravity(Gravity.CENTER);
+        teamAssistTV.setTypeface(null, Typeface.BOLD);
 
         teamBlocksTV = new TextView(getActivity());
-        teamBlocksTV.setBackgroundResource(R.drawable.table_border);
+        teamBlocksTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamBlocksTV.setPadding(15, 15, 15, 15);
+        teamBlocksTV.setGravity(Gravity.CENTER);
+        teamBlocksTV.setTypeface(null, Typeface.BOLD);
 
         teamStealsTV = new TextView(getActivity());
-        teamStealsTV.setBackgroundResource(R.drawable.table_border);
+        teamStealsTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamStealsTV.setPadding(15, 15, 15, 15);
+        teamStealsTV.setGravity(Gravity.CENTER);
+        teamStealsTV.setTypeface(null, Typeface.BOLD);
 
         teamTurnTV = new TextView(getActivity());
-        teamTurnTV.setBackgroundResource(R.drawable.table_border);
+        teamTurnTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamTurnTV.setPadding(15, 15, 15, 15);
+        teamTurnTV.setGravity(Gravity.CENTER);
+        teamTurnTV.setTypeface(null, Typeface.BOLD);
 
         teamFoulsTV = new TextView(getActivity());
-        teamFoulsTV.setBackgroundResource(R.drawable.table_border);
+        teamFoulsTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamFoulsTV.setPadding(15, 15, 15, 15);
+        teamFoulsTV.setGravity(Gravity.CENTER);
+        teamFoulsTV.setTypeface(null, Typeface.BOLD);
 
         teamPointsTV = new TextView(getActivity());
-        teamPointsTV.setBackgroundResource(R.drawable.table_border);
+        teamPointsTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamPointsTV.setPadding(15, 15, 15, 15);
+        teamPointsTV.setGravity(Gravity.CENTER);
+        teamPointsTV.setTypeface(null, Typeface.BOLD);
 
         teamEffTV = new TextView(getActivity());
-        teamEffTV.setBackgroundResource(R.drawable.table_border);
+        teamEffTV.setTextColor(getResources().getColor(R.color.colorPrimary));
         teamEffTV.setPadding(15, 15, 15, 15);
+        teamEffTV.setGravity(Gravity.CENTER);
+        teamEffTV.setTypeface(null, Typeface.BOLD);
 
-        teamTV.setText(R.string.taraba);
+//        teamTV.setText(R.string.taraba);
         teamTitle.setText(R.string.total);
         int minutes = teamTime / 60;
         int seconds = teamTime % 60;
@@ -482,7 +586,7 @@ public class StatsFragment extends Fragment {
         teamPointsTV.setText(String.valueOf(teamPoints));
         teamEffTV.setText(String.valueOf(teamEff));
 
-        row3.addView(teamTV);
+//        row3.addView(teamTV);
         row3.addView(teamTitle);
         row3.addView(teamTimeTV);
         row3.addView(teamFGtv);

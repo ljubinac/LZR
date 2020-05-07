@@ -81,8 +81,8 @@
     <string name="player_has_5_foul">The player has 5 fouls!</string>
     <string name="teams_must_start_with_5_players">Teams must start with 5 players!</string>
 
-    <string name="no" translatable="false">#No</string>
-    <string name="PLAYER" translatable="false">PLAYER</string>
+    <string name="no" translatable="false">#</string>
+    <string name="PLAYER" translatable="false">Player</string>
     <string name="Time" translatable="false">Time</string>
     <string name="FG" translatable="false">FG</string>
     <string name="pts2" translatable="false">2pts</string>
@@ -198,6 +198,7 @@
 
     <string-array name="parametres_array">
         <item>PTS</item>
+        <item>EFF</item>
         <item>AST</item>
         <item>REB</item>
         <item>STL</item>
