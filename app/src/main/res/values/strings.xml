@@ -207,4 +207,19 @@
         <item>PF</item>
         <item>TEH</item>
     </string-array>
+
+    <string name="made">Made</string>
+    <string name="attempt">Attempt</string>
+    <string name="offensive">Offensive</string>
+    <string name="defensive">Defensive</string>
+    <string name="points2">2 points</string>
+    <string name="points3">3 points</string>
+    <string name="points1">Free throws</string>
+    <string name="rebounds">Rebounds</string>
+    <string name="assists">Assists</string>
+    <string name="blocks">Blocks</string>
+    <string name="steals">Steals</string>
+    <string name="turnovers">Turnovers</string>
+    <string name="fouls">Fouls</string>
+    <string name="technical_fouls">Technical fouls</string>
 </resources>

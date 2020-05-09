@@ -5,6 +5,638 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+<!--    cela aktivnost-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+<!--        semafor-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/scoreboard">
+<!--            prvi deo semafora sa 5 LL-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+<!--                LL1 samo strelica-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_arrow" />
+
+                </LinearLayout>
+<!--                LL2 podaci teamA-->
+                <LinearLayout
+                    style="@style/scoreboard_teams_LL">
+
+                    <TextView
+                        style="@style/scoreboard_teams_fouls"
+                        android:id="@+id/teamA_fouls_tv" />
+
+                    <TextView
+                        style="@style/scoreboard_res_tv"
+                        android:id="@+id/scoreTeamA"
+                        android:text="ResA" />
+
+                    <TextView
+                        style="@style/scoreboard_teams_names_tv"
+                        android:id="@+id/teamA"
+                        android:text="TeamA" />
+
+                </LinearLayout>
+<!--                LL vreme-->
+                <LinearLayout
+                    style="@style/scoreboard_teams_LL"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:text="Q1"/>
+
+                    <TextView
+                        android:id="@+id/text_view_countdown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="35:24"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+<!--                podaci teamB-->
+                <LinearLayout
+                    style="@style/scoreboard_teams_LL">
+
+                    <TextView
+                        style="@style/scoreboard_teams_fouls"
+                        android:id="@+id/teamB_fouls_tv" />
+
+                    <TextView
+                        style="@style/scoreboard_res_tv"
+                        android:id="@+id/scoreTeamB"
+                        android:text="ResB" />
+
+                    <TextView
+                        style="@style/scoreboard_teams_names_tv"
+                        android:id="@+id/teamB"
+                        android:text="TeamB" />
+
+                </LinearLayout>
+<!--                prazan-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+<!--            drugi deo semafora sa 7 IMG-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/button_reset"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_vector_reset" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_vector_2"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_vector_2"/>
+                <ImageView
+                    android:id="@+id/button_start_pause"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/ic_vector_start"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_vector_2"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_vector_2"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_vector_2"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+<!--        vodjenje statistike LL-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+<!--        teamA igraci-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/firstTeamRV"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="vertical" />
+
+<!--        za dugmice LL-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:padding="4dp">
+            
+<!--            2pts LL-->
+            <LinearLayout
+                style="@style/points_rebs_LL">
+                
+                <TextView
+                    style="@style/button_titles_tv"
+                    android:text="@string/points2"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_2P"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_2PM">
+
+                            <TextView
+                                style="@style/in_button_text_tv"
+                                android:id="@+id/tv2pmTitle"
+                                android:text="@string/made"
+                                 />
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/tv2pm" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_2PA">
+
+                            <TextView
+                                style="@style/in_button_text_tv"
+                                android:id="@+id/tv2paTitle"
+                                android:text="@string/attempt" />
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/tv2pa" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            3pts LL-->
+            <LinearLayout
+                style="@style/points_rebs_LL">
+
+                <TextView
+                    style="@style/button_titles_tv"
+                    android:text="@string/points3"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_3P"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_3PM">
+
+                            <TextView
+                                style="@style/in_button_text_tv"
+                                android:id="@+id/tv3pmTitle"
+                                android:text="@string/made"
+                                />
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/tv3pm" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_3PA">
+
+                            <TextView
+                                style="@style/in_button_text_tv"
+                                android:id="@+id/tv3paTitle"
+                                android:text="@string/attempt" />
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/tv3pa" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            1pts LL-->
+            <LinearLayout
+                style="@style/points_rebs_LL">
+
+                <TextView
+                    style="@style/button_titles_tv"
+                    android:text="@string/points1"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_1P"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_1PM">
+
+                            <TextView
+                                style="@style/in_button_text_tv"
+                                android:id="@+id/tv1pmTitle"
+                                android:text="@string/made"
+                                />
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/tv1pm" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_1PA">
+
+                            <TextView
+                                style="@style/in_button_text_tv"
+                                android:id="@+id/tv1paTitle"
+                                android:text="@string/attempt" />
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/tv1pa" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            rebs LL-->
+            <LinearLayout
+                style="@style/points_rebs_LL">
+
+                <TextView
+                    style="@style/button_titles_tv"
+                    android:text="@string/rebounds"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_rebounds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_offReb">
+
+                            <TextView
+                                style="@style/in_button_text_tv"
+                                android:id="@+id/offRebTitleTV"
+                                android:text="@string/offensive"
+                                />
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/offRebTV" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_defReb">
+
+                            <TextView
+                                style="@style/in_button_text_tv"
+                                android:id="@+id/defRebTitleTV"
+                                android:text="@string/defensive" />
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/defRebTV" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            asist block LL-->
+            <LinearLayout
+                style="@style/points_rebs_LL">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/button_titles_tv_second"
+                            android:text="@string/assists"/>
+                        <TextView
+                            style="@style/button_titles_tv_second"
+                            android:text="@string/blocks"/>
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_assistBlock"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                       >
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_assist"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/assistTV" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            style="@style/buttons_LL"
+                            android:id="@+id/ll_block"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                style="@style/in_button_number_tv"
+                                android:id="@+id/blockTV" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            steals turnovers LL-->
+            <LinearLayout
+                style="@style/points_rebs_LL">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/button_titles_tv_second"
+                            android:text="@string/steals"/>
+                        <TextView
+                            style="@style/button_titles_tv_second"
+                            android:text="@string/turnovers"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/ll_stealsTurnovers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="4dp"
+                            >
+
+                            <LinearLayout
+                                style="@style/buttons_LL"
+                                android:id="@+id/ll_steals"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    style="@style/in_button_number_tv"
+                                    android:id="@+id/stealsTV" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                style="@style/buttons_LL"
+                                android:id="@+id/ll_turnovers"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    style="@style/in_button_number_tv"
+                                    android:id="@+id/turnoversTV" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <!--            fouls  LL-->
+            <LinearLayout
+                style="@style/points_rebs_LL">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/button_titles_tv_second"
+                            android:text="@string/fouls"/>
+                        <TextView
+                            style="@style/button_titles_tv_second"
+                            android:text="@string/technical_fouls"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/ll_Fouls"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="4dp"
+                            >
+
+                            <LinearLayout
+                                style="@style/buttons_LL"
+                                android:id="@+id/ll_foul"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    style="@style/in_button_number_tv"
+                                    android:id="@+id/foulTV" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                style="@style/buttons_LL"
+                                android:id="@+id/ll_tehnicalFoul"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    style="@style/in_button_number_tv"
+                                    android:id="@+id/tehnicalFoulTV" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            finish LL-->
+            <LinearLayout
+                style="@style/points_rebs_LL">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/ll_finish"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="4dp"
+                            >
+
+                            <LinearLayout
+                                style="@style/finish_LL"
+                                android:id="@+id/ll_finishGame">
+
+                                <TextView
+                                    style="@style/in_button_number_tv"
+                                    android:id="@+id/finishGameTV"
+                                    android:text="@string/finishGameTV" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+<!--        teamB igraci-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/secondTeamRV"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
     tools:context=".GameActivity">
 
@@ -698,4 +1330,4 @@
     </LinearLayout>
 
 
-</ScrollView>
+</ScrollView>-->

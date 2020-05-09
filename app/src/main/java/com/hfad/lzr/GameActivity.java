@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,8 +53,8 @@ public class GameActivity extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 6000;
 
     private TextView mTextViewCountDown;
-    private Button mButtonStartPause;
-    private Button mButtonReset;
+    private ImageView mButtonStartPause;
+    private ImageView mButtonReset;
 
     private CountDownTimer mCountDownTimer;
 
@@ -592,7 +593,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-                mButtonStartPause.setText(R.string.start);
+//                mButtonStartPause.setText(R.string.start);
                 mButtonStartPause.setVisibility(View.INVISIBLE);
                 mButtonReset.setVisibility(View.VISIBLE);
 
@@ -606,14 +607,14 @@ public class GameActivity extends AppCompatActivity {
         }.start();
 
         mTimerRunning = true;
-        mButtonStartPause.setText(R.string.pause);
+//        mButtonStartPause.setText(R.string.pause);
         mButtonReset.setVisibility(View.INVISIBLE);
     }
 
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
-        mButtonStartPause.setText(R.string.start);
+//        mButtonStartPause.setText(R.string.start);
         mButtonReset.setVisibility(View.VISIBLE);
     }
 
