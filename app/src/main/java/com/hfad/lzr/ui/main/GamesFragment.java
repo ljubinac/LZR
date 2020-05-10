@@ -84,6 +84,8 @@ public class GamesFragment extends Fragment {
             protected void onBindViewHolder(@NonNull GameViewHolder holder, int position, @NonNull final Game model) {
                 holder.teamAnameTV.setText(model.getTeamAnaziv());
                 holder.teamBnameTV.setText(model.getTeamBnaziv());
+                holder.gameDateTV.setText(model.getGameDate());
+                holder.gameTimeTV.setText(model.getGameTime());
                 if(model.isFinished()) {
                     holder.resAtv.setText(String.valueOf(model.getResA()));
                     holder.resBtv.setText(String.valueOf(model.getResB()));
