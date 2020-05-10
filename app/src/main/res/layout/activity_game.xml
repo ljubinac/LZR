@@ -7,24 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-<!--    cela aktivnost-->
+    <!--    cela aktivnost-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-<!--        semafor-->
+        <!--        semafor-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/scoreboard"
             android:orientation="vertical"
-            android:background="@drawable/scoreboard">
-<!--            prvi deo semafora sa 5 LL-->
+            >
+            <!--            prvi deo semafora sa 5 LL-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-<!--                LL1 samo strelica-->
+                <!--                LL1 samo strelica-->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -37,26 +38,25 @@
                         app:srcCompat="@drawable/ic_arrow" />
 
                 </LinearLayout>
-<!--                LL2 podaci teamA-->
-                <LinearLayout
-                    style="@style/scoreboard_teams_LL">
+                <!--                LL2 podaci teamA-->
+                <LinearLayout style="@style/scoreboard_teams_LL">
 
                     <TextView
-                        style="@style/scoreboard_teams_fouls"
-                        android:id="@+id/teamA_fouls_tv" />
+                        android:id="@+id/teamA_fouls_tv"
+                        style="@style/scoreboard_teams_fouls" />
 
                     <TextView
-                        style="@style/scoreboard_res_tv"
                         android:id="@+id/scoreTeamA"
+                        style="@style/scoreboard_res_tv"
                         android:text="ResA" />
 
                     <TextView
-                        style="@style/scoreboard_teams_names_tv"
                         android:id="@+id/teamA"
+                        style="@style/scoreboard_teams_names_tv"
                         android:text="TeamA" />
 
                 </LinearLayout>
-<!--                LL vreme-->
+                <!--                LL vreme-->
                 <LinearLayout
                     style="@style/scoreboard_teams_LL"
                     android:layout_gravity="center">
@@ -64,9 +64,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:text="Q1"
                         android:textColor="@color/white"
-                        android:text="Q1"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/text_view_countdown"
@@ -78,26 +78,25 @@
                         android:textSize="22sp" />
 
                 </LinearLayout>
-<!--                podaci teamB-->
-                <LinearLayout
-                    style="@style/scoreboard_teams_LL">
+                <!--                podaci teamB-->
+                <LinearLayout style="@style/scoreboard_teams_LL">
 
                     <TextView
-                        style="@style/scoreboard_teams_fouls"
-                        android:id="@+id/teamB_fouls_tv" />
+                        android:id="@+id/teamB_fouls_tv"
+                        style="@style/scoreboard_teams_fouls" />
 
                     <TextView
-                        style="@style/scoreboard_res_tv"
                         android:id="@+id/scoreTeamB"
+                        style="@style/scoreboard_res_tv"
                         android:text="ResB" />
 
                     <TextView
-                        style="@style/scoreboard_teams_names_tv"
                         android:id="@+id/teamB"
+                        style="@style/scoreboard_teams_names_tv"
                         android:text="TeamB" />
 
                 </LinearLayout>
-<!--                prazan-->
+                <!--                prazan-->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -108,12 +107,12 @@
 
             </LinearLayout>
 
-<!--            drugi deo semafora sa 7 IMG-->
+            <!--            drugi deo semafora sa 7 IMG-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/button_reset"
@@ -121,286 +120,254 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_vector_reset" />
+
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2"/>
+                    app:srcCompat="@drawable/ic_vector_2" />
+
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2"/>
+                    app:srcCompat="@drawable/ic_vector_2" />
+
                 <ImageView
                     android:id="@+id/button_start_pause"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    app:srcCompat="@drawable/ic_vector_start"/>
+                    app:srcCompat="@drawable/ic_vector_start" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2"/>
+                    app:srcCompat="@drawable/ic_vector_2" />
+
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2"/>
+                    app:srcCompat="@drawable/ic_vector_2" />
+
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2"/>
+                    app:srcCompat="@drawable/ic_vector_2" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-<!--        vodjenje statistike LL-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
-
-<!--        teamA igraci-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/firstTeamRV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scrollbars="vertical" />
-
-<!--        za dugmice LL-->
+        <!--        vodjenje statistike LL-->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:padding="4dp">
-            
-<!--            2pts LL-->
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <!--        teamA igraci-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/firstTeamRV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="vertical" />
+
+            <!--        za dugmice LL-->
             <LinearLayout
-                style="@style/points_rebs_LL">
-                
-                <TextView
-                    style="@style/button_titles_tv"
-                    android:text="@string/points2"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <!--            2pts LL-->
+                <LinearLayout style="@style/points_rebs_LL">
+
+                    <TextView
+                        style="@style/button_titles_tv"
+                        android:text="@string/points2" />
 
                     <LinearLayout
                         android:id="@+id/ll_2P"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="4dp">
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            style="@style/buttons_LL"
-                            android:id="@+id/ll_2PM">
+                            android:id="@+id/ll_2PM"
+                            style="@style/buttons_LL">
 
                             <TextView
-                                style="@style/in_button_text_tv"
                                 android:id="@+id/tv2pmTitle"
-                                android:text="@string/made"
-                                 />
+                                style="@style/in_button_text_tv"
+                                android:text="@string/made" />
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/tv2pm" />
+                                android:id="@+id/tv2pm"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            style="@style/buttons_LL"
-                            android:id="@+id/ll_2PA">
+                            android:id="@+id/ll_2PA"
+                            style="@style/buttons_LL">
 
                             <TextView
-                                style="@style/in_button_text_tv"
                                 android:id="@+id/tv2paTitle"
+                                style="@style/in_button_text_tv"
                                 android:text="@string/attempt" />
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/tv2pa" />
+                                android:id="@+id/tv2pa"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
                     </LinearLayout>
+
                 </LinearLayout>
-            </LinearLayout>
 
-            <!--            3pts LL-->
-            <LinearLayout
-                style="@style/points_rebs_LL">
+                <!--            3pts LL-->
+                <LinearLayout style="@style/points_rebs_LL">
 
-                <TextView
-                    style="@style/button_titles_tv"
-                    android:text="@string/points3"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/button_titles_tv"
+                        android:text="@string/points3" />
 
                     <LinearLayout
                         android:id="@+id/ll_3P"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="4dp">
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            style="@style/buttons_LL"
-                            android:id="@+id/ll_3PM">
+                            android:id="@+id/ll_3PM"
+                            style="@style/buttons_LL">
 
                             <TextView
-                                style="@style/in_button_text_tv"
                                 android:id="@+id/tv3pmTitle"
-                                android:text="@string/made"
-                                />
+                                style="@style/in_button_text_tv"
+                                android:text="@string/made" />
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/tv3pm" />
+                                android:id="@+id/tv3pm"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            style="@style/buttons_LL"
-                            android:id="@+id/ll_3PA">
+                            android:id="@+id/ll_3PA"
+                            style="@style/buttons_LL">
 
                             <TextView
-                                style="@style/in_button_text_tv"
                                 android:id="@+id/tv3paTitle"
+                                style="@style/in_button_text_tv"
                                 android:text="@string/attempt" />
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/tv3pa" />
+                                android:id="@+id/tv3pa"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <!--            1pts LL-->
-            <LinearLayout
-                style="@style/points_rebs_LL">
+                <!--            1pts LL-->
+                <LinearLayout style="@style/points_rebs_LL">
 
-                <TextView
-                    style="@style/button_titles_tv"
-                    android:text="@string/points1"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/button_titles_tv"
+                        android:text="@string/points1" />
 
                     <LinearLayout
                         android:id="@+id/ll_1P"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="4dp">
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            style="@style/buttons_LL"
-                            android:id="@+id/ll_1PM">
+                            android:id="@+id/ll_1PM"
+                            style="@style/buttons_LL">
 
                             <TextView
-                                style="@style/in_button_text_tv"
                                 android:id="@+id/tv1pmTitle"
-                                android:text="@string/made"
-                                />
+                                style="@style/in_button_text_tv"
+                                android:text="@string/made" />
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/tv1pm" />
+                                android:id="@+id/tv1pm"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            style="@style/buttons_LL"
-                            android:id="@+id/ll_1PA">
+                            android:id="@+id/ll_1PA"
+                            style="@style/buttons_LL">
 
                             <TextView
-                                style="@style/in_button_text_tv"
                                 android:id="@+id/tv1paTitle"
+                                style="@style/in_button_text_tv"
                                 android:text="@string/attempt" />
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/tv1pa" />
+                                android:id="@+id/tv1pa"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <!--            rebs LL-->
-            <LinearLayout
-                style="@style/points_rebs_LL">
+                <!--            rebs LL-->
+                <LinearLayout style="@style/points_rebs_LL">
 
-                <TextView
-                    style="@style/button_titles_tv"
-                    android:text="@string/rebounds"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/button_titles_tv"
+                        android:text="@string/rebounds" />
 
                     <LinearLayout
                         android:id="@+id/ll_rebounds"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="4dp">
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            style="@style/buttons_LL"
-                            android:id="@+id/ll_offReb">
+                            android:id="@+id/ll_offReb"
+                            style="@style/buttons_LL">
 
                             <TextView
-                                style="@style/in_button_text_tv"
                                 android:id="@+id/offRebTitleTV"
-                                android:text="@string/offensive"
-                                />
+                                style="@style/in_button_text_tv"
+                                android:text="@string/offensive" />
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/offRebTV" />
+                                android:id="@+id/offRebTV"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            style="@style/buttons_LL"
-                            android:id="@+id/ll_defReb">
+                            android:id="@+id/ll_defReb"
+                            style="@style/buttons_LL">
 
                             <TextView
-                                style="@style/in_button_text_tv"
                                 android:id="@+id/defRebTitleTV"
+                                style="@style/in_button_text_tv"
                                 android:text="@string/defensive" />
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/defRebTV" />
+                                android:id="@+id/defRebTV"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <!--            asist block LL-->
-            <LinearLayout
-                style="@style/points_rebs_LL">
+                <!--            asist block LL-->
+                <LinearLayout style="@style/points_rebs_LL">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -409,59 +376,46 @@
 
                         <TextView
                             style="@style/button_titles_tv_second"
-                            android:text="@string/assists"/>
+                            android:text="@string/assists" />
+
                         <TextView
                             style="@style/button_titles_tv_second"
-                            android:text="@string/blocks"/>
+                            android:text="@string/blocks" />
                     </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:id="@+id/ll_assistBlock"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="4dp"
-                       >
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            style="@style/buttons_LL"
                             android:id="@+id/ll_assist"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/assistTV" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
                             style="@style/buttons_LL"
-                            android:id="@+id/ll_block"
                             android:gravity="center_vertical">
 
                             <TextView
-                                style="@style/in_button_number_tv"
-                                android:id="@+id/blockTV" />
+                                android:id="@+id/assistTV"
+                                style="@style/in_button_number_tv" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_block"
+                            style="@style/buttons_LL"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/blockTV"
+                                style="@style/in_button_number_tv" />
 
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
 
-            <!--            steals turnovers LL-->
-            <LinearLayout
-                style="@style/points_rebs_LL">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <!--            steals turnovers LL-->
+                <LinearLayout style="@style/points_rebs_LL">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -470,58 +424,45 @@
 
                         <TextView
                             style="@style/button_titles_tv_second"
-                            android:text="@string/steals"/>
+                            android:text="@string/steals" />
+
                         <TextView
                             style="@style/button_titles_tv_second"
-                            android:text="@string/turnovers"/>
+                            android:text="@string/turnovers" />
                     </LinearLayout>
 
+
                     <LinearLayout
+                        android:id="@+id/ll_stealsTurnovers"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:id="@+id/ll_stealsTurnovers"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="4dp"
-                            >
+                            android:id="@+id/ll_steals"
+                            style="@style/buttons_LL"
+                            android:gravity="center_vertical">
 
-                            <LinearLayout
-                                style="@style/buttons_LL"
-                                android:id="@+id/ll_steals"
-                                android:gravity="center_vertical">
+                            <TextView
+                                android:id="@+id/stealsTV"
+                                style="@style/in_button_number_tv" />
 
-                                <TextView
-                                    style="@style/in_button_number_tv"
-                                    android:id="@+id/stealsTV" />
+                        </LinearLayout>
 
-                            </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/ll_turnovers"
+                            style="@style/buttons_LL"
+                            android:gravity="center_vertical">
 
-                            <LinearLayout
-                                style="@style/buttons_LL"
-                                android:id="@+id/ll_turnovers"
-                                android:gravity="center_vertical">
+                            <TextView
+                                android:id="@+id/turnoversTV"
+                                style="@style/in_button_number_tv" />
 
-                                <TextView
-                                    style="@style/in_button_number_tv"
-                                    android:id="@+id/turnoversTV" />
-
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-            <!--            fouls  LL-->
-            <LinearLayout
-                style="@style/points_rebs_LL">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <!--            fouls  LL-->
+                <LinearLayout style="@style/points_rebs_LL">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -530,10 +471,11 @@
 
                         <TextView
                             style="@style/button_titles_tv_second"
-                            android:text="@string/fouls"/>
+                            android:text="@string/fouls" />
+
                         <TextView
                             style="@style/button_titles_tv_second"
-                            android:text="@string/technical_fouls"/>
+                            android:text="@string/technical_fouls" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -545,789 +487,767 @@
                             android:id="@+id/ll_Fouls"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="4dp"
-                            >
+                            android:orientation="horizontal">
 
                             <LinearLayout
-                                style="@style/buttons_LL"
                                 android:id="@+id/ll_foul"
-                                android:gravity="center_vertical">
-
-                                <TextView
-                                    style="@style/in_button_number_tv"
-                                    android:id="@+id/foulTV" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
                                 style="@style/buttons_LL"
-                                android:id="@+id/ll_tehnicalFoul"
                                 android:gravity="center_vertical">
 
                                 <TextView
-                                    style="@style/in_button_number_tv"
-                                    android:id="@+id/tehnicalFoulTV" />
+                                    android:id="@+id/foulTV"
+                                    style="@style/in_button_number_tv" />
 
                             </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!--            finish LL-->
-            <LinearLayout
-                style="@style/points_rebs_LL">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/ll_finish"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="4dp"
-                            >
 
                             <LinearLayout
-                                style="@style/finish_LL"
-                                android:id="@+id/ll_finishGame">
+                                android:id="@+id/ll_tehnicalFoul"
+                                style="@style/buttons_LL"
+                                android:gravity="center_vertical">
 
                                 <TextView
-                                    style="@style/in_button_number_tv"
-                                    android:id="@+id/finishGameTV"
-                                    android:text="@string/finishGameTV" />
+                                    android:id="@+id/tehnicalFoulTV"
+                                    style="@style/in_button_number_tv" />
 
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
+                <!--            finish LL-->
+                <LinearLayout
+                    android:id="@+id/ll_finishGame"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/finish_game_ll"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:elevation="3dp">
+
+                    <TextView
+                        android:id="@+id/finishGameTV"
+                        style="@style/in_button_number_tv"
+                        android:text="@string/finishGameTV"
+                        android:textAllCaps="true" />
+
+                </LinearLayout>
+
             </LinearLayout>
+
+            <!--        teamB igraci-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/secondTeamRV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="vertical" />
 
         </LinearLayout>
-
-<!--        teamB igraci-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/secondTeamRV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scrollbars="vertical" />
-
-    </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
 
 
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
 
-<!--
-<?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    tools:context=".GameActivity">
-
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/firstTeamRV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:scrollbars="vertical" />
+        tools:context=".GameActivity">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/gameTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_view_countdown"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/gameTimeButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button_start_pause"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/start"
-                    android:textColor="@color/white"
-                    android:background="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
-
-                <Button
-                    android:id="@+id/button_reset"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/reset"
-                    android:textColor="@color/white"
-                    android:background="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:visibility="invisible"
-                    tools:visibility="visible"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/gameTeams"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teamA"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="TeamA"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/teamB"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="TeamB"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/gameScore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/scoreTeamA"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="ResA"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=":"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/scoreTeamB"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:text="ResB"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_2P"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_2PM"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv2pmTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/tv2pmTitle"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv2pm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_2PA"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv2paTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/tv2paTitle"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv2pa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_3P"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_3PM"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv3pmTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/tv3pmTitle"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv3pm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_3PA"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv3paTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/tv3paTitle"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv3pa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_1P"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_1PM"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv1pmTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/tv1pmTitle"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv1pm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_1PA"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv1paTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/tv1paTitle"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv1pa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_rebounds"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_offReb"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/offRebTitleTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/offRebTitleTV"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/offRebTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_defReb"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/defRebTitleTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/defRebTitleTV"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/defRebTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_assistBlock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_assist"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/assistTitleTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/assistTitleTV"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/assistTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_block"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/blockTitleTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/blockTitleTV"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/blockTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-            android:id="@+id/ll_stealsTurnovers"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-
-
-            <LinearLayout
-                android:id="@+id/ll_steals"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/stealsTitleTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/stealsTitleTV"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/stealsTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="0"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_turnovers"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/turnoversTitleTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/turnoversTitleTV"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/turnoversTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="0"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_Fouls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-
-
-                <LinearLayout
-                    android:id="@+id/ll_foul"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/foulTitleTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/foulTitleTV"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/foulTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_tehnicalFoul"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tehnicalFoulTitleTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/tehnicalFoulTitleTV"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tehnicalFoulTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="0"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_finish"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_finishGame"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border2"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/finishGameTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/finishGameTV"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/secondTeamRV"
-            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:scrollbars="vertical" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/firstTeamRV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scrollbars="vertical" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/gameTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_view_countdown"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/gameTimeButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button_start_pause"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/button_reset"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/reset"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        tools:visibility="visible"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/gameTeams"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/teamA"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="TeamA"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/teamB"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="TeamB"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/gameScore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/scoreTeamA"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="ResA"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/scoreTeamB"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="ResB"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_2P"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_2PM"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv2pmTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/tv2pmTitle"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv2pm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_2PA"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv2paTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/tv2paTitle"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv2pa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_3P"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_3PM"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv3pmTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/tv3pmTitle"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv3pm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_3PA"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv3paTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/tv3paTitle"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv3pa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_1P"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_1PM"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv1pmTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/tv1pmTitle"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv1pm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_1PA"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv1paTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/tv1paTitle"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv1pa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_rebounds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_offReb"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/offRebTitleTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/offRebTitleTV"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/offRebTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_defReb"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/defRebTitleTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/defRebTitleTV"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/defRebTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_assistBlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_assist"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/assistTitleTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/assistTitleTV"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/assistTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_block"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/blockTitleTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/blockTitleTV"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/blockTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
 
-</ScrollView>-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                android:id="@+id/ll_stealsTurnovers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+
+
+                <LinearLayout
+                    android:id="@+id/ll_steals"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/stealsTitleTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/stealsTitleTV"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/stealsTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="0"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_turnovers"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/turnoversTitleTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/turnoversTitleTV"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/turnoversTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="0"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_Fouls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_foul"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/foulTitleTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/foulTitleTV"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/foulTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_tehnicalFoul"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tehnicalFoulTitleTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/tehnicalFoulTitleTV"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tehnicalFoulTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_finish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_finishGame"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/finishGameTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/finishGameTV"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/secondTeamRV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
+
+
+    </ScrollView>-->

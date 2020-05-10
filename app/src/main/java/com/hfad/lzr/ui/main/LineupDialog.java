@@ -56,7 +56,7 @@ public class LineupDialog extends DialogFragment {
 
         secondLineupRV.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new PlayersGameAdapter(reserves);
+        adapter = new PlayersGameAdapter(reserves, "teamA");
         secondLineupRV.setLayoutManager(layoutManager);
         secondLineupRV.setAdapter(adapter);
 

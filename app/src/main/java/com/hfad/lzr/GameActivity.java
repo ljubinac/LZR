@@ -482,15 +482,16 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 for (int i = 0; i < playersGameA.size(); i++){
                     PlayerGame playerGame = playersGameA.get(i);
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalEff").setValue(playerGame.getTotalPoints() +
+                    DatabaseReference databaseReferencePlayer = databaseReferencePlayers.child(playerGame.getId());
+                    databaseReferencePlayer.child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
+                    databaseReferencePlayer.child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
+                    databaseReferencePlayer.child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
+                    databaseReferencePlayer.child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
+                    databaseReferencePlayer.child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
+                    databaseReferencePlayer.child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
+                    databaseReferencePlayer.child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
+                    databaseReferencePlayer.child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
+                    databaseReferencePlayer.child("totalEff").setValue(playerGame.getTotalPoints() +
                             playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
                             (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
                             playerGame.getTotalFouls());
@@ -499,15 +500,16 @@ public class GameActivity extends AppCompatActivity {
 
                 for (int i = 0; i < playersGameB.size(); i++){
                     PlayerGame playerGame = playersGameB.get(i);
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
-                    databaseReferencePlayers.child(playerGame.getId()).child("totalEff").setValue(playerGame.getTotalPoints() +
+                    DatabaseReference databaseReferencePlayer = databaseReferencePlayers.child(playerGame.getId());
+                    databaseReferencePlayer.child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
+                    databaseReferencePlayer.child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
+                    databaseReferencePlayer.child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
+                    databaseReferencePlayer.child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
+                    databaseReferencePlayer.child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
+                    databaseReferencePlayer.child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
+                    databaseReferencePlayer.child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
+                    databaseReferencePlayer.child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
+                    databaseReferencePlayer.child("totalEff").setValue(playerGame.getTotalPoints() +
                             playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
                             (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
                             playerGame.getTotalFouls());
@@ -643,7 +645,7 @@ public class GameActivity extends AppCompatActivity {
         teamArv = findViewById(R.id.firstTeamRV);
         teamArv.setHasFixedSize(true);
         layoutManagerA = new LinearLayoutManager(getApplicationContext());
-        adapterA = new PlayersGameAdapter(playersGameA);
+        adapterA = new PlayersGameAdapter(playersGameA, "teamA");
 
         teamArv.setLayoutManager(layoutManagerA);
         teamArv.setAdapter(adapterA);
@@ -706,7 +708,7 @@ public class GameActivity extends AppCompatActivity {
         teamBrv = findViewById(R.id.secondTeamRV);
         teamBrv.setHasFixedSize(true);
         layoutManagerB = new LinearLayoutManager(getApplicationContext());
-        adapterB = new PlayersGameAdapter(playersGameB);
+        adapterB = new PlayersGameAdapter(playersGameB, "teamB");
 
         teamBrv.setLayoutManager(layoutManagerB);
         teamBrv.setAdapter(adapterB);

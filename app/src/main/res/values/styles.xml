@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -91,39 +91,37 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="in_button_number_tv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:text">0</item>
     </style>
     <style name="buttons_LL">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:orientation">vertical</item>
         <item name="android:background">@drawable/border_button</item>
-        <item name="android:layout_marginLeft">3dp</item>
-        <item name="android:layout_marginRight">3dp</item>
+        <item name="android:elevation" tools:targetApi="lollipop">3dp</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
     </style>
-    <style name="finish_LL">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:background">@drawable/finish_game_ll</item>
-    </style>
+
     <style name="button_titles_tv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <style name="button_titles_tv_second">
         <item name="android:layout_width">0dp</item>
@@ -131,7 +129,8 @@
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

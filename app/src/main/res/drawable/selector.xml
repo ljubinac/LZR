@@ -2,13 +2,14 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:state_selected="true"
-        android:drawable="@color/grey_start"/>
+        android:drawable="@drawable/player_game_selected_background"/>
     <item
         app:state_in="true"
-        android:drawable="@color/text_grey_light"/>
+        android:drawable="@drawable/player_game_background"/>
     <item
         app:state_out="true"
-        android:drawable="@color/white"/>
+        android:drawable="@drawable/player_game_background"
+        />
     <item
         app:state_changeOut="true"
         android:drawable="@color/colorAccent"/>
