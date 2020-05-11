@@ -149,6 +149,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, TeamsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_create_team:
+                intent = new Intent(this, CreateTeamActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_create_league:
+                intent = new Intent(this, CreateLeagueActivity.class);
+                startActivity(intent);
+                break;
             case R.id.nav_standings:
                 intent = new Intent(this, StandingsActivity.class);
                 startActivity(intent);

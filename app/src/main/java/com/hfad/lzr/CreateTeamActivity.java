@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,9 +19,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hfad.lzr.adapter.PlayersAdapter;
+import com.hfad.lzr.model.League;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.Team;
 
@@ -36,8 +41,12 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     private Button saveTeam;
     private EditText teamName;
-    private DatabaseReference databaseReferencePlayers, databaseReferenceTeams;
-    private Spinner leagueName;
+    private DatabaseReference databaseReferencePlayers, databaseReferenceTeams, databaseReferenceLeagues;
+    Spinner leagueSpinner;
+    ArrayAdapter<String> adapterList;
+    ArrayList<String> leaguesSpinnerList;
+    ArrayList<League> leagues;
+    ValueEventListener listener;
 
     private TextView playerNumber, playerName;
     private ImageView addPlayer;
@@ -54,13 +63,22 @@ public class CreateTeamActivity extends AppCompatActivity {
 
         saveTeam = findViewById(R.id.save_team);
         teamName = findViewById(R.id.team_name);
-        leagueName = findViewById(R.id.choose_league);
+        leagueSpinner = findViewById(R.id.choose_league);
         databaseReferenceTeams = FirebaseDatabase.getInstance().getReference("teams");
 
         addPlayer = findViewById(R.id.add_image);
         playerNumber = findViewById(R.id.player_number_edt);
         playerName = findViewById(R.id.player_name_edt);
         databaseReferencePlayers = FirebaseDatabase.getInstance().getReference("players");
+
+        databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
+
+        leagues = new ArrayList<>();
+
+        leaguesSpinnerList = new ArrayList<>();
+        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
+
+        leagueSpinner.setAdapter(adapterList);
 
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +102,27 @@ public class CreateTeamActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), CreateMatchActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        fetchLeagues();
+    }
+
+    private void fetchLeagues() {
+        listener = databaseReferenceLeagues.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot league : dataSnapshot.getChildren()) {
+                    leaguesSpinnerList.add(league.child("name").getValue().toString());
+                    leagues.add(league.getValue(League.class));
+                }
+
+                adapterList.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
@@ -124,7 +163,7 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     private void addTeam() {
         String name = teamName.getText().toString();
-        String league = String.valueOf(leagueName.getSelectedItem());
+        String league = String.valueOf(leagueSpinner.getSelectedItem());
         if (!TextUtils.isEmpty(name)) {
             String id = databaseReferenceTeams.push().getKey();
             Team team = new Team(id, name, league);

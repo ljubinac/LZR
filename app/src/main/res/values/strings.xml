@@ -222,4 +222,9 @@
     <string name="turnovers">Turnovers</string>
     <string name="fouls">Fouls</string>
     <string name="technical_fouls">Technical fouls</string>
+    <string name="save_league">Save league</string>
+    <string name="league_added">League added!</string>
+    <string name="league_name_fail">Add league name!</string>
+    <string name="league_not_added">League not added!</string>
+    <string name="create_league">Create new league</string>
 </resources>

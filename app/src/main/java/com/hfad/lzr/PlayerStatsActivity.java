@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hfad.lzr.adapter.PlayerStatsAdapter;
 import com.hfad.lzr.adapter.PlayersGameAdapter;
 import com.hfad.lzr.adapter.TeamAdapter;
+import com.hfad.lzr.model.League;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
@@ -35,8 +36,10 @@ public class PlayerStatsActivity extends AppCompatActivity {
     RecyclerView playerStatsRV;
     Spinner leagueSpinner;
     ArrayAdapter<String> adapterList;
-    ArrayList<String> leagues;
-    DatabaseReference databaseReference;
+    ArrayList<String> leaguesSpinnerList;
+    ArrayList<League> leagues;
+    ValueEventListener listener;
+    DatabaseReference databaseReference, databaseReferenceLeagues;
     ArrayList<Player> players;
     PlayerStatsAdapter playerStatsAdapter;
     RecyclerView.LayoutManager mLayoutManager;
@@ -64,18 +67,22 @@ public class PlayerStatsActivity extends AppCompatActivity {
 
         parameterSpinner = findViewById(R.id.choose_parameter);
 
+        databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
+
         leagues = new ArrayList<>();
-        leagues.add("Liga A");
-        leagues.add("Liga B");
-        adapterListOfParameters = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
-        adapterListOfParameters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        leaguesSpinnerList = new ArrayList<>();
+        adapterListOfParameters = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
+//        adapterListOfParameters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         parameters = new ArrayList<>();
         parameters.add("PTS");
         parameters.add("AST");
 
-        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
-        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
+//        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        leagueSpinner.setAdapter(adapterList);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.divider));
@@ -114,7 +121,28 @@ public class PlayerStatsActivity extends AppCompatActivity {
             }
         });
 
+        fetchLeagues();
+
         fetch("Liga A", "PTS");
+    }
+
+    private void fetchLeagues() {
+        listener = databaseReferenceLeagues.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot league : dataSnapshot.getChildren()) {
+                    leaguesSpinnerList.add(league.child("name").getValue().toString());
+                    leagues.add(league.getValue(League.class));
+                }
+
+                adapterList.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void fetch(String league, final String parameter) {

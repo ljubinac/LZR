@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hfad.lzr.model.Game;
+import com.hfad.lzr.model.League;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
@@ -33,11 +34,12 @@ import java.util.Date;
 public class CreateMatchActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     Spinner spinner1, spinner2, leagueSpinner;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference, databaseReferenceLeagues;
     ValueEventListener listener;
     ArrayAdapter<String> adapterTeamA, adapterList;
-    ArrayList<String> teamsSpinnerA, teamsSpinnerB, leagues;
+    ArrayList<String> teamsSpinnerA, teamsSpinnerB, leaguesSpinnerList;
     ArrayList<Team> teams;
+    ArrayList<League> leagues;
     Button saveGame;
     Toolbar toolbar;
     DatabaseReference databaseReferenceGames;
@@ -76,6 +78,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
 
 
         teams = new ArrayList<>();
+        leagues = new ArrayList<>();
         spinner1 = findViewById(R.id.choose_teamA);
         spinner2 = findViewById(R.id.choose_teamB);
         leagueSpinner = findViewById(R.id.choose_league);
@@ -93,10 +96,10 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
                 startActivity(intent);
             }
         });
-        leagues = new ArrayList<>();
-        leagues.add("Liga A");
-        leagues.add("Liga B");
-        adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leagues);
+
+        databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
+        leaguesSpinnerList = new ArrayList<>();
+        adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leaguesSpinnerList);
         adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("teams");
@@ -111,6 +114,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
                 android.R.layout.simple_spinner_dropdown_item,
                 teamsSpinnerB);
 
+        leagueSpinner.setAdapter(adapterList);
         spinner1.setAdapter(adapterTeamA);
         spinner2.setAdapter(adapterTeamA);
 
@@ -129,6 +133,27 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
             }
         });
 
+        fetchLeagues();
+
+    }
+
+    private void fetchLeagues() {
+        listener = databaseReferenceLeagues.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot league : dataSnapshot.getChildren()) {
+                    leaguesSpinnerList.add(league.child("name").getValue().toString());
+                    leagues.add(league.getValue(League.class));
+                }
+
+                adapterList.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 

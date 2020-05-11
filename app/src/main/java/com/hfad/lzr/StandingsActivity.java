@@ -35,6 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hfad.lzr.adapter.TeamAdapter;
+import com.hfad.lzr.model.League;
 import com.hfad.lzr.model.Team;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
@@ -55,10 +56,12 @@ public class StandingsActivity extends AppCompatActivity {
     private int STORAGE_PERMISSION_CODE = 1;
 
     RecyclerView standingsRV;
+    ValueEventListener listener;
     Spinner leagueSpinner;
     ArrayAdapter<String> adapterList;
-    ArrayList<String> leagues;
-    DatabaseReference databaseReference;
+    ArrayList<String> leaguesSpinnerList;
+    ArrayList<League> leagues;
+    DatabaseReference databaseReference, databaseReferenceLeagues;
     ArrayList<Team> teams;
     TeamAdapter teamAdapter;
     RecyclerView.LayoutManager mLayoutManager;
@@ -87,11 +90,15 @@ public class StandingsActivity extends AppCompatActivity {
 
         myFilePath = "";
 
+        databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
+
         leagues = new ArrayList<>();
-        leagues.add("Liga A");
-        leagues.add("Liga B");
-        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
-        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        leaguesSpinnerList = new ArrayList<>();
+        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
+//        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        leagueSpinner.setAdapter(adapterList);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.divider));
@@ -117,12 +124,33 @@ public class StandingsActivity extends AppCompatActivity {
 
         });
 
+        fetchLeagues();
+
         fetch("Liga A");
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createPdf();
+            }
+        });
+    }
+
+    private void fetchLeagues() {
+        listener = databaseReferenceLeagues.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot league : dataSnapshot.getChildren()) {
+                    leaguesSpinnerList.add(league.child("name").getValue().toString());
+                    leagues.add(league.getValue(League.class));
+                }
+
+                adapterList.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

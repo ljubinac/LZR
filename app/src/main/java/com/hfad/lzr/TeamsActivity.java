@@ -23,9 +23,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.hfad.lzr.adapter.TeamViewHolder;
+import com.hfad.lzr.model.League;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
@@ -37,7 +42,10 @@ public class TeamsActivity extends AppCompatActivity {
     FirebaseRecyclerAdapter adapter;
     Spinner leagueSpinner;
     ArrayAdapter<String> adapterList;
-    ArrayList<String> leagues;
+    ArrayList<String> leaguesSpinnerList;
+    ArrayList<League> leagues;
+    DatabaseReference databaseReferenceLeagues;
+    ValueEventListener listener;
     Toolbar toolbar;
     FloatingActionButton fab;
 
@@ -54,11 +62,15 @@ public class TeamsActivity extends AppCompatActivity {
         leagueSpinner = findViewById(R.id.choose_league);
         fab = findViewById(R.id.fab);
 
+        databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
+
         leagues = new ArrayList<>();
-        leagues.add("Liga A");
-        leagues.add("Liga B");
-        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, leagues);
-        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        leaguesSpinnerList = new ArrayList<>();
+        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
+//        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        leagueSpinner.setAdapter(adapterList);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.divider));
@@ -80,6 +92,8 @@ public class TeamsActivity extends AppCompatActivity {
 
         });
 
+        fetchLeagues();
+
         fetch("Liga A");
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +104,25 @@ public class TeamsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void fetchLeagues() {
+        listener = databaseReferenceLeagues.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot league : dataSnapshot.getChildren()) {
+                    leaguesSpinnerList.add(league.child("name").getValue().toString());
+                    leagues.add(league.getValue(League.class));
+                }
+
+                adapterList.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void fetch(String league) {
