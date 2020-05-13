@@ -1,24 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".CreateLeagueActivity">
 
-
-    <EditText
-        android:id="@+id/league_name_et"
-        android:layout_width="0dp"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp">
 
-    <Button
-        android:id="@+id/save_league_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/save_league"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_logo_register_login" />
+
+        <EditText
+            android:id="@+id/league_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/edit_text_register_background"
+            android:hint="@string/league_name_hint"
+            android:textColor="@color/text"
+            android:textColorHint="@color/text_grey_dark"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+   <!-- <View style="@style/Divider_create_team_league"
+        android:layout_marginTop="370dp"/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp">
+
+        <Button
+            android:id="@+id/save_league_btn"
+            style="@style/AppTheme.ButtonOrange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:text="@string/save_game"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
 
 </LinearLayout>
+

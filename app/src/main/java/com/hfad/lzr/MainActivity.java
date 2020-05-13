@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.setTabTextColors(getResources().getColor(R.color.tab_not_selected),
                 getResources().getColor(R.color.white));
 
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.orange_start));
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(GamesFragment.newInstance(true), "Recent games");

@@ -81,6 +81,7 @@ public class StatsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Game stats");
 
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tabs);
@@ -92,7 +93,7 @@ public class StatsActivity extends AppCompatActivity {
         tabLayout.setTabTextColors(getResources().getColor(R.color.tab_not_selected),
                 getResources().getColor(R.color.white));
 
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.orange_start));
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         statsFragmentA = StatsFragment.newInstance(playersGameA);

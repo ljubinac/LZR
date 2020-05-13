@@ -16,16 +16,6 @@ import java.util.ArrayList;
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
     private ArrayList<Team> mTeamList;
-   /* private OnItemClickListener mListener;
-    public int selectedPos = RecyclerView.NO_POSITION;
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void onItemClickListener(OnItemClickListener listener){
-        mListener = listener;
-    }*/
 
     static class ViewHolder extends  RecyclerView.ViewHolder{
 
@@ -42,19 +32,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
             pointsTV = itemView.findViewById(R.id.pointsTV);
         }
 
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
-                        }
-                    }
-
-                }
-            });*/
-        }
+    }
 
     public TeamAdapter(ArrayList<Team> teams){
         mTeamList = teams;
@@ -64,7 +42,6 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.standings_item, parent, false);
-       /* ViewHolder vh = new ViewHolder(view, mListener);*/
         return new ViewHolder(view);
     }
 

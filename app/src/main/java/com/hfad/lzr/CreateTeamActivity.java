@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,10 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    private ImageView showAdd;
+    private ImageView backAdd;
+    private LinearLayout addPlayerLL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +65,11 @@ public class CreateTeamActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Create team");
+
+        showAdd = findViewById(R.id.show_add_image);
+        addPlayerLL = findViewById(R.id.add_player_ll);
+        backAdd = findViewById(R.id.back_image);
 
         saveTeam = findViewById(R.id.save_team);
         teamName = findViewById(R.id.team_name);
@@ -80,12 +90,33 @@ public class CreateTeamActivity extends AppCompatActivity {
 
         leagueSpinner.setAdapter(adapterList);
 
+        showAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAdd.setVisibility(View.GONE);
+                addPlayer.setVisibility(View.VISIBLE);
+                addPlayerLL.setVisibility(View.VISIBLE);
+            }
+        });
+
+        backAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAdd.setVisibility(View.VISIBLE);
+                addPlayerLL.setVisibility(View.GONE);
+                addPlayer.setVisibility(View.GONE);
+            }
+        });
+
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 addPlayer();
                 buildRecyclerView();
+                showAdd.setVisibility(View.VISIBLE);
+                addPlayerLL.setVisibility(View.GONE);
+                addPlayer.setVisibility(View.GONE);
             }
         });
 

@@ -80,6 +80,7 @@ public class StandingsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Standings");
 
         standingsRV = findViewById(R.id.standingsRV);
         leagueSpinner = findViewById(R.id.choose_league);

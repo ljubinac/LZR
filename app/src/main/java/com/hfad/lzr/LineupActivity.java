@@ -46,6 +46,7 @@ public class LineupActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Choose lineup");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -64,7 +65,7 @@ public class LineupActivity extends AppCompatActivity {
         tabs.setTabTextColors(getResources().getColor(R.color.tab_not_selected),
                 getResources().getColor(R.color.white));
 
-        tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
+        tabs.setSelectedTabIndicatorColor(getResources().getColor(R.color.orange_start));
 
         startGame = findViewById(R.id.start_game);
 

@@ -22,6 +22,11 @@
         <item name="android:layout_height">3dp</item>
         <item name="android:background">@drawable/divider_team</item>
     </style>
+    <style name="Divider_create_team_league">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:background">@drawable/divider_create_team_league</item>
+    </style>
 
     <style name="AppTheme.ButtonBlue" parent="Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:background">@drawable/blue_button</item>

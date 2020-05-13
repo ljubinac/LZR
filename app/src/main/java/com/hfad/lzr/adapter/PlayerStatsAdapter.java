@@ -1,11 +1,13 @@
 package com.hfad.lzr.adapter;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.lzr.R;
@@ -13,6 +15,8 @@ import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PlayerStatsAdapter extends RecyclerView.Adapter<PlayerStatsAdapter.PlayerStatsViewHolder> {
 
@@ -43,6 +47,7 @@ public class PlayerStatsAdapter extends RecyclerView.Adapter<PlayerStatsAdapter.
         return new PlayerStatsViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull PlayerStatsViewHolder holder, int position) {
         Player player = mPlayersList.get(position);
@@ -50,20 +55,31 @@ public class PlayerStatsAdapter extends RecyclerView.Adapter<PlayerStatsAdapter.
         holder.playerTV.setText(player.getNameAndLastname());
         if(mSelectedParameter.equals("PTS")) {
             holder.parameterTV.setText(String.valueOf(player.getTotalPoints()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalPoints).reversed());
         } else if (mSelectedParameter.equals("AST")) {
             holder.parameterTV.setText(String.valueOf(player.getTotalAssists()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalAssists).reversed());
         } else if (mSelectedParameter.equals("REB")) {
             holder.parameterTV.setText(String.valueOf(player.getTotalRebs()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalRebs).reversed());
         } else if (mSelectedParameter.equals("STL")) {
             holder.parameterTV.setText(String.valueOf(player.getTotalSteals()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalSteals).reversed());
         } else if (mSelectedParameter.equals("BLK")) {
             holder.parameterTV.setText(String.valueOf(player.getTotalBlocks()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalBlocks).reversed());
         } else if (mSelectedParameter.equals("TOV")) {
             holder.parameterTV.setText(String.valueOf(player.getTotalTurnovers()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalTurnovers).reversed());
         } else if (mSelectedParameter.equals("PF")) {
             holder.parameterTV.setText(String.valueOf(player.getTotalFouls()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalFouls).reversed());
         } else if (mSelectedParameter.equals("TEH")) {
             holder.parameterTV.setText(String.valueOf(player.getTotalTehnical()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalTehnical).reversed());
+        } else {
+            holder.parameterTV.setText(String.valueOf(player.getTotalEff()));
+            Collections.sort(mPlayersList, Comparator.comparing(Player::getTotalEff).reversed());
         }
     }
 

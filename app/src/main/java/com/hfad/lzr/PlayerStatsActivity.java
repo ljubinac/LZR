@@ -1,6 +1,7 @@
 package com.hfad.lzr;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class PlayerStatsActivity extends AppCompatActivity {
 
@@ -61,6 +64,7 @@ public class PlayerStatsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Player stats");
 
         playerStatsRV = findViewById(R.id.player_stats_rv);
         leagueSpinner = findViewById(R.id.choose_league);
@@ -76,8 +80,8 @@ public class PlayerStatsActivity extends AppCompatActivity {
 //        adapterListOfParameters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         parameters = new ArrayList<>();
-        parameters.add("PTS");
-        parameters.add("AST");
+      /*  parameters.add("PTS");
+        parameters.add("AST");*/
 
         adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
 //        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -147,6 +151,7 @@ public class PlayerStatsActivity extends AppCompatActivity {
 
     private void fetch(String league, final String parameter) {
         databaseReference.orderByChild("league").equalTo(league).addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 players.clear();
@@ -155,7 +160,8 @@ public class PlayerStatsActivity extends AppCompatActivity {
                     players.add(player);
                 }
 
-                Collections.sort(players);
+//                Collections.sort(players, Comparator.comparing(Player::getTotalPoints)
+//                .thenComparing(Player::getTotalAssists));
 
                 playerStatsRV.setHasFixedSize(true);
                 mLayoutManager = new LinearLayoutManager(getApplicationContext());

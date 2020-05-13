@@ -509,7 +509,7 @@ public class GameActivity extends AppCompatActivity {
                     databaseReferencePlayer.child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
                     databaseReferencePlayer.child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
                     databaseReferencePlayer.child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
-                    databaseReferencePlayer.child("totalEff").setValue(playerGame.getTotalPoints() +
+                    databaseReferencePlayer.child("totalEff").setValue(playerGame.getTotalEff() + playerGame.getTotalPoints() +
                             playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
                             (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
                             playerGame.getTotalFouls());

@@ -8,8 +8,6 @@ import java.util.Objects;
 public class PlayerGame extends Player implements Serializable {
 
     private String gameId;
-    /*private int pointsTeamA;
-    private int pointsTeamB;*/
     private int pm2;
     private int pa2;
     private int pm3;
@@ -24,6 +22,7 @@ public class PlayerGame extends Player implements Serializable {
     private int foul;
     private int steal;
     private int tehnicalFoul;
+    private int eff;
     private int minutes;
     private int whenGoingIn;
 
@@ -37,8 +36,6 @@ public class PlayerGame extends Player implements Serializable {
     public PlayerGame(String gameId ,Player player) {
         super(player);
         this.gameId = gameId;
-       /* this.pointsTeamA = pointsTeamA;
-        this.pointsTeamB = pointsTeamB;*/
         this.pm2 = 0;
         this.pa2 = 0;
         this.pm3 =0;
@@ -53,6 +50,15 @@ public class PlayerGame extends Player implements Serializable {
         this.foul = 0;
         this.steal = 0;
         this.minutes = 0;
+        this.eff = 0;
+    }
+
+    public int getEff() {
+        return eff;
+    }
+
+    public void setEff(int eff) {
+        this.eff = eff;
     }
 
     public String getGameId() {

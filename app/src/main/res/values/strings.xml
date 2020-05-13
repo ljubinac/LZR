@@ -227,4 +227,5 @@
     <string name="league_name_fail">Add league name!</string>
     <string name="league_not_added">League not added!</string>
     <string name="create_league">Create new league</string>
+    <string name="league_name_hint">League name</string>
 </resources>

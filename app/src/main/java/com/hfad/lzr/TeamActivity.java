@@ -41,7 +41,7 @@ public class TeamActivity extends AppCompatActivity {
     TextView teamNameTV, teamLeagueTV;
     LinearLayout teamNameLL1, teamNameLL2, leagueLL1, leagueLL2, addPlayerLL;
     EditText teamNameET, playerNumberET, playerNameET;
-    ImageView acceptTeamName, editTeamName, acceptLeague, editLeague, addPlayer, editPlayer, deletePlayer, showAdd, backAdd;
+    ImageView editTeamName, addPlayer, editPlayer, deletePlayer, showAdd, backAdd;
     String teamName, idTeam;
     Spinner leagueSpinner;
     RecyclerView playersRV;
@@ -58,22 +58,16 @@ public class TeamActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Team");
 
         divider = findViewById(R.id.divider);
         teamNameTV = findViewById(R.id.teamNameTV);
         teamLeagueTV = findViewById(R.id.teamLeagueTV);
-//        teamNameET = findViewById(R.id.teamNameET);
         teamNameLL1 = findViewById(R.id.teamNameLL1);
-//        teamNameLL2 = findViewById(R.id.teamNameLL2);
-//        acceptTeamName = findViewById(R.id.acceptTeamName);
         editTeamName = findViewById(R.id.image_editTeamName);
         teamName = getIntent().getStringExtra("team_name");
 
-//        editLeague = findViewById(R.id.image_editLeague);
         leagueSpinner = findViewById(R.id.choose_league);
-//        acceptLeague = findViewById(R.id.image_acceptLeague);
-//        leagueLL1 = findViewById(R.id.leagueLL1);
-//        leagueLL2 = findViewById(R.id.leagueLL2);
 
         idTeam = getIntent().getStringExtra("idTeam");
         playerNumberET = findViewById(R.id.player_number_edt);

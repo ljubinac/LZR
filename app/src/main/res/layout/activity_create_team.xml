@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".CreateTeamActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -12,80 +13,129 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp"
-        tools:context=".CreateTeamActivity">
+        android:background="@drawable/gray_layout_gradient">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/team_name"
-                android:textColor="@color/text"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            android:orientation="vertical"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp">
 
             <EditText
                 android:id="@+id/team_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edit_text_register_background"
                 android:hint="@string/team_name_hint"
                 android:textColor="@color/text"
-                android:textSize="18dp"
-                android:textStyle="italic" />
+                android:textColorHint="@color/text_grey_dark"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/choose_league"
-                android:textColor="@color/text"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            android:orientation="vertical"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp">
 
             <Spinner
                 android:id="@+id/choose_league"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_for_create_team"
+                android:elevation="3dp"
                 android:entries="@array/leagues" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="50dp">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_weight="4"
+                android:gravity="center"
                 android:text="@string/players_title"
-                android:textAlignment="center"
-                android:textColor="@color/text"
+                android:textColor="@color/colorPrimary"
                 android:textSize="22dp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/show_add_image"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_add" />
+
+            <ImageView
+                android:id="@+id/add_image"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_save"
+                android:visibility="gone"/>
         </LinearLayout>
 
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/add_player_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/player_number_edt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/player_number_hint"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textColor="@color/text"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/player_name_edt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:background="@drawable/edit_text_background"
+                android:hint="@string/player_name_hint"
+                android:inputType="text"
+                android:textColor="@color/text"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/back_image"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:tint="#9F3F21"
+                app:srcCompat="@drawable/ic_cancel" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -94,54 +144,24 @@
             android:padding="4dp"
             android:scrollbars="vertical" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+    <!--<View style="@style/Divider_create_team_league" />-->
 
-            <EditText
-                android:id="@+id/player_number_edt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/player_number_hint"
-                android:inputType="number"
-                android:maxLength="2"
-                android:textColor="@color/text"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/player_name_edt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/player_name_hint"
-                android:inputType="text"
-                android:textColor="@color/text"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/add_image"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="2"
-                android:src="@drawable/ic_add" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp">
 
         <Button
             android:id="@+id/save_team"
-            android:layout_width="wrap_content"
+            style="@style/AppTheme.ButtonOrange"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="70dp"
-            android:width="130dp"
-            android:text="@string/add_team" />
-
-
+            android:layout_marginBottom="48dp"
+            android:text="@string/save_game"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>
