@@ -516,28 +516,30 @@ public class GameActivity extends AppCompatActivity {
                 }
                 game.setResA(resA);
                 game.setResB(resB);
-                teamA.setPointsScored(teamA.getPointsScored() + resA);
-                teamA.setPointsReceived(teamA.getPointsReceived() + resB);
-                teamB.setPointsScored(teamB.getPointsScored() + resB);
-                teamB.setPointsReceived(teamB.getPointsReceived() + resA);
-                if (resA > resB) {
-                    teamA.setPoints(teamA.getPoints() + 2);
-                    teamB.setPoints(teamB.getPoints() + 1);
-                } else {
-                    teamB.setPoints(teamB.getPoints() + 2);
-                    teamA.setPoints(teamA.getPoints() + 1);
+                if(!game.isExhibition()) {
+                    teamA.setPointsScored(teamA.getPointsScored() + resA);
+                    teamA.setPointsReceived(teamA.getPointsReceived() + resB);
+                    teamB.setPointsScored(teamB.getPointsScored() + resB);
+                    teamB.setPointsReceived(teamB.getPointsReceived() + resA);
+                    if (resA > resB) {
+                        teamA.setPoints(teamA.getPoints() + 2);
+                        teamB.setPoints(teamB.getPoints() + 1);
+                    } else {
+                        teamB.setPoints(teamB.getPoints() + 2);
+                        teamA.setPoints(teamA.getPoints() + 1);
+                    }
+                    teamA.setPlayed(teamA.getPlayed() + 1);
+                    teamB.setPlayed(teamB.getPlayed() + 1);
+                    if (resA > resB) {
+                        teamA.setWin(teamA.getWin() + 1);
+                        teamB.setLost(teamB.getLost() + 1);
+                    } else {
+                        teamB.setWin(teamB.getWin() + 1);
+                        teamA.setLost(teamA.getLost() + 1);
+                    }
+                    databaseReference.child(teamA.getId()).setValue(teamA);
+                    databaseReference.child(teamB.getId()).setValue(teamB);
                 }
-                teamA.setPlayed(teamA.getPlayed() + 1);
-                teamB.setPlayed(teamB.getPlayed() + 1);
-                if (resA > resB) {
-                    teamA.setWin(teamA.getWin() + 1);
-                    teamB.setLost(teamB.getLost() + 1);
-                } else {
-                    teamB.setWin(teamB.getWin() + 1);
-                    teamA.setLost(teamA.getLost() + 1);
-                }
-                databaseReference.child(teamA.getId()).setValue(teamA);
-                databaseReference.child(teamB.getId()).setValue(teamB);
                 game.setResA(resA);
                 game.setResB(resB);
                 game.setFinished(true);

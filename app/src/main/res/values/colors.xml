@@ -6,7 +6,7 @@
     <color name="colorAccent">#F9AA33</color>
     <color name="blue_btn">#344955</color>
     <color name="white">#fff</color>
-    <color name="text">#000</color>
+    <color name="text">#3A3A3A</color>
     <color name="text_grey">#979797</color>
     <color name="text_grey_light">#D2D2D2</color>
     <color name="text_grey_dark">#344955</color>
@@ -19,8 +19,7 @@
     <color name="default_background">#FAFAFA</color>
     
     <color name="orange_start">#F9AA33</color>
-    <color name="orange_end">#D37C2B</color>
-    <color name="nova">#9F3F21</color>
+    <color name="orange_end">#F9AA33</color>
 
     <color name="blue_start">#344955</color>
     <color name="blue_end">#4A6EA8</color>

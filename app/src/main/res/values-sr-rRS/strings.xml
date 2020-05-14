@@ -57,4 +57,6 @@
     <string name="game_hall">Hala</string>
     <string name="game_time">Vreme</string>
     <string name="game_date">Datum</string>
+    <string name="languages_default_value" translatable="false">Srpski</string>
+    <string name="languages_summary">Srpski</string>
 </resources>

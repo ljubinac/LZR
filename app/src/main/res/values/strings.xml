@@ -137,8 +137,8 @@
 
     <string name="languages">Languages</string>
     <string name="languages_dialog_title" translatable="false">Perform Sync Using</string>
-    <string name="languages_default_value" translatable="false">English</string>
-    <string name="languages_summary" translatable="false">English</string>
+    <string name="languages_default_value">English</string>
+    <string name="languages_summary">English</string>
 
     <string-array name="languages_entries">
         <item>@string/english</item>
@@ -146,8 +146,8 @@
     </string-array>
 
     <string-array name="languages_values">
-        <item>@string/english</item>
-        <item>@string/serbian</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
     <string name="title_activity_main2">Main2Activity</string>
     <!-- Strings used for fragments for navigation -->

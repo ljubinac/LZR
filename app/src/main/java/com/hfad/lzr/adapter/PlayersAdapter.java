@@ -113,6 +113,8 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
                 mListener.onAcceptClick(position, holder.mPlayerNameTv.getText().toString(), holder.mPlayerNumberTv.getText().toString());
             }
         });
+
+
     }
 
     @Override

@@ -13,12 +13,13 @@ public class Game implements Serializable {
     private String teamAnaziv;
     private String teamBnaziv;
     private boolean isFinished;
+    private boolean isExhibition;
 
 
     public Game() {
     }
 
-    public Game(String id, String idTeamA, String idTeamB, String gameDate, String gameTime, String teamAnaziv, String teamBnaziv, boolean isFinished) {
+    public Game(String id, String idTeamA, String idTeamB, String gameDate, String gameTime, String teamAnaziv, String teamBnaziv, boolean isFinished, boolean isExhibition) {
         this.id = id;
         this.idTeamA = idTeamA;
         this.idTeamB = idTeamB;
@@ -27,6 +28,15 @@ public class Game implements Serializable {
         this.teamAnaziv = teamAnaziv;
         this.teamBnaziv = teamBnaziv;
         this.isFinished = isFinished;
+        this.isExhibition = isExhibition;
+    }
+
+    public boolean isExhibition() {
+        return isExhibition;
+    }
+
+    public void setExhibition(boolean exhibition) {
+        isExhibition = exhibition;
     }
 
     public boolean isFinished() {

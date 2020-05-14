@@ -8,13 +8,13 @@
         android:summary="@string/sync_pref_summary"
         android:defaultValue="true"/>-->
     <!--android:dependency="pref_sync"-->
-    <ListPreference
+   <!-- <ListPreference
         android:key="themes"
         android:title="@string/themes"
         android:entries="@array/themes_entries"
         android:entryValues="@array/themes_values"
         android:defaultValue="@string/themes_default_value"
-        android:summary="@string/themes_summary"/>
+        android:summary="@string/themes_summary"/>-->
 
     <!--        android:dependency="pref_sync"-->
     <ListPreference
@@ -22,7 +22,7 @@
         android:title="@string/languages"
         android:entries="@array/languages_entries"
         android:entryValues="@array/languages_values"
-        android:defaultValue="@string/languages_default_value"
+        android:defaultValue="1"
         android:summary="@string/languages_summary"/>
 
 </PreferenceScreen>

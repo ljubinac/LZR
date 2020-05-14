@@ -18,7 +18,7 @@ public class SettingsActivity extends AppCompatActivity {
             if(savedInstanceState != null)
                 return;
 
-            getFragmentManager().beginTransaction().add(R.id.fragment_container, new SettingsFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
         }
     }
 }

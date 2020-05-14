@@ -91,8 +91,13 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
                 String id = databaseReferenceGames.push().getKey();
                 Team teamA = teams.get(spinner1.getSelectedItemPosition());
                 Team teamB = teams.get(spinner2.getSelectedItemPosition());
-                Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false);
-                databaseReferenceGames.child(id).setValue(game);
+                if(leagueSpinner.getSelectedItem().toString().equals("Exhibition")) {
+                    Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, true);
+                    databaseReferenceGames.child(id).setValue(game);
+                } else {
+                    Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, false);
+                    databaseReferenceGames.child(id).setValue(game);
+                }
                 intent.putExtra("activity", "CreatingMatchActivity");
                 startActivity(intent);
             }
@@ -100,6 +105,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
 
         databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
         leaguesSpinnerList = new ArrayList<>();
+        leaguesSpinnerList.add("Exhibition");
         adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leaguesSpinnerList);
         adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -163,7 +169,13 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot team : dataSnapshot.getChildren()) {
-                    if (team.child("league").getValue().equals(league)) {
+                    if(!leagueSpinner.getSelectedItem().toString().equals("Exhibition")) {
+                        if (team.child("league").getValue().equals(league)) {
+                            teamsSpinnerA.add(team.child("name").getValue().toString());
+                            teamsSpinnerB.add(team.child("name").getValue().toString());
+                            teams.add(team.getValue(Team.class));
+                        }
+                    } else {
                         teamsSpinnerA.add(team.child("name").getValue().toString());
                         teamsSpinnerB.add(team.child("name").getValue().toString());
                         teams.add(team.getValue(Team.class));

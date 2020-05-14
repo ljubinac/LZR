@@ -1,76 +1,69 @@
 package com.hfad.lzr.ui.main;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.util.DisplayMetrics;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.hfad.lzr.R;
 
 import java.util.Locale;
 
-public class SettingsFragment extends PreferenceFragment {
 
-    public static final String THEMES = "themes";
-    public static final String LANGUAGES = "languages";
-    private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener;
+public class SettingsFragment extends PreferenceFragmentCompat {
+
+    ListPreference languages;
+
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
+        languages = findPreference("languages");
 
-        preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+
+        languages.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                if(key.equals(THEMES)){
-                    Preference themesPref = findPreference(key);
-                    themesPref.setSummary(sharedPreferences.getString(key, ""));
-                }
 
-                if(key.equals(LANGUAGES)){
-                    Preference languagesPref = findPreference(key);
-                    languagesPref.setSummary(sharedPreferences.getString(key, ""));
-                }
+            public boolean onPreferenceChange(Preference preference, Object o) {
+
+                if (o.equals("1"))
+                    setLocal("en");
+                else if (o.equals("2"))
+                    setLocal("sr");
+                else
+                    setLocal("en");
+                getActivity().recreate();
+                return true;
+
             }
-        };
 
-
-
+        });
     }
 
-    /*public void setLocale(String lang){
-        Locale myLocale = new Locale(lang);
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void setLocal(String lang) {
+
         Resources res = getResources();
+
+// Change locale settings in the app.
+
         DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
+
+        android.content.res.Configuration conf = res.getConfiguration();
+
+        conf.setLocale(new Locale(lang.toLowerCase())); // API 17+ only.
+
+// Use conf.locale = new Locale(...) if targeting lower versions
+
         res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, AndroidLocale.class);
-        finish();
-         startActivity(refresh}*/
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
-        Preference themesPref = findPreference(THEMES);
-        themesPref.setSummary(getPreferenceScreen().getSharedPreferences().getString(THEMES, ""));
-
-        Preference languagesPref = findPreference(LANGUAGES);
-        languagesPref.setSummary(getPreferenceScreen().getSharedPreferences().getString(LANGUAGES, ""));
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
     }
 }
