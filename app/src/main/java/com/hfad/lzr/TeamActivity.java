@@ -58,7 +58,7 @@ public class TeamActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Team");
+        getSupportActionBar().setTitle(R.string.team);
 
         divider = findViewById(R.id.divider);
         teamNameTV = findViewById(R.id.teamNameTV);

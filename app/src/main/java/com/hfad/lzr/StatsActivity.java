@@ -81,7 +81,7 @@ public class StatsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Game stats");
+        getSupportActionBar().setTitle(R.string.game_stats);
 
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tabs);

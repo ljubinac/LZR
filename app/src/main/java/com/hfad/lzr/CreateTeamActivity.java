@@ -67,7 +67,7 @@ public class CreateTeamActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Create team");
+        getSupportActionBar().setTitle(R.string.toolbar_create_team);
 
         showAdd = findViewById(R.id.show_add_image);
         addPlayerLL = findViewById(R.id.add_player_ll);

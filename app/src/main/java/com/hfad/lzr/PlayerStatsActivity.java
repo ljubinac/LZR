@@ -64,7 +64,7 @@ public class PlayerStatsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Player stats");
+        getSupportActionBar().setTitle(R.string.player_stats);
 
         playerStatsRV = findViewById(R.id.player_stats_rv);
         leagueSpinner = findViewById(R.id.choose_league);

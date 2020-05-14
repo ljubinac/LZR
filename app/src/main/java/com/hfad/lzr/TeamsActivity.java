@@ -57,7 +57,7 @@ public class TeamsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Teams");
+        getSupportActionBar().setTitle(R.string.teams);
 
         teamsRV = findViewById(R.id.teamsRV);
         leagueSpinner = findViewById(R.id.choose_league);

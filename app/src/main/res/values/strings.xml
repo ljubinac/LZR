@@ -103,7 +103,7 @@
     <string name="kosa_crta" translatable="false">/</string>
 
     <string name="team_name_hint">Team name</string>
-    <string name="player_number_hint">#</string>
+    <string name="player_number_hint" translatable="false">#</string>
     <string name="player_name_hint">Name</string>
     <string name="button_save">Save</string>
     <string name="button_share">Share</string>
@@ -121,9 +121,9 @@
     <string name="sync_pref_summary">Get your photos, videos, contacts, subscriptions, etc on all your devices.</string>-->
 
     <string name="themes">Themes</string>
-    <string name="themes_dialog_title">Perform Sync Using</string>
-    <string name="themes_default_value" translatable="false">Light</string>
-    <string name="themes_summary" translatable="false">Light</string>
+    <string name="themes_dialog_title" translatable="false">Perform Sync Using</string>
+    <string name="themes_default_value">Light</string>
+    <string name="themes_summary">Light</string>
 
     <string-array name="themes_entries">
         <item>@string/light</item>
@@ -149,24 +149,24 @@
         <item>1</item>
         <item>2</item>
     </string-array>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2" translatable="false">Main2Activity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
     <string name="choose_hall">Hall</string>
     <string name="save_game">Save Game</string>
     <string name="pick_time">Time</string>
     <string name="pick_date">Date</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-    <string name="points_negative_warning">Shots and attempts can not be a negative number!</string>
+    <string name="points_negative_warning">Shots can not be a negative number!</string>
 
     <string name="game_date">Date</string>
     <string name="game_time">Time</string>
@@ -183,7 +183,7 @@
     <string name="sign_up">Sign up</string>
     <string name="log_in">Log in</string>
     <string name="text_forgot_password">Forgot password?</string>
-    <string name="togline">Togline...</string>
+    <string name="togline" translatable="false">Togline...</string>
 
     <string name="games">Games</string>
     <string name="teams_nav">Teams</string>
@@ -191,7 +191,7 @@
     <string name="settings">Settings</string>
     <string name="sign_out">Sign out</string>
 
-    <string name="todays_roster">Today\'s \nroaster</string>
+    <string name="todays_roster">Today\'s \nroster</string>
     <string name="starting5">Starting \nfive</string>
 
     <string name="player_stats">Player stats</string>
@@ -228,4 +228,12 @@
     <string name="league_not_added">League not added!</string>
     <string name="create_league">Create new league</string>
     <string name="league_name_hint">League name</string>
+    <string name="teams">Teams</string>
+    <string name="recent_games">Recent games</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="toolbar_create_league">Create league</string>
+    <string name="toolbar_create_team">Create team</string>
+    <string name="toolbar_create_match">Create game</string>
+    <string name="toolbar_choose_lineup">Choose lineup</string>
+    <string name="game_stats">Game stats</string>
 </resources>

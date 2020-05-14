@@ -73,7 +73,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Create game");
+        getSupportActionBar().setTitle(R.string.toolbar_create_match);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 

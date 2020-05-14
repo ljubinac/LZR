@@ -46,7 +46,7 @@ public class LineupActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Choose lineup");
+        getSupportActionBar().setTitle(R.string.toolbar_choose_lineup);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
