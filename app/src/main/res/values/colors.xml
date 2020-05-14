@@ -42,4 +42,5 @@
     <color name="standings_start">#E2EEF5</color>
 
     <color name="starting5_background">#6BE2EEF5</color>
+    <color name="edit_text_hint">#66344955</color>
 </resources>

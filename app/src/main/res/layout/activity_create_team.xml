@@ -25,7 +25,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="32dp">
 
             <EditText
                 android:id="@+id/team_name"
@@ -34,7 +34,7 @@
                 android:background="@drawable/edit_text_register_background"
                 android:hint="@string/team_name_hint"
                 android:textColor="@color/text"
-                android:textColorHint="@color/text_grey_dark"
+                android:textColorHint="@color/edit_text_hint"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -60,7 +60,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal"
             android:layout_marginLeft="50dp">
 
@@ -86,9 +86,10 @@
             <ImageView
                 android:id="@+id/add_image"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_save"
+                app:srcCompat="@drawable/ic_save_checkbox"
                 android:visibility="gone"/>
         </LinearLayout>
 
@@ -101,6 +102,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="16dp"
+            android:layout_marginTop="16dp"
             android:visibility="gone">
 
             <EditText
@@ -150,18 +152,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center|bottom"
-        android:orientation="vertical"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/save_team"
             style="@style/AppTheme.ButtonOrange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
             android:text="@string/save_game"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="40dp"/>
     </LinearLayout>
 
 </LinearLayout>
