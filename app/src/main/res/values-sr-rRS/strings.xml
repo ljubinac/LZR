@@ -50,8 +50,8 @@
     <string name="english">Engleski</string>
     <string name="choose_hall">Hala</string>
     <string name="save_game">Sačuvaj utakmicu</string>
-    <string name="pick_time">Odaberite vreme</string>
-    <string name="pick_date">Odaberite datum</string>
+    <string name="pick_time">Vreme</string>
+    <string name="pick_date">Datum</string>
     <string name="team">Tim</string>
     <string name="game_hall">Hala</string>
     <string name="game_time">Vreme</string>

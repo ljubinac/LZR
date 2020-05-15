@@ -1,20 +1,33 @@
 package com.hfad.lzr;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.hfad.lzr.R;
+import com.hfad.lzr.adapter.LeagueViewHolder;
+import com.hfad.lzr.adapter.LineupViewHolder;
 import com.hfad.lzr.model.League;
 
 public class CreateLeagueActivity extends AppCompatActivity {
@@ -26,6 +39,10 @@ public class CreateLeagueActivity extends AppCompatActivity {
     String leagueName;
     League league;
     Toolbar toolbar;
+
+    RecyclerView recyclerViewLeague;
+    FirebaseRecyclerOptions<League> options;
+    FirebaseRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +66,67 @@ public class CreateLeagueActivity extends AppCompatActivity {
                 addLeague();
             }
         });
+
+        recyclerViewLeague = findViewById(R.id.league_recycler_view);
+        recyclerViewLeague.setHasFixedSize(true);
+        recyclerViewLeague.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.divider));
+        recyclerViewLeague.addItemDecoration(itemDecorator);
+        recyclerViewLeague.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewLeague.setHasFixedSize(true);
+
+        Query query = databaseReference;
+        options = new FirebaseRecyclerOptions.Builder<League>().setQuery(query, League.class).build();
+        adapter = new FirebaseRecyclerAdapter<League, LeagueViewHolder>(options) {
+
+
+            @NonNull
+            @Override
+            public LeagueViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.league_item, parent, false);
+                return new LeagueViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull LeagueViewHolder holder, int position, @NonNull League model) {
+                holder.leagueNameTV.setText(model.getName());
+
+                holder.deleteLeagueImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CreateLeagueActivity.this);
+
+                        builder.setTitle("Confirm");
+                        builder.setMessage("Are you sure?");
+
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do nothing but close the dialog
+                                adapter.getRef(position).removeValue();
+                                dialog.dismiss();
+                            }
+                        });
+
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        AlertDialog alert = builder.create();
+                        alert.show();
+
+                    }
+                });
+            }
+        };
+        adapter.startListening();
+        recyclerViewLeague.setAdapter(adapter);
     }
 
     public void addLeague(){
