@@ -106,4 +106,5 @@
     <string name="toolbar_create_match">Kreiraj utakmicu</string>
     <string name="toolbar_choose_lineup">Izaberi postave</string>
     <string name="game_stats">Statistika</string>
+    <string name="leagues_title">Lige</string>
 </resources>

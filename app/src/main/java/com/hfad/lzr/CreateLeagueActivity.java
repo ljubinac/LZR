@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -34,7 +36,7 @@ public class CreateLeagueActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     EditText leagueNameET;
-    Button saveLeague;
+    ImageView saveLeague;
     String leagueId;
     String leagueName;
     League league;
@@ -44,6 +46,10 @@ public class CreateLeagueActivity extends AppCompatActivity {
     FirebaseRecyclerOptions<League> options;
     FirebaseRecyclerAdapter adapter;
 
+    ImageView showAdd;
+    ImageView cancelAdd;
+    LinearLayout addLeagueLL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +57,35 @@ public class CreateLeagueActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.toolbar_create_league);
+        getSupportActionBar().setTitle(R.string.leagues_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         leagueNameET = findViewById(R.id.league_name_et);
         saveLeague = findViewById(R.id.save_league_btn);
+        showAdd = findViewById(R.id.show_add_image);
+        cancelAdd = findViewById(R.id.back_image);
+        addLeagueLL = findViewById(R.id.add_league_ll);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("leagues");
+
+        showAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAdd.setVisibility(View.GONE);
+                saveLeague.setVisibility(View.VISIBLE);
+                addLeagueLL.setVisibility(View.VISIBLE);
+            }
+        });
+
+        cancelAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAdd.setVisibility(View.VISIBLE);
+                saveLeague.setVisibility(View.GONE);
+                addLeagueLL.setVisibility(View.GONE);
+            }
+        });
 
         saveLeague.setOnClickListener(new View.OnClickListener() {
             @Override

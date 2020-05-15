@@ -3,6 +3,7 @@ package com.hfad.lzr;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -213,13 +215,24 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
         timePickerDialog.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         date = day + "/" + month + "/" + year;
+        datePickerBtn.setText(date);
     }
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int min) {
-        time = hour + ":" + min;
+        if(hour < 10 && min < 10)
+            time = "0" + hour + ":0" + min;
+        else if(hour < 10)
+            time = "0" + hour + ":" + min;
+        else if(min < 10)
+            time = hour + ":0" + min;
+        else
+            time = hour + ":" + min;
+
+        timePickerBtn.setText(time);
     }
 }
