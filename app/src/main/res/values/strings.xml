@@ -237,4 +237,8 @@
     <string name="toolbar_choose_lineup">Choose lineup</string>
     <string name="game_stats">Game stats</string>
     <string name="leagues_title">Leagues</string>
+    <string name="plus_minut">+1m</string>
+    <string name="minus_minut">-1m</string>
+    <string name="plus_second">+1s</string>
+    <string name="minus_second">-1m</string>
 </resources>

@@ -15,6 +15,7 @@ public class GameViewHolder extends RecyclerView.ViewHolder {
     public TextView teamAnameTV, teamBnameTV, resAtv, resBtv, gameDateTV, gameTimeTV, gameVenueTV;
     public ImageView teamAimage, teamBimage;
     public LinearLayout upcomingGameLL;
+    public LinearLayout dateTimeHallLL;
     public GameViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -28,5 +29,6 @@ public class GameViewHolder extends RecyclerView.ViewHolder {
         teamAimage = itemView.findViewById(R.id.teamA_image);
         teamBimage = itemView.findViewById(R.id.teamB_image);
         upcomingGameLL = itemView.findViewById(R.id.upcomingGame_ll);
+        dateTimeHallLL = itemView.findViewById(R.id.date_time_hall_ll);
     }
 }

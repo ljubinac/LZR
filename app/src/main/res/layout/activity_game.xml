@@ -122,42 +122,82 @@
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_vector_reset" />
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2" />
+                    android:background="@drawable/ic_vector_2"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minus_minut"
+                        android:textColor="@color/white"
+                        android:padding="2dp"/>
+                </LinearLayout>
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2" />
+                    android:background="@drawable/ic_vector_2"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minus_second"
+                        android:textColor="@color/white"
+                        android:padding="2dp"/>
+                </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/button_start_pause"
+                    android:id="@+id/button_start"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     app:srcCompat="@drawable/ic_vector_start" />
 
                 <ImageView
+                    android:id="@+id/button_pause"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/ic_pause"
+                    android:visibility="gone"/>
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2" />
+                    android:background="@drawable/ic_vector_2"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/plus_second"
+                        android:textColor="@color/white"
+                        android:padding="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_vector_2"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/minus_second"
+                        android:textColor="@color/white"
+                        android:padding="2dp"/>
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_vector_2" />
+                    app:srcCompat="@drawable/ic_more_horiz_black_24dp" />
 
             </LinearLayout>
 
@@ -171,6 +211,8 @@
             android:orientation="horizontal">
 
             <!--        teamA igraci-->
+
+            <!--        za dugmice LL-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/firstTeamRV"
                 android:layout_width="0dp"
@@ -178,7 +220,6 @@
                 android:layout_weight="1"
                 android:scrollbars="vertical" />
 
-            <!--        za dugmice LL-->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

@@ -89,6 +89,7 @@ public class GamesFragment extends Fragment {
                 if(model.isFinished()) {
                     holder.resAtv.setText(String.valueOf(model.getResA()));
                     holder.resBtv.setText(String.valueOf(model.getResB()));
+                    holder.dateTimeHallLL.setBackground(getResources().getDrawable(R.drawable.dark_grey_layout_gradient));
                 }
 
                 if(!model.isFinished()) {
