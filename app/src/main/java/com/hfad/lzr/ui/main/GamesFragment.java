@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -20,13 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.hfad.lzr.LineupActivity;
-import com.hfad.lzr.MainActivity;
 import com.hfad.lzr.R;
-import com.hfad.lzr.StatsActivity;
 import com.hfad.lzr.adapter.GameViewHolder;
 import com.hfad.lzr.model.Game;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,7 +84,7 @@ public class GamesFragment extends Fragment {
                 if(model.isFinished()) {
                     holder.resAtv.setText(String.valueOf(model.getResA()));
                     holder.resBtv.setText(String.valueOf(model.getResB()));
-                    holder.dateTimeHallLL.setBackground(getResources().getDrawable(R.drawable.dark_grey_layout_gradient));
+                    holder.dateTimeHallLL.setBackground(getResources().getDrawable(R.drawable.game_item_recent_lower));
                 }
 
                 if(!model.isFinished()) {

@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,12 +26,10 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.hfad.lzr.R;
 import com.hfad.lzr.adapter.LeagueViewHolder;
-import com.hfad.lzr.adapter.LineupViewHolder;
 import com.hfad.lzr.model.League;
 
-public class CreateLeagueActivity extends AppCompatActivity {
+public class LeaguesActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     EditText leagueNameET;
@@ -53,7 +50,7 @@ public class CreateLeagueActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_league);
+        setContentView(R.layout.activity_leagues);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -123,7 +120,7 @@ public class CreateLeagueActivity extends AppCompatActivity {
                 holder.deleteLeagueImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(CreateLeagueActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LeaguesActivity.this);
 
                         builder.setTitle("Confirm");
                         builder.setMessage("Are you sure?");

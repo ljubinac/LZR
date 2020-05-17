@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateLeagueActivity">
+    tools:context=".LeaguesActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="50dp">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
@@ -34,7 +33,7 @@
             android:id="@+id/show_add_image"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_add" />
 
@@ -44,37 +43,31 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_save_checkbox"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_save_checkbox" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/add_league_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_background"
-        android:layout_marginHorizontal="16dp"
         android:visibility="gone">
-
-        <!--<ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_logo_register_login" />-->
 
         <EditText
             android:id="@+id/league_name_et"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:inputType="text"
-            android:background="@drawable/edit_text_leagues"
-            android:textColor="@color/text"
-            android:textSize="16dp"
+            android:background="@drawable/input_background"
             android:hint="@string/league_name_hint"
-            android:textColorHint="@color/edit_text_hint"
-            />
+            android:inputType="text"
+            android:textColor="@color/text"
+            android:textColorHint="@color/primary40"
+            android:textSize="14dp" />
 
         <ImageView
             android:id="@+id/back_image"
@@ -88,32 +81,10 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:id="@+id/league_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:padding="32dp"/>
-
-   <!-- <View style="@style/Divider_create_team_league"
-        android:layout_marginTop="370dp"/>-->
-
-  <!--  <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|bottom"
-        android:orientation="vertical"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp">
-
-        <Button
-            android:id="@+id/save_league_btn"
-            style="@style/AppTheme.ButtonOrange"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:text="@string/save_league"
-            android:textColor="@color/white" />
-    </LinearLayout>-->
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

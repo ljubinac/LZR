@@ -20,16 +20,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:textColor="@color/text"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
 
     <ImageView
         android:id="@+id/image_delete"
         android:layout_width="0dp"
-        android:layout_height="21dp"
+        android:layout_height="22dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/ic_delete"
-        android:tint="#9F3F21"
+        android:tint="@color/action"
         />
 
 </LinearLayout>

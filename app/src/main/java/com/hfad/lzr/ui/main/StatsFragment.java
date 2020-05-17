@@ -1,6 +1,5 @@
 package com.hfad.lzr.ui.main;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -14,13 +13,11 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hfad.lzr.R;
 import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.PlayerGame;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -263,7 +260,7 @@ public class StatsFragment extends Fragment {
             TableRow row2 = new TableRow(getActivity());
             row2.setLayoutParams(lp);
 
-            row2.setBackgroundResource(R.drawable.gray_layout_gradient);
+            row2.setBackgroundResource(R.drawable.game_item_upper);
 
             number = new TextView(getActivity());
             number.setPadding(15, 15, 15, 15);
@@ -447,7 +444,7 @@ public class StatsFragment extends Fragment {
             row2.addView(eff);
 
             if (i % 2 == 0){
-                row2.setBackgroundResource(R.drawable.gray_layout_gradient);
+                row2.setBackgroundResource(R.drawable.game_item_upper);
             } else {
                 row2.setBackgroundColor(getResources().getColor(R.color.white));
             }

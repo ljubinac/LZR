@@ -19,17 +19,16 @@
             layout="@layout/toolbar" />
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_marginLeft="30dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 android:text="@string/choose_league"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
@@ -38,24 +37,24 @@
                 android:id="@+id/choose_league"
                 android:layout_width="175dp"
                 android:layout_height="45dp"
-                android:elevation="2dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/spinner_custom"
+                android:elevation="2dp"
                 android:entries="@array/leagues" />
         </LinearLayout>
 
-        <View style="@style/Divider" />
+<!--        <View style="@style/Divider" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_marginLeft="30dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 android:text="@string/choose_teamA"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
@@ -64,25 +63,24 @@
                 android:id="@+id/choose_teamA"
                 android:layout_width="175dp"
                 android:layout_height="45dp"
-                android:elevation="2dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/spinner_custom"
-                android:entries="@array/teams"
-                />
+                android:elevation="2dp"
+                android:entries="@array/teams" />
         </LinearLayout>
 
-        <View style="@style/Divider" />
+<!--        <View style="@style/Divider" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_marginLeft="30dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 android:text="@string/choose_teamB"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
@@ -91,24 +89,24 @@
                 android:id="@+id/choose_teamB"
                 android:layout_width="175dp"
                 android:layout_height="45dp"
-                android:entries="@array/teams"
+                android:layout_marginRight="30dp"
                 android:background="@drawable/spinner_custom"
                 android:elevation="2dp"
-                android:layout_marginRight="30dp"/>
+                android:entries="@array/teams" />
         </LinearLayout>
 
-        <View style="@style/Divider" />
+<!--        <View style="@style/Divider" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_marginLeft="30dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 android:text="@string/choose_hall"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
@@ -117,13 +115,13 @@
                 android:id="@+id/choose_hall"
                 android:layout_width="175dp"
                 android:layout_height="45dp"
-                android:entries="@array/teams"
-                android:background="@drawable/spinner_custom"
                 android:layout_marginRight="30dp"
-                android:elevation="2dp"/>
+                android:background="@drawable/spinner_custom"
+                android:elevation="2dp"
+                android:entries="@array/teams" />
         </LinearLayout>
 
-        <View style="@style/Divider" />
+<!--        <View style="@style/Divider" />-->
 
         <LinearLayout
             style="@style/create_match_choose_ll"
@@ -134,24 +132,22 @@
 
             <Button
                 android:id="@+id/pick_date_btn"
-                style="@style/AppTheme.ButtonBlue"
+                style="@style/AppTheme.DateTimeButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/outline_event_24"
-                android:drawableTint="@color/white"
                 android:text="@string/pick_date" />
 
             <Button
                 android:id="@+id/pick_time_btn"
-                style="@style/AppTheme.ButtonBlue"
+                style="@style/AppTheme.DateTimeButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/baseline_schedule_24"
-                android:drawableTint="@color/white"
                 android:text="@string/pick_time" />
         </LinearLayout>
 

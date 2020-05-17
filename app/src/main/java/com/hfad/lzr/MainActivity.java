@@ -1,5 +1,10 @@
 package com.hfad.lzr;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,11 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -149,12 +149,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, TeamsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.nav_create_team:
-                intent = new Intent(this, CreateTeamActivity.class);
-                startActivity(intent);
-                break;
             case R.id.nav_create_league:
-                intent = new Intent(this, CreateLeagueActivity.class);
+                intent = new Intent(this, LeaguesActivity.class);
                 startActivity(intent);
                 break;
             case R.id.nav_standings:

@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#344955</color>
+    <color name="primary10">#1A344955</color>
+    <color name="primary40">#66344955</color>
+    <color name="primary50">#80344955</color>
+    <color name="colorSecondary">#E2EEF5</color>
+    <color name="tab_not_selected">#80FFFFFF</color>
+    <color name="text">#3A3A3A</color>
+    <color name="text50">#803A3A3A</color>
+    <color name="action">#9F3F21</color>
+
+
     <color name="colorPrimaryDark">#232F34</color>
     <color name="colorPrimaryLight">#4A6572</color>
     <color name="colorAccent">#F9AA33</color>
     <color name="blue_btn">#344955</color>
     <color name="white">#fff</color>
-    <color name="text">#3A3A3A</color>
-    <color name="text_grey">#979797</color>
+
     <color name="text_grey_light">#D2D2D2</color>
-    <color name="text_grey_dark">#344955</color>
-    <color name="edit_text_grey">#E5E5E5</color>
+
     <color name="player_game_item">#E7E7E7</color>
-    <color name="red_btn">#ff0000</color>
-    <color name="green_btn">#008000</color>
     <color name="team_bg">#ebebe0</color>
     <color name="divider">#14212121</color>
     <color name="default_background">#FAFAFA</color>
@@ -24,14 +30,12 @@
     <color name="blue_start">#344955</color>
     <color name="blue_end">#4A6EA8</color>
     
-    <color name="tagline">#80344955</color>
+
 
     <color name="link">#4A6EA8</color>
 
-    <color name="grey_start">#e2eef5</color>
-    <color name="grey_end">#e2eef5</color>
 
-    <color name="tab_not_selected">#B3FFFFFF</color>
+
 
     <color name="drop_down_arrow">#99000000</color>
 
@@ -41,5 +45,4 @@
     <color name="standings_start">#E2EEF5</color>
 
     <color name="starting5_background">#6BE2EEF5</color>
-    <color name="edit_text_hint">#66344955</color>
 </resources>

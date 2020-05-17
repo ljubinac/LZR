@@ -14,38 +14,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp"
-        android:background="@drawable/gray_layout_gradient">
+        android:background="@drawable/game_item_upper"
+        android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginTop="32dp">
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/team_name"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/edit_text_register_background"
+                android:background="@drawable/input_background"
                 android:hint="@string/team_name_hint"
                 android:textColor="@color/text"
-                android:textColorHint="@color/edit_text_hint"
-                android:textSize="16sp" />
+                android:textColorHint="@color/primary40"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginRight="32dp"
-            android:layout_marginTop="16dp">
+            android:orientation="vertical">
 
             <Spinner
                 android:id="@+id/choose_league"
@@ -60,9 +59,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="50dp">
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
@@ -72,7 +71,7 @@
                 android:gravity="center"
                 android:text="@string/players_title"
                 android:textColor="@color/text"
-                android:textSize="22dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -89,82 +88,88 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_save_checkbox"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_save_checkbox" />
         </LinearLayout>
 
     </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/add_player_ll"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/add_player_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/player_number_edt"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone">
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/input_background"
+            android:hint="@string/player_number_hint"
+            android:inputType="number"
+            android:maxLength="3"
+            android:textColor="@color/text"
+            android:textSize="14dp" />
 
-            <EditText
-                android:id="@+id/player_number_edt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_weight="1"
-                android:background="@drawable/edit_text_background"
-                android:hint="@string/player_number_hint"
-                android:inputType="number"
-                android:maxLength="2"
-                android:textColor="@color/text"
-                android:textSize="16dp" />
+        <EditText
+            android:id="@+id/player_name_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@drawable/input_background"
+            android:hint="@string/player_name_hint"
+            android:inputType="text"
+            android:textColor="@color/text"
+            android:textSize="14dp" />
 
-            <EditText
-                android:id="@+id/player_name_edt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@drawable/edit_text_background"
-                android:hint="@string/player_name_hint"
-                android:inputType="text"
-                android:textColor="@color/text"
-                android:textSize="16dp" />
+        <ImageView
+            android:id="@+id/back_image"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tint="#9F3F21"
+            app:srcCompat="@drawable/ic_cancel" />
 
-            <ImageView
-                android:id="@+id/back_image"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:tint="#9F3F21"
-                app:srcCompat="@drawable/ic_cancel" />
 
-        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="match_parent"
             android:padding="4dp"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:layout_above="@+id/save_team_layout"/>
 
-    <!--<View style="@style/Divider_create_team_league" />-->
+        <!--<View style="@style/Divider_create_team_league" />-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|bottom"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/save_team"
-            style="@style/AppTheme.ButtonOrange"
+        <LinearLayout
+            android:id="@+id/save_team_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/save_team_btn"
-            android:textColor="@color/white"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="40dp"/>
-    </LinearLayout>
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
 
+            <Button
+                android:id="@+id/save_team"
+                style="@style/AppTheme.ButtonOrange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="40dp"
+                android:text="@string/save_team_btn"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

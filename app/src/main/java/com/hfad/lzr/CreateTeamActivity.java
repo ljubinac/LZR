@@ -56,8 +56,7 @@ public class CreateTeamActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
-    private ImageView showAdd;
-    private ImageView backAdd;
+    private ImageView showAdd, backAdd;
     private LinearLayout addPlayerLL;
 
     @Override
@@ -126,14 +125,15 @@ public class CreateTeamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                addTeam();
-                if(getIntent().getStringExtra("prev_activity") == null){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                }
-                else if(getIntent().getStringExtra("prev_activity").equals("CreatingMatchActivity")){
-                    Intent intent = new Intent(getApplicationContext(), CreateMatchActivity.class);
-                    startActivity(intent);
+                boolean isSaved = addTeam();
+                if (isSaved) {
+                    if (getIntent().getStringExtra("prev_activity") == null) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    } else if (getIntent().getStringExtra("prev_activity").equals("CreatingMatchActivity")) {
+                        Intent intent = new Intent(getApplicationContext(), CreateMatchActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -206,18 +206,18 @@ public class CreateTeamActivity extends AppCompatActivity {
         });
     }
 
-    public void editPlayer(int position, String name, String number){
+    public void editPlayer(int position, String name, String number) {
         players.get(position).setNameAndLastname(name);
         players.get(position).setNumber(number);
         mPlayersAdapter.notifyItemChanged(position);
     }
 
-    public void removePlayer(int position) {
+    private void removePlayer(int position) {
         players.remove(position);
         mPlayersAdapter.notifyItemRemoved(position);
     }
 
-    private void addTeam() {
+    private boolean addTeam() {
         String name = teamName.getText().toString();
         String league = String.valueOf(leagueSpinner.getSelectedItem());
         if (!TextUtils.isEmpty(name)) {
@@ -233,11 +233,13 @@ public class CreateTeamActivity extends AppCompatActivity {
                 databaseReferencePlayers.child(idPlayer).setValue(p);
             }
             Toast.makeText(this, R.string.team_added, Toast.LENGTH_LONG).show();
+            return true;
         } else if (TextUtils.isEmpty(name)) {
-            saveTeam.setActivated(false);
             Toast.makeText(this, R.string.add_team_name, Toast.LENGTH_LONG).show();
+            return false;
         } else {
             Toast.makeText(this, R.string.team_not_added, Toast.LENGTH_LONG).show();
+            return false;
         }
     }
 
