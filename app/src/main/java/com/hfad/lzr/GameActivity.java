@@ -62,6 +62,9 @@ public class GameActivity extends AppCompatActivity {
 
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
+    LinearLayout pauseLL;
+    LinearLayout startLL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +74,9 @@ public class GameActivity extends AppCompatActivity {
         mButtonStart = findViewById(R.id.button_start);
         mButtonPause = findViewById(R.id.button_pause);
         mButtonReset = findViewById(R.id.button_reset);
+
+        pauseLL = findViewById(R.id.pause_ll);
+        startLL = findViewById(R.id.start_ll);
 
         mButtonStart.setOnClickListener(new View.OnClickListener() {
 
@@ -611,8 +617,8 @@ public class GameActivity extends AppCompatActivity {
             public void onFinish() {
                 mTimerRunning = false;
 //                mButtonStartPause.setText(R.string.start);
-                mButtonStart.setVisibility(View.VISIBLE);
-                mButtonPause.setVisibility(View.GONE);
+                startLL.setVisibility(View.VISIBLE);
+                pauseLL.setVisibility(View.GONE);
                 mButtonReset.setVisibility(View.VISIBLE);
 
                 for (int i = 0; i < 5; i++) {
@@ -626,8 +632,8 @@ public class GameActivity extends AppCompatActivity {
 
         mTimerRunning = true;
 //        mButtonStartPause.setText(R.string.pause);
-        mButtonPause.setVisibility(View.VISIBLE);
-        mButtonStart.setVisibility(View.GONE);
+        pauseLL.setVisibility(View.VISIBLE);
+        startLL.setVisibility(View.GONE);
         mButtonReset.setVisibility(View.INVISIBLE);
     }
 
@@ -635,8 +641,8 @@ public class GameActivity extends AppCompatActivity {
         mCountDownTimer.cancel();
         mTimerRunning = false;
 //        mButtonStartPause.setText(R.string.start);
-        mButtonStart.setVisibility(View.VISIBLE);
-        mButtonPause.setVisibility(View.GONE);
+        startLL.setVisibility(View.VISIBLE);
+        pauseLL.setVisibility(View.GONE);
         mButtonReset.setVisibility(View.VISIBLE);
     }
 
@@ -644,8 +650,8 @@ public class GameActivity extends AppCompatActivity {
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
         updateCountDownText();
         mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonStart.setVisibility(View.VISIBLE);
-        mButtonPause.setVisibility(View.GONE);
+        startLL.setVisibility(View.VISIBLE);
+        pauseLL.setVisibility(View.GONE);
 
         for (int i = 0; i < 5; i++) {
             playersGameA.get(i).setWhenGoingIn((int) mTimeLeftInMillis / 1000);

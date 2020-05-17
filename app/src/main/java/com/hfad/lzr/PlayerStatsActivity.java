@@ -2,21 +2,33 @@ package com.hfad.lzr;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,12 +41,23 @@ import com.hfad.lzr.model.League;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 public class PlayerStatsActivity extends AppCompatActivity {
+
+    private int STORAGE_PERMISSION_CODE = 1;
 
     RecyclerView playerStatsRV;
     Spinner leagueSpinner;
@@ -55,12 +78,20 @@ public class PlayerStatsActivity extends AppCompatActivity {
     String selectedLeague;
     String selectedParameter;
 
+    String myFilePath;
+    FloatingActionButton fab;
 
+    LinearLayout playerStatsLL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_stats);
+
+        playerStatsLL = findViewById(R.id.player_stats_ll);
+        fab = findViewById(R.id.sharePdfFab);
+
+        myFilePath = "";
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -128,6 +159,13 @@ public class PlayerStatsActivity extends AppCompatActivity {
         fetchLeagues();
 
         fetch("Liga A", "PTS");
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createPdf();
+            }
+        });
     }
 
     private void fetchLeagues() {
@@ -185,5 +223,104 @@ public class PlayerStatsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void createPdf() {
+
+        if (ContextCompat.checkSelfPermission(PlayerStatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestStoragePermission();
+        }
+        fab.setVisibility(View.INVISIBLE);
+        byte[] bytesA = createImage(playerStatsLL);
+        imageToPDF(bytesA);
+        sharePdf();
+        fab.setVisibility(View.VISIBLE);
+    }
+
+    public byte[] createImage(LinearLayout playerStatsLL) {
+        playerStatsLL.setDrawingCacheEnabled(true);
+        playerStatsLL.buildDrawingCache();
+        Bitmap bm = playerStatsLL.getDrawingCache();
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        return bytes.toByteArray();
+    }
+
+    public void imageToPDF(byte[] bytesA) {
+        try {
+            Document document = new Document();
+            String dirpath = getApplicationContext().getCacheDir().toString();
+
+            Date c = Calendar.getInstance().getTime();
+
+            SimpleDateFormat df = new SimpleDateFormat("dd_MM_yyyy");
+            String formattedDate = df.format(c);
+
+            myFilePath = dirpath + "/player stats_" + formattedDate + "_" + leagueSpinner.getSelectedItem().toString() + ".pdf";
+            PdfWriter.getInstance(document, new FileOutputStream(myFilePath)); //  Change pdf's name.
+            document.open();
+            Image imgA = Image.getInstance(bytesA);
+            float scalerA = ((document.getPageSize().getWidth() - document.leftMargin()
+                    - document.rightMargin() - 0) / imgA.getWidth()) * 100;
+            imgA.scalePercent(scalerA);
+
+            //imgA.setSpacingAfter(50f);
+            //imgA.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
+            // document.add(new Paragraph(game.getGameDate() + " " + game.getTeamAnaziv() + " vs. " + game.getTeamBnaziv()));
+            // document.add(Chunk.NEWLINE);
+            // document.add(new Paragraph(game.getTeamAnaziv()));
+            document.add(imgA);
+            document.close();
+            Toast.makeText(this, "PDF Generated successfully!..", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sharePdf() {
+        File fileWithinMyDir = new File(myFilePath);
+        Uri pdfUri = Uri.fromFile(fileWithinMyDir);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            pdfUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", fileWithinMyDir);
+        }
+
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        intentShareFile.setType("application/pdf");
+        intentShareFile.putExtra(Intent.EXTRA_STREAM, pdfUri);
+        intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                "Sharing File...");
+        intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+
+        startActivity(Intent.createChooser(intentShareFile, "Share File"));
+    }
+
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            new AlertDialog.Builder(this).setTitle("Permission needed").setMessage("This permission is needed because of that and that").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    ActivityCompat.requestPermissions(PlayerStatsActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                }
+            }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            }).create().show();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Permission NOT GRANTED", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.PlayerGame;
@@ -59,8 +60,6 @@ public class StatsActivity extends AppCompatActivity {
 
     String myFilePath;
 
-    Button share, create;
-
     Game game;
 
     Toolbar toolbar;
@@ -69,6 +68,8 @@ public class StatsActivity extends AppCompatActivity {
     TabLayout tabLayout;
 
     StatsFragment statsFragmentA, statsFragmentB;
+
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,7 @@ public class StatsActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tabs);
 
+        fab = findViewById(R.id.sharePdfFab);
 
         tabLayout.setupWithViewPager(viewPager, true);
         tabLayout.setSelected(true);
@@ -106,16 +108,16 @@ public class StatsActivity extends AppCompatActivity {
 
         myFilePath = "";
 
-        share = findViewById(R.id.sharePdf);
+        /*share = findViewById(R.id.sharePdf);
         create = findViewById(R.id.createPdf);
 
         create.setEnabled(true);
-        share.setEnabled(false);
+        share.setEnabled(false);*/
 
-        share.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sharePdf();
+                createPdf();
             }
         });
 
@@ -174,23 +176,25 @@ public class StatsActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(intentShareFile, "Share File"));
     }
 
-    public void createPdf(View view) {
+    public void createPdf() {
 
         if (ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestStoragePermission();
         }
         // get view group using reference
         // convert view group to bitmap
+        fab.setVisibility(View.INVISIBLE);
         tableTeamA = statsFragmentA.getTable();
         tableTeamB = statsFragmentB.getTable();
         byte[] bytesA = createImage(tableTeamA);
         byte[] bytesB = createImage(tableTeamB);
         try {
             imageToPDF(bytesA, bytesB);
+            sharePdf();
+            fab.setVisibility(View.VISIBLE);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        share.setEnabled(true);
     }
 
     public byte[] createImage(TableLayout table) {

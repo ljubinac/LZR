@@ -42,9 +42,36 @@
                 <!--                LL2 podaci teamA-->
                 <LinearLayout style="@style/scoreboard_teams_LL">
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/teamA_fouls_tv"
-                        style="@style/scoreboard_teams_fouls" />
+                        style="@style/scoreboard_teams_fouls" />-->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/scoreTeamA"
@@ -82,9 +109,36 @@
                 <!--                podaci teamB-->
                 <LinearLayout style="@style/scoreboard_teams_LL">
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/teamB_fouls_tv"
-                        style="@style/scoreboard_teams_fouls" />
+                        style="@style/scoreboard_teams_fouls" />-->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_points_for_team_fouls"/>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/scoreTeamB"
@@ -115,40 +169,50 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
                 <ImageView
                     android:id="@+id/button_reset"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     app:srcCompat="@drawable/ic_vector_reset" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_vector_2"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/minus_minut"
-                        android:textColor="@color/white"
-                        android:padding="2dp"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:background="@drawable/ic_vector_2"
                     android:gravity="center">
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/minus_second"
-                        android:textColor="@color/white"
-                        android:padding="2dp"/>
+                        app:srcCompat="@drawable/minus_1m"/>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_vector_2"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/minus_1s"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/start_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_weight="3"
+                    android:gravity="center">
 
                 <ImageView
                     android:id="@+id/button_start"
@@ -157,26 +221,23 @@
                     android:layout_weight="2"
                     app:srcCompat="@drawable/ic_vector_start" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pause_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:visibility="gone">
+
                 <ImageView
                     android:id="@+id/button_pause"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    app:srcCompat="@drawable/ic_pause"
-                    android:visibility="gone"/>
+                    app:srcCompat="@drawable/ic_pause" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_vector_2"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/plus_second"
-                        android:textColor="@color/white"
-                        android:padding="2dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -185,19 +246,37 @@
                     android:layout_weight="1"
                     android:background="@drawable/ic_vector_2"
                     android:gravity="center">
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/minus_second"
-                        android:textColor="@color/white"
-                        android:padding="2dp"/>
+                        app:srcCompat="@drawable/plus_1s"/>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_vector_2"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/plus_1m"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_more_horiz_black_24dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

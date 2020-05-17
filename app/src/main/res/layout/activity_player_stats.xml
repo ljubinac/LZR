@@ -13,31 +13,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="30dp"
-            android:gravity="center_vertical"
-            android:text="@string/choose_league"
-            android:textColor="@color/text"
-            android:textSize="14sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:orientation="vertical">
 
         <Spinner
             android:id="@+id/choose_league"
-            android:layout_width="175dp"
-            android:layout_height="44dp"
-            android:layout_gravity="center"
-            android:background="@drawable/spinner_custom"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/spinner_for_create_team"
             android:elevation="3dp"
             android:entries="@array/leagues" />
+
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/player_stats_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:gravity="center"
@@ -101,7 +101,8 @@
                 android:layout_margin="16dp"
                 android:contentDescription="@string/create_game"
                 android:scaleType="center"
-                android:src="@drawable/fab_share" />
+                android:src="@drawable/fab_share"
+                android:layout_alignParentEnd="true" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/player_stats_rv"
@@ -113,5 +114,5 @@
         </RelativeLayout>
     </LinearLayout>
 
-
+    </LinearLayout>
 </LinearLayout>

@@ -110,7 +110,8 @@ public class TeamActivity extends AppCompatActivity {
         showAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAdd.setVisibility(View.INVISIBLE);
+                showAdd.setVisibility(View.GONE);
+                addPlayer.setVisibility(View.VISIBLE);
                 addPlayerLL.setVisibility(View.VISIBLE);
                 divider.setVisibility(View.VISIBLE);
             }
@@ -120,6 +121,7 @@ public class TeamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showAdd.setVisibility(View.VISIBLE);
+                addPlayer.setVisibility(View.GONE);
                 addPlayerLL.setVisibility(View.GONE);
                 divider.setVisibility(View.GONE);
             }
@@ -134,6 +136,7 @@ public class TeamActivity extends AppCompatActivity {
                 playersRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 fetch(idTeam);
                 showAdd.setVisibility(View.VISIBLE);
+                addPlayer.setVisibility(View.GONE);
                 addPlayerLL.setVisibility(View.GONE);
 
             }
