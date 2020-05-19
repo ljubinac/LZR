@@ -14,6 +14,9 @@ public class Game implements Serializable {
     private String teamBnaziv;
     private boolean isFinished;
     private boolean isExhibition;
+    private int foulsTeamA;
+    private int foulsTeamB;
+    private int quarter;
 
 
     public Game() {
@@ -29,6 +32,30 @@ public class Game implements Serializable {
         this.teamBnaziv = teamBnaziv;
         this.isFinished = isFinished;
         this.isExhibition = isExhibition;
+    }
+
+    public int getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(int quarter) {
+        this.quarter = quarter;
+    }
+
+    public int getFoulsTeamA() {
+        return foulsTeamA;
+    }
+
+    public void setFoulsTeamA(int foulsTeamA) {
+        this.foulsTeamA = foulsTeamA;
+    }
+
+    public int getFoulsTeamB() {
+        return foulsTeamB;
+    }
+
+    public void setFoulsTeamB(int foulsTeamB) {
+        this.foulsTeamB = foulsTeamB;
     }
 
     public boolean isExhibition() {

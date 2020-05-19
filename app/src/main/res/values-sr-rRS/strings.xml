@@ -107,4 +107,5 @@
     <string name="toolbar_choose_lineup">Izaberi postave</string>
     <string name="game_stats">Statistika</string>
     <string name="leagues_title">Lige</string>
+    <string name="is_in_the_bonus">" je u bonusu!"</string>
 </resources>

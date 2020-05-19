@@ -158,7 +158,7 @@
 
     <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
     <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
-    <string name="choose_hall">Hall</string>
+    <string name="choose_hall">Arena</string>
     <string name="save_game">Save Game</string>
     <string name="pick_time">Time</string>
     <string name="pick_date">Date</string>
@@ -170,7 +170,7 @@
 
     <string name="game_date">Date</string>
     <string name="game_time">Time</string>
-    <string name="game_hall">Hall</string>
+    <string name="game_hall">Arena</string>
 
     <string name="team">Team</string>
     <string name="login">Login</string>
@@ -237,8 +237,10 @@
     <string name="toolbar_choose_lineup">Choose lineup</string>
     <string name="game_stats">Game stats</string>
     <string name="leagues_title">Leagues</string>
-    <string name="plus_minut">+1m</string>
-    <string name="minus_minut">-1m</string>
-    <string name="plus_second">+1s</string>
-    <string name="minus_second">-1m</string>
+    <string name="is_in_the_bonus">is in the bonus!</string>
+    <string name="quarter_one" translatable="false">Q1</string>
+    <string name="quarter_two" translatable="false">Q2</string>
+    <string name="quarter_three" translatable="false">Q3</string>
+    <string name="quarter_four" translatable="false">Q4</string>
+    <string name="extra_time" translatable="false">ET</string>
 </resources>

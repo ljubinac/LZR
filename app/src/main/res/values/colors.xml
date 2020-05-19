@@ -45,4 +45,7 @@
     <color name="standings_start">#E2EEF5</color>
 
     <color name="starting5_background">#6BE2EEF5</color>
+
+    <color name="team_fouls_yellow">#ffd11a</color>
+    <color name="team_fouls_red">#cc0000</color>
 </resources>

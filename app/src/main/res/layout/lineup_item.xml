@@ -21,17 +21,15 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/orange_start"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/player_name_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textColor="@color/text"
+            android:textSize="16sp"/>
 
         <RelativeLayout
             android:layout_width="70dp"

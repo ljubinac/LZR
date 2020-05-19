@@ -1,11 +1,13 @@
 package com.hfad.lzr;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -128,7 +130,7 @@ public class CreateTeamActivity extends AppCompatActivity {
                 boolean isSaved = addTeam();
                 if (isSaved) {
                     if (getIntent().getStringExtra("prev_activity") == null) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), TeamsActivity.class);
                         startActivity(intent);
                     } else if (getIntent().getStringExtra("prev_activity").equals("CreatingMatchActivity")) {
                         Intent intent = new Intent(getApplicationContext(), CreateMatchActivity.class);

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_aliga_splash" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/togline"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,16 +28,17 @@
             android:gravity="center_horizontal"
             android:text="@string/togline"
             android:textColor="@color/primary50"
-            android:textSize="20sp" />
+            android:textSize="20sp" />-->
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="80dp"
         android:layout_marginRight="32dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center|bottom"
+        android:layout_marginBottom="64dp">
 
         <Button
             android:id="@+id/go_to_sign_up_btn"

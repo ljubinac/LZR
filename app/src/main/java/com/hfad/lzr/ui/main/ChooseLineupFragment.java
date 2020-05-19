@@ -1,6 +1,7 @@
 package com.hfad.lzr.ui.main;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,6 +118,8 @@ public class ChooseLineupFragment extends Fragment {
                             onItemUncheck(model);
                             holder.lineupCheckbox.setChecked(false);
                             holder.firstLineupCheckBox.setChecked(false);
+                            holder.playerNumberTV.setTypeface(null, Typeface.NORMAL);
+                            holder.playerNameTV.setTypeface(null, Typeface.NORMAL);
                             holder.ll1.setBackgroundColor(getResources().getColor(R.color.default_background));
                         }
                     }
@@ -129,10 +132,14 @@ public class ChooseLineupFragment extends Fragment {
                             onItemFirstCheck(model);
                             holder.lineupCheckbox.setChecked(true);
                             holder.firstLineupCheckBox.setChecked(true);
+                            holder.playerNumberTV.setTypeface(null, Typeface.BOLD);
+                            holder.playerNameTV.setTypeface(null, Typeface.BOLD);
                             holder.ll1.setBackgroundColor(getResources().getColor(R.color.starting5_background));
                         } else {
                             onItemUncheck(model);
                             holder.firstLineupCheckBox.setChecked(false);
+                            holder.playerNumberTV.setTypeface(null, Typeface.NORMAL);
+                            holder.playerNameTV.setTypeface(null, Typeface.NORMAL);
                             holder.ll1.setBackgroundColor(getResources().getColor(R.color.default_background));
                         }
                     }

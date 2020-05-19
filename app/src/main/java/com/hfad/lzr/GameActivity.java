@@ -1,12 +1,17 @@
 package com.hfad.lzr;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +32,7 @@ import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class GameActivity extends AppCompatActivity {
@@ -65,10 +71,32 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout pauseLL;
     LinearLayout startLL;
 
+    private int foulsTeamA, foulsTeamB;
+    private ImageView firstFoulTeamA, firstFoulTeamB, secondFoulTeamA, secondFoulTeamB, thirdFoulTeamA, thirdFoulTeamB, fourthFoulTeamA, fourthFoulTeamB, fifthFoulTeamA, fifthFoulTeamB;
+    int quarter;
+    TextView quarterTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        firstFoulTeamA = findViewById(R.id.first_foul_team_A);
+        firstFoulTeamB = findViewById(R.id.first_foul_team_B);
+        secondFoulTeamA = findViewById(R.id.second_foul_team_A);
+        secondFoulTeamB = findViewById(R.id.second_foul_team_B);
+        thirdFoulTeamA = findViewById(R.id.third_foul_team_A);
+        thirdFoulTeamB = findViewById(R.id.third_foul_team_B);
+        fourthFoulTeamA = findViewById(R.id.fourth_foul_team_A);
+        fourthFoulTeamB = findViewById(R.id.fourth_foul_team_B);
+        fifthFoulTeamA = findViewById(R.id.fifth_foul_team_A);
+        fifthFoulTeamB = findViewById(R.id.fifth_foul_team_B);
+
+        foulsTeamA = 0;
+        foulsTeamB = 0;
+
+        quarterTV = findViewById(R.id.quarter_tv);
+        quarter = 1;
 
         mTextViewCountDown = findViewById(R.id.text_view_countdown);
         mButtonStart = findViewById(R.id.button_start);
@@ -454,6 +482,9 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     current.setFoul(current.getFoul() + 1);
                     tvFoul.setText(String.valueOf(current.getFoul()));
+                    game.setFoulsTeamA(foulsTeamA + 1);
+                    setTeamFouls(1);
+
                 }
             }
         });
@@ -464,6 +495,7 @@ public class GameActivity extends AppCompatActivity {
                 if (current.getFoul() > 0) {
                     current.setFoul(current.getFoul() - 1);
                     tvFoul.setText(String.valueOf(current.getFoul()));
+                    setTeamFouls(-1);
                 }
                 return true;
             }
@@ -479,6 +511,7 @@ public class GameActivity extends AppCompatActivity {
                     tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
                     current.setFoul(current.getFoul() + 1);
                     tvFoul.setText(String.valueOf(current.getFoul()));
+                    setTeamFouls(1);
                 }
             }
         });
@@ -491,6 +524,7 @@ public class GameActivity extends AppCompatActivity {
                     tvTehnical.setText(String.valueOf(current.getTehnicalFoul()));
                     current.setFoul(current.getFoul() - 1);
                     tvFoul.setText(String.valueOf(current.getFoul()));
+                    setTeamFouls(-1);
                 }
                 return true;
             }
@@ -570,6 +604,73 @@ public class GameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void setTeamFouls(int fouls){
+        if (currentTeam) {
+            foulsTeamB = foulsTeamB + fouls;
+            if (foulsTeamB == 1){
+                firstFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+            } else if (foulsTeamB == 2){
+                firstFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                secondFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+            } else if (foulsTeamB == 3){
+                firstFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                secondFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                thirdFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+            } else if (foulsTeamB == 4){
+                firstFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                secondFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                thirdFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                fourthFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+            } else {
+                firstFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                secondFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                thirdFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                fourthFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                fifthFoulTeamB.setColorFilter(getResources().getColor(R.color.team_fouls_red));
+                Toast.makeText(getApplicationContext(), teamB.getName() + " " + getString(R.string.is_in_the_bonus), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            foulsTeamA = foulsTeamA + fouls;
+            if (foulsTeamA == 1){
+                firstFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+            } else if (foulsTeamA == 2){
+                firstFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                secondFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+            } else if (foulsTeamA == 3){
+                firstFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                secondFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                thirdFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+            } else if (foulsTeamA == 4){
+                firstFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                secondFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                thirdFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                fourthFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+            } else {
+                firstFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                secondFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                thirdFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                fourthFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_yellow));
+                fifthFoulTeamA.setColorFilter(getResources().getColor(R.color.team_fouls_red));
+                Toast.makeText(getApplicationContext(), teamA.getName() + " " + getString(R.string.is_in_the_bonus), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void resetTeamFouls(){
+        foulsTeamA = 0;
+        foulsTeamB = 0;
+        firstFoulTeamA.setColorFilter(getResources().getColor(R.color.white));
+        secondFoulTeamA.setColorFilter(getResources().getColor(R.color.white));
+        thirdFoulTeamA.setColorFilter(getResources().getColor(R.color.white));
+        fourthFoulTeamA.setColorFilter(getResources().getColor(R.color.white));
+        fifthFoulTeamA.setColorFilter(getResources().getColor(R.color.white));
+        firstFoulTeamB.setColorFilter(getResources().getColor(R.color.white));
+        secondFoulTeamB.setColorFilter(getResources().getColor(R.color.white));
+        thirdFoulTeamB.setColorFilter(getResources().getColor(R.color.white));
+        fourthFoulTeamB.setColorFilter(getResources().getColor(R.color.white));
+        fifthFoulTeamB.setColorFilter(getResources().getColor(R.color.white));
     }
 
     public void setRes(int points) {
@@ -652,6 +753,21 @@ public class GameActivity extends AppCompatActivity {
         mButtonReset.setVisibility(View.INVISIBLE);
         startLL.setVisibility(View.VISIBLE);
         pauseLL.setVisibility(View.GONE);
+        resetTeamFouls();
+
+        if (quarter == 1){
+            quarter += 1;
+            quarterTV.setText(R.string.quarter_two);
+        } else if (quarter == 2){
+            quarter += 1;
+            quarterTV.setText(R.string.quarter_three);
+        } else if (quarter == 3){
+            quarter += 1;
+            quarterTV.setText(R.string.quarter_four);
+        } else {
+            quarter += 1;
+            quarterTV.setText(R.string.extra_time);
+        }
 
         for (int i = 0; i < 5; i++) {
             playersGameA.get(i).setWhenGoingIn((int) mTimeLeftInMillis / 1000);

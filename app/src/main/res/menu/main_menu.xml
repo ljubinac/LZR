@@ -15,19 +15,27 @@
                 android:icon="@drawable/ic_teams_icon"
                 android:iconTint="@color/colorPrimary"/>
 
+<!--        <item-->
+<!--            android:id="@+id/nav_create_team"-->
+<!--            android:title="@string/create_team"-->
+<!--            android:icon="@drawable/ic_teams_icon"-->
+<!--            android:iconTint="@color/colorPrimary"/>-->
+
         <item
             android:id="@+id/nav_create_league"
             android:title="@string/leagues_title"
+            android:icon="@drawable/ic_leagues"
             android:iconTint="@color/colorPrimary"/>
 
         <item
             android:id="@+id/nav_standings"
             android:title="@string/standings"
-            android:icon="@drawable/ic_standings_icon"
+            android:icon="@drawable/ic_standings"
             android:iconTint="@color/colorPrimary"/>
         <item
             android:id="@+id/nav_player_stats"
             android:title="@string/player_stats"
+            android:icon="@drawable/ic_player_stats"
             android:iconTint="@color/colorPrimary"/>
         <item
             android:id="@+id/nav_settings"

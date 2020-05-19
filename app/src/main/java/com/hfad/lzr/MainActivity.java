@@ -1,7 +1,10 @@
 package com.hfad.lzr;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -24,6 +27,7 @@ import com.hfad.lzr.ui.main.GamesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -78,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-
 
     }
 
@@ -149,6 +152,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, TeamsActivity.class);
                 startActivity(intent);
                 break;
+//            case R.id.nav_create_team:
+//                intent = new Intent(this, CreateTeamActivity.class);
+//                startActivity(intent);
+//                break;
             case R.id.nav_create_league:
                 intent = new Intent(this, LeaguesActivity.class);
                 startActivity(intent);
@@ -173,6 +180,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 }

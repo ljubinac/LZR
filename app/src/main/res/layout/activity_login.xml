@@ -56,14 +56,14 @@
             android:layout_marginRight="32dp"
             android:text="@string/log_in" />
 
-        <TextView
+       <!-- <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@string/text_forgot_password"
             android:textColor="@color/link"
-            android:textSize="14sp" />
+            android:textSize="14sp" />-->
 
 
     </LinearLayout>

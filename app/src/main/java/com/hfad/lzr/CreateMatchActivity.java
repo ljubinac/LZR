@@ -3,6 +3,8 @@ package com.hfad.lzr;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -132,6 +135,9 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
                 teamsSpinnerA.clear();
                 teamsSpinnerB.clear();
                 fetch(selectedItem);
+                //menja tekst ali tek kad se izabere nesto u spineru
+               /* ((TextView)adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.text));
+                ((TextView)adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);*/
             }
 
             @Override

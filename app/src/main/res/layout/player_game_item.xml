@@ -28,7 +28,7 @@
                 android:id="@+id/jersey_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_basketaball_jersey"
+                app:srcCompat="@drawable/ic_basketaball_jersey"
 
 
                 />

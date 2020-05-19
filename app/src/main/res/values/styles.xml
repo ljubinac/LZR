@@ -54,7 +54,10 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-
+<style name="spinnerTheme">
+    <item name="android:textColor">@color/text</item>
+    <item name="android:textStyle">bold</item>
+</style>
 
 <!--    activity_game.xml-->
     <style name="scoreboard_res_tv">
