@@ -111,4 +111,5 @@
     <string name="exhibition">Prijateljska</string>
     <string name="away_team">Gost</string>
     <string name="home_team">Domaćin</string>
+    <string name="arena">Arena</string>
 </resources>

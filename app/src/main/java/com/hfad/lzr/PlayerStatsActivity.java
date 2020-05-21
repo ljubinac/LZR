@@ -107,15 +107,15 @@ public class PlayerStatsActivity extends AppCompatActivity {
         leagues = new ArrayList<>();
 
         leaguesSpinnerList = new ArrayList<>();
-        adapterListOfParameters = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
-//        adapterListOfParameters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterListOfParameters = new ArrayAdapter<>(this, R.layout.spinner_item2, leaguesSpinnerList);
+        adapterListOfParameters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         parameters = new ArrayList<>();
       /*  parameters.add("PTS");
         parameters.add("AST");*/
 
-        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
-//        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterList = new ArrayAdapter<>(this, R.layout.spinner_item2, leaguesSpinnerList);
+        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         leagueSpinner.setAdapter(adapterList);
 

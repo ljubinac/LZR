@@ -29,115 +29,39 @@
             <Spinner
                 android:id="@+id/choose_league"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="48dp"
                 android:background="@drawable/spinner_for_create_team"
-                android:theme="@style/spinnerTheme"
-                android:elevation="2dp"
+                android:elevation="3dp"
                 android:entries="@array/leagues" />
 
             <Spinner
                 android:id="@+id/choose_teamA"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="32dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/spinner_for_create_team"
-                android:theme="@style/spinnerTheme"
-                android:elevation="2dp"
+                android:elevation="3dp"
                 android:entries="@array/teams" />
 
             <Spinner
                 android:id="@+id/choose_teamB"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="32dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/spinner_for_create_team"
-                android:theme="@style/spinnerTheme"
-                android:elevation="2dp"
+                android:elevation="3dp"
                 android:entries="@array/teams" />
 
             <Spinner
                 android:id="@+id/choose_hall"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="32dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/spinner_for_create_team"
-                android:theme="@style/spinnerTheme"
-                android:elevation="2dp"
+                android:elevation="3dp"
                 android:entries="@array/teams" />
         </LinearLayout>
 
-
-        <!-- <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="70dp"
-             android:gravity="center"
-             android:orientation="horizontal">
-
-             <Spinner
-                 android:id="@+id/choose_league"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginHorizontal="32dp"
-                 android:background="@drawable/spinner_for_create_team"
-                 android:elevation="2dp"
-                 android:entries="@array/leagues" />
-         </LinearLayout>
-
- &lt;!&ndash;        <View style="@style/Divider" />&ndash;&gt;
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="70dp"
-             android:gravity="center"
-             android:orientation="horizontal">
-
-             <Spinner
-                 android:id="@+id/choose_teamA"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginHorizontal="32dp"
-                 android:background="@drawable/spinner_for_create_team"
-                 android:elevation="2dp"
-                 android:entries="@array/teams" />
-         </LinearLayout>
-
- &lt;!&ndash;        <View style="@style/Divider" />&ndash;&gt;
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="70dp"
-             android:gravity="center"
-             android:orientation="horizontal">
-
-             <Spinner
-                 android:id="@+id/choose_teamB"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginHorizontal="32dp"
-                 android:background="@drawable/spinner_for_create_team"
-                 android:elevation="2dp"
-                 android:entries="@array/teams" />
-         </LinearLayout>
-
- &lt;!&ndash;        <View style="@style/Divider" />&ndash;&gt;
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="70dp"
-             android:gravity="center"
-             android:orientation="horizontal">
-
-             <Spinner
-                 android:id="@+id/choose_hall"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginHorizontal="32dp"
-                 android:background="@drawable/spinner_for_create_team"
-                 android:elevation="2dp"
-                 android:entries="@array/teams" />
-         </LinearLayout>-->
-
-        <!--        <View style="@style/Divider" />-->
 
         <LinearLayout
             style="@style/create_match_choose_ll"

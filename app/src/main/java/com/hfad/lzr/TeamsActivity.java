@@ -69,8 +69,8 @@ public class TeamsActivity extends AppCompatActivity {
         leagues = new ArrayList<>();
 
         leaguesSpinnerList = new ArrayList<>();
-        adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
-//        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterList = new ArrayAdapter<>(this, R.layout.spinner_item2, leaguesSpinnerList);
+        adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         leagueSpinner.setAdapter(adapterList);
 

@@ -8,6 +8,8 @@ public class Game implements Serializable {
     private String idTeamB;
     private String gameDate;
     private String gameTime;
+    private String gameArenaId;
+    private String gameArenaName;
     private int resA;
     private int resB;
     private String teamAnaziv;
@@ -22,7 +24,7 @@ public class Game implements Serializable {
     public Game() {
     }
 
-    public Game(String id, String idTeamA, String idTeamB, String gameDate, String gameTime, String teamAnaziv, String teamBnaziv, boolean isFinished, boolean isExhibition) {
+    public Game(String id, String idTeamA, String idTeamB, String gameDate, String gameTime, String teamAnaziv, String teamBnaziv, boolean isFinished, boolean isExhibition, String gameArenaId, String gameArenaName) {
         this.id = id;
         this.idTeamA = idTeamA;
         this.idTeamB = idTeamB;
@@ -32,6 +34,24 @@ public class Game implements Serializable {
         this.teamBnaziv = teamBnaziv;
         this.isFinished = isFinished;
         this.isExhibition = isExhibition;
+        this.gameArenaId = gameArenaId;
+        this.gameArenaName = getGameArenaName();
+    }
+
+    public String getGameArenaId() {
+        return gameArenaId;
+    }
+
+    public void setGameArenaId(String gameArenaId) {
+        this.gameArenaId = gameArenaId;
+    }
+
+    public String getGameArenaName() {
+        return gameArenaName;
+    }
+
+    public void setGameArenaName(String gameArenaName) {
+        this.gameArenaName = gameArenaName;
     }
 
     public int getQuarter() {

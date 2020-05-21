@@ -246,4 +246,7 @@
     <string name="home_team">Home team</string>
     <string name="away_team">Away team</string>
     <string name="exhibition">Exhibition</string>
+    <string name="duga" translatable="false">Duga</string>
+    <string name="lukovski" translatable="false">Lukovski</string>
+    <string name="arena">Arena</string>
 </resources>

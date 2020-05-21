@@ -81,6 +81,7 @@ public class GamesFragment extends Fragment {
                 holder.teamBnameTV.setText(model.getTeamBnaziv());
                 holder.gameDateTV.setText(model.getGameDate());
                 holder.gameTimeTV.setText(model.getGameTime());
+                holder.gameVenueTV.setText(model.getGameArenaName());
                 if(model.isFinished()) {
                     holder.resAtv.setText(String.valueOf(model.getResA()));
                     holder.resBtv.setText(String.valueOf(model.getResB()));
