@@ -243,4 +243,7 @@
     <string name="quarter_three" translatable="false">Q3</string>
     <string name="quarter_four" translatable="false">Q4</string>
     <string name="extra_time" translatable="false">ET</string>
+    <string name="home_team">Home team</string>
+    <string name="away_team">Away team</string>
+    <string name="exhibition">Exhibition</string>
 </resources>

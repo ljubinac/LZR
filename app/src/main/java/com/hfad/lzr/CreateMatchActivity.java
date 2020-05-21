@@ -39,7 +39,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
     Spinner spinner1, spinner2, leagueSpinner;
     DatabaseReference databaseReference, databaseReferenceLeagues;
     ValueEventListener listener;
-    ArrayAdapter<String> adapterTeamA, adapterList;
+    ArrayAdapter<String> adapterTeamA, adapterTeamB, adapterList;
     ArrayList<String> teamsSpinnerA, teamsSpinnerB, leaguesSpinnerList;
     ArrayList<Team> teams;
     ArrayList<League> leagues;
@@ -92,8 +92,8 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 String id = databaseReferenceGames.push().getKey();
-                Team teamA = teams.get(spinner1.getSelectedItemPosition());
-                Team teamB = teams.get(spinner2.getSelectedItemPosition());
+                Team teamA = teams.get(spinner1.getSelectedItemPosition() - 1);
+                Team teamB = teams.get(spinner2.getSelectedItemPosition() - 1);
                 if(leagueSpinner.getSelectedItem().toString().equals("Exhibition")) {
                     Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, true);
                     databaseReferenceGames.child(id).setValue(game);
@@ -108,7 +108,8 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
 
         databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
         leaguesSpinnerList = new ArrayList<>();
-        leaguesSpinnerList.add("Exhibition");
+        leaguesSpinnerList.add(0, getString(R.string.leagues_title));
+        leaguesSpinnerList.add(getString(R.string.exhibition));
         adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, leaguesSpinnerList);
         adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -120,13 +121,13 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
                 teamsSpinnerA);
 
         teamsSpinnerB = new ArrayList<>();
-        adapterTeamA = new ArrayAdapter<String>(CreateMatchActivity.this,
+        adapterTeamB = new ArrayAdapter<String>(CreateMatchActivity.this,
                 android.R.layout.simple_spinner_dropdown_item,
                 teamsSpinnerB);
 
         leagueSpinner.setAdapter(adapterList);
         spinner1.setAdapter(adapterTeamA);
-        spinner2.setAdapter(adapterTeamA);
+        spinner2.setAdapter(adapterTeamB);
 
         leagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -134,9 +135,15 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
                 String selectedItem = adapterView.getItemAtPosition(i).toString();
                 teamsSpinnerA.clear();
                 teamsSpinnerB.clear();
-                fetch(selectedItem);
+                teamsSpinnerA.add(0, getString(R.string.home_team));
+                teamsSpinnerB.add(0, getString(R.string.away_team));
+                if(!selectedItem.equals(getString(R.string.leagues_title))) {
+                    fetch(selectedItem);
+                }
+                adapterTeamA.notifyDataSetChanged();
+                adapterTeamB.notifyDataSetChanged();
                 //menja tekst ali tek kad se izabere nesto u spineru
-               /* ((TextView)adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.text));
+                /*((TextView)adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.text));
                 ((TextView)adapterView.getChildAt(0)).setTypeface(null, Typeface.BOLD);*/
             }
 
@@ -175,7 +182,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot team : dataSnapshot.getChildren()) {
-                    if(!leagueSpinner.getSelectedItem().toString().equals("Exhibition")) {
+                    if(!leagueSpinner.getSelectedItem().toString().equals(getString(R.string.exhibition))) {
                         if (team.child("league").getValue().equals(league)) {
                             teamsSpinnerA.add(team.child("name").getValue().toString());
                             teamsSpinnerB.add(team.child("name").getValue().toString());
@@ -189,6 +196,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
                 }
 
                 adapterTeamA.notifyDataSetChanged();
+                adapterTeamB.notifyDataSetChanged();
             }
 
             @Override

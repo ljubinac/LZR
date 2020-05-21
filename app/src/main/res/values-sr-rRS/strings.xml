@@ -108,4 +108,7 @@
     <string name="game_stats">Statistika</string>
     <string name="leagues_title">Lige</string>
     <string name="is_in_the_bonus">" je u bonusu!"</string>
+    <string name="exhibition">Prijateljska</string>
+    <string name="away_team">Gost</string>
+    <string name="home_team">Domaćin</string>
 </resources>

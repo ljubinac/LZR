@@ -30,6 +30,7 @@ import com.hfad.lzr.model.Game;
 import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
+import com.hfad.lzr.ui.main.LineupDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -829,6 +830,9 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(int position) {
+                LineupDialog dialog = LineupDialog.newInstance(playersGameA);
+                dialog.show(getSupportFragmentManager(), "LineupDialog");
+
                 goingOutA = playersGameA.get(position);
                 goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionA = position;

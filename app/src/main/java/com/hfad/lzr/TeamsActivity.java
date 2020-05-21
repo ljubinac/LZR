@@ -34,6 +34,7 @@ import com.hfad.lzr.model.League;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TeamsActivity extends AppCompatActivity {
 
