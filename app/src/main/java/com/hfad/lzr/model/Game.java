@@ -35,7 +35,7 @@ public class Game implements Serializable {
         this.isFinished = isFinished;
         this.isExhibition = isExhibition;
         this.gameArenaId = gameArenaId;
-        this.gameArenaName = getGameArenaName();
+        this.gameArenaName = gameArenaName;
     }
 
     public String getGameArenaId() {
