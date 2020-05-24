@@ -32,6 +32,8 @@ public class PlayerGame extends Player implements Serializable {
     private boolean mIsChangeOut = false;
     private boolean mIsEnabled = false;
 
+    private boolean isSelected;
+
 
     public PlayerGame(String gameId ,Player player) {
         super(player);
@@ -51,6 +53,14 @@ public class PlayerGame extends Player implements Serializable {
         this.steal = 0;
         this.minutes = 0;
         this.eff = 0;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public int getEff() {

@@ -59,7 +59,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/spinner_for_create_team"
                 android:elevation="3dp"
-                android:entries="@array/teams" />
+                android:entries="@array/arenas" />
         </LinearLayout>
 
 

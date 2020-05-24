@@ -10,20 +10,22 @@
         android:layout_height="500dp"
         android:padding="10dp">
 
+        <TextView
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Substitutions"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/text" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/secondLineupArv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="4dp"
-            android:scrollbars="vertical"/>
-
-        <!--<androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/secondLineupBrv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:padding="4dp"
             android:scrollbars="vertical"
-            android:visibility="gone"/>-->
+            android:layout_marginTop="50dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,8 +34,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:textSize="18sp"
-            android:textColor="#33bbff"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
             android:id="@+id/action_ok"/>
 
         <TextView
@@ -43,8 +45,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="20dp"
-            android:textSize="18sp"
-            android:textColor="#33bbff"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
             android:id="@+id/action_cancel"/>
     </RelativeLayout>
 

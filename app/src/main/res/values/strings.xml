@@ -29,6 +29,10 @@
         <item>Team3</item>
         <item>Team4</item>
     </string-array>
+    <string-array name="arenas">
+        <item>Duga</item>
+        <item>Lukovski</item>
+    </string-array>
     <string-array name="options">
         <item>Team1</item>
         <item>Team2</item>

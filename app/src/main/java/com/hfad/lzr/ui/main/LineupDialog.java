@@ -2,12 +2,15 @@ package com.hfad.lzr.ui.main;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,20 +24,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DatabaseReference;
 import com.hfad.lzr.GameActivity;
 import com.hfad.lzr.R;
+import com.hfad.lzr.adapter.DialogSubsAdapter;
 import com.hfad.lzr.adapter.PlayersGameAdapter;
 import com.hfad.lzr.model.Game;
+import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.PlayerGame;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class LineupDialog extends DialogFragment {
+public class LineupDialog extends DialogFragment implements AdapterView.OnItemClickListener {
 
     private static final String TAG = "LineupDialog";
     private TextView mActionOk, mActionCancel;
     RecyclerView secondLineupRV;
-    PlayersGameAdapter adapter;
+    DialogSubsAdapter adapter;
     TextView playerNumberTV;
     TextView playerNameTV;
     RecyclerView.LayoutManager layoutManager;
@@ -42,9 +47,7 @@ public class LineupDialog extends DialogFragment {
     ArrayList<PlayerGame> players;
 
     ArrayList<PlayerGame> izmene;
-
-    boolean isChange = false;
-    int goingOutPositionA;
+    PlayerGame playerGame;
 
    /* @NonNull
     @Override
@@ -70,11 +73,12 @@ public class LineupDialog extends DialogFragment {
         return builder.create();
     }*/
 
-    public static LineupDialog newInstance(ArrayList<PlayerGame> players) {
+    public static LineupDialog newInstance(ArrayList<PlayerGame> players, PlayerGame playerGame) {
         LineupDialog dialog = new LineupDialog();
 
         Bundle args = new Bundle();
         args.putSerializable("playersGameA", players);
+        args.putSerializable("playerGame", playerGame);
         dialog.setArguments(args);
 
         return dialog;
@@ -85,6 +89,7 @@ public class LineupDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         players = ( ArrayList<PlayerGame> ) getArguments().getSerializable("playersGameA");
+        playerGame = ( PlayerGame ) getArguments().getSerializable("playerGame");
     }
 
     @Nullable
@@ -106,23 +111,11 @@ public class LineupDialog extends DialogFragment {
 
         secondLineupRV.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new PlayersGameAdapter(izmene, "teamA");
+        adapter = new DialogSubsAdapter(getContext(), izmene);
         secondLineupRV.setLayoutManager(layoutManager);
         secondLineupRV.setAdapter(adapter);
 
-
-
-        adapter.onItemClickListener(new PlayersGameAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-
-            }
-
-            @Override
-            public void onLongClick(int position) {
-
-            }
-        });
+        adapter.setOnItemClickListener(this);
 
         mActionCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,9 +128,16 @@ public class LineupDialog extends DialogFragment {
         mActionOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: capturing input");
+
             }
         });
         return  view;
     }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        playerGame = izmene.get(position);
+    }
+
 }

@@ -55,7 +55,7 @@ public class GameActivity extends AppCompatActivity {
     PlayerGame goingOutA, goingOutB;
     int goingOutPositionA, goingOutPositionB;
     boolean isChange = false;
-    /*  private static final String TAG = "GameActivity";*/
+    private static final String TAG = "GameActivity";
 
     private static final long START_TIME_IN_MILLIS = 6000;
 
@@ -76,6 +76,8 @@ public class GameActivity extends AppCompatActivity {
     private ImageView firstFoulTeamA, firstFoulTeamB, secondFoulTeamA, secondFoulTeamB, thirdFoulTeamA, thirdFoulTeamB, fourthFoulTeamA, fourthFoulTeamB, fifthFoulTeamA, fifthFoulTeamB;
     int quarter;
     TextView quarterTV;
+
+    PlayerGame goingIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,14 +115,6 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startTimer();
             }
-//            @Override
-//            public void onClick(View v) {
-//                if (mTimerRunning) {
-//                    pauseTimer();
-//                } else {
-//                    startTimer();
-//                }
-//            }
         });
 
         mButtonPause.setOnClickListener(new View.OnClickListener() {
@@ -807,7 +801,7 @@ public class GameActivity extends AppCompatActivity {
                     adapterB.notifyItemChanged(adapterB.selectedPos);
                     adapterA.notifyItemChanged(adapterA.selectedPos);
                 } else {
-                    PlayerGame goingIn = playersGameA.get(position);
+                    goingIn = playersGameA.get(position);
                     goingIn.setmIsIn(true);
                     goingIn.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
                     playersGameA.set(goingOutPositionA, goingIn);
@@ -830,7 +824,7 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(int position) {
-                LineupDialog dialog = LineupDialog.newInstance(playersGameA);
+                LineupDialog dialog = LineupDialog.newInstance(playersGameA, goingIn);
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
 
                 goingOutA = playersGameA.get(position);
@@ -873,7 +867,7 @@ public class GameActivity extends AppCompatActivity {
                     adapterA.notifyItemChanged(adapterA.selectedPos);
                     adapterB.notifyItemChanged(adapterB.selectedPos);
                 } else {
-                    PlayerGame goingIn = playersGameB.get(position);
+                    goingIn = playersGameB.get(position);
                     goingIn.setmIsIn(true);
                     goingIn.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
                     playersGameB.set(goingOutPositionB, goingIn);
@@ -896,6 +890,8 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(int position) {
+                LineupDialog dialog = LineupDialog.newInstance(playersGameB, goingIn);
+                dialog.show(getSupportFragmentManager(), "LineupDialog");
                 goingOutB = playersGameB.get(position);
                 goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionB = position;
