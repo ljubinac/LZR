@@ -1,6 +1,7 @@
 package com.hfad.lzr.ui.main;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,36 +50,17 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
     ArrayList<PlayerGame> izmene;
     PlayerGame playerGame;
 
-   /* @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    DialogListener dialogListener;
 
-        players = ( ArrayList<PlayerGame> ) getArguments().getSerializable("playersGameA");
+    String team;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Izmene")
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                getDialog().dismiss();
-            }
-        });
-
-        return builder.create();
-    }*/
-
-    public static LineupDialog newInstance(ArrayList<PlayerGame> players, PlayerGame playerGame) {
+    public static LineupDialog newInstance(ArrayList<PlayerGame> players, String team) {
         LineupDialog dialog = new LineupDialog();
 
         Bundle args = new Bundle();
         args.putSerializable("playersGameA", players);
-        args.putSerializable("playerGame", playerGame);
+        args.putString("team", team);
         dialog.setArguments(args);
 
         return dialog;
@@ -89,7 +71,7 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
         super.onCreate(savedInstanceState);
 
         players = ( ArrayList<PlayerGame> ) getArguments().getSerializable("playersGameA");
-        playerGame = ( PlayerGame ) getArguments().getSerializable("playerGame");
+        team = getArguments().getString("team");
     }
 
     @Nullable
@@ -128,7 +110,8 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
         mActionOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dialogListener.doOkClick(playerGame, team);
+                getDialog().dismiss();
             }
         });
         return  view;
@@ -138,6 +121,21 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         playerGame = izmene.get(position);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            dialogListener = ( DialogListener ) context;
+        } catch (ClassCastException e) {
+            throw  new ClassCastException(context.toString() + " must implement dialog listener.");
+        }
+    }
+
+    public interface DialogListener{
+        void doOkClick(PlayerGame playerGame, String team);
     }
 
 }

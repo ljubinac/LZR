@@ -1,6 +1,7 @@
 package com.hfad.lzr;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements LineupDialog.DialogListener {
 
     DatabaseReference databaseReference, databaseReferenceGames, databaseReferencePlayers;
     ArrayList<PlayerGame> playersGameA, playersGameB;
@@ -53,7 +55,7 @@ public class GameActivity extends AppCompatActivity {
     Team teamA;
     Team teamB;
     PlayerGame goingOutA, goingOutB;
-    int goingOutPositionA, goingOutPositionB;
+    int goingOutPositionA, goingOutPositionB, goingInPositionA, goingInPositionB;
     boolean isChange = false;
     private static final String TAG = "GameActivity";
 
@@ -77,12 +79,19 @@ public class GameActivity extends AppCompatActivity {
     int quarter;
     TextView quarterTV;
 
-    PlayerGame goingIn;
+    String timA, timB;
+
+    ImageView minusMinuteImg, minusSecondImg, plusMinuteImg, plusSecondImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        minusMinuteImg = findViewById(R.id.minus_minute_img);
+        minusSecondImg = findViewById(R.id.minus_second_img);
+        plusMinuteImg = findViewById(R.id.plus_minute_img);
+        plusSecondImg = findViewById(R.id.plus_second_img);
 
         firstFoulTeamA = findViewById(R.id.first_foul_team_A);
         firstFoulTeamB = findViewById(R.id.first_foul_team_B);
@@ -127,7 +136,142 @@ public class GameActivity extends AppCompatActivity {
         mButtonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetTimer();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        resetTimer();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+            }
+        });
+
+        minusMinuteImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        minusMinute();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        plusMinuteImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        plusMinute();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        minusSecondImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        minusSecond();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        plusSecondImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        plusSecond();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
@@ -801,34 +945,33 @@ public class GameActivity extends AppCompatActivity {
                     adapterB.notifyItemChanged(adapterB.selectedPos);
                     adapterA.notifyItemChanged(adapterA.selectedPos);
                 } else {
-                    goingIn = playersGameA.get(position);
-                    goingIn.setmIsIn(true);
-                    goingIn.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
-                    playersGameA.set(goingOutPositionA, goingIn);
-                    playersGameA.set(position, goingOutA);
-                    for (int i = 5; i < playersGameA.size(); i++) {
-                        playersGameA.get(i).setmIsChangeIn(false);
-                        playersGameA.get(i).setmIsOut(true);
-                        playersGameA.get(i).setmIsEnabled(false);
-                    }
-                    for (int i = 0; i < 5; i++) {
-                        playersGameA.get(i).setmIsEnabled(true);
-                        playersGameA.get(i).setmIsIn(true);
-                    }
-
-                    goingOutA.setmIsChangeOut(false);
-                    adapterA.notifyDataSetChanged();
-                    isChange = false;
+//                    goingInA = playersGameA.get(position);
+//                    goingInA.setmIsIn(true);
+//                    goingInA.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
+//                    playersGameA.set(goingOutPositionA, goingInA);
+//                    playersGameA.set(position, goingOutA);
+//                    for (int i = 5; i < playersGameA.size(); i++) {
+//                        playersGameA.get(i).setmIsChangeIn(false);
+//                        playersGameA.get(i).setmIsOut(true);
+//                        playersGameA.get(i).setmIsEnabled(false);
+//                    }
+//                    for (int i = 0; i < 5; i++) {
+//                        playersGameA.get(i).setmIsEnabled(true);
+//                        playersGameA.get(i).setmIsIn(true);
+//                    }
+//
+//                    goingOutA.setmIsChangeOut(false);
+//                    adapterA.notifyDataSetChanged();
+//                    isChange = false;
                 }
             }
 
             @Override
             public void onLongClick(int position) {
-                LineupDialog dialog = LineupDialog.newInstance(playersGameA, goingIn);
-                dialog.show(getSupportFragmentManager(), "LineupDialog");
-
                 goingOutA = playersGameA.get(position);
-                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
+                LineupDialog dialog = LineupDialog.newInstance(playersGameA, game.getTeamAnaziv());
+                dialog.show(getSupportFragmentManager(), "LineupDialog");
+                /*goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionA = position;
                 goingOutA.setmIsChangeOut(true);
                 for (int i = 5; i < playersGameA.size(); i++) {
@@ -839,7 +982,7 @@ public class GameActivity extends AppCompatActivity {
                     playersGameA.get(i).setmIsEnabled(false);
                 }
                 isChange = true;
-                adapterA.notifyDataSetChanged();
+                adapterA.notifyDataSetChanged();*/
 
             }
         });
@@ -867,10 +1010,10 @@ public class GameActivity extends AppCompatActivity {
                     adapterA.notifyItemChanged(adapterA.selectedPos);
                     adapterB.notifyItemChanged(adapterB.selectedPos);
                 } else {
-                    goingIn = playersGameB.get(position);
-                    goingIn.setmIsIn(true);
-                    goingIn.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
-                    playersGameB.set(goingOutPositionB, goingIn);
+                    /*goingInB = playersGameB.get(position);
+                    goingInB.setmIsIn(true);
+                    goingInB.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
+                    playersGameB.set(goingOutPositionB, goingInB);
                     playersGameB.set(position, goingOutB);
                     for (int i = 5; i < playersGameB.size(); i++) {
                         playersGameB.get(i).setmIsChangeIn(false);
@@ -884,16 +1027,17 @@ public class GameActivity extends AppCompatActivity {
 
                     goingOutB.setmIsChangeOut(false);
                     adapterB.notifyDataSetChanged();
-                    isChange = false;
+                    isChange = false;*/
                 }
             }
 
             @Override
             public void onLongClick(int position) {
-                LineupDialog dialog = LineupDialog.newInstance(playersGameB, goingIn);
-                dialog.show(getSupportFragmentManager(), "LineupDialog");
                 goingOutB = playersGameB.get(position);
-                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
+                LineupDialog dialog = LineupDialog.newInstance(playersGameB, game.getTeamBnaziv());
+                dialog.show(getSupportFragmentManager(), "LineupDialog");
+
+                /*goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionB = position;
                 goingOutB.setmIsChangeOut(true);
                 for (int i = 5; i < playersGameB.size(); i++) {
@@ -904,8 +1048,63 @@ public class GameActivity extends AppCompatActivity {
                     playersGameB.get(i).setmIsEnabled(false);
                 }
                 isChange = true;
-                adapterB.notifyDataSetChanged();
+                adapterB.notifyDataSetChanged();*/
             }
         });
     }
+
+    @Override
+    public void doOkClick(PlayerGame playerGame, String team) {
+
+        if(team.equals(game.getTeamAnaziv())) {
+            goingOutPositionA = playersGameA.indexOf(goingOutA);
+            goingInPositionA = playersGameA.indexOf(playerGame);
+            playerGame.setmIsIn(true);
+            playerGame.setWhenGoingIn(( int ) mTimeLeftInMillis / 1000);
+            playersGameA.set(goingOutPositionA, playerGame);
+            playersGameA.set(goingInPositionA, goingOutA);
+            for (int i = 5; i < playersGameA.size(); i++) {
+                playersGameA.get(i).setmIsChangeIn(false);
+                playersGameA.get(i).setmIsOut(true);
+                playersGameA.get(i).setmIsEnabled(false);
+            }
+            for (int i = 0; i < 5; i++) {
+                playersGameA.get(i).setmIsEnabled(true);
+                playersGameA.get(i).setmIsIn(true);
+            }
+
+            goingOutA.setmIsChangeOut(false);
+            adapterA.notifyDataSetChanged();
+            isChange = false;
+        } else if (team.equals(game.getTeamBnaziv())) {
+            goingOutPositionB = playersGameB.indexOf(goingOutB);
+            goingInPositionB = playersGameB.indexOf(playerGame);
+            playerGame.setmIsIn(true);
+            playerGame.setWhenGoingIn((int) mTimeLeftInMillis / 1000);
+            playersGameB.set(goingOutPositionB, playerGame);
+            playersGameB.set(goingInPositionB, goingOutB);
+            for (int i = 5; i < playersGameB.size(); i++) {
+                playersGameB.get(i).setmIsChangeIn(false);
+                playersGameB.get(i).setmIsOut(true);
+                playersGameB.get(i).setmIsEnabled(false);
+            }
+            for (int i = 0; i < 5; i++) {
+                playersGameB.get(i).setmIsEnabled(true);
+                playersGameB.get(i).setmIsIn(true);
+            }
+
+            goingOutB.setmIsChangeOut(false);
+            adapterB.notifyDataSetChanged();
+            isChange = false;
+        }
+    }
+
+   /* private void minusMinute() {
+        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60 - 1;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        mTextViewCountDown.setText(timeLeftFormatted);
+    }*/
 }

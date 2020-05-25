@@ -215,6 +215,7 @@
                     android:gravity="center"
                     android:layout_marginHorizontal="7dp">
                     <ImageView
+                        android:id="@+id/minus_minute_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/minus_1m"/>
@@ -228,6 +229,7 @@
                     android:gravity="center"
                     android:layout_marginHorizontal="7dp">
                     <ImageView
+                        android:id="@+id/minus_second_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/minus_1s"/>
@@ -273,6 +275,7 @@
                     android:gravity="center"
                     android:layout_marginHorizontal="7dp">
                     <ImageView
+                        android:id="@+id/plus_second_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/plus_1s"/>
@@ -286,6 +289,7 @@
                     android:gravity="center"
                     android:layout_marginHorizontal="7dp">
                     <ImageView
+                        android:id="@+id/plus_minute_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/plus_1m"/>
