@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -86,8 +88,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
         teams = new ArrayList<>();
         leagues = new ArrayList<>();
         arenas = new ArrayList<>();
-        arenas.add(new Arena("1", getString(R.string.duga)));
-        arenas.add(new Arena("2", getString(R.string.lukovski)));
+
         spinner1 = findViewById(R.id.choose_teamA);
         spinner2 = findViewById(R.id.choose_teamB);
         leagueSpinner = findViewById(R.id.choose_league);
@@ -96,28 +97,36 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
         saveGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                String id = databaseReferenceGames.push().getKey();
-                Team teamA = teams.get(spinner1.getSelectedItemPosition() - 1);
-                Team teamB = teams.get(spinner2.getSelectedItemPosition() - 1);
-                Arena arena = arenas.get(arenaSpinner.getSelectedItemPosition() - 1);
-                if(leagueSpinner.getSelectedItem().toString().equals("Exhibition")) {
-                    Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, true, arena.getId(), arena.getName());
-                    databaseReferenceGames.child(id).setValue(game);
+                if (!leagueSpinner.getSelectedItem().toString().equals(getString(R.string.leagues_title))
+                        && !spinner1.getSelectedItem().toString().equals(getString(R.string.home_team))
+                        && !spinner2.getSelectedItem().toString().equals(getString(R.string.away_team))
+                        && !arenaSpinner.getSelectedItem().toString().equals(getString(R.string.arena))
+                        && date != null && time != null){
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    String id = databaseReferenceGames.push().getKey();
+                    Team teamA = teams.get(spinner1.getSelectedItemPosition() - 1);
+                    Team teamB = teams.get(spinner2.getSelectedItemPosition() - 1);
+                    Arena arena = arenas.get(arenaSpinner.getSelectedItemPosition() - 1);
+                    if (leagueSpinner.getSelectedItem().toString().equals(getString(R.string.exhibition))) {
+                        Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, true, arena.getId(), arena.getName());
+                        databaseReferenceGames.child(id).setValue(game);
+                    } else {
+                        Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, false, arena.getId(), arena.getName());
+                        databaseReferenceGames.child(id).setValue(game);
+                    }
+                    intent.putExtra("activity", "CreatingMatchActivity");
+                    startActivity(intent);
                 } else {
-                    Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, false, arena.getId(), arena.getName());
-                    databaseReferenceGames.child(id).setValue(game);
+                    Toast.makeText(getApplicationContext(), R.string.some_fields, Toast.LENGTH_LONG).show();
                 }
-                intent.putExtra("activity", "CreatingMatchActivity");
-                startActivity(intent);
             }
         });
 
         databaseReferenceArenas = FirebaseDatabase.getInstance().getReference("arenas");
         arenaSpinnerList = new ArrayList<>();
         arenaSpinnerList.add(0, getString(R.string.arena));
-        arenaSpinnerList.add(getString(R.string.duga));
-        arenaSpinnerList.add(getString(R.string.lukovski));
+
         adapterArena = new ArrayAdapter<String>(this, R.layout.spinner_item2, arenaSpinnerList);
         adapterArena.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -251,7 +260,7 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
 
 
     private void showDatePickerDialog() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
     }
 

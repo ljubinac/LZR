@@ -969,9 +969,9 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
             @Override
             public void onLongClick(int position) {
                 goingOutA = playersGameA.get(position);
-                LineupDialog dialog = LineupDialog.newInstance(playersGameA, game.getTeamAnaziv());
+                LineupDialog dialog = LineupDialog.newInstance(playersGameA, "teamA");
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
-                /*goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
+                goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionA = position;
                 goingOutA.setmIsChangeOut(true);
                 for (int i = 5; i < playersGameA.size(); i++) {
@@ -982,7 +982,7 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
                     playersGameA.get(i).setmIsEnabled(false);
                 }
                 isChange = true;
-                adapterA.notifyDataSetChanged();*/
+                adapterA.notifyDataSetChanged();
 
             }
         });
@@ -1034,10 +1034,10 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
             @Override
             public void onLongClick(int position) {
                 goingOutB = playersGameB.get(position);
-                LineupDialog dialog = LineupDialog.newInstance(playersGameB, game.getTeamBnaziv());
+                LineupDialog dialog = LineupDialog.newInstance(playersGameB, "teamB");
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
 
-                /*goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
+                goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionB = position;
                 goingOutB.setmIsChangeOut(true);
                 for (int i = 5; i < playersGameB.size(); i++) {
@@ -1048,7 +1048,7 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
                     playersGameB.get(i).setmIsEnabled(false);
                 }
                 isChange = true;
-                adapterB.notifyDataSetChanged();*/
+                adapterB.notifyDataSetChanged();
             }
         });
     }
@@ -1056,7 +1056,7 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
     @Override
     public void doOkClick(PlayerGame playerGame, String team) {
 
-        if(team.equals(game.getTeamAnaziv())) {
+        if(team.equals("teamA")) {
             goingOutPositionA = playersGameA.indexOf(goingOutA);
             goingInPositionA = playersGameA.indexOf(playerGame);
             playerGame.setmIsIn(true);
@@ -1076,7 +1076,7 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
             goingOutA.setmIsChangeOut(false);
             adapterA.notifyDataSetChanged();
             isChange = false;
-        } else if (team.equals(game.getTeamBnaziv())) {
+        } else if (team.equals("teamB")) {
             goingOutPositionB = playersGameB.indexOf(goingOutB);
             goingInPositionB = playersGameB.indexOf(playerGame);
             playerGame.setmIsIn(true);

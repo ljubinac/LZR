@@ -38,6 +38,10 @@
             android:icon="@drawable/ic_player_stats"
             android:iconTint="@color/colorPrimary"/>
         <item
+            android:id="@+id/nav_arenas"
+            android:title="@string/arenas"
+            android:iconTint="@color/colorPrimary"/>
+        <item
             android:id="@+id/nav_settings"
             android:title="@string/settings"
             android:icon="@drawable/ic_settings_24px"

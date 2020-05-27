@@ -59,7 +59,7 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
         LineupDialog dialog = new LineupDialog();
 
         Bundle args = new Bundle();
-        args.putSerializable("playersGameA", players);
+        args.putSerializable("playersList", players);
         args.putString("team", team);
         dialog.setArguments(args);
 
@@ -70,7 +70,7 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        players = ( ArrayList<PlayerGame> ) getArguments().getSerializable("playersGameA");
+        players = ( ArrayList<PlayerGame> ) getArguments().getSerializable("playersList");
         team = getArguments().getString("team");
     }
 

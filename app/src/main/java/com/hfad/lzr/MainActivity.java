@@ -168,6 +168,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, PlayerStatsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_arenas:
+                intent = new Intent(this, ArenasActivity.class);
+                startActivity(intent);
+                break;
             case R.id.nav_settings:
                 intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);

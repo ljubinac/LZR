@@ -253,4 +253,10 @@
     <string name="duga" translatable="false">Duga</string>
     <string name="lukovski" translatable="false">Lukovski</string>
     <string name="arena">Arena</string>
+    <string name="arenas">Arenas</string>
+    <string name="arena_name_hint">Arena name</string>
+    <string name="arena_added">Arena added!</string>
+    <string name="arena_name_fail">Add arena name!</string>
+    <string name="arena_not_added">Arena not added!</string>
+    <string name="some_fields">Some fields are not selected? Please select all fields.</string>
 </resources>
