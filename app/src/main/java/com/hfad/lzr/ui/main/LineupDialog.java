@@ -48,18 +48,21 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
     ArrayList<PlayerGame> players;
 
     ArrayList<PlayerGame> izmene;
-    PlayerGame playerGame;
+    PlayerGame playerGame, playerGameOut;
 
     DialogListener dialogListener;
 
     String team;
 
+    TextView a, b;
 
-    public static LineupDialog newInstance(ArrayList<PlayerGame> players, String team) {
+
+    public static LineupDialog newInstance(ArrayList<PlayerGame> players, PlayerGame playerGameOut, String team) {
         LineupDialog dialog = new LineupDialog();
 
         Bundle args = new Bundle();
         args.putSerializable("playersList", players);
+        args.putSerializable("playerGameOut", playerGameOut);
         args.putString("team", team);
         dialog.setArguments(args);
 
@@ -71,6 +74,7 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
         super.onCreate(savedInstanceState);
 
         players = ( ArrayList<PlayerGame> ) getArguments().getSerializable("playersList");
+        playerGameOut = ( PlayerGame ) getArguments().getSerializable("playerGameOut");
         team = getArguments().getString("team");
     }
 
@@ -78,6 +82,9 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_lineup, container, false);
+
+        a = view.findViewById(R.id.player_in_name_tv);
+        b = view.findViewById(R.id.player_out_name_tv);
 
         secondLineupRV = view.findViewById(R.id.secondLineupArv);
         mActionCancel = view.findViewById(R.id.action_cancel);
@@ -121,6 +128,8 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         playerGame = izmene.get(position);
+        a.setText(playerGame.getNameAndLastname());
+        b.setText(playerGameOut.getNameAndLastname());
     }
 
     @Override

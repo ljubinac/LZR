@@ -94,8 +94,8 @@ public class StandingsActivity extends AppCompatActivity {
         databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
 
         leagues = new ArrayList<>();
-
         leaguesSpinnerList = new ArrayList<>();
+        leaguesSpinnerList.add(0, getString(R.string.leagues_title));
         adapterList = new ArrayAdapter<>(this, R.layout.spinner_item2, leaguesSpinnerList);
         adapterList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

@@ -1,6 +1,7 @@
 package com.hfad.lzr;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -89,6 +90,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         leagues = new ArrayList<>();
 
         leaguesSpinnerList = new ArrayList<>();
+        leaguesSpinnerList.add(0, getString(R.string.leagues_title));
         adapterList = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, leaguesSpinnerList);
 
         leagueSpinner.setAdapter(adapterList);
@@ -116,6 +118,7 @@ public class CreateTeamActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 addPlayer();
+                closeKeyboard();
                 buildRecyclerView();
                 showAdd.setVisibility(View.VISIBLE);
                 addPlayerLL.setVisibility(View.GONE);
@@ -141,6 +144,14 @@ public class CreateTeamActivity extends AppCompatActivity {
         });
 
         fetchLeagues();
+    }
+
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void fetchLeagues() {
@@ -222,7 +233,7 @@ public class CreateTeamActivity extends AppCompatActivity {
     private boolean addTeam() {
         String name = teamName.getText().toString();
         String league = String.valueOf(leagueSpinner.getSelectedItem());
-        if (!TextUtils.isEmpty(name)) {
+        if (!TextUtils.isEmpty(name) && !league.equals(getResources().getString(R.string.leagues_title))) {
             String id = databaseReferenceTeams.push().getKey();
             Team team = new Team(id, name, league);
             databaseReferenceTeams.child(id).setValue(team);

@@ -105,8 +105,8 @@ public class PlayerStatsActivity extends AppCompatActivity {
         databaseReferenceLeagues = FirebaseDatabase.getInstance().getReference("leagues");
 
         leagues = new ArrayList<>();
-
         leaguesSpinnerList = new ArrayList<>();
+        leaguesSpinnerList.add(0, getString(R.string.leagues_title));
         adapterListOfParameters = new ArrayAdapter<>(this, R.layout.spinner_item2, leaguesSpinnerList);
         adapterListOfParameters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

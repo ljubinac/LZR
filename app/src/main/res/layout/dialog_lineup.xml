@@ -5,19 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".GameActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <TextView
-            android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Substitutions"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/text" />
+            android:textColor="@color/text"
+            android:layout_gravity="center"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/secondLineupArv"
@@ -25,29 +26,103 @@
             android:layout_height="300dp"
             android:padding="4dp"
             android:scrollbars="vertical"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Out"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/colorSecondary"
+                android:textAllCaps="true"
+                android:layout_marginRight="8dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="In"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@color/colorSecondary"
+                android:textAllCaps="true"
+                android:layout_marginLeft="8dp"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OK"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
+            android:id="@+id/player_out_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text=""
             android:textSize="16sp"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/action_ok"/>
-
+            android:textColor="@color/colorAccent"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:padding="2dp"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CANCEL"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="20dp"
+            android:id="@+id/player_in_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text=""
             android:textSize="16sp"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/action_cancel"/>
-    </RelativeLayout>
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:padding="2dp"/>
+    </LinearLayout>
+
+        <View style="@style/Divider"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="OK"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/action_ok"
+                android:layout_marginRight="8dp"
+                android:background="@color/colorAccent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="CANCEL"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/action_cancel"
+                android:layout_marginLeft="8dp"
+                android:background="@color/colorAccent"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

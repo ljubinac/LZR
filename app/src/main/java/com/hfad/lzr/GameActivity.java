@@ -856,7 +856,6 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-//                mButtonStartPause.setText(R.string.start);
                 startLL.setVisibility(View.VISIBLE);
                 pauseLL.setVisibility(View.GONE);
                 mButtonReset.setVisibility(View.VISIBLE);
@@ -871,7 +870,6 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
         }.start();
 
         mTimerRunning = true;
-//        mButtonStartPause.setText(R.string.pause);
         pauseLL.setVisibility(View.VISIBLE);
         startLL.setVisibility(View.GONE);
         mButtonReset.setVisibility(View.INVISIBLE);
@@ -880,7 +878,6 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
-//        mButtonStartPause.setText(R.string.start);
         startLL.setVisibility(View.VISIBLE);
         pauseLL.setVisibility(View.GONE);
         mButtonReset.setVisibility(View.VISIBLE);
@@ -969,7 +966,7 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
             @Override
             public void onLongClick(int position) {
                 goingOutA = playersGameA.get(position);
-                LineupDialog dialog = LineupDialog.newInstance(playersGameA, "teamA");
+                LineupDialog dialog = LineupDialog.newInstance(playersGameA, goingOutA,  "teamA");
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
                 goingOutA.setMinutes(goingOutA.getMinutes() + goingOutA.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
                 goingOutPositionA = position;
@@ -1034,7 +1031,7 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
             @Override
             public void onLongClick(int position) {
                 goingOutB = playersGameB.get(position);
-                LineupDialog dialog = LineupDialog.newInstance(playersGameB, "teamB");
+                LineupDialog dialog = LineupDialog.newInstance(playersGameB, goingOutB, "teamB");
                 dialog.show(getSupportFragmentManager(), "LineupDialog");
 
                 goingOutB.setMinutes(goingOutB.getMinutes() + goingOutB.getWhenGoingIn() - ((int) mTimeLeftInMillis / 1000));
