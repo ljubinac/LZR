@@ -55,7 +55,8 @@
         <activity
             android:name=".CreateMatchActivity"
             android:configChanges="screenSize|orientation|screenLayout" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:configChanges="locale"/>
     </application>
 
 </manifest>

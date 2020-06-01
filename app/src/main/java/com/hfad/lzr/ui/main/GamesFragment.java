@@ -28,12 +28,12 @@ import com.hfad.lzr.model.Game;
  */
 public class GamesFragment extends Fragment {
 
-    DatabaseReference databaseReference;
-    RecyclerView gamesRV;
-    FirebaseRecyclerOptions<Game> options;
-    FirebaseRecyclerAdapter adapter;
+    private DatabaseReference databaseReference;
+    private RecyclerView gamesRV;
+    private FirebaseRecyclerOptions<Game> options;
+    private FirebaseRecyclerAdapter adapter;
 
-    Game game;
+    private Game game;
 
     boolean isFinished;
 

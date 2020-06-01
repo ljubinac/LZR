@@ -23,6 +23,6 @@
         android:entries="@array/languages_entries"
         android:entryValues="@array/languages_values"
         android:defaultValue="1"
-        android:summary="@string/languages_summary"/>
+        android:summary="@string/languages_summary" />
 
 </PreferenceScreen>

@@ -6,51 +6,45 @@
         <item
             android:id="@+id/nav_games"
             android:title="@string/games"
-            android:icon="@drawable/baseline_sports_basketball_24"
+            android:icon="@drawable/nav_games"
             android:iconTint="@color/colorPrimary"
             />
             <item
                 android:id="@+id/nav_teams"
                 android:title="@string/teams_nav"
-                android:icon="@drawable/ic_teams_icon"
-                android:iconTint="@color/colorPrimary"/>
-
-<!--        <item-->
-<!--            android:id="@+id/nav_create_team"-->
-<!--            android:title="@string/create_team"-->
-<!--            android:icon="@drawable/ic_teams_icon"-->
-<!--            android:iconTint="@color/colorPrimary"/>-->
+                android:icon="@drawable/nav_teams"
+                android:iconTint="@color/colorAccent"/>
 
         <item
             android:id="@+id/nav_create_league"
             android:title="@string/leagues_title"
-            android:icon="@drawable/ic_leagues"
-            android:iconTint="@color/colorPrimary"/>
+            android:icon="@drawable/nav_leagues"
+            android:iconTint="@color/colorAccent"/>
 
         <item
             android:id="@+id/nav_standings"
             android:title="@string/standings"
-            android:icon="@drawable/ic_standings"
-            android:iconTint="@color/colorPrimary"/>
+            android:icon="@drawable/nav_standings"
+            android:iconTint="@color/colorAccent"/>
         <item
             android:id="@+id/nav_player_stats"
             android:title="@string/player_stats"
-            android:icon="@drawable/ic_player_stats"
-            android:iconTint="@color/colorPrimary"/>
+            android:icon="@drawable/nav_player_stats"
+            android:iconTint="@color/colorAccent"/>
         <item
             android:id="@+id/nav_arenas"
             android:title="@string/arenas"
-            android:iconTint="@color/colorPrimary"/>
+            android:iconTint="@color/colorAccent"/>
         <item
             android:id="@+id/nav_settings"
             android:title="@string/settings"
-            android:icon="@drawable/ic_settings_24px"
-            android:iconTint="@color/colorPrimary"
+            android:icon="@drawable/nav_settings"
+            android:iconTint="@color/colorAccent"
             />
         <item
             android:id="@+id/nav_quit"
             android:title="@string/sign_out"
-            android:iconTint="@color/colorPrimary"/>
+            android:iconTint="@color/colorAccent"/>
 
     </group>
 </menu>

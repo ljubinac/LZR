@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.orange_start));
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
-        viewPagerAdapter.addFragment(GamesFragment.newInstance(true), getString(R.string.recent_games));
-        viewPagerAdapter.addFragment(GamesFragment.newInstance(false), getString(R.string.upcoming));
+        viewPagerAdapter.addFragment(GamesFragment.newInstance(true), getResources().getString(R.string.recent_games));
+        viewPagerAdapter.addFragment(GamesFragment.newInstance(false), getResources().getString(R.string.upcoming));
         viewPager.setAdapter(viewPagerAdapter);
 
 
@@ -153,10 +153,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, TeamsActivity.class);
                 startActivity(intent);
                 break;
-//            case R.id.nav_create_team:
-//                intent = new Intent(this, CreateTeamActivity.class);
-//                startActivity(intent);
-//                break;
             case R.id.nav_create_league:
                 intent = new Intent(this, LeaguesActivity.class);
                 startActivity(intent);

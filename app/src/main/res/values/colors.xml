@@ -10,6 +10,8 @@
     <color name="text50">#803A3A3A</color>
     <color name="action">#9F3F21</color>
 
+    <color name="inside_button">#2F424E</color>
+
 
     <color name="colorPrimaryDark">#232F34</color>
     <color name="colorPrimaryLight">#4A6572</color>
@@ -23,7 +25,7 @@
     <color name="team_bg">#ebebe0</color>
     <color name="divider">#14212121</color>
     <color name="default_background">#FAFAFA</color>
-    
+
     <color name="orange_start">#F9AA33</color>
     <color name="orange_end">#F9AA33</color>
 

@@ -18,7 +18,7 @@
         <shape android:shape="line">
             <stroke
                 android:width="2dp"
-                android:color="#ffffff" />
+                android:color="@color/inside_button" />
         </shape>
     </item>
     <item
@@ -29,7 +29,7 @@
             <shape android:shape="line">
                 <stroke
                     android:width="2dp"
-                    android:color="#ffffff" />
+                    android:color="@color/inside_button" />
             </shape>
         </rotate>
     </item>
