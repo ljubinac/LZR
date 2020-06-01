@@ -54,7 +54,7 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
 
     String team;
 
-    TextView a, b;
+    TextView playerInNameTV, playerOutNameTv, playerInNumberTV, playerOutNumberTV;
 
 
     public static LineupDialog newInstance(ArrayList<PlayerGame> players, PlayerGame playerGameOut, String team) {
@@ -83,8 +83,12 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_lineup, container, false);
 
-        a = view.findViewById(R.id.player_in_name_tv);
-        b = view.findViewById(R.id.player_out_name_tv);
+
+        playerOutNameTv = view.findViewById(R.id.player_out_name_tv);
+        playerOutNumberTV = view.findViewById(R.id.player_out_number_tv);
+
+        playerOutNumberTV.setText(playerGameOut.getNumber());
+        playerOutNameTv.setText(playerGameOut.getNameAndLastname());
 
         secondLineupRV = view.findViewById(R.id.secondLineupArv);
         mActionCancel = view.findViewById(R.id.action_cancel);
@@ -128,8 +132,8 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         playerGame = izmene.get(position);
-        a.setText(playerGame.getNameAndLastname());
-        b.setText(playerGameOut.getNameAndLastname());
+       /* playerOutNameTv.setText(playerGameOut.getNameAndLastname());
+        playerOutNumberTV.setText(playerGameOut.getNumber());*/
     }
 
     @Override

@@ -259,4 +259,8 @@
     <string name="arena_name_fail">Add arena name!</string>
     <string name="arena_not_added">Arena not added!</string>
     <string name="some_fields">Some fields are not selected? Please select all fields.</string>
+    <string name="finish_game_dialog_text">Are you sure you want to finish the game?</string>
+    <string name="dialog_title">Confirm</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_ok">Ok</string>
 </resources>

@@ -112,4 +112,14 @@
     <string name="away_team">Gost</string>
     <string name="home_team">Domaćin</string>
     <string name="arena">Arena</string>
+    <string name="arenas">Hale</string>
+    <string name="arena_name_hint">Naziv hale</string>
+    <string name="arena_added">Hala je dodata!</string>
+    <string name="arena_name_fail">Dodaj naziv hale!</string>
+    <string name="arena_not_added">Hala nije dodata!</string>
+    <string name="some_fields">Neka polja nisu selektovana? Molim Vas, selektujte sva polja.</string>
+    <string name="finish_game_dialog_text">Da li ste sigurni da zelite da završite utakmicu?</string>
+    <string name="dialog_title">Potvrda</string>
+    <string name="dialog_cancel">Otkazi</string>
+    <string name="dialog_ok">Potvrdi</string>
 </resources>

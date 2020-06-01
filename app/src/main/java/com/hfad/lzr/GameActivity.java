@@ -200,23 +200,23 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
                 builder.setMessage("Are you sure?");
 
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 //                        plusMinute();
-                        dialog.dismiss();
-                    }
-                });
+                    dialog.dismiss();
+                }
+            });
 
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
 
-                AlertDialog alert = builder.create();
+            AlertDialog alert = builder.create();
                 alert.show();
-            }
+        }
         });
 
         minusSecondImg.setOnClickListener(new View.OnClickListener() {
@@ -672,75 +672,97 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
         llFinishGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < playersGameA.size(); i++){
-                    PlayerGame playerGame = playersGameA.get(i);
-                    DatabaseReference databaseReferencePlayer = databaseReferencePlayers.child(playerGame.getId());
-                    databaseReferencePlayer.child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
-                    databaseReferencePlayer.child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
-                    databaseReferencePlayer.child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
-                    databaseReferencePlayer.child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
-                    databaseReferencePlayer.child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
-                    databaseReferencePlayer.child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
-                    databaseReferencePlayer.child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
-                    databaseReferencePlayer.child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
-                    databaseReferencePlayer.child("totalEff").setValue(playerGame.getTotalPoints() +
-                            playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
-                            (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
-                            playerGame.getTotalFouls());
+                AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 
-                }
+                builder.setTitle(getResources().getString(R.string.dialog_title));
+                builder.setMessage(getResources().getString(R.string.finish_game_dialog_text));
 
-                for (int i = 0; i < playersGameB.size(); i++){
-                    PlayerGame playerGame = playersGameB.get(i);
-                    DatabaseReference databaseReferencePlayer = databaseReferencePlayers.child(playerGame.getId());
-                    databaseReferencePlayer.child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
-                    databaseReferencePlayer.child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
-                    databaseReferencePlayer.child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
-                    databaseReferencePlayer.child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
-                    databaseReferencePlayer.child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
-                    databaseReferencePlayer.child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
-                    databaseReferencePlayer.child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
-                    databaseReferencePlayer.child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
-                    databaseReferencePlayer.child("totalEff").setValue(playerGame.getTotalEff() + playerGame.getTotalPoints() +
-                            playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
-                            (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
-                            playerGame.getTotalFouls());
-                }
-                game.setResA(resA);
-                game.setResB(resB);
-                if(!game.isExhibition()) {
-                    teamA.setPointsScored(teamA.getPointsScored() + resA);
-                    teamA.setPointsReceived(teamA.getPointsReceived() + resB);
-                    teamB.setPointsScored(teamB.getPointsScored() + resB);
-                    teamB.setPointsReceived(teamB.getPointsReceived() + resA);
-                    if (resA > resB) {
-                        teamA.setPoints(teamA.getPoints() + 2);
-                        teamB.setPoints(teamB.getPoints() + 1);
-                    } else {
-                        teamB.setPoints(teamB.getPoints() + 2);
-                        teamA.setPoints(teamA.getPoints() + 1);
+                builder.setNegativeButton(getResources().getString(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
-                    teamA.setPlayed(teamA.getPlayed() + 1);
-                    teamB.setPlayed(teamB.getPlayed() + 1);
-                    if (resA > resB) {
-                        teamA.setWin(teamA.getWin() + 1);
-                        teamB.setLost(teamB.getLost() + 1);
-                    } else {
-                        teamB.setWin(teamB.getWin() + 1);
-                        teamA.setLost(teamA.getLost() + 1);
+                });
+
+                builder.setPositiveButton(getResources().getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        for (int i = 0; i < playersGameA.size(); i++){
+                            PlayerGame playerGame = playersGameA.get(i);
+                            DatabaseReference databaseReferencePlayer = databaseReferencePlayers.child(playerGame.getId());
+                            databaseReferencePlayer.child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
+                            databaseReferencePlayer.child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
+                            databaseReferencePlayer.child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
+                            databaseReferencePlayer.child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
+                            databaseReferencePlayer.child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
+                            databaseReferencePlayer.child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
+                            databaseReferencePlayer.child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
+                            databaseReferencePlayer.child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
+                            databaseReferencePlayer.child("totalEff").setValue(playerGame.getTotalPoints() +
+                                    playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
+                                    (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
+                                    playerGame.getTotalFouls());
+
+                        }
+
+                        for (int i = 0; i < playersGameB.size(); i++){
+                            PlayerGame playerGame = playersGameB.get(i);
+                            DatabaseReference databaseReferencePlayer = databaseReferencePlayers.child(playerGame.getId());
+                            databaseReferencePlayer.child("totalPoints").setValue(playerGame.getTotalPoints() + playerGame.getPm1() + (playerGame.getPm2() * 2) + (playerGame.getPm3() * 3));
+                            databaseReferencePlayer.child("totalAssists").setValue(playerGame.getTotalAssists() + playerGame.getAsist());
+                            databaseReferencePlayer.child("totalRebs").setValue(playerGame.getTotalRebs() + playerGame.getOffReb() + playerGame.getDefReb());
+                            databaseReferencePlayer.child("totalSteals").setValue(playerGame.getTotalSteals() + playerGame.getSteal());
+                            databaseReferencePlayer.child("totalBlocks").setValue(playerGame.getTotalBlocks() + playerGame.getBlock());
+                            databaseReferencePlayer.child("totalFouls").setValue(playerGame.getTotalFouls() + playerGame.getFoul());
+                            databaseReferencePlayer.child("totalTehnical").setValue(playerGame.getTotalTehnical() + playerGame.getTehnicalFoul());
+                            databaseReferencePlayer.child("totalTurnovers").setValue(playerGame.getTotalTurnovers() + playerGame.getTurnover());
+                            databaseReferencePlayer.child("totalEff").setValue(playerGame.getTotalEff() + playerGame.getTotalPoints() +
+                                    playerGame.getTotalBlocks() + playerGame.getTotalSteals() + playerGame.getTotalAssists() + playerGame.getTotalRebs() -
+                                    (playerGame.getPa1() + playerGame.getPa2() + playerGame.getPa3()) - playerGame.getTotalTurnovers() -
+                                    playerGame.getTotalFouls());
+                        }
+                        game.setResA(resA);
+                        game.setResB(resB);
+                        if(!game.isExhibition()) {
+                            teamA.setPointsScored(teamA.getPointsScored() + resA);
+                            teamA.setPointsReceived(teamA.getPointsReceived() + resB);
+                            teamB.setPointsScored(teamB.getPointsScored() + resB);
+                            teamB.setPointsReceived(teamB.getPointsReceived() + resA);
+                            if (resA > resB) {
+                                teamA.setPoints(teamA.getPoints() + 2);
+                                teamB.setPoints(teamB.getPoints() + 1);
+                            } else {
+                                teamB.setPoints(teamB.getPoints() + 2);
+                                teamA.setPoints(teamA.getPoints() + 1);
+                            }
+                            teamA.setPlayed(teamA.getPlayed() + 1);
+                            teamB.setPlayed(teamB.getPlayed() + 1);
+                            if (resA > resB) {
+                                teamA.setWin(teamA.getWin() + 1);
+                                teamB.setLost(teamB.getLost() + 1);
+                            } else {
+                                teamB.setWin(teamB.getWin() + 1);
+                                teamA.setLost(teamA.getLost() + 1);
+                            }
+                            databaseReference.child(teamA.getId()).setValue(teamA);
+                            databaseReference.child(teamB.getId()).setValue(teamB);
+                        }
+                        game.setResA(resA);
+                        game.setResB(resB);
+                        game.setFinished(true);
+                        databaseReferenceGames.child(game.getId()).setValue(game);
+                        Intent intent = new Intent(GameActivity.this, StatsActivity.class);
+                        intent.putExtra("playersGameA", playersGameA);
+                        intent.putExtra("playersGameB", playersGameB);
+                        intent.putExtra("game", game);
+                        startActivity(intent);
+                        dialog.dismiss();
                     }
-                    databaseReference.child(teamA.getId()).setValue(teamA);
-                    databaseReference.child(teamB.getId()).setValue(teamB);
-                }
-                game.setResA(resA);
-                game.setResB(resB);
-                game.setFinished(true);
-                databaseReferenceGames.child(game.getId()).setValue(game);
-                Intent intent = new Intent(GameActivity.this, StatsActivity.class);
-                intent.putExtra("playersGameA", playersGameA);
-                intent.putExtra("playersGameB", playersGameB);
-                intent.putExtra("game", game);
-                startActivity(intent);
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
             }
         });
     }
