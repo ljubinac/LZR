@@ -8,7 +8,7 @@
         android:drawable="@drawable/player_game_background"/>
     <item
         app:state_out="true"
-        android:drawable="@drawable/player_game_background"
+        android:drawable="@drawable/player_game_out_background"
         />
     <item
         app:state_changeOut="true"

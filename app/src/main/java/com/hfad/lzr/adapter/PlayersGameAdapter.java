@@ -1,6 +1,8 @@
 package com.hfad.lzr.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -151,8 +153,14 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
 
         if (position < 5) {
             holder.cll.setmIsIn(true);
+            holder.jeseyIV.setImageResource(R.drawable.ic_basketaball_jersey);
+            holder.playerGameNumberTV.setTextColor(Color.parseColor("#344955"));
+            holder.playerLastnameTV.setTextColor(Color.parseColor("#344955"));
         } else {
             holder.cll.setmIsOut(true);
+            holder.jeseyIV.setImageResource(R.drawable.ic_basketball_jersey_out);
+            holder.playerGameNumberTV.setTextColor(Color.parseColor("#ffffff"));
+            holder.playerLastnameTV.setTextColor(Color.parseColor("#ffffff"));
         }
         if (playerGame.ismIsEnabled()) {
             holder.itemView.setEnabled(true);
@@ -161,11 +169,17 @@ public class PlayersGameAdapter extends RecyclerView.Adapter<PlayersGameAdapter.
         }
         if (playerGame.ismIsChangeOut()) {
             holder.cll.setmIsChangeOut(true);
+            holder.jeseyIV.setImageResource(R.drawable.ic_basketball_jersey_out);
+            holder.playerGameNumberTV.setTextColor(Color.parseColor("#ffffff"));
+            holder.playerLastnameTV.setTextColor(Color.parseColor("#ffffff"));
             holder.cll.setmIsIn(false);
             holder.cll.setmIsOut(false);
         }
         if (playerGame.ismIsChangeIn()) {
             holder.cll.setmIsChangeIn(true);
+            holder.jeseyIV.setImageResource(R.drawable.ic_basketaball_jersey);
+            holder.playerGameNumberTV.setTextColor(Color.parseColor("#344955"));
+            holder.playerLastnameTV.setTextColor(Color.parseColor("#344955"));
             holder.cll.setmIsOut(false);
         }
 
