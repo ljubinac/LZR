@@ -43,6 +43,7 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
         TextView mPlayerNameTv;
         TextView mPlayerNumberTv;
         ImageView mAccept;
+        ImageView mCancel;
 
         ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -55,6 +56,7 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
             mPlayerNameTv = itemView.findViewById(R.id.player_name_tv);
             mPlayerNumberTv = itemView.findViewById(R.id.player_number_tv);
             mAccept = itemView.findViewById(R.id.image_accept);
+            mCancel = itemView.findViewById(R.id.cancel_edit_image);
 
 
 
@@ -96,8 +98,16 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
             public void onClick(View v) {
                 holder.mPlayerNameEt.setText(holder.mPlayerNameTv.getText().toString());
                 holder.mPlayerNumberEt.setText(holder.mPlayerNumberTv.getText().toString());
-                holder.ll1.setVisibility(View.INVISIBLE);
+                holder.ll1.setVisibility(View.GONE);
                 holder.ll2.setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.mCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.ll1.setVisibility(View.VISIBLE);
+                holder.ll2.setVisibility(View.GONE);
             }
         });
 
@@ -108,7 +118,7 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ViewHold
                 holder.mPlayerNameTv.setText(holder.mPlayerNameEt.getText().toString());
                 holder.mPlayerNumberTv.setText(holder.mPlayerNumberEt.getText().toString());
                 holder.ll1.setVisibility(View.VISIBLE);
-                holder.ll2.setVisibility(View.INVISIBLE);
+                holder.ll2.setVisibility(View.GONE);
 
                 mListener.onAcceptClick(position, holder.mPlayerNameTv.getText().toString(), holder.mPlayerNumberTv.getText().toString());
             }

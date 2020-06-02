@@ -729,11 +729,21 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
                             teamB.setPointsScored(teamB.getPointsScored() + resB);
                             teamB.setPointsReceived(teamB.getPointsReceived() + resA);
                             if (resA > resB) {
-                                teamA.setPoints(teamA.getPoints() + 2);
-                                teamB.setPoints(teamB.getPoints() + 1);
+                                if(resA == 20 && resB == 0){
+                                    teamA.setPoints(teamA.getPoints() + 2);
+                                    teamB.setPoints(teamB.getPoints());
+                                } else {
+                                    teamA.setPoints(teamA.getPoints() + 2);
+                                    teamB.setPoints(teamB.getPoints() + 1);
+                                }
                             } else {
-                                teamB.setPoints(teamB.getPoints() + 2);
-                                teamA.setPoints(teamA.getPoints() + 1);
+                                if (resA == 0 && resB == 20){
+                                    teamB.setPoints(teamB.getPoints() + 2);
+                                    teamA.setPoints(teamA.getPoints());
+                                } else {
+                                    teamB.setPoints(teamB.getPoints() + 2);
+                                    teamA.setPoints(teamA.getPoints() + 1);
+                                }
                             }
                             teamA.setPlayed(teamA.getPlayed() + 1);
                             teamB.setPlayed(teamB.getPlayed() + 1);
