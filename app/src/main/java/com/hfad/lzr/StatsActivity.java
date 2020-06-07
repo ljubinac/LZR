@@ -71,10 +71,14 @@ public class StatsActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
 
+/*    Button button;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+
+      /*  button = findViewById(R.id.save_game);*/
 
         playersGameA = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameA");
         playersGameB = (ArrayList<PlayerGame>) getIntent().getSerializableExtra("playersGameB");
@@ -120,6 +124,15 @@ public class StatsActivity extends AppCompatActivity {
                 createPdf();
             }
         });
+
+      /*  button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StatsActivity.this, ResultsActivity.class);
+                intent.putExtra("game", game);
+                startActivity(intent);
+            }
+        });*/
 
     }
 

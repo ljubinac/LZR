@@ -262,5 +262,7 @@
     <string name="finish_game_dialog_text">Are you sure you want to finish the game?</string>
     <string name="dialog_title">Confirm</string>
     <string name="dialog_cancel">Cancel</string>
-    <string name="dialog_ok">Ok</string>
+    <string name="dialog_ok">OK</string>
+    <string name="msg_for_non_selected_lineup_dialog">You have to select a player!</string>
+    <string name="results">Results</string>
 </resources>

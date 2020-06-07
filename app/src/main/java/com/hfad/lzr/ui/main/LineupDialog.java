@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,22 +40,22 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
 
     private static final String TAG = "LineupDialog";
     private TextView mActionOk, mActionCancel;
-    RecyclerView secondLineupRV;
-    DialogSubsAdapter adapter;
-    TextView playerNumberTV;
-    TextView playerNameTV;
-    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView secondLineupRV;
+    private DialogSubsAdapter adapter;
+    private TextView playerNumberTV;
+    private TextView playerNameTV;
+    private RecyclerView.LayoutManager layoutManager;
 
-    ArrayList<PlayerGame> players;
+    private ArrayList<PlayerGame> players;
 
-    ArrayList<PlayerGame> izmene;
-    PlayerGame playerGame, playerGameOut;
+    private ArrayList<PlayerGame> substitutions;
+    private PlayerGame playerGame, playerGameOut;
 
-    DialogListener dialogListener;
+    private DialogListener dialogListener;
 
-    String team;
+    private String team;
 
-    TextView playerInNameTV, playerOutNameTv, playerInNumberTV, playerOutNumberTV;
+    private TextView playerOutNameTv, playerOutNumberTV;
 
 
     public static LineupDialog newInstance(ArrayList<PlayerGame> players, PlayerGame playerGameOut, String team) {
@@ -96,15 +97,15 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
         playerNameTV = view.findViewById(R.id.player_name_tv);
         playerNumberTV = view.findViewById(R.id.player_number_tv);
 
-        izmene = new ArrayList<>();
+        substitutions = new ArrayList<>();
         for (int i = 5; i < players.size(); i++){
-            PlayerGame izmena = players.get(i);
-            izmene.add(izmena);
+            PlayerGame substitution = players.get(i);
+            substitutions.add(substitution);
         }
 
         secondLineupRV.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new DialogSubsAdapter(getContext(), izmene);
+        adapter = new DialogSubsAdapter(getContext(), substitutions);
         secondLineupRV.setLayoutManager(layoutManager);
         secondLineupRV.setAdapter(adapter);
 
@@ -121,8 +122,12 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
         mActionOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogListener.doOkClick(playerGame, team);
-                getDialog().dismiss();
+                if(playerGame != null) {
+                    dialogListener.doOkClick(playerGame, team);
+                    getDialog().dismiss();
+                } else {
+                    Toast.makeText(getContext(), R.string.msg_for_non_selected_lineup_dialog, Toast.LENGTH_LONG).show();
+                }
             }
         });
         return  view;
@@ -131,9 +136,7 @@ public class LineupDialog extends DialogFragment implements AdapterView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        playerGame = izmene.get(position);
-       /* playerOutNameTv.setText(playerGameOut.getNameAndLastname());
-        playerOutNumberTV.setText(playerGameOut.getNumber());*/
+        playerGame = substitutions.get(position);
     }
 
     @Override

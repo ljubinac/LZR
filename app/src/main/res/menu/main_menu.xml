@@ -36,6 +36,10 @@
             android:title="@string/arenas"
             android:iconTint="@color/colorAccent"/>
         <item
+            android:id="@+id/nav_results"
+            android:title="@string/results"
+            android:iconTint="@color/colorAccent"/>
+        <item
             android:id="@+id/nav_settings"
             android:title="@string/settings"
             android:icon="@drawable/nav_settings"

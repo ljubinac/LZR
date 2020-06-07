@@ -108,40 +108,34 @@ public class ChooseLineupFragment extends Fragment {
                 holder.playerNumberTV.setText(model.getNumber());
                 holder.playerNameTV.setText(model.getNameAndLastname());
 
-                holder.lineupCheckbox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (holder.lineupCheckbox.isChecked()){
-                            onItemCheck(model);
-                            holder.lineupCheckbox.setChecked(true);
-                        } else {
-                            onItemUncheck(model);
-                            holder.lineupCheckbox.setChecked(false);
-                            holder.firstLineupCheckBox.setChecked(false);
-                            holder.playerNumberTV.setTypeface(null, Typeface.NORMAL);
-                            holder.playerNameTV.setTypeface(null, Typeface.NORMAL);
-                            holder.ll1.setBackgroundColor(getResources().getColor(R.color.default_background));
-                        }
+                holder.lineupCheckbox.setOnClickListener(v -> {
+                    if (holder.lineupCheckbox.isChecked()){
+                        onItemCheck(model);
+                        holder.lineupCheckbox.setChecked(true);
+                    } else {
+                        onItemUncheck(model);
+                        holder.lineupCheckbox.setChecked(false);
+                        holder.firstLineupCheckBox.setChecked(false);
+                        holder.playerNumberTV.setTypeface(null, Typeface.NORMAL);
+                        holder.playerNameTV.setTypeface(null, Typeface.NORMAL);
+                        holder.ll1.setBackgroundColor(getResources().getColor(R.color.default_background));
                     }
                 });
 
-                holder.firstLineupCheckBox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(holder.firstLineupCheckBox.isChecked()){
-                            onItemFirstCheck(model);
-                            holder.lineupCheckbox.setChecked(true);
-                            holder.firstLineupCheckBox.setChecked(true);
-                            holder.playerNumberTV.setTypeface(null, Typeface.BOLD);
-                            holder.playerNameTV.setTypeface(null, Typeface.BOLD);
-                            holder.ll1.setBackgroundColor(getResources().getColor(R.color.starting5_background));
-                        } else {
-                            onItemUncheck(model);
-                            holder.firstLineupCheckBox.setChecked(false);
-                            holder.playerNumberTV.setTypeface(null, Typeface.NORMAL);
-                            holder.playerNameTV.setTypeface(null, Typeface.NORMAL);
-                            holder.ll1.setBackgroundColor(getResources().getColor(R.color.default_background));
-                        }
+                holder.firstLineupCheckBox.setOnClickListener(v -> {
+                    if(holder.firstLineupCheckBox.isChecked()){
+                        onItemFirstCheck(model);
+                        holder.lineupCheckbox.setChecked(true);
+                        holder.firstLineupCheckBox.setChecked(true);
+                        holder.playerNumberTV.setTypeface(null, Typeface.BOLD);
+                        holder.playerNameTV.setTypeface(null, Typeface.BOLD);
+                        holder.ll1.setBackgroundColor(getResources().getColor(R.color.starting5_background));
+                    } else {
+                        onItemUncheck(model);
+                        holder.firstLineupCheckBox.setChecked(false);
+                        holder.playerNumberTV.setTypeface(null, Typeface.NORMAL);
+                        holder.playerNameTV.setTypeface(null, Typeface.NORMAL);
+                        holder.ll1.setBackgroundColor(getResources().getColor(R.color.default_background));
                     }
                 });
             }
@@ -153,7 +147,7 @@ public class ChooseLineupFragment extends Fragment {
        return root;
     }
 
-    public void onItemFirstCheck(Player player){
+    private void onItemFirstCheck(Player player){
         if(players.contains(player)){
             players.remove(player);
         }
@@ -164,11 +158,11 @@ public class ChooseLineupFragment extends Fragment {
         starting5.remove(position);
     }
 
-    public void onItemCheck(Player player){
+    private void onItemCheck(Player player){
         players.add(player);
     }
 
-    public void onItemUncheck(Player player) {
+    private void onItemUncheck(Player player) {
         players.remove(player);
     }
 

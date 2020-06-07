@@ -79,8 +79,6 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
     int quarter;
     TextView quarterTV;
 
-    String timA, timB;
-
     ImageView minusMinuteImg, minusSecondImg, plusMinuteImg, plusSecondImg;
 
     @Override
@@ -766,6 +764,7 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
                         intent.putExtra("playersGameB", playersGameB);
                         intent.putExtra("game", game);
                         startActivity(intent);
+
                         dialog.dismiss();
                     }
                 });
@@ -1128,7 +1127,7 @@ public class GameActivity extends AppCompatActivity implements LineupDialog.Dial
         }
     }
 
-   /* private void minusMinute() {
+ /*   private void minusMinute() {
         int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60 - 1;
 

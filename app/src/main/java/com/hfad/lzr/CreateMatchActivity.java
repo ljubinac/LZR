@@ -108,11 +108,12 @@ public class CreateMatchActivity extends AppCompatActivity implements DatePicker
                     Team teamA = teams.get(spinner1.getSelectedItemPosition() - 1);
                     Team teamB = teams.get(spinner2.getSelectedItemPosition() - 1);
                     Arena arena = arenas.get(arenaSpinner.getSelectedItemPosition() - 1);
+                    String league = leagueSpinner.getSelectedItem().toString();
                     if (leagueSpinner.getSelectedItem().toString().equals(getString(R.string.exhibition))) {
-                        Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, true, arena.getId(), arena.getName());
+                        Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, true, arena.getId(), arena.getName(), league);
                         databaseReferenceGames.child(id).setValue(game);
                     } else {
-                        Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, false, arena.getId(), arena.getName());
+                        Game game = new Game(id, teamA.getId(), teamB.getId(), date, time, teamA.getName(), teamB.getName(), false, false, arena.getId(), arena.getName(), league);
                         databaseReferenceGames.child(id).setValue(game);
                     }
                     intent.putExtra("activity", "CreatingMatchActivity");

@@ -122,4 +122,6 @@
     <string name="dialog_title">Potvrda</string>
     <string name="dialog_cancel">Otkazi</string>
     <string name="dialog_ok">Potvrdi</string>
+    <string name="msg_for_non_selected_lineup_dialog">Morate selektovati igrača!</string>
+    <string name="results">Rezultati</string>
 </resources>

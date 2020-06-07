@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ArenasActivity"></activity>
+        <activity android:name=".ResultsActivity"></activity>
+        <activity android:name=".ArenasActivity" />
         <activity android:name=".LeaguesActivity" />
         <activity android:name=".PlayerStatsActivity" />
         <activity android:name=".LoginActivity" />
@@ -55,8 +56,9 @@
         <activity
             android:name=".CreateMatchActivity"
             android:configChanges="screenSize|orientation|screenLayout" />
-        <activity android:name=".MainActivity"
-            android:configChanges="locale"/>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="locale" />
     </application>
 
 </manifest>
