@@ -37,6 +37,7 @@ public class GamesFragment extends Fragment {
 
     boolean isFinished;
 
+
     public GamesFragment() {
         // Required empty public constructor
     }

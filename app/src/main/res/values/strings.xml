@@ -265,4 +265,6 @@
     <string name="dialog_ok">OK</string>
     <string name="msg_for_non_selected_lineup_dialog">You have to select a player!</string>
     <string name="results">Results</string>
+    <string name="msg_player_number_fail">Enter the number of the player!</string>
+    <string name="msg_player_name_fail">Enter the name of the player!</string>
 </resources>

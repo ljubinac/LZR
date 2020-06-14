@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_chevrons_left"/>
+            app:srcCompat="@drawable/ic_chevrons_right"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_chevrons_right"
+            app:srcCompat="@drawable/ic_chevrons_left"
             android:layout_marginTop="16dp"/>
 
      <!--   <LinearLayout

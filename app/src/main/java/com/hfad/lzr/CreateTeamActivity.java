@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,6 +38,7 @@ import com.hfad.lzr.model.Player;
 import com.hfad.lzr.model.Team;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CreateTeamActivity extends AppCompatActivity {
 
@@ -66,6 +69,8 @@ public class CreateTeamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
+
+        /*setupUI(findViewById(R.id.create_team_activity));*/
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -107,6 +112,7 @@ public class CreateTeamActivity extends AppCompatActivity {
         backAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                closeKeyboard();
                 showAdd.setVisibility(View.VISIBLE);
                 addPlayerLL.setVisibility(View.GONE);
                 addPlayer.setVisibility(View.GONE);
@@ -118,7 +124,7 @@ public class CreateTeamActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 addPlayer();
-                closeKeyboard();
+//                closeKeyboard();
                 buildRecyclerView();
                 showAdd.setVisibility(View.VISIBLE);
                 addPlayerLL.setVisibility(View.GONE);
@@ -146,13 +152,46 @@ public class CreateTeamActivity extends AppCompatActivity {
         fetchLeagues();
     }
 
-    private void closeKeyboard() {
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null){
+            InputMethodManager inputMethodManager = ( InputMethodManager ) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    /*private void closeKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }*/
+
+ /*   public void setupUI(View view){
+        if(!(view instanceof EditText)){
+            view.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(CreateTeamActivity.this);
+                    return false;
+                }
+            });
+        }
+
+        if(view instanceof ViewGroup){
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++){
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setupUI(innerView);
+            }
+        }
     }
+    public static void hideSoftKeyboard(Activity activity){
+        InputMethodManager inputMethodManager = ( InputMethodManager ) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        assert inputMethodManager != null;
+        inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(activity.getCurrentFocus()).getWindowToken(), 0);
+    }*/
 
     private void fetchLeagues() {
         listener = databaseReferenceLeagues.addValueEventListener(new ValueEventListener() {
@@ -248,6 +287,7 @@ public class CreateTeamActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.team_added, Toast.LENGTH_LONG).show();
             return true;
         } else if (TextUtils.isEmpty(name)) {
+            teamName.setError(getResources().getString(R.string.add_team_name));
             Toast.makeText(this, R.string.add_team_name, Toast.LENGTH_LONG).show();
             return false;
         } else {
@@ -266,6 +306,8 @@ public class CreateTeamActivity extends AppCompatActivity {
             playerNumber.setText("");
             Toast.makeText(this, R.string.player_added, Toast.LENGTH_LONG).show();
         } else {
+            playerNumber.setError(getResources().getString(R.string.player_not_added));
+            playerName.setError(getResources().getString(R.string.player_not_added));
             Toast.makeText(this, R.string.player_not_added, Toast.LENGTH_LONG).show();
         }
     }

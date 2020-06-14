@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -79,6 +80,8 @@ public class ArenasActivity extends AppCompatActivity {
         cancelAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                closeKeyboard();
+                arenaNameET.setText("");
                 showAdd.setVisibility(View.VISIBLE);
                 saveArena.setVisibility(View.GONE);
                 addArenaLL.setVisibility(View.GONE);
@@ -89,7 +92,7 @@ public class ArenasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addArena();
-                closeKeyboard();
+//                closeKeyboard();
             }
         });
 
@@ -156,13 +159,22 @@ public class ArenasActivity extends AppCompatActivity {
         arenasRV.setAdapter(adapter);
     }
 
-    private void closeKeyboard() {
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null){
+            InputMethodManager inputMethodManager = ( InputMethodManager ) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    /*private void closeKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
+    }*/
 
     public void addArena(){
         arenaName = arenaNameET.getText().toString();
@@ -173,6 +185,7 @@ public class ArenasActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.arena_added, Toast.LENGTH_LONG).show();
             arenaNameET.setText("");
         } else if (TextUtils.isEmpty(arenaName)){
+            arenaNameET.setError(getResources().getString(R.string.arena_name_fail));
             Toast.makeText(this, R.string.arena_name_fail, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, R.string.arena_not_added, Toast.LENGTH_LONG).show();

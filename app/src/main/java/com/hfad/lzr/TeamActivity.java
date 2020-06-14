@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -123,6 +124,9 @@ public class TeamActivity extends AppCompatActivity {
         backAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                closeKeyboard();
+                playerNumberET.setText("");
+                playerNameET.setText("");
                 showAdd.setVisibility(View.VISIBLE);
                 addPlayer.setVisibility(View.GONE);
                 addPlayerLL.setVisibility(View.GONE);
@@ -134,7 +138,7 @@ public class TeamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addPlayer();
-                closeKeyboard();
+//                closeKeyboard();
                 playersRV = findViewById(R.id.recyclerView);
                 playersRV.setHasFixedSize(true);
                 playersRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -179,18 +183,27 @@ public class TeamActivity extends AppCompatActivity {
         });*/
     }
 
-    private void closeKeyboard() {
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null){
+            InputMethodManager inputMethodManager = ( InputMethodManager ) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+   /* private void closeKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
+    }*/
 
     private void addPlayer() {
         String number = playerNumberET.getText().toString();
         String name = playerNameET.getText().toString();
-        if (!TextUtils.isEmpty(number) || !TextUtils.isEmpty(name)) {
+        if (!TextUtils.isEmpty(number) && !TextUtils.isEmpty(name)) {
             String id = databaseReferencePlayers.push().getKey();
             Player player = new Player(id, name, number, idTeam, team.getLeague());
             player.setId(id);
@@ -200,6 +213,12 @@ public class TeamActivity extends AppCompatActivity {
             playerNameET.setText("");
 
             Toast.makeText(this, R.string.player_added, Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(number) && !TextUtils.isEmpty(name)){
+            playerNumberET.setError(getResources().getString(R.string.msg_player_number_fail));
+            Toast.makeText(this, R.string.player_not_added, Toast.LENGTH_LONG).show();
+        } else if (!TextUtils.isEmpty(number) && TextUtils.isEmpty(name)){
+            playerNameET.setError(getResources().getString(R.string.msg_player_name_fail));
+            Toast.makeText(this, R.string.player_not_added, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, R.string.player_not_added, Toast.LENGTH_LONG).show();
         }

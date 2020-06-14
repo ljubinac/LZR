@@ -60,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:background="@drawable/input_background"
+            android:background="@drawable/selector_edit_text"
             android:hint="@string/arena_name_hint"
             android:inputType="text"
             android:textColor="@color/text"

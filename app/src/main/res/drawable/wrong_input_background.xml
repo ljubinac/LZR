@@ -9,4 +9,8 @@
         android:top="13dp"
         android:right="10dp"
         android:bottom="13dp" />
+
+    <stroke
+        android:width="1dip"
+        android:color="@color/red_hint"/>
 </shape>
